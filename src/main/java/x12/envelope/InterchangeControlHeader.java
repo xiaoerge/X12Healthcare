@@ -1,4 +1,4 @@
-package x12.control;
+package x12.envelope;
 
 import x12.segment.ISA;
 

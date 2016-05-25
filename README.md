@@ -1,1 +1,1 @@
-ANSI ASC X12 Implementation
+ANSI ASC X12 implementation for healthcare

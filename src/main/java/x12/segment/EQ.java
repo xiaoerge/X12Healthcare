@@ -11,4 +11,5 @@ public class EQ extends Segment {
     protected void setSize() {
         this.size = 0;
     }
+    protected void setName() { this.name = "EQ"; }
 }

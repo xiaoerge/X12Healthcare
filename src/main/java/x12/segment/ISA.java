@@ -5,6 +5,9 @@ package x12.segment;
  */
 public class ISA extends Segment
 {
+    public ISA() {
+        super();
+    }
     public ISA(String content, String delimiter) {
         super(content, delimiter);
     }
@@ -12,6 +15,7 @@ public class ISA extends Segment
     protected void setSize() {
         this.size = 16;
     }
+    protected void setName() { this.name = "ISA"; }
 
     public String getAuthInfoQualifier() {return collection[1];}
     public String getAuthInformation() {return collection[2];}
@@ -29,4 +33,21 @@ public class ISA extends Segment
     public String getAcknowledgmentRequested() {return collection[14];}
     public String getUsageIndicator() {return collection[15];}
     public String getComponentElementSeparator() {return collection[16];}
+
+    public void setAuthInfoQualifier(String s) { collection[1] = s;}
+    public void setAuthInformation(String s) { collection[2] = s;}
+    public void setSecurityInfoQualifier(String s) { collection[3] = s;}
+    public void setSecurityInformation(String s) { collection[4] = s;}
+    public void setInterchangeIDQualifierSender(String s) { collection[5] = s;}
+    public void setInterchangeSenderID(String s) { collection[6] = s;}
+    public void setInterchangeIDQualifierReceiver(String s) { collection[7] = s;}
+    public void setInterchangeReceiverID(String s) { collection[8] = s;}
+    public void setInterchangeDate(String s) { collection[9] = s;}
+    public void setInterchangeTime(String s) { collection[10] = s;}
+    public void setRepetitionSeparator(String s) { collection[11] = s;}
+    public void setInterchangeControlVersionNumber(String s) { collection[12] = s;}
+    public void setInterchangeControlNumber(String s) { collection[13] = s;}
+    public void setAcknowledgmentRequested(String s) { collection[14] = s;}
+    public void setUsageIndicator(String s) { collection[15] = s;}
+    public void setComponentElementSeparator(String s) { collection[16] = s;}
 }

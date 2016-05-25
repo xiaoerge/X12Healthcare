@@ -11,4 +11,5 @@ public class N3 extends Segment {
     protected void setSize() {
         this.size = 0;
     }
+    protected void setName() { this.name = "N3"; }
 }

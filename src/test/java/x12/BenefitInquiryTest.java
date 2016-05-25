@@ -15,24 +15,48 @@ public class BenefitInquiryTest  {
 
         ISA isa = new ISA(x12, Character.toString('*'));
 
-        Assert.assertEquals(isa.toString(), x12);
-        Assert.assertEquals(isa.validate(), true);
-        Assert.assertEquals(isa.size(), 16);
-        Assert.assertEquals(isa.getAuthInfoQualifier(), "00");
-        Assert.assertEquals(isa.getAuthInformation(), "...");
-        Assert.assertEquals(isa.getSecurityInfoQualifier(), "01");
-        Assert.assertEquals(isa.getSecurityInformation(), "SECRET");
-        Assert.assertEquals(isa.getInterchangeIDQualifierSender(), "ZZ");
-        Assert.assertEquals(isa.getInterchangeSenderID(), "SUBMITTERS...ID");
-        Assert.assertEquals(isa.getInterchangeIDQualifierReceiver(), "ZZ");
-        Assert.assertEquals(isa.getInterchangeReceiverID(), "RECEIVERS...ID");
-        Assert.assertEquals(isa.getInterchangeDate(), "030101");
-        Assert.assertEquals(isa.getInterchangeTime(), "1253");
-        Assert.assertEquals(isa.getRepetitionSeparator(), "^");
-        Assert.assertEquals(isa.getInterchangeControlVersionNumber(), "00602");
-        Assert.assertEquals(isa.getInterchangeControlNumber(), "000000905");
-        Assert.assertEquals(isa.getAcknowledgmentRequested(), "0");
-        Assert.assertEquals(isa.getUsageIndicator(), "T");
-        Assert.assertEquals(isa.getComponentElementSeparator(), ":");
+        Assert.assertEquals(x12, isa.toString());
+        Assert.assertEquals(true, isa.validate());
+        Assert.assertEquals(16, isa.size());
+        Assert.assertEquals("00", isa.getAuthInfoQualifier());
+        Assert.assertEquals("...", isa.getAuthInformation());
+        Assert.assertEquals("01", isa.getSecurityInfoQualifier());
+        Assert.assertEquals("SECRET", isa.getSecurityInformation());
+        Assert.assertEquals("ZZ", isa.getInterchangeIDQualifierSender());
+        Assert.assertEquals("SUBMITTERS...ID", isa.getInterchangeSenderID());
+        Assert.assertEquals("ZZ", isa.getInterchangeIDQualifierReceiver());
+        Assert.assertEquals("RECEIVERS...ID", isa.getInterchangeReceiverID());
+        Assert.assertEquals("030101", isa.getInterchangeDate());
+        Assert.assertEquals("1253", isa.getInterchangeTime());
+        Assert.assertEquals("^", isa.getRepetitionSeparator());
+        Assert.assertEquals("00602", isa.getInterchangeControlVersionNumber());
+        Assert.assertEquals("000000905", isa.getInterchangeControlNumber());
+        Assert.assertEquals("0", isa.getAcknowledgmentRequested());
+        Assert.assertEquals("T", isa.getUsageIndicator());
+        Assert.assertEquals(":", isa.getComponentElementSeparator());
+    }
+
+    @Test
+    public void testCreateISA() {
+        String x12 = "ISA*00*...*01*SECRET*ZZ*SUBMITTERS...ID*ZZ*RECEIVERS...ID*030101*1253*^*00602*000000905*0*T*:~";
+        ISA isa = new ISA();
+        isa.setAuthInfoQualifier("00");
+        isa.setAuthInformation("...");
+        isa.setSecurityInfoQualifier("01");
+        isa.setSecurityInformation("SECRET");
+        isa.setInterchangeIDQualifierSender("ZZ");
+        isa.setInterchangeSenderID("SUBMITTERS...ID");
+        isa.setInterchangeIDQualifierReceiver("ZZ");
+        isa.setInterchangeReceiverID("RECEIVERS...ID");
+        isa.setInterchangeDate("030101");
+        isa.setInterchangeTime("1253");
+        isa.setRepetitionSeparator("^");
+        isa.setInterchangeControlVersionNumber("00602");
+        isa.setInterchangeControlNumber("000000905");
+        isa.setAcknowledgmentRequested("0");
+        isa.setUsageIndicator("T");
+        isa.setComponentElementSeparator(":");
+
+        Assert.assertEquals(x12, isa.toString());
     }
 }

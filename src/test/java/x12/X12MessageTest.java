@@ -2,18 +2,18 @@ package x12;
 
 import org.junit.Assert;
 import org.junit.Test;
+import x12.segment.GS;
 import x12.segment.ISA;
 
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class BenefitInquiryTest  {
+public class X12MessageTest {
 
     @Test
     public void testParseISA() {
         String x12 = "ISA*00*...*01*SECRET*ZZ*SUBMITTERS...ID*ZZ*RECEIVERS...ID*030101*1253*^*00602*000000905*0*T*:~";
-
-        ISA isa = new ISA(x12, Character.toString('*'));
+        ISA isa = new ISA(x12);
 
         Assert.assertEquals(x12, isa.toString());
         Assert.assertEquals(true, isa.validate());
@@ -40,6 +40,7 @@ public class BenefitInquiryTest  {
     public void testCreateISA() {
         String x12 = "ISA*00*...*01*SECRET*ZZ*SUBMITTERS...ID*ZZ*RECEIVERS...ID*030101*1253*^*00602*000000905*0*T*:~";
         ISA isa = new ISA();
+
         isa.setAuthInfoQualifier("00");
         isa.setAuthInformation("...");
         isa.setSecurityInfoQualifier("01");
@@ -58,5 +59,39 @@ public class BenefitInquiryTest  {
         isa.setComponentElementSeparator(":");
 
         Assert.assertEquals(x12, isa.toString());
+    }
+
+    @Test
+    public void testParseGS() {
+        String x12 = "GS*HC*SUBMITTERS...Code*RECEIVERS...Code*20160524*0616*126*X*005010X222A1~";
+        GS gs = new GS(x12);
+
+        Assert.assertEquals(x12, gs.toString());
+        Assert.assertEquals(true, gs.validate());
+        Assert.assertEquals("HC", gs.getFunctionalIDCode());
+        Assert.assertEquals("SUBMITTERS...Code", gs.getApplicationSendersCode());
+        Assert.assertEquals("RECEIVERS...Code", gs.getApplicationReceiversCode());
+        Assert.assertEquals("20160524", gs.getDate());
+        Assert.assertEquals("0616", gs.getTime());
+        Assert.assertEquals("126", gs.getGroupControlNumber());
+        Assert.assertEquals("X", gs.getResponsibleAgencyCode());
+        Assert.assertEquals("005010X222A1", gs.getVersionReleaseIndustryIDCode());
+    }
+
+    @Test
+    public void testCreateGS() {
+        String x12 = "GS*HC*SUBMITTERS...Code*RECEIVERS...Code*20160524*0616*126*X*005010X222A1~";
+        GS gs = new GS();
+
+        gs.setFunctionalIDCode("HC");
+        gs.setApplicationSendersCode("SUBMITTERS...Code");
+        gs.setApplicationReceiversCode("RECEIVERS...Code");
+        gs.setDate("20160524");
+        gs.setTime("0616");
+        gs.setGroupControlNumber("126");
+        gs.setResponsibleAgencyCode("X");
+        gs.setVersionReleaseIndustryIDCode("005010X222A1");
+
+        Assert.assertEquals(x12, gs.toString());
     }
 }

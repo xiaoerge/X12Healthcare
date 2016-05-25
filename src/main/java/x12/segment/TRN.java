@@ -4,8 +4,8 @@ package x12.segment;
  * Created by xiaoerge on 5/23/16.
  */
 public class TRN extends Segment {
-    public TRN(String content, String delimiter) {
-        super(content, delimiter);
+    public TRN(String content) {
+        super(content);
     }
 
     protected void setSize() {

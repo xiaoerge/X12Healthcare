@@ -19,12 +19,12 @@ public abstract class Segment
     protected String[] collection;
 
     public Segment() {
-        this("","*");
+        this("");
     }
-    public Segment(String content, String delimiter) {
+    public Segment(String content) {
         this.parseError = false;
         this.content = content;
-        this.delimiter = delimiter;
+        this.delimiter = "*";
 
         setSize();
         setName();
@@ -34,7 +34,7 @@ public abstract class Segment
     private void parse() {
         if (content.length() == 0) {
             this.collection = new String[size+1];
-            this.collection[0] = name;
+            collection[0] = name;
             return;
         }
 
@@ -54,10 +54,14 @@ public abstract class Segment
     }
     public boolean validate()
     {
-        return !parseError || collection.length-1 <= size;
+        return collection[0].equals(name) && name.length() > 0 && !parseError && collection.length-1 <= size;
     }
     public String toString()
     {
+        if (!validate())
+            return name.concat(StringUtils.repeat("*", size)).concat("~");
+
+        collection[0] = name;
         return StringUtils.join(collection, delimiter).concat("~");
     }
 }

@@ -6,8 +6,8 @@ import x12.segment.Segment;
  * Created by xiaoerge on 5/23/16.
  */
 public class GE extends Segment {
-    public GE(String content, String delimiter) {
-        super(content, delimiter);
+    public GE(String content) {
+        super(content);
     }
 
     protected void setSize() {

@@ -8,8 +8,8 @@ public class ISA extends Segment
     public ISA() {
         super();
     }
-    public ISA(String content, String delimiter) {
-        super(content, delimiter);
+    public ISA(String content) {
+        super(content);
     }
 
     protected void setSize() {

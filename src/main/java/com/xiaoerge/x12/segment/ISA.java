@@ -1,5 +1,7 @@
 package com.xiaoerge.x12.segment;
 
+import com.xiaoerge.x12.enumeration.*;
+
 /**
  * Created by xiaoerge on 5/23/16.
  */
@@ -17,7 +19,7 @@ public class ISA extends Segment
     }
     protected void setName() { this.name = "ISA"; }
 
-    public String getAuthInfoQualifier() {return collection[1];}
+    public AuthInformationQualifier getAuthInfoQualifier() {return Qualifier.codeValueOf(AuthInformationQualifier.class, collection[1]);}
     public String getAuthInformation() {return collection[2];}
     public String getSecurityInfoQualifier() {return collection[3];}
     public String getSecurityInformation() {return collection[4];}
@@ -34,7 +36,7 @@ public class ISA extends Segment
     public String getUsageIndicator() {return collection[15];}
     public String getComponentElementSeparator() {return collection[16];}
 
-    public void setAuthInfoQualifier(String s) { collection[1] = s;}
+    public void setAuthInfoQualifier(AuthInformationQualifier s) { collection[1] = s.toString();}
     public void setAuthInformation(String s) { collection[2] = s;}
     public void setSecurityInfoQualifier(String s) { collection[3] = s;}
     public void setSecurityInformation(String s) { collection[4] = s;}

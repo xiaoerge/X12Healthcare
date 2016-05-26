@@ -13,8 +13,8 @@ public class X12MessageTest {
         String x12 = "ISA*00*...*01*SECRET*ZZ*SUBMITTERS...ID*ZZ*RECEIVERS...ID*030101*1253*^*00602*000000905*0*T*:~";
         ISA isa = new ISA(x12);
 
-        Assert.assertEquals(x12, isa.toString());
         Assert.assertEquals(true, isa.validate());
+        Assert.assertEquals(x12, isa.toString());
         Assert.assertEquals(16, isa.size());
         Assert.assertEquals("00", isa.getAuthInfoQualifier());
         Assert.assertEquals("...", isa.getAuthInformation());
@@ -56,6 +56,7 @@ public class X12MessageTest {
         isa.setUsageIndicator("T");
         isa.setComponentElementSeparator(":");
 
+        Assert.assertEquals(true, isa.validate());
         Assert.assertEquals(x12, isa.toString());
     }
 
@@ -64,8 +65,8 @@ public class X12MessageTest {
         String x12 = "GS*HC*SUBMITTERS...Code*RECEIVERS...Code*20160524*0616*126*X*005010X222A1~";
         GS gs = new GS(x12);
 
-        Assert.assertEquals(x12, gs.toString());
         Assert.assertEquals(true, gs.validate());
+        Assert.assertEquals(x12, gs.toString());
         Assert.assertEquals("HC", gs.getFunctionalIDCode());
         Assert.assertEquals("SUBMITTERS...Code", gs.getApplicationSendersCode());
         Assert.assertEquals("RECEIVERS...Code", gs.getApplicationReceiversCode());
@@ -90,7 +91,87 @@ public class X12MessageTest {
         gs.setResponsibleAgencyCode("X");
         gs.setVersionReleaseIndustryIDCode("005010X222A1");
 
+        Assert.assertEquals(true, gs.validate());
         Assert.assertEquals(x12, gs.toString());
+    }
+
+    @Test
+    public void testParseST() {
+        String x12 = "ST*837*1*005010X222A1~";
+        ST st = new ST(x12);
+
+        Assert.assertEquals(true, st.validate());
+        Assert.assertEquals(x12, st.toString());
+        Assert.assertEquals("837", st.getTransactionSetIDCode());
+        Assert.assertEquals("1", st.getTransactionSetControlNumber());
+        Assert.assertEquals("005010X222A1", st.getImplementationConventionReference());
+    }
+
+    @Test
+    public void testCreateST() {
+        String x12 = "ST*837*1*005010X222A1~";
+        ST st = new ST();
+
+        st.setTransactionSetIDCode("837");
+        st.setTransactionSetControlNumber("1");
+        st.setImplementationConventionReference("005010X222A1");
+
+        Assert.assertEquals(true, st.validate());
+        Assert.assertEquals(x12, st.toString());
+    }
+
+    @Test
+    public void testParseBHT() {
+        String x12 = "BHT*0019*00*123*20160525*0616*CH~";
+        BHT bht = new BHT(x12);
+
+        Assert.assertEquals(true, bht.validate());
+        Assert.assertEquals(x12, bht.toString());
+        Assert.assertEquals("0019", bht.getHierarchicalStructureCode());
+        Assert.assertEquals("00", bht.getTransactionSetPurposeCode());
+        Assert.assertEquals("123", bht.getReferenceIdentification());
+        Assert.assertEquals("20160525", bht.getDate());
+        Assert.assertEquals("0616", bht.getTime());
+        Assert.assertEquals("CH", bht.getTransactionTypeCode());
+    }
+
+    @Test
+    public void testCreateBHT() {
+        String x12 = "BHT*0019*00*123*20160525*0616*CH~";
+        BHT bht = new BHT();
+
+        bht.setHierarchicalStructureCode("0019");
+        bht.setTransactionSetPurposeCode("00");
+        bht.setReferenceIdentification("123");
+        bht.setDate("20160525");
+        bht.setTime("0616");
+        bht.setTransactionTypeCode("CH");
+
+        Assert.assertEquals(true, bht.validate());
+        Assert.assertEquals(x12, bht.toString());
+    }
+
+    @Test
+    public void testParseSE() {
+        String x12 = "SE*1*1~";
+        SE se = new SE();
+
+        Assert.assertEquals(true, se.validate());
+        Assert.assertEquals(x12, se.toString());
+        Assert.assertEquals("0019", se.getTransactionSegmentCount());
+        Assert.assertEquals("00", se.getTransactionSetControlNumber());
+    }
+
+    @Test
+    public void testCreateSE() {
+        String x12 = "SE*1*1~";
+        SE se = new SE();
+
+        se.setTransactionSegmentCount("1");
+        se.setTransactionSetControlNumber("1");
+
+        Assert.assertEquals(true, se.validate());
+        Assert.assertEquals(x12, se.toString());
     }
 
     @Test
@@ -98,8 +179,8 @@ public class X12MessageTest {
         String x12 = "GE*1*0616~";
         GE gs = new GE(x12);
 
-        Assert.assertEquals(x12, gs.toString());
         Assert.assertEquals(true, gs.validate());
+        Assert.assertEquals(x12, gs.toString());
         Assert.assertEquals("1", gs.getNumberOfTransactionsSetsIncluded());
         Assert.assertEquals("0616", gs.getGroupControlNumber());
     }
@@ -112,8 +193,8 @@ public class X12MessageTest {
         gs.setNumberOfTransactionsSetsIncluded("1");
         gs.setGroupControlNumber("0616");
 
-        Assert.assertEquals(x12, gs.toString());
         Assert.assertEquals(true, gs.validate());
+        Assert.assertEquals(x12, gs.toString());
     }
 
     @Test
@@ -121,8 +202,8 @@ public class X12MessageTest {
         String x12 = "IEA*1*0616~";
         IEA iea = new IEA(x12);
 
-        Assert.assertEquals(x12, iea.toString());
         Assert.assertEquals(true, iea.validate());
+        Assert.assertEquals(x12, iea.toString());
         Assert.assertEquals("1", iea.getNumberOfIncludedFunctionalGroups());
         Assert.assertEquals("0616", iea.getInterchangeControlNumber());
     }
@@ -135,7 +216,7 @@ public class X12MessageTest {
         iea.setNumberOfIncludedFunctionalGroups("1");
         iea.setInterchangeControlNumber("0616");
 
-        Assert.assertEquals(x12, iea.toString());
         Assert.assertEquals(true, iea.validate());
+        Assert.assertEquals(x12, iea.toString());
     }
 }

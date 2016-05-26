@@ -1,9 +1,7 @@
 package com.xiaoerge.x12;
 
-import org.junit.Assert;
-import org.junit.Test;
-import com.xiaoerge.x12.segment.GS;
-import com.xiaoerge.x12.segment.ISA;
+import org.junit.*;
+import com.xiaoerge.x12.segment.*;
 
 /**
  * Created by xiaoerge on 5/23/16.
@@ -93,5 +91,51 @@ public class X12MessageTest {
         gs.setVersionReleaseIndustryIDCode("005010X222A1");
 
         Assert.assertEquals(x12, gs.toString());
+    }
+
+    @Test
+    public void testParseGE() {
+        String x12 = "GE*1*0616~";
+        GE gs = new GE(x12);
+
+        Assert.assertEquals(x12, gs.toString());
+        Assert.assertEquals(true, gs.validate());
+        Assert.assertEquals("1", gs.getNumberOfTransactionsSetsIncluded());
+        Assert.assertEquals("0616", gs.getGroupControlNumber());
+    }
+
+    @Test
+    public void testCreateGE() {
+        String x12 = "GE*1*0616~";
+        GE gs = new GE();
+
+        gs.setNumberOfTransactionsSetsIncluded("1");
+        gs.setGroupControlNumber("0616");
+
+        Assert.assertEquals(x12, gs.toString());
+        Assert.assertEquals(true, gs.validate());
+    }
+
+    @Test
+    public void testParseIEA() {
+        String x12 = "IEA*1*0616~";
+        IEA iea = new IEA(x12);
+
+        Assert.assertEquals(x12, iea.toString());
+        Assert.assertEquals(true, iea.validate());
+        Assert.assertEquals("1", iea.getNumberOfIncludedFunctionalGroups());
+        Assert.assertEquals("0616", iea.getInterchangeControlNumber());
+    }
+
+    @Test
+    public void testCreateIEA() {
+        String x12 = "IEA*1*0616~";
+        IEA iea = new IEA();
+
+        iea.setNumberOfIncludedFunctionalGroups("1");
+        iea.setInterchangeControlNumber("0616");
+
+        Assert.assertEquals(x12, iea.toString());
+        Assert.assertEquals(true, iea.validate());
     }
 }

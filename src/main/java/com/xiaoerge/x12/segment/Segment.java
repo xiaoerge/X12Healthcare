@@ -52,7 +52,7 @@ public abstract class Segment
     }
     public boolean validate()
     {
-        return collection[0].equals(name) && name.length() > 0 && !parseError && collection.length-1 <= size;
+        return collection[0].equals(name) && name.length() > 0 && !parseError && size != 0 && collection.length-1 <= size;
     }
     public String toString()
     {

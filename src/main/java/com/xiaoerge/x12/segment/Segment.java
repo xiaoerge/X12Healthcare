@@ -1,8 +1,13 @@
 package com.xiaoerge.x12.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
+import com.xiaoerge.x12.annotation.Definition;
+import com.xiaoerge.x12.enumeration.Required;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
 /**
@@ -56,11 +61,52 @@ public abstract class Segment
     }
     public boolean validate()
     {
-        return !parseError && validateName() && size != 0 && validateSize();
+        return !parseError && validateName() && size != 0
+                && validateSize() && validateRequired() && validateValid();
     }
 
     private boolean validateName() {
         return name.length() > 0 && collection[0].equals(name);
+    }
+
+    private boolean validateRequired() {
+        Class obj = this.getClass();
+        for (Method method : obj.getDeclaredMethods()) {
+            if (method.isAnnotationPresent(Definition.class)) {
+                Definition definition = (Definition) method.getAnnotation(Definition.class);
+
+                if (definition.required() == Required.REQUIRED) {
+                    try {
+                        String code = (String) method.invoke(this);
+                        return code.length() > 0;
+                    } catch (IllegalAccessException e) {
+                        return false;
+                    } catch (InvocationTargetException e) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean validateValid() {
+        Class obj = this.getClass();
+        for (Method method : obj.getDeclaredMethods()) {
+            if (method.isAnnotationPresent(Definition.class)) {
+                Definition definition = (Definition) method.getAnnotation(Definition.class);
+
+                try {
+                    String code = (String) method.invoke(this);
+                    return ArrayUtils.contains(definition.codeValues(), code);
+                } catch (IllegalAccessException e) {
+                    return false;
+                } catch (InvocationTargetException e) {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean validateSize() {

@@ -17,52 +17,52 @@ public class ISA extends Segment
         super(content);
     }
 
-    @Definition(required = Required.REQUIRED, minLength = 2, maxLength = 2, codeValues = {"00", "03"})
+    @Definition(required = Required.REQUIRED, position = 1, minLength = 2, maxLength = 2, codeValues = {"00", "03"})
     public String getAuthInfoQualifier() {return collection[1];}
 
-    @Definition(required = Required.REQUIRED, minLength = 10, maxLength = 10, codeValues = {})
+    @Definition(required = Required.REQUIRED, position = 2, minLength = 10, maxLength = 10)
     public String getAuthInformation() {return collection[2];}
 
-    @Definition(required = Required.REQUIRED, minLength = 2, maxLength = 2, codeValues = {"00", "01"})
+    @Definition(required = Required.REQUIRED, position = 3, minLength = 2, maxLength = 2, codeValues = {"00", "01"})
     public String getSecurityInfoQualifier() {return collection[3];}
 
-    @Definition(required = Required.REQUIRED, minLength = 10, maxLength = 10)
+    @Definition(required = Required.REQUIRED, position = 4, minLength = 10, maxLength = 10)
     public String getSecurityInformation() {return collection[4];}
 
-    @Definition(required = Required.REQUIRED, minLength = 2, maxLength = 2, codeValues = {"01", "14", "20", "27", "28", "29", "30", "33", "ZZ"})
+    @Definition(required = Required.REQUIRED, position = 5, minLength = 2, maxLength = 2, codeValues = {"01", "14", "20", "27", "28", "29", "30", "33", "ZZ"})
     public String getInterchangeIDQualifierSender() {return collection[5];}
 
-    @Definition(required = Required.REQUIRED, minLength = 15, maxLength = 15)
+    @Definition(required = Required.REQUIRED, position = 6, minLength = 15, maxLength = 15)
     public String getInterchangeSenderID() {return collection[6];}
 
-    @Definition(required = Required.REQUIRED, minLength = 2, maxLength = 2, codeValues = {"01", "14", "20", "27", "28", "29", "30", "33", "ZZ"})
+    @Definition(required = Required.REQUIRED, position = 7, minLength = 2, maxLength = 2, codeValues = {"01", "14", "20", "27", "28", "29", "30", "33", "ZZ"})
     public String getInterchangeIDQualifierReceiver() {return collection[7];}
 
-    @Definition(required = Required.REQUIRED, minLength = 15, maxLength = 15)
+    @Definition(required = Required.REQUIRED, position = 8, minLength = 15, maxLength = 15)
     public String getInterchangeReceiverID() {return collection[8];}
 
-    @Definition(required = Required.REQUIRED, minLength = 6, maxLength = 6)
+    @Definition(required = Required.REQUIRED, position = 9, minLength = 6, maxLength = 6)
     public String getInterchangeDate() {return collection[9];}
 
-    @Definition(required = Required.REQUIRED, minLength = 4, maxLength = 4)
+    @Definition(required = Required.REQUIRED, position = 10, minLength = 4, maxLength = 4)
     public String getInterchangeTime() {return collection[10];}
 
-    @Definition(required = Required.REQUIRED, minLength = 1, maxLength = 1, codeValues = {"^"})
+    @Definition(required = Required.REQUIRED, position = 11, minLength = 1, maxLength = 1, codeValues = {"^"})
     public String getRepetitionSeparator() {return collection[11];}
 
-    @Definition(required = Required.REQUIRED, minLength = 5, maxLength = 5)
+    @Definition(required = Required.REQUIRED, position = 12, minLength = 5, maxLength = 5)
     public String getInterchangeControlVersionNumber() {return collection[12];}
 
-    @Definition(required = Required.REQUIRED, minLength = 9, maxLength = 9, codeValues = {})
+    @Definition(required = Required.REQUIRED, position = 13, minLength = 9, maxLength = 9)
     public String getInterchangeControlNumber() {return collection[13];}
 
-    @Definition(required = Required.REQUIRED, minLength = 1, maxLength = 1, codeValues = {"0", "1"})
+    @Definition(required = Required.REQUIRED, position = 14, minLength = 1, maxLength = 1, codeValues = {"0", "1"})
     public String getAcknowledgmentRequested() {return collection[14];}
 
-    @Definition(required = Required.REQUIRED, minLength = 1, maxLength = 1, codeValues = {"P", "T"})
+    @Definition(required = Required.REQUIRED, position = 15, minLength = 1, maxLength = 1, codeValues = {"P", "T"})
     public String getUsageIndicator() {return collection[15];}
 
-    @Definition(required = Required.REQUIRED, minLength = 1, maxLength = 1)
+    @Definition(required = Required.REQUIRED, position = 16, minLength = 1, maxLength = 1)
     public String getComponentElementSeparator() {return collection[16];}
 
     public void setAuthInfoQualifier(String s) { collection[1] = s;}

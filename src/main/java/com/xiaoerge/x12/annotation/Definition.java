@@ -16,6 +16,7 @@ import java.lang.annotation.Target;
 public @interface Definition {
 
     public Required required();
+    public int position();
     public int minLength();
     public int maxLength();
     public String[] codeValues() default {};

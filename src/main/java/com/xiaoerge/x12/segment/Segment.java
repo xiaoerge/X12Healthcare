@@ -66,8 +66,8 @@ public abstract class Segment
     }
     public boolean validate()
     {
-        return !parseError && validateName() && size != 0
-                && validateSize() && validateRequired()
+        return !parseError && size != 0
+                && validateName() && validateSize() && validateRequired()
                 && validateCodeValue() && validateDataLength();
     }
 
@@ -89,7 +89,7 @@ public abstract class Segment
                     String code = (String) method.invoke(this);
                     boolean v = code.length() > 0;
                     if (!v) {
-                        logger.log(Level.SEVERE, name+""+definition.position()+" is required but missing");
+                        logger.log(Level.SEVERE, name+""+String.format("%02d", definition.position())+" is required but missing");
                         ret = false;
                     }
                 } catch (IllegalAccessException e) {
@@ -116,7 +116,7 @@ public abstract class Segment
                     String code = (String) method.invoke(this);
                     boolean v =  ArrayUtils.contains(definition.codeValues(), code);
                     if (!v) {
-                        logger.log(Level.SEVERE, name+""+definition.position()+" is not within "+ArrayUtils.toString(definition.codeValues()));
+                        logger.log(Level.SEVERE, name+""+String.format("%02d", definition.position())+" is not a valid. Valid values are "+ArrayUtils.toString(definition.codeValues()));
                         ret = false;
                     }
 
@@ -145,10 +145,13 @@ public abstract class Segment
 
                 try {
                     String code = (String) method.invoke(this);
+                    if (code.length() == 0) continue;
+
                     boolean v =  code.length() >= definition.minLength() && code.length() <= definition.maxLength();
                     if (!v) {
-                        logger.log(Level.SEVERE, name+""+definition.position()+" length should be between "
-                                +definition.minLength()+", "+definition.maxLength());
+                        String message = (definition.minLength() == definition.maxLength()) ?
+                                definition.minLength()+"" : "between "+definition.minLength()+", "+definition.maxLength();
+                        logger.log(Level.SEVERE, name+""+String.format("%02d", definition.position())+" length should be "+message);
                         ret = false;
                     }
 

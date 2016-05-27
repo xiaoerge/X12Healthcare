@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Definition {
 
-    public Required required();
+    public Required required() default Required.Optional;
     public int position();
     public int minLength();
     public int maxLength();

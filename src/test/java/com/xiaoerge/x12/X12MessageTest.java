@@ -1,6 +1,5 @@
 package com.xiaoerge.x12;
 
-import com.xiaoerge.x12.enumeration.AuthInformationQualifier;
 import org.junit.*;
 import com.xiaoerge.x12.segment.*;
 
@@ -17,7 +16,7 @@ public class X12MessageTest {
         Assert.assertEquals(true, isa.validate());
         Assert.assertEquals(x12, isa.toString());
         Assert.assertEquals(16, isa.size());
-        Assert.assertEquals(AuthInformationQualifier.NoAuthorizationInformation, isa.getAuthInfoQualifier());
+        Assert.assertEquals("00", isa.getAuthInfoQualifier());
         Assert.assertEquals("...", isa.getAuthInformation());
         Assert.assertEquals("01", isa.getSecurityInfoQualifier());
         Assert.assertEquals("SECRET", isa.getSecurityInformation());
@@ -40,7 +39,7 @@ public class X12MessageTest {
         String x12 = "ISA*00*...*01*SECRET*ZZ*SUBMITTERS...ID*ZZ*RECEIVERS...ID*030101*1253*^*00602*000000905*0*T*:~";
         ISA isa = new ISA();
 
-        isa.setAuthInfoQualifier(AuthInformationQualifier.NoAuthorizationInformation);
+        isa.setAuthInfoQualifier("00");
         isa.setAuthInformation("...");
         isa.setSecurityInfoQualifier("01");
         isa.setSecurityInformation("SECRET");

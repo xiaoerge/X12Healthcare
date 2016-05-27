@@ -1,8 +1,11 @@
 package com.xiaoerge.x12.segment;
 
+import com.xiaoerge.x12.annotation.Declaration;
+
 /**
  * Created by xiaoerge on 5/23/16.
  */
+@Declaration(size = 8, name = "GS")
 public class GS extends Segment
 {
     public GS() {
@@ -11,11 +14,6 @@ public class GS extends Segment
     public GS(String content) {
         super(content);
     }
-
-    protected void setSize() {
-        this.size = 8;
-    }
-    protected void setName() { this.name = "GS"; }
 
     public String getFunctionalIDCode() {return collection[1];}
     public String getApplicationSendersCode() {return collection[2];}

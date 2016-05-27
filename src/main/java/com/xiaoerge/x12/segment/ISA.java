@@ -1,10 +1,13 @@
 package com.xiaoerge.x12.segment;
 
+import com.xiaoerge.x12.annotation.Declaration;
+import com.xiaoerge.x12.annotation.Definition;
 import com.xiaoerge.x12.enumeration.*;
 
 /**
  * Created by xiaoerge on 5/23/16.
  */
+@Declaration(size = 16, name = "ISA")
 public class ISA extends Segment
 {
     public ISA() {
@@ -14,29 +17,55 @@ public class ISA extends Segment
         super(content);
     }
 
-    protected void setSize() {
-        this.size = 16;
-    }
-    protected void setName() { this.name = "ISA"; }
+    @Definition(required = Required.REQUIRED, minLength = 2, maxLength = 2, codeValues = {"00", "03"})
+    public String getAuthInfoQualifier() {return collection[1];}
 
-    public AuthInformationQualifier getAuthInfoQualifier() {return Qualifier.codeValueOf(AuthInformationQualifier.class, collection[1]);}
+    @Definition(required = Required.REQUIRED, minLength = 10, maxLength = 10, codeValues = {})
     public String getAuthInformation() {return collection[2];}
+
+    @Definition(required = Required.REQUIRED, minLength = 2, maxLength = 2, codeValues = {"00", "01"})
     public String getSecurityInfoQualifier() {return collection[3];}
+
+    @Definition(required = Required.REQUIRED, minLength = 10, maxLength = 10)
     public String getSecurityInformation() {return collection[4];}
+
+    @Definition(required = Required.REQUIRED, minLength = 2, maxLength = 2, codeValues = {"01", "14", "20", "27", "28", "29", "30", "33", "ZZ"})
     public String getInterchangeIDQualifierSender() {return collection[5];}
+
+    @Definition(required = Required.REQUIRED, minLength = 15, maxLength = 15)
     public String getInterchangeSenderID() {return collection[6];}
+
+    @Definition(required = Required.REQUIRED, minLength = 2, maxLength = 2, codeValues = {"01", "14", "20", "27", "28", "29", "30", "33", "ZZ"})
     public String getInterchangeIDQualifierReceiver() {return collection[7];}
+
+    @Definition(required = Required.REQUIRED, minLength = 15, maxLength = 15)
     public String getInterchangeReceiverID() {return collection[8];}
+
+    @Definition(required = Required.REQUIRED, minLength = 6, maxLength = 6)
     public String getInterchangeDate() {return collection[9];}
+
+    @Definition(required = Required.REQUIRED, minLength = 4, maxLength = 4)
     public String getInterchangeTime() {return collection[10];}
+
+    @Definition(required = Required.REQUIRED, minLength = 1, maxLength = 1, codeValues = {"^"})
     public String getRepetitionSeparator() {return collection[11];}
+
+    @Definition(required = Required.REQUIRED, minLength = 5, maxLength = 5)
     public String getInterchangeControlVersionNumber() {return collection[12];}
+
+    @Definition(required = Required.REQUIRED, minLength = 9, maxLength = 9, codeValues = {})
     public String getInterchangeControlNumber() {return collection[13];}
+
+    @Definition(required = Required.REQUIRED, minLength = 1, maxLength = 1, codeValues = {"0", "1"})
     public String getAcknowledgmentRequested() {return collection[14];}
+
+    @Definition(required = Required.REQUIRED, minLength = 1, maxLength = 1, codeValues = {"P", "T"})
     public String getUsageIndicator() {return collection[15];}
+
+    @Definition(required = Required.REQUIRED, minLength = 1, maxLength = 1)
     public String getComponentElementSeparator() {return collection[16];}
 
-    public void setAuthInfoQualifier(AuthInformationQualifier s) { collection[1] = s.toString();}
+    public void setAuthInfoQualifier(String s) { collection[1] = s;}
     public void setAuthInformation(String s) { collection[2] = s;}
     public void setSecurityInfoQualifier(String s) { collection[3] = s;}
     public void setSecurityInformation(String s) { collection[4] = s;}

@@ -1,18 +1,16 @@
 package com.xiaoerge.x12.segment;
 
+import com.xiaoerge.x12.annotation.Declaration;
+
 /**
  * Created by xiaoerge on 5/23/16.
  */
+@Declaration(size = 3, name = "ST")
 public class ST extends Segment {
     public ST() {super();}
     public ST(String content) {
         super(content);
     }
-
-    protected void setSize() {
-        this.size = 3;
-    }
-    protected void setName() { this.name = "ST"; }
 
     public String getTransactionSetIDCode() { return collection[1]; }
     public String getTransactionSetControlNumber() { return collection[2]; }

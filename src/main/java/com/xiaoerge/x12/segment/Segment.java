@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.segment;
 
+import com.xiaoerge.x12.annotation.Declaration;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Pattern;
@@ -24,8 +25,13 @@ public abstract class Segment
         this.content = content;
         this.delimiter = "*";
 
-        setSize();
-        setName();
+        Class obj = this.getClass();
+        if (obj.isAnnotationPresent(Declaration.class)) {
+            Declaration declaration = (Declaration) obj.getAnnotation(Declaration.class);
+            this.size = declaration.size();
+            this.name = declaration.name();
+        }
+
         parse();
     }
 
@@ -44,16 +50,23 @@ public abstract class Segment
             this.collection = content.substring(0, content.length()-1).split(Pattern.quote(delimiter));
         }
     }
-    protected abstract void setSize();
-    protected abstract void setName();
 
     public int size() {
         return size;
     }
     public boolean validate()
     {
-        return collection[0].equals(name) && name.length() > 0 && !parseError && size != 0 && collection.length-1 == size;
+        return !parseError && validateName() && size != 0 && validateSize();
     }
+
+    private boolean validateName() {
+        return name.length() > 0 && collection[0].equals(name);
+    }
+
+    private boolean validateSize() {
+        return size != 0 && collection.length-1 == size;
+    }
+
     public String toString()
     {
         if (!validate())

@@ -1,18 +1,16 @@
 package com.xiaoerge.x12.segment;
 
+import com.xiaoerge.x12.annotation.Declaration;
+
 /**
  * Created by xiaoerge on 5/23/16.
  */
+@Declaration(size = 6, name = "BHT")
 public class BHT extends Segment {
     public BHT() {super();}
     public BHT(String content) {
         super(content);
     }
-
-    protected void setSize() {
-        this.size = 6;
-    }
-    protected void setName() { this.name = "BHT"; }
 
     public String getHierarchicalStructureCode() { return collection[1]; }
     public String getTransactionSetPurposeCode() { return collection[2]; }

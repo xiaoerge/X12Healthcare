@@ -1,18 +1,16 @@
 package com.xiaoerge.x12.segment;
 
+import com.xiaoerge.x12.annotation.Declaration;
+
 /**
  * Created by xiaoerge on 5/23/16.
  */
+@Declaration(size = 2, name = "GE")
 public class GE extends Segment {
     public GE() {super();}
     public GE(String content) {
         super(content);
     }
-
-    protected void setSize() {
-        this.size = 2;
-    }
-    protected void setName() { this.name = "GE"; }
 
     public String getNumberOfTransactionsSetsIncluded() { return collection[1]; }
     public String getGroupControlNumber() { return collection[2]; }

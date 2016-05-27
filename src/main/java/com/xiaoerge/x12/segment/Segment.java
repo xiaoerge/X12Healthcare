@@ -3,6 +3,7 @@ package com.xiaoerge.x12.segment;
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
 import com.xiaoerge.x12.enumeration.Required;
+import com.xiaoerge.x12.message.IMessage;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public abstract class Segment
+public abstract class Segment implements IMessage
 {
     static Logger logger = Logger.getLogger(Segment.class.getName());
 
@@ -87,7 +88,7 @@ public abstract class Segment
                 if (definition.required() != Required.REQUIRED) continue;
                 try {
                     String code = (String) method.invoke(this);
-                    boolean v = code.length() > 0;
+                    boolean v = code != null && code.length() > 0;
                     if (!v) {
                         logger.log(Level.SEVERE, name+""+String.format("%02d", definition.position())+" is required but missing");
                         ret = false;

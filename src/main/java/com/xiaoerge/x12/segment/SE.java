@@ -1,6 +1,8 @@
 package com.xiaoerge.x12.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
+import com.xiaoerge.x12.annotation.Definition;
+import com.xiaoerge.x12.enumeration.Required;
 
 /**
  * Created by xiaoerge on 5/23/16.
@@ -12,7 +14,10 @@ public class SE extends Segment {
         super(content);
     }
 
+    @Definition(required = Required.REQUIRED, position = 1, minLength = 1, maxLength = 10)
     public String getTransactionSegmentCount() { return collection[1]; }
+
+    @Definition(required = Required.REQUIRED, position = 2, minLength = 4, maxLength = 9)
     public String getTransactionSetControlNumber() { return collection[2]; }
 
     public void setTransactionSegmentCount(String s) { collection[1] = s; }

@@ -153,22 +153,22 @@ public class X12MessageTest {
 
     @Test
     public void testParseSE() {
-        String x12 = "SE*1*1~";
+        String x12 = "SE*1*0001~";
         SE se = new SE(x12);
 
         Assert.assertEquals(true, se.validate());
         Assert.assertEquals(x12, se.toString());
         Assert.assertEquals("1", se.getTransactionSegmentCount());
-        Assert.assertEquals("1", se.getTransactionSetControlNumber());
+        Assert.assertEquals("0001", se.getTransactionSetControlNumber());
     }
 
     @Test
     public void testCreateSE() {
-        String x12 = "SE*1*1~";
+        String x12 = "SE*1*0001~";
         SE se = new SE();
 
         se.setTransactionSegmentCount("1");
-        se.setTransactionSetControlNumber("1");
+        se.setTransactionSetControlNumber("0001");
 
         Assert.assertEquals(true, se.validate());
         Assert.assertEquals(x12, se.toString());

@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public abstract class Segment implements IMessage
+public class Segment implements IMessage
 {
     static Logger logger = Logger.getLogger(Segment.class.getName());
 
@@ -65,6 +65,11 @@ public abstract class Segment implements IMessage
     public int size() {
         return size;
     }
+
+    public String toX12String() {
+        return toString();
+    }
+
     public boolean validate()
     {
         return !parseError && size != 0
@@ -166,6 +171,7 @@ public abstract class Segment implements IMessage
         return ret;
     }
 
+    @Override
     public String toString()
     {
         if (!validate())

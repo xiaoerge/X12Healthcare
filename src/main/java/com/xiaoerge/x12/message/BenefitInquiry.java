@@ -1,18 +1,14 @@
 package com.xiaoerge.x12.message;
 
+import com.xiaoerge.x12.control.FunctionalGroup;
+import com.xiaoerge.x12.control.InterchangeEnvelope;
+import com.xiaoerge.x12.control.Transaction;
+
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class BenefitInquiry implements IMessage {
-    public boolean validate() {
-        return false;
-    }
-
-    public String toX12String() {
-        return "";
-    }
-
-    public int size() {
-        return 0;
+public class BenefitInquiry extends X12Message {
+    public BenefitInquiry(String s) {
+        super(s);
     }
 }

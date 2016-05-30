@@ -26,6 +26,20 @@ public class Transaction implements IMessage
         segmentList = new ArrayList<Segment>();
     }
 
+    public Transaction(String s) {
+
+        String header = s, content = s, footer = s;
+
+        st = new ST(header);
+        bht = new BHT(content);
+        se = new SE(footer);
+        segmentList = new ArrayList<Segment>();
+    }
+
+    public String getTransactionSetIDCode() {
+        return st.getTransactionSetIDCode();
+    }
+
     public boolean validate() {
         boolean v = true;
         for (Segment segment : segmentList) {
@@ -37,11 +51,10 @@ public class Transaction implements IMessage
         return st.validate() && bht.validate() && se.validate() && v;
     }
 
-    public String toString() {
+    public String toX12String() {
         StringBuilder builder = new StringBuilder();
         builder.append(st.toString());
         builder.append(bht.toString());
-
         for (Segment segment : segmentList) {
             builder.append(segment.toString());
         }

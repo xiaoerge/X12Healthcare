@@ -7,7 +7,7 @@ import com.xiaoerge.healthcare.x12.enumeration.Required;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-@Declaration(size = 16, name = "ISA")
+@Declaration(requiredSize = 16, fieldSize = 16, name = "ISA")
 public class ISA extends Segment
 {
     public ISA() {

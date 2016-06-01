@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Declaration {
 
-    public int size();
+    public int requiredSize();
+    public int fieldSize();
     public String name();
 }

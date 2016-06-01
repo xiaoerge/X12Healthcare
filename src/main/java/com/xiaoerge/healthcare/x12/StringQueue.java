@@ -5,10 +5,12 @@ package com.xiaoerge.healthcare.x12;
  */
 public class StringQueue {
 
+    private int pointer;
     private String[] message;
     public StringQueue(String s) {
         message = s.split("~");
         message = (message.length >= 3) ? message : new String[]{"", "", ""};
+        pointer = 1;
     }
     public int size() {
         return message.length;
@@ -29,5 +31,18 @@ public class StringQueue {
             builder.append(message[i]+"~");
         }
         return builder.toString();
+    }
+
+    public String getNext() {
+        return message[pointer++];
+    }
+
+    public void reset() {
+        pointer = 1;
+    }
+
+    //ignores header and trailer because we have methods for them
+    public boolean hasNext() {
+        return pointer > 0 && pointer < message.length-1;
     }
 }

@@ -7,9 +7,4 @@ public class HL extends Segment {
     public HL(String content) {
         super(content);
     }
-
-    protected void setSize() {
-        this.size = 0;
-    }
-    protected void setName() { this.name = "HL"; }
 }

@@ -6,7 +6,7 @@ import org.junit.*;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class X12MessageTest {
+public class SegmentTest {
 
     @Test
     public void testParseISA() {
@@ -122,7 +122,7 @@ public class X12MessageTest {
 
     @Test
     public void testParseBHT() {
-        String x12 = "BHT*0019*00*123*20160525*0616*CH~";
+        String x12 = "BHT*0019*00*123*20160525*0616~";
         BHT bht = new BHT(x12);
 
         Assert.assertEquals(true, bht.validate());
@@ -132,12 +132,11 @@ public class X12MessageTest {
         Assert.assertEquals("123", bht.getReferenceIdentification());
         Assert.assertEquals("20160525", bht.getDate());
         Assert.assertEquals("0616", bht.getTime());
-        Assert.assertEquals("CH", bht.getTransactionTypeCode());
     }
 
     @Test
     public void testCreateBHT() {
-        String x12 = "BHT*0019*00*123*20160525*0616*CH~";
+        String x12 = "BHT*0019*00*123*20160525*0616~";
         BHT bht = new BHT();
 
         bht.setHierarchicalStructureCode("0019");
@@ -145,7 +144,6 @@ public class X12MessageTest {
         bht.setReferenceIdentification("123");
         bht.setDate("20160525");
         bht.setTime("0616");
-        bht.setTransactionTypeCode("CH");
 
         Assert.assertEquals(true, bht.validate());
         Assert.assertEquals(x12, bht.toString());

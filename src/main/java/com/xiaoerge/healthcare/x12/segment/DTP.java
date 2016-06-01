@@ -7,9 +7,4 @@ public class DTP extends Segment {
     public DTP(String content) {
         super(content);
     }
-
-    protected void setSize() {
-        this.size = 0;
-    }
-    protected void setName() { this.name = "DTP"; }
 }

@@ -32,8 +32,10 @@ public class Transaction implements IMessage
         StringQueue stringQueue = new StringQueue(s);
         String header = stringQueue.getHeader(), content = stringQueue.getContent(), trailer = stringQueue.getTrailer();
 
+        StringQueue contentQueue = new StringQueue(content);
+
         st = new ST(header);
-        bht = new BHT(content);
+        bht = new BHT(contentQueue.getHeader());
         se = new SE(trailer);
         segmentList = new ArrayList<Segment>();
     }

@@ -7,7 +7,7 @@ import com.xiaoerge.healthcare.x12.annotation.Definition;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-@Declaration(size = 6, name = "BHT")
+@Declaration(requiredSize = 5, fieldSize = 6, name = "BHT")
 public class BHT extends Segment {
     public BHT() {super();}
     public BHT(String content) {
@@ -29,7 +29,7 @@ public class BHT extends Segment {
     @Definition(required = Required.REQUIRED, position = 5, minLength = 4, maxLength = 8)
     public String getTime() { return collection[5]; }
 
-    @Definition(required = Required.REQUIRED, position = 6, minLength = 2, maxLength = 2)
+    @Definition(required = Required.NOTUSED, position = 6, minLength = 2, maxLength = 2)
     public String getTransactionTypeCode() { return collection[6]; }
 
     public void setHierarchicalStructureCode(String s) { collection[1] = s; }

@@ -21,10 +21,8 @@ public class Segment implements IMessage
     static Logger logger = Logger.getLogger(Segment.class.getName());
 
     private boolean parseError;
-    protected int size;
-    protected String name;
-    protected String content;
-    protected String delimiter;
+    protected int requiredSize, fieldSize;
+    protected String name, content, delimiter;
     protected String[] collection;
 
     public Segment() {
@@ -38,7 +36,8 @@ public class Segment implements IMessage
         Class obj = this.getClass();
         if (obj.isAnnotationPresent(Declaration.class)) {
             Declaration declaration = (Declaration) obj.getAnnotation(Declaration.class);
-            size = declaration.size();
+            requiredSize = declaration.requiredSize();
+            fieldSize = declaration.fieldSize();
             name = declaration.name();
         }
 
@@ -47,7 +46,7 @@ public class Segment implements IMessage
 
     private void parse() {
         if (content.length() == 0) {
-            collection = new String[size+1];
+            collection = new String[requiredSize+1];
             collection[0] = name;
             return;
         }
@@ -63,7 +62,7 @@ public class Segment implements IMessage
     }
 
     public int size() {
-        return size;
+        return requiredSize;
     }
 
     public String toX12String() {
@@ -72,7 +71,7 @@ public class Segment implements IMessage
 
     public boolean validate()
     {
-        return !parseError && size != 0
+        return !parseError
                 && validateName() && validateSize() && validateRequired()
                 && validateCodeValue() && validateDataLength();
     }
@@ -137,8 +136,11 @@ public class Segment implements IMessage
     }
 
     private boolean validateSize() {
-        boolean v = size != 0 && collection.length-1 == size;
-        if (!v) logger.log(Level.SEVERE, name+" size should be "+size);
+        boolean v = requiredSize != 0 && collection.length-1 == requiredSize;
+        if (!v) {
+            logger.log(Level.SEVERE, name+" size should be "+requiredSize);
+            System.out.println(ArrayUtils.toString(collection));
+        }
         return v;
     }
 
@@ -149,11 +151,13 @@ public class Segment implements IMessage
             if (method.isAnnotationPresent(Definition.class)) {
                 Definition definition = (Definition) method.getAnnotation(Definition.class);
 
+                if (definition.required() != Required.REQUIRED) continue;
                 try {
                     String code = (String) method.invoke(this);
                     if (code.length() == 0) continue;
 
                     boolean v =  code.length() >= definition.minLength() && code.length() <= definition.maxLength();
+
                     if (!v) {
                         String message = (definition.minLength() == definition.maxLength()) ?
                                 definition.minLength()+"" : "between "+definition.minLength()+", "+definition.maxLength();
@@ -175,7 +179,7 @@ public class Segment implements IMessage
     public String toString()
     {
         if (!validate())
-            return name.concat(StringUtils.repeat("*", size)).concat("~");
+            return name.concat(StringUtils.repeat("*", requiredSize)).concat("~");
 
         collection[0] = name;
         return StringUtils.join(collection, delimiter).concat("~");

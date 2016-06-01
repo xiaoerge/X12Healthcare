@@ -28,16 +28,25 @@ public class Transaction implements IMessage
     }
 
     public Transaction(String s) {
-
         StringQueue stringQueue = new StringQueue(s);
-        String header = stringQueue.getHeader(), content = stringQueue.getContent(), trailer = stringQueue.getTrailer();
-
-        StringQueue contentQueue = new StringQueue(content);
-
-        st = new ST(header);
-        bht = new BHT(contentQueue.getHeader());
-        se = new SE(trailer);
         segmentList = new ArrayList<Segment>();
+
+        while (stringQueue.hasNext()) {
+            String next = stringQueue.getNext();
+            if (next.startsWith("ST")) {
+                st = new ST(next);
+            }
+            else if (next.startsWith("BHT")) {
+                bht = new BHT(next);
+            }
+            else if (next.startsWith("SE")) {
+                se = new SE(next);
+            }
+            else {
+                //Segment segment = new Segment(next);
+                //segmentList.add(segment);
+            }
+        }
     }
 
     public String getTransactionSetIDCode() {

@@ -5,44 +5,79 @@ import com.xiaoerge.healthcare.x12.message.IMessage;
 import com.xiaoerge.healthcare.x12.segment.GE;
 import com.xiaoerge.healthcare.x12.segment.GS;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by xiaoerge on 5/23/16.
  */
 public class FunctionalGroup implements IMessage
 {
     private GS gs;
-    private Transaction transaction;
+    private List<Transaction> transactions;
     private GE ge;
 
     public FunctionalGroup() {
-        super();
         gs = new GS();
-        transaction = new Transaction();
+        transactions = new ArrayList<Transaction>();
         ge = new GE();
     }
     public FunctionalGroup(String s) {
-
         StringQueue stringQueue = new StringQueue(s);
-        String header = stringQueue.getHeader(), content = stringQueue.getContent(), trailer = stringQueue.getTrailer();
+        transactions = new ArrayList<Transaction>();
 
-        gs = new GS(header);
-        transaction = new Transaction(content);
-        ge = new GE(trailer);
+        StringBuilder builder = null;
+        while (stringQueue.hasNext()) {
+            String next = stringQueue.getNext();
+            if (next.startsWith("GS")) {
+                gs = new GS(next);
+            }
+            else if (next.startsWith("GE")) {
+                ge = new GE(next);
+            }
+            else if (next.startsWith("ST")) {
+                builder = new StringBuilder();
+                builder.append(next);
+            }
+            else if (next.startsWith("SE")) {
+                if (builder != null) {
+                    builder.append(next);
+                    String groupContent = builder.toString();
+                    Transaction transaction = new Transaction(groupContent);
+                    transactions.add(transaction);
+                }
+            }
+            else {
+                if (builder != null) builder.append(next);
+            }
+        }
     }
 
-    public Transaction getTransaction() {
-        return transaction;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
     public boolean validate() {
-        return gs.validate() && transaction.validate() && ge.validate();
+        for (Transaction transaction : transactions) {
+            if (!transaction.validate()) return false;
+        }
+        return gs.validate() && ge.validate();
     }
 
     public int size() {
-        return 2 + transaction.size();
+        return 2 + transactions.size();
     }
 
     public String toX12String() {
-        return gs.toX12String() + transaction.toX12String() + ge.toX12String();
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(gs.toX12String());
+
+        for (Transaction transaction : transactions) {
+            builder.append(transaction.toX12String());
+        }
+
+        builder.append(ge.toX12String());
+        return builder.toString();
     }
 }

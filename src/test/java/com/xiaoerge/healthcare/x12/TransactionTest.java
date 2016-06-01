@@ -11,7 +11,7 @@ public class TransactionTest {
 
     @Test
     public void testParseTransaction() {
-        String x12 = "ST***~BHT******~SE**~";
+        String x12 = "ST***~BHT*****~SE**~";
         Transaction transaction = new Transaction();
 
         Assert.assertFalse(transaction.validate());
@@ -20,7 +20,7 @@ public class TransactionTest {
 
     @Test
     public void testCreateTransaction() {
-        String x12 = "ST***~BHT******~SE**~";
+        String x12 = "ST***~BHT*****~SE**~";
         Transaction transaction = new Transaction();
 
         Assert.assertFalse(transaction.validate());

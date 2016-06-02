@@ -125,8 +125,6 @@ public class ControlSegmentTest {
         String x12 = "BHT*0019*00*123*20160525*0616~";
         BHT bht = new BHT(x12);
 
-        System.out.println(bht.toX12String());
-
         Assert.assertEquals(true, bht.validate());
         Assert.assertEquals(x12, bht.toString());
         Assert.assertEquals("0019", bht.getHierarchicalStructureCode());
@@ -138,13 +136,14 @@ public class ControlSegmentTest {
 
     @Test
     public void testCreateBHT() {
-        String x12 = "BHT*0019*00*123*20160525~";
+        String x12 = "BHT*0019*00*123*20160525*0616~";
         BHT bht = new BHT();
 
         bht.setHierarchicalStructureCode("0019");
         bht.setTransactionSetPurposeCode("00");
         bht.setReferenceIdentification("123");
         bht.setDate("20160525");
+        bht.setTime("0616");
 
         Assert.assertEquals(true, bht.validate());
         Assert.assertEquals(x12, bht.toString());

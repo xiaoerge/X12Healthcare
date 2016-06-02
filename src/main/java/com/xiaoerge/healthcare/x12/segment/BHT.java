@@ -26,7 +26,7 @@ public class BHT extends Segment {
     @Definition(required = Required.REQUIRED, position = 4, minLength = 8, maxLength = 8)
     public String getDate() { return collection[4]; }
 
-    @Definition(required = Required.OPTIONAL, position = 5, minLength = 4, maxLength = 8)
+    @Definition(required = Required.REQUIRED, position = 5, minLength = 4, maxLength = 8)
     public String getTime() { return collection[5]; }
 
     @Definition(required = Required.NOTUSED, position = 6, minLength = 2, maxLength = 2)

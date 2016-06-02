@@ -6,6 +6,5 @@ package com.xiaoerge.healthcare.x12.message;
 public interface IMessage {
 
     public abstract boolean validate();
-    public abstract int size();
     public abstract String toX12String();
 }

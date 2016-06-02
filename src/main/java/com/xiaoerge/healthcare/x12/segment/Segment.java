@@ -45,19 +45,22 @@ public class Segment implements IMessage
     }
 
     private void parse() {
-        if (content.length() == 0) {
-            collection = new String[requiredSize+1];
-            collection[0] = name;
-            return;
-        }
+        collection = new String[fieldSize+1];
+        collection[0] = name;
+        for (int i = 1; i < collection.length; i++) collection[i] = "";
 
-        if (content.charAt(content.length() - 1) != '~') {
-            parseError = true;
-            logger.log(Level.SEVERE, name+" missing segment terminator");
-            //collection = content.split(Pattern.quote(delimiter));
-        }
-        else {
-            collection = content.substring(0, content.length()-1).split(Pattern.quote(delimiter));
+        if (content.length() > 0){
+            if (content.charAt(content.length() - 1) != '~') {
+                parseError = true;
+                logger.log(Level.SEVERE, name+" missing segment terminator");
+                //collection = content.split(Pattern.quote(delimiter));
+            }
+            else {
+                String[] pCollection = content.substring(0, content.length()-1).split(Pattern.quote(delimiter));
+                for (int i = 0; i < pCollection.length; i++) {
+                    collection[i] = pCollection[i];
+                }
+            }
         }
     }
 
@@ -136,10 +139,9 @@ public class Segment implements IMessage
     }
 
     private boolean validateSize() {
-        boolean v = requiredSize != 0 && collection.length-1 == requiredSize;
+        boolean v = requiredSize != 0 && collection.length-1 >= requiredSize;
         if (!v) {
             logger.log(Level.SEVERE, name+" size should be "+requiredSize);
-            System.out.println(ArrayUtils.toString(collection));
         }
         return v;
     }
@@ -182,6 +184,24 @@ public class Segment implements IMessage
             return name.concat(StringUtils.repeat("*", requiredSize)).concat("~");
 
         collection[0] = name;
-        return StringUtils.join(collection, delimiter).concat("~");
+        StringBuilder builder = new StringBuilder();
+        builder.append(name).append("*");
+
+        int i = collection.length-1, j = i;
+
+        while (i > 0) {
+            if (collection[i].length() != 0) {
+                j = i;
+                break;
+            }
+            i--;
+        }
+        for (i = 1; i < j+1; i++) {
+            builder.append(collection[i]).append("*");
+        }
+        builder.deleteCharAt(builder.length()-1);
+        builder.append("~");
+
+        return builder.toString();
     }
 }

@@ -18,18 +18,20 @@ public class Transaction implements IMessage
     private ST st;
     private BHT bht;
     private SE se;
-    private List<Segment> segmentList;
+
+    private String content;
 
     public Transaction() {
         st = new ST();
         bht = new BHT();
         se = new SE();
-        segmentList = new ArrayList<Segment>();
+
+        content = "";
     }
 
     public Transaction(String s) {
         StringQueue stringQueue = new StringQueue(s);
-        segmentList = new ArrayList<Segment>();
+        StringBuilder builder = new StringBuilder();
 
         while (stringQueue.hasNext()) {
             String next = stringQueue.getNext();
@@ -43,10 +45,13 @@ public class Transaction implements IMessage
                 se = new SE(next);
             }
             else {
-                //Segment segment = new Segment(next);
-                //segmentList.add(segment);
+                builder.append(next).append("~");
             }
         }
+        content = builder.toString();
+    }
+    public String getContent() {
+        return content;
     }
 
     public String getTransactionSetIDCode() {
@@ -54,28 +59,12 @@ public class Transaction implements IMessage
     }
 
     public boolean validate() {
-        boolean v = true;
-        for (Segment segment : segmentList) {
-            if (!segment.validate()) {
-                v = false;
-                break;
-            }
-        }
-        return st.validate() && bht.validate() && se.validate() && v;
+        return st.validate() && bht.validate() && se.validate();
     }
 
     public String toX12String() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(st.toString());
-        builder.append(bht.toString());
-        for (Segment segment : segmentList) {
-            builder.append(segment.toString());
-        }
-        builder.append(se.toString());
-        return builder.toString();
-    }
-
-    public int size() {
-        return 3 + segmentList.size();
+        return st.toString() +
+                bht.toString() +
+                se.toString();
     }
 }

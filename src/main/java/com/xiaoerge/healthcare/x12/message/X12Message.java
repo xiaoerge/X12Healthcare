@@ -24,9 +24,6 @@ public class X12Message implements IMessage {
     public boolean validate() {
         return interchangeEnvelope.validate();
     }
-    public int size() {
-        return interchangeEnvelope.size();
-    }
     public String toX12String() {
         return interchangeEnvelope.toX12String();
     }

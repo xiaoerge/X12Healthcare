@@ -165,4 +165,31 @@ public class SegmentTest {
         Assert.assertEquals(true, prv.validate());
         Assert.assertEquals(x12, prv.toString());
     }
+
+    @Test
+    public void testParseTRN() {
+        String x12 = "TRN*1*98175-012547*8877281234*RADIOLOGY~";
+        TRN trn = new TRN(x12);
+
+        Assert.assertEquals(true, trn.validate());
+        Assert.assertEquals(x12, trn.toString());
+        Assert.assertEquals("1", trn.getTraceTypeCode());
+        Assert.assertEquals("98175-012547", trn.getReferenceIdentification());
+        Assert.assertEquals("8877281234", trn.getOriginatingCompanyIdentifier());
+        Assert.assertEquals("RADIOLOGY", trn.getReferenceIdentification2());
+    }
+
+    @Test
+    public void testCreateTRN() {
+        String x12 = "TRN*1*98175-012547*8877281234*RADIOLOGY~";
+        TRN trn = new TRN();
+
+        trn.setTraceTypeCode("1");
+        trn.setReferenceIdentification("98175-012547");
+        trn.setOriginatingCompanyIdentifier("8877281234");
+        trn.setReferenceIdentification2("RADIOLOGY");
+
+        Assert.assertEquals(true, trn.validate());
+        Assert.assertEquals(x12, trn.toString());
+    }
 }

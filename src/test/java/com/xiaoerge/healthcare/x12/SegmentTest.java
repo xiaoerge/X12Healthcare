@@ -260,4 +260,57 @@ public class SegmentTest {
         Assert.assertEquals(true, dmg.validate());
         Assert.assertEquals(x12, dmg.toString());
     }
+
+    @Test
+    public void testParseINS() {
+        String x12 = "INS*Y*18*AAA*BBB*C*D*CO*EM*S*N*D8*HHMM*C*New York*NY*USA*3~";
+        INS ins = new INS(x12);
+
+        Assert.assertEquals(true, ins.validate());
+        Assert.assertEquals(x12, ins.toString());
+        Assert.assertEquals("Y", ins.getYesNoConditionOrResponseCode());
+        Assert.assertEquals("18", ins.getIndividualRelationshipCode());
+        Assert.assertEquals("AAA", ins.getMaintenanceTypeCode());
+        Assert.assertEquals("BBB", ins.getMaintenanceReasonCode());
+        Assert.assertEquals("C", ins.getBenefitStatusCode());
+        Assert.assertEquals("D", ins.getMedicareStatusCode());
+        Assert.assertEquals("CO", ins.getConsolidatedOmnibusBudgetReconciliationActQualifying());
+        Assert.assertEquals("EM", ins.getEmploymentStatusCode());
+        Assert.assertEquals("S", ins.getStudentStatusCode());
+        Assert.assertEquals("N", ins.getYesNoConditionOrResponseCode2());
+        Assert.assertEquals("D8", ins.getDateTimePeriodFormatQualifier());
+        Assert.assertEquals("HHMM", ins.getDateTimePeriod());
+        Assert.assertEquals("C", ins.getConfidentialityCode());
+        Assert.assertEquals("New York", ins.getCityName());
+        Assert.assertEquals("NY", ins.getStateOrProvinceCode());
+        Assert.assertEquals("USA", ins.getCountryCode());
+        Assert.assertEquals("3", ins.getNumber());
+    }
+
+    @Test
+    public void testCreateINS() {
+        String x12 = "INS*Y*18*AAA*BBB*C*D*CO*EM*S*N*D8*HHMM*C*New York*NY*USA*3~";
+        INS ins = new INS();
+
+        ins.setYesNoConditionOrResponseCode("Y");
+        ins.setIndividualRelationshipCode("18");
+        ins.setMaintenanceTypeCode("AAA");
+        ins.setMaintenanceReasonCode("BBB");
+        ins.setBenefitStatusCode("C");
+        ins.setMedicareStatusCode("D");
+        ins.setConsolidatedOmnibusBudgetReconciliationActQualifying("CO");
+        ins.setEmploymentStatusCode("EM");
+        ins.setStudentStatusCode("S");
+        ins.setYesNoConditionOrResponseCode2("N");
+        ins.setDateTimePeriodFormatQualifier("D8");
+        ins.setDateTimePeriod("HHMM");
+        ins.setConfidentialityCode("C");
+        ins.setCityName("New York");
+        ins.setStateOrProvinceCode("NY");
+        ins.setCountryCode("USA");
+        ins.setNumber("3");
+
+        Assert.assertEquals(true, ins.validate());
+        Assert.assertEquals(x12, ins.toString());
+    }
 }

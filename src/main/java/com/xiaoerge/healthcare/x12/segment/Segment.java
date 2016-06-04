@@ -2,7 +2,6 @@ package com.xiaoerge.healthcare.x12.segment;
 
 import com.xiaoerge.healthcare.x12.annotation.Declaration;
 import com.xiaoerge.healthcare.x12.annotation.Definition;
-import com.xiaoerge.healthcare.x12.enumeration.Required;
 import com.xiaoerge.healthcare.x12.message.IMessage;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -57,8 +56,19 @@ public class Segment implements IMessage
             }
             else {
                 String[] pCollection = content.substring(0, content.length()-1).split(Pattern.quote(delimiter));
-                for (int i = 0; i < pCollection.length; i++) {
-                    collection[i] = pCollection[i];
+                int min = Math.min(collection.length, pCollection.length);
+                for (int i = 0; i < min; i++) {
+                    try {
+                        collection[i] = pCollection[i];
+                    }
+                    catch (Exception ex) {
+                        collection[i] = "";
+                    }
+                }
+
+                if (pCollection.length > collection.length) {
+                    parseError = true;
+                    logger.log(Level.SEVERE, name+" field length should be less tha or equal to "+fieldSize);
                 }
             }
         }
@@ -74,8 +84,7 @@ public class Segment implements IMessage
 
     public boolean validate()
     {
-        return !parseError
-                && validateName() && validateSize() && validateRequired()
+        return !parseError && validateName() && validateFieldSize()
                 && validateCodeValue() && validateDataLength();
     }
 
@@ -83,33 +92,6 @@ public class Segment implements IMessage
         boolean v = name.length() > 0 && collection[0].equals(name);
         if (!v) logger.log(Level.SEVERE, name+" Segment field does not match");
         return v;
-    }
-
-    private boolean validateRequired() {
-        boolean ret = true;
-        Class obj = this.getClass();
-        for (Method method : obj.getDeclaredMethods()) {
-            if (method.isAnnotationPresent(Definition.class)) {
-                Definition definition = (Definition) method.getAnnotation(Definition.class);
-
-                if (definition.required() != Required.REQUIRED) continue;
-                try {
-                    String code = (String) method.invoke(this);
-                    boolean v = code != null && code.length() > 0;
-                    if (!v) {
-                        logger.log(Level.SEVERE, name+""+String.format("%02d", definition.position())+" is required but missing");
-                        ret = false;
-                    }
-                } catch (IllegalAccessException e) {
-                    logger.log(Level.SEVERE, e.getMessage());
-                    return false;
-                } catch (InvocationTargetException e) {
-                    logger.log(Level.SEVERE, e.getMessage());
-                    return false;
-                }
-            }
-        }
-        return ret;
     }
 
     private boolean validateCodeValue() {
@@ -138,8 +120,8 @@ public class Segment implements IMessage
         return ret;
     }
 
-    private boolean validateSize() {
-        boolean v = requiredSize != 0 && collection.length-1 >= requiredSize;
+    private boolean validateFieldSize() {
+        boolean v = collection.length-1 <= fieldSize;
         if (!v) {
             logger.log(Level.SEVERE, name+" size should be "+requiredSize);
         }
@@ -153,7 +135,6 @@ public class Segment implements IMessage
             if (method.isAnnotationPresent(Definition.class)) {
                 Definition definition = (Definition) method.getAnnotation(Definition.class);
 
-                if (definition.required() != Required.REQUIRED) continue;
                 try {
                     String code = (String) method.invoke(this);
                     if (code.length() == 0) continue;

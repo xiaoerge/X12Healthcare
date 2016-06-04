@@ -16,40 +16,40 @@ public class NM1 extends Segment {
         super(content);
     }
 
-    @Definition(required = Required.REQUIRED, position = 1, minLength = 2, maxLength = 3, codeValues = {"1P", "2B", "36", "80", "FA", "GP", "P5", "PR"})
+    @Definition(position = 1, minLength = 2, maxLength = 3, codeValues = {"1P", "2B", "36", "80", "FA", "GP", "P5", "PR"})
     public String getEntityIdentifierCode() { return collection[1]; }
 
-    @Definition(required = Required.REQUIRED, position = 2, minLength = 1, maxLength = 1, codeValues = {"1", "2"})
+    @Definition(position = 2, minLength = 1, maxLength = 1, codeValues = {"1", "2"})
     public String getEntityTypeQualifier() { return collection[2]; }
 
-    @Definition(required = Required.REQUIRED, position = 3, minLength = 1, maxLength = 60)
+    @Definition(position = 3, minLength = 1, maxLength = 60)
     public String getNameLastOrOrganizationName() { return collection[3]; }
 
-    @Definition(required = Required.SITUATIONAL, position = 4, minLength = 1, maxLength = 35)
+    @Definition(position = 4, minLength = 1, maxLength = 35)
     public String getNameFirst() { return collection[4]; }
 
-    @Definition(required = Required.SITUATIONAL, position = 5, minLength = 1, maxLength = 25)
+    @Definition(position = 5, minLength = 1, maxLength = 25)
     public String getNameMiddle() { return collection[5]; }
 
-    @Definition(required = Required.NOTUSED, position = 6, minLength = 1, maxLength = 10)
+    @Definition(position = 6, minLength = 1, maxLength = 10)
     public String getPrefix() { return collection[6]; }
 
-    @Definition(required = Required.SITUATIONAL, position = 7, minLength = 1, maxLength = 10)
+    @Definition(position = 7, minLength = 1, maxLength = 10)
     public String getNameSuffix() { return collection[7]; }
 
-    @Definition(required = Required.REQUIRED, position = 8, minLength = 1, maxLength = 2, codeValues = {"24", "34", "FI", "PI", "PP", "SV"})
+    @Definition(position = 8, minLength = 1, maxLength = 2, codeValues = {"24", "34", "FI", "PI", "PP", "SV"})
     public String getIdentificationCodeQualifier() { return collection[8]; }
 
-    @Definition(required = Required.REQUIRED, position = 9, minLength = 2, maxLength = 80)
+    @Definition(position = 9, minLength = 2, maxLength = 80)
     public String getIdentificationCode() { return collection[9]; }
 
-    @Definition(required = Required.NOTUSED, position = 10, minLength = 2, maxLength = 2)
+    @Definition(position = 10, minLength = 2, maxLength = 2)
     public String getEntityRelationshipCode() { return collection[10]; }
 
-    @Definition(required = Required.NOTUSED, position = 11, minLength = 2, maxLength = 3)
+    @Definition(position = 11, minLength = 2, maxLength = 3)
     public String getEntityIdentifierCodeNotUsed() { return collection[11]; }
 
-    @Definition(required = Required.NOTUSED, position = 12, minLength = 1, maxLength = 60)
+    @Definition(position = 12, minLength = 1, maxLength = 60)
     public String getNameLastOrOrganizationNameNotUsed() { return collection[12]; }
 
     public void setEntityIdentifierCode(String s) { collection[1] = s; }

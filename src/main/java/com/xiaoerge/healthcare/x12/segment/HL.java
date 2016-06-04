@@ -16,16 +16,16 @@ public class HL extends Segment {
         super(content);
     }
 
-    @Definition(required = Required.REQUIRED, position = 1, minLength = 1, maxLength = 12)
+    @Definition(position = 1, minLength = 1, maxLength = 12)
     public String getHierarchicalIDNumber() {return collection[1];}
 
-    @Definition(required = Required.NOTUSED, position = 2, minLength = 1, maxLength = 12)
+    @Definition(position = 2, minLength = 1, maxLength = 12)
     public String getHierarchicalParentIDNumber() {return collection[2];}
 
-    @Definition(required = Required.REQUIRED, position = 3, minLength = 1, maxLength = 2)
+    @Definition(position = 3, minLength = 1, maxLength = 2)
     public String getHierarchicalLevelCode() {return collection[3];}
 
-    @Definition(required = Required.REQUIRED, position = 4, minLength = 1, maxLength = 1)
+    @Definition(position = 4, minLength = 1, maxLength = 1)
     public String getHierarchicalChildCode() {return collection[4];}
 
     public void setHierarchicalIDNumber(String s) { collection[1] = s;}

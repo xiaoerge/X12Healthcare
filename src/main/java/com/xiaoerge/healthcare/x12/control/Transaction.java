@@ -59,7 +59,10 @@ public class Transaction implements IMessage
     }
 
     public boolean validate() {
-        return st.validate() && bht.validate() && se.validate();
+        boolean b1 = st.validate();
+        boolean b2 = bht.validate();
+        boolean b3 = se.validate();
+        return b1 && b2 && b3;
     }
 
     public String toX12String() {

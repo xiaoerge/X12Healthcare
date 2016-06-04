@@ -11,19 +11,19 @@ public class TransactionTest {
 
     @Test
     public void testParseTransaction() {
-        String x12 = "ST***~BHT*****~SE**~";
-        Transaction transaction = new Transaction();
+        String x12 = "ST***~BHT*\\*\\*\\*\\*\\*\\*\\*~SE**~";
+        Transaction transaction = new Transaction(x12);
 
         Assert.assertFalse(transaction.validate());
-        Assert.assertEquals(x12, transaction.toX12String());
+        Assert.assertNotEquals(x12, transaction.toX12String());
     }
 
     @Test
     public void testCreateTransaction() {
-        String x12 = "ST***~BHT*****~SE**~";
+        String x12 = "ST***~BHT******~SE**~";
         Transaction transaction = new Transaction();
 
-        Assert.assertFalse(transaction.validate());
+        Assert.assertTrue(transaction.validate());
         Assert.assertEquals(x12, transaction.toX12String());
     }
 }

@@ -12,8 +12,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Declaration {
-
-    public int requiredSize();
     public int fieldSize();
     public String name();
 }

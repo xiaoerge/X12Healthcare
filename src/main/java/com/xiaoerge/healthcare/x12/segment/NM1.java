@@ -7,7 +7,7 @@ import com.xiaoerge.healthcare.x12.enumeration.Required;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-@Declaration(requiredSize = 5, fieldSize = 12, name = "NM1")
+@Declaration(fieldSize = 12, name = "NM1")
 public class NM1 extends Segment {
     public NM1() {
         super();

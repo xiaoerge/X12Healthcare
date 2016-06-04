@@ -92,4 +92,77 @@ public class SegmentTest {
         Assert.assertEquals(true, ref.validate());
         Assert.assertEquals(x12, ref.toString());
     }
+
+    @Test
+    public void testParseN3() {
+        String x12 = "N3*201 PARK AVENUE*SUITE 300~";
+        N3 n3 = new N3(x12);
+
+        Assert.assertEquals(true, n3.validate());
+        Assert.assertEquals(x12, n3.toString());
+        Assert.assertEquals("201 PARK AVENUE", n3.getAddressInformation());
+        Assert.assertEquals("SUITE 300", n3.getAddressInformation2());
+    }
+
+    @Test
+    public void testCreateN3() {
+        String x12 = "N3*201 PARK AVENUE*SUITE 300~";
+        N3 n3 = new N3();
+
+        n3.setAddressInformation("201 PARK AVENUE");
+        n3.setAddressInformation2("SUITE 300");
+
+        Assert.assertEquals(true, n3.validate());
+        Assert.assertEquals(x12, n3.toString());
+    }
+
+    @Test
+    public void testParseN4() {
+        String x12 = "N4*KANSAS CITY*MO*64108~";
+        N4 n4 = new N4(x12);
+
+        Assert.assertEquals(true, n4.validate());
+        Assert.assertEquals(x12, n4.toString());
+        Assert.assertEquals("KANSAS CITY", n4.getCityName());
+        Assert.assertEquals("MO", n4.getStateOrProvinceCode());
+        Assert.assertEquals("64108", n4.getPostalCode());
+    }
+
+    @Test
+    public void testCreateN4() {
+        String x12 = "N4*KANSAS CITY*MO*64108~";
+        N4 n4 = new N4();
+
+        n4.setCityName("KANSAS CITY");
+        n4.setStateOrProvinceCode("MO");
+        n4.setPostalCode("64108");
+
+        Assert.assertEquals(true, n4.validate());
+        Assert.assertEquals(x12, n4.toString());
+    }
+
+    @Test
+    public void testParsePRV() {
+        String x12 = "PRV*RF*PXC*207Q00000X~";
+        PRV prv = new PRV(x12);
+
+        Assert.assertEquals(true, prv.validate());
+        Assert.assertEquals(x12, prv.toString());
+        Assert.assertEquals("RF", prv.getProviderCode());
+        Assert.assertEquals("PXC", prv.getReferenceIdentificationQualifier());
+        Assert.assertEquals("207Q00000X", prv.getReferenceIdentification());
+    }
+
+    @Test
+    public void testCreatePRV() {
+        String x12 = "PRV*RF*PXC*207Q00000X~";
+        PRV prv = new PRV();
+
+        prv.setProviderCode("RF");
+        prv.setReferenceIdentificationQualifier("PXC");
+        prv.setReferenceIdentification("207Q00000X");
+
+        Assert.assertEquals(true, prv.validate());
+        Assert.assertEquals(x12, prv.toString());
+    }
 }

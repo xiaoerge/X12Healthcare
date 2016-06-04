@@ -7,7 +7,7 @@ import com.xiaoerge.healthcare.x12.annotation.Definition;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-@Declaration(requiredSize = 2, fieldSize = 2, name = "SE")
+@Declaration(fieldSize = 2, name = "SE")
 public class SE extends Segment {
     public SE() {super();}
     public SE(String content) {

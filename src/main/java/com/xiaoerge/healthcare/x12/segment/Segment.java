@@ -20,7 +20,7 @@ public class Segment implements IMessage
     static Logger logger = Logger.getLogger(Segment.class.getName());
 
     private boolean parseError;
-    protected int requiredSize, fieldSize;
+    protected int fieldSize;
     protected String name, content, delimiter;
     protected String[] collection;
 
@@ -35,7 +35,6 @@ public class Segment implements IMessage
         Class obj = this.getClass();
         if (obj.isAnnotationPresent(Declaration.class)) {
             Declaration declaration = (Declaration) obj.getAnnotation(Declaration.class);
-            requiredSize = declaration.requiredSize();
             fieldSize = declaration.fieldSize();
             name = declaration.name();
         }
@@ -75,7 +74,7 @@ public class Segment implements IMessage
     }
 
     public int size() {
-        return requiredSize;
+        return fieldSize;
     }
 
     public String toX12String() {
@@ -123,7 +122,7 @@ public class Segment implements IMessage
     private boolean validateFieldSize() {
         boolean v = collection.length-1 <= fieldSize;
         if (!v) {
-            logger.log(Level.SEVERE, name+" size should be "+requiredSize);
+            logger.log(Level.SEVERE, name+" size should be "+fieldSize);
         }
         return v;
     }
@@ -162,7 +161,7 @@ public class Segment implements IMessage
     public String toString()
     {
         if (!validate())
-            return name.concat(StringUtils.repeat("*", requiredSize)).concat("~");
+            return name.concat(StringUtils.repeat("*", fieldSize)).concat("~");
 
         collection[0] = name;
         StringBuilder builder = new StringBuilder();

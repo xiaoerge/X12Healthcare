@@ -7,7 +7,7 @@ import com.xiaoerge.healthcare.x12.enumeration.Required;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-@Declaration(requiredSize = 2, fieldSize = 4, name = "REF")
+@Declaration(fieldSize = 4, name = "REF")
 public class REF extends Segment {
     public REF() {
         super();

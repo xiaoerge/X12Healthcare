@@ -7,7 +7,7 @@ import com.xiaoerge.healthcare.x12.annotation.Declaration;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-@Declaration(requiredSize = 8, fieldSize = 8, name = "GS")
+@Declaration(fieldSize = 8, name = "GS")
 public class GS extends Segment
 {
     public GS() {

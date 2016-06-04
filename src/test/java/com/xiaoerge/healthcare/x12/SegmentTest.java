@@ -313,4 +313,29 @@ public class SegmentTest {
         Assert.assertEquals(true, ins.validate());
         Assert.assertEquals(x12, ins.toString());
     }
+
+    @Test
+    public void testParseHI() {
+        String x12 = "HI*BK:8901*BF:87200*BF:5559~";
+        HI hi = new HI(x12);
+
+        Assert.assertEquals(true, hi.validate());
+        Assert.assertEquals(x12, hi.toString());
+        Assert.assertEquals("BK:8901", hi.getHealthCareCodeInformation1());
+        Assert.assertEquals("BF:87200", hi.getHealthCareCodeInformation2());
+        Assert.assertEquals("BF:5559", hi.getHealthCareCodeInformation3());
+    }
+
+    @Test
+    public void testCreateHI() {
+        String x12 = "HI*BK:8901*BF:87200*BF:5559~";
+        HI hi = new HI();
+
+        hi.setHealthCareCodeInformation1("BK:8901");
+        hi.setHealthCareCodeInformation2("BF:87200");
+        hi.setHealthCareCodeInformation3("BF:5559");
+
+        Assert.assertEquals(true, hi.validate());
+        Assert.assertEquals(x12, hi.toString());
+    }
 }

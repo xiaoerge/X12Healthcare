@@ -219,4 +219,45 @@ public class SegmentTest {
         Assert.assertEquals(true, trn.validate());
         Assert.assertEquals(x12, trn.toString());
     }
+
+    @Test
+    public void testParseDMG() {
+        String x12 = "DMG*D8*19430917*M*M*A*US*USA*A*1*2*3~";
+        DMG dmg = new DMG(x12);
+
+        Assert.assertEquals(true, dmg.validate());
+        Assert.assertEquals(x12, dmg.toString());
+        Assert.assertEquals("D8", dmg.getDateTimePeriodFormatQualifier());
+        Assert.assertEquals("19430917", dmg.getDateTimePeriod());
+        Assert.assertEquals("M", dmg.getGenderCode());
+        Assert.assertEquals("M", dmg.getMaritalStatusCode());
+        Assert.assertEquals("A", dmg.getCompositeRaceOrEthnicityInformation());
+        Assert.assertEquals("US", dmg.getCitizenshipStatusCode());
+        Assert.assertEquals("USA", dmg.getCountryCode());
+        Assert.assertEquals("A", dmg.getBasisOfVerificationCode());
+        Assert.assertEquals("1", dmg.getQuantity());
+        Assert.assertEquals("2", dmg.getCodeListQualifierCode());
+        Assert.assertEquals("3", dmg.getIndustryCode());
+    }
+
+    @Test
+    public void testCreateDMG() {
+        String x12 = "DMG*D8*19430917*M*M*A*US*USA*A*1*2*3~";
+        DMG dmg = new DMG();
+
+        dmg.setDateTimePeriodFormatQualifier("D8");
+        dmg.setDateTimePeriod("19430917");
+        dmg.setGenderCode("M");
+        dmg.setMaritalStatusCode("M");
+        dmg.setCompositeRaceOrEthnicityInformation("A");
+        dmg.setCitizenshipStatusCode("US");
+        dmg.setCountryCode("USA");
+        dmg.setBasisOfVerificationCode("A");
+        dmg.setQuantity("1");
+        dmg.setCodeListQualifierCode("2");
+        dmg.setIndustryCode("3");
+
+        Assert.assertEquals(true, dmg.validate());
+        Assert.assertEquals(x12, dmg.toString());
+    }
 }

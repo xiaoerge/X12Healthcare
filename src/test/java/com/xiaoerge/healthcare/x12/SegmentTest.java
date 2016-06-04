@@ -338,4 +338,29 @@ public class SegmentTest {
         Assert.assertEquals(true, hi.validate());
         Assert.assertEquals(x12, hi.toString());
     }
+
+    @Test
+    public void testParseDTP() {
+        String x12 = "DTP*291*D8*20051015~";
+        DTP dtp = new DTP(x12);
+
+        Assert.assertEquals(true, dtp.validate());
+        Assert.assertEquals(x12, dtp.toString());
+        Assert.assertEquals("291", dtp.getDateTimeQualifier());
+        Assert.assertEquals("D8", dtp.getDateTimePeriodFormatQualifier());
+        Assert.assertEquals("20051015", dtp.getDateTimePeriod());
+    }
+
+    @Test
+    public void testCreateDTP() {
+        String x12 = "DTP*291*D8*20051015~";
+        DTP dtp = new DTP();
+
+        dtp.setDateTimeQualifier("291");
+        dtp.setDateTimePeriodFormatQualifier("D8");
+        dtp.setDateTimePeriod("20051015");
+
+        Assert.assertEquals(true, dtp.validate());
+        Assert.assertEquals(x12, dtp.toString());
+    }
 }

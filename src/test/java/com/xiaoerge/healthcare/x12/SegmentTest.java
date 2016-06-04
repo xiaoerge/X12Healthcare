@@ -11,23 +11,24 @@ public class SegmentTest {
 
     @Test
     public void testParseISA() {
-        String x12 = "HL*1**20*1~";
+        String x12 = "HL*1* *20*1~";
         HL hl = new HL(x12);
 
         Assert.assertEquals(true, hl.validate());
         Assert.assertEquals(x12, hl.toString());
         Assert.assertEquals("1", hl.getHierarchicalIDNumber());
-        Assert.assertEquals("", hl.getHierarchicalParentIDNumber());
+        Assert.assertEquals(" ", hl.getHierarchicalParentIDNumber());
         Assert.assertEquals("20", hl.getHierarchicalLevelCode());
         Assert.assertEquals("1", hl.getHierarchicalChildCode());
     }
 
     @Test
     public void testCreateISA() {
-        String x12 = "HL*1**20*1~";
+        String x12 = "HL*1* *20*1~";
         HL hl = new HL();
 
         hl.setHierarchicalIDNumber("1");
+        hl.setHierarchicalParentIDNumber(" ");
         hl.setHierarchicalLevelCode("20");
         hl.setHierarchicalChildCode("1");
 
@@ -37,7 +38,7 @@ public class SegmentTest {
 
     @Test
     public void testParseNM1() {
-        String x12 = "NM1*1P*1*JONES*MARCUS***MD*34*111223333~";
+        String x12 = "NM1*1P*1*JONES*MARCUS*A*MR*MD*34*111223333*AA*BB*C~";
         NM1 nm1 = new NM1(x12);
 
         Assert.assertEquals(true, nm1.validate());
@@ -46,23 +47,33 @@ public class SegmentTest {
         Assert.assertEquals("1", nm1.getEntityTypeQualifier());
         Assert.assertEquals("JONES", nm1.getNameLastOrOrganizationName());
         Assert.assertEquals("MARCUS", nm1.getNameFirst());
+        Assert.assertEquals("A", nm1.getNameMiddle());
+        Assert.assertEquals("MR", nm1.getNamePrefix());
         Assert.assertEquals("MD", nm1.getNameSuffix());
         Assert.assertEquals("34", nm1.getIdentificationCodeQualifier());
         Assert.assertEquals("111223333", nm1.getIdentificationCode());
+        Assert.assertEquals("AA", nm1.getEntityRelationshipCode());
+        Assert.assertEquals("BB", nm1.getEntityIdentifierCodeNotUsed());
+        Assert.assertEquals("C", nm1.getNameLastOrOrganizationNameNotUsed());
     }
 
     @Test
     public void testCreateNM1() {
-        String x12 = "NM1*1P*1*JONES*MARCUS***MD*34*111223333~";
+        String x12 = "NM1*1P*1*JONES*MARCUS*A*MR*MD*34*111223333*AA*BB*C~";
         NM1 nm1 = new NM1();
 
         nm1.setEntityIdentifierCode("1P");
         nm1.setEntityTypeQualifier("1");
         nm1.setNameLastOrOrganizationName("JONES");
         nm1.setNameFirst("MARCUS");
+        nm1.setNameMiddle("A");
+        nm1.setNamePrefix("MR");
         nm1.setNameSuffix("MD");
         nm1.setIdentificationCodeQualifier("34");
         nm1.setIdentificationCode("111223333");
+        nm1.setEntityRelationshipCode("AA");
+        nm1.setEntityIdentifierCodeNotUsed("BB");
+        nm1.setNameLastOrOrganizationNameNotUsed("C");
 
         Assert.assertEquals(true, nm1.validate());
         Assert.assertEquals(x12, nm1.toString());
@@ -70,7 +81,7 @@ public class SegmentTest {
 
     @Test
     public void testParseREF() {
-        String x12 = "REF*EO*477563928~";
+        String x12 = "REF*EO*477563928**ZZ~";
         REF ref = new REF(x12);
 
         Assert.assertEquals(true, ref.validate());
@@ -78,16 +89,18 @@ public class SegmentTest {
         Assert.assertEquals("EO", ref.getReferenceIdentificationQualifier());
         Assert.assertEquals("477563928", ref.getReferenceIdentification());
         Assert.assertEquals("", ref.getDescription());
+        Assert.assertEquals("ZZ", ref.getReferenceIdentifier());
     }
 
     @Test
     public void testCreateREF() {
-        String x12 = "REF*EO*477563928~";
+        String x12 = "REF*EO*477563928**ZZ~";
         REF ref = new REF();
 
         ref.setReferenceIdentificationQualifier("EO");
         ref.setReferenceIdentification("477563928");
         ref.setDescription("");
+        ref.setReferenceIdentifier("ZZ");
 
         Assert.assertEquals(true, ref.validate());
         Assert.assertEquals(x12, ref.toString());
@@ -118,7 +131,7 @@ public class SegmentTest {
 
     @Test
     public void testParseN4() {
-        String x12 = "N4*KANSAS CITY*MO*64108~";
+        String x12 = "N4*KANSAS CITY*MO*64108*USA*1*2*3~";
         N4 n4 = new N4(x12);
 
         Assert.assertEquals(true, n4.validate());
@@ -126,16 +139,24 @@ public class SegmentTest {
         Assert.assertEquals("KANSAS CITY", n4.getCityName());
         Assert.assertEquals("MO", n4.getStateOrProvinceCode());
         Assert.assertEquals("64108", n4.getPostalCode());
+        Assert.assertEquals("USA", n4.getCountryCode());
+        Assert.assertEquals("1", n4.getLocationQualifier());
+        Assert.assertEquals("2", n4.getLocationIdentifier());
+        Assert.assertEquals("3", n4.getCountrySubdivisionCode());
     }
 
     @Test
     public void testCreateN4() {
-        String x12 = "N4*KANSAS CITY*MO*64108~";
+        String x12 = "N4*KANSAS CITY*MO*64108*USA*1*2*3~";
         N4 n4 = new N4();
 
         n4.setCityName("KANSAS CITY");
         n4.setStateOrProvinceCode("MO");
         n4.setPostalCode("64108");
+        n4.setCountryCode("USA");
+        n4.setLocationIdentifier("2");
+        n4.setLocationQualifier("1");
+        n4.setCountrySubdivisionCode("3");
 
         Assert.assertEquals(true, n4.validate());
         Assert.assertEquals(x12, n4.toString());
@@ -143,7 +164,7 @@ public class SegmentTest {
 
     @Test
     public void testParsePRV() {
-        String x12 = "PRV*RF*PXC*207Q00000X~";
+        String x12 = "PRV*RF*PXC*207Q00000X*PA*AA*AAA~";
         PRV prv = new PRV(x12);
 
         Assert.assertEquals(true, prv.validate());
@@ -151,16 +172,22 @@ public class SegmentTest {
         Assert.assertEquals("RF", prv.getProviderCode());
         Assert.assertEquals("PXC", prv.getReferenceIdentificationQualifier());
         Assert.assertEquals("207Q00000X", prv.getReferenceIdentification());
+        Assert.assertEquals("PA", prv.getStateOrProvinceCode());
+        Assert.assertEquals("AA", prv.getProviderSpecialtyInformation());
+        Assert.assertEquals("AAA", prv.getProviderOrganizationCode());
     }
 
     @Test
     public void testCreatePRV() {
-        String x12 = "PRV*RF*PXC*207Q00000X~";
+        String x12 = "PRV*RF*PXC*207Q00000X*PA*AA*AAA~";
         PRV prv = new PRV();
 
         prv.setProviderCode("RF");
         prv.setReferenceIdentificationQualifier("PXC");
         prv.setReferenceIdentification("207Q00000X");
+        prv.setStateOrProvinceCode("PA");
+        prv.setProviderSpecialtyInformation("AA");
+        prv.setProviderOrganizationCode("AAA");
 
         Assert.assertEquals(true, prv.validate());
         Assert.assertEquals(x12, prv.toString());

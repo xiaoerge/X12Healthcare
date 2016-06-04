@@ -25,7 +25,7 @@ public class REF extends Segment {
     @Definition(position = 3, minLength = 1, maxLength = 80)
     public String getDescription() {return collection[3];}
 
-    @Definition(position = 4, minLength = 1, maxLength = 1)
+    @Definition(position = 4, minLength = 1, maxLength = 10)
     public String getReferenceIdentifier() {return collection[4];}
 
     public void setReferenceIdentificationQualifier(String s) { collection[1] = s;}

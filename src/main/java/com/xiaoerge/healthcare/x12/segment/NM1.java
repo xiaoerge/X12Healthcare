@@ -32,7 +32,7 @@ public class NM1 extends Segment {
     public String getNameMiddle() { return collection[5]; }
 
     @Definition(position = 6, minLength = 1, maxLength = 10)
-    public String getPrefix() { return collection[6]; }
+    public String getNamePrefix() { return collection[6]; }
 
     @Definition(position = 7, minLength = 1, maxLength = 10)
     public String getNameSuffix() { return collection[7]; }
@@ -57,7 +57,7 @@ public class NM1 extends Segment {
     public void setNameLastOrOrganizationName(String s) { collection[3] = s; }
     public void setNameFirst(String s) { collection[4] = s; }
     public void setNameMiddle(String s) { collection[5] = s; }
-    public void setPrefix(String s) { collection[6] = s; }
+    public void setNamePrefix(String s) { collection[6] = s; }
     public void setNameSuffix(String s) { collection[7] = s; }
     public void setIdentificationCodeQualifier(String s) { collection[8] = s; }
     public void setIdentificationCode(String s) { collection[9] = s; }

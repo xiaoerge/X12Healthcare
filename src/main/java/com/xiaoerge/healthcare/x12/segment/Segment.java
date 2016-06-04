@@ -50,6 +50,7 @@ public class Segment implements IMessage
         if (content.length() > 0){
             if (content.charAt(content.length() - 1) != '~') {
                 parseError = true;
+                logger.log(Level.SEVERE, name+" parse()");
                 logger.log(Level.SEVERE, name+" missing segment terminator");
                 //collection = content.split(Pattern.quote(delimiter));
             }
@@ -67,6 +68,7 @@ public class Segment implements IMessage
 
                 if (pCollection.length > collection.length) {
                     parseError = true;
+                    logger.log(Level.SEVERE, name+" parse()");
                     logger.log(Level.SEVERE, name+" field length should be less tha or equal to "+fieldSize);
                 }
             }
@@ -89,7 +91,10 @@ public class Segment implements IMessage
 
     private boolean validateName() {
         boolean v = name.length() > 0 && collection[0].equals(name);
-        if (!v) logger.log(Level.SEVERE, name+" Segment field does not match");
+        if (!v) {
+            logger.log(Level.SEVERE, name+" validateName()");
+            logger.log(Level.SEVERE, name+" Segment field does not match");
+        }
         return v;
     }
 
@@ -105,6 +110,7 @@ public class Segment implements IMessage
                     String code = (String) method.invoke(this);
                     boolean v =  ArrayUtils.contains(definition.codeValues(), code);
                     if (!v) {
+                        logger.log(Level.SEVERE, name+" validateCodeValue()");
                         logger.log(Level.SEVERE, name+""+String.format("%02d", definition.position())+" is not a valid. Valid values are "+ArrayUtils.toString(definition.codeValues()));
                         ret = false;
                     }
@@ -122,6 +128,7 @@ public class Segment implements IMessage
     private boolean validateFieldSize() {
         boolean v = collection.length-1 <= fieldSize;
         if (!v) {
+            logger.log(Level.SEVERE, name+" validateFieldSize()");
             logger.log(Level.SEVERE, name+" size should be "+fieldSize);
         }
         return v;
@@ -141,6 +148,7 @@ public class Segment implements IMessage
                     boolean v =  code.length() >= definition.minLength() && code.length() <= definition.maxLength();
 
                     if (!v) {
+                        logger.log(Level.SEVERE, name+" validateDataLength()");
                         String message = (definition.minLength() == definition.maxLength()) ?
                                 definition.minLength()+"" : "between "+definition.minLength()+", "+definition.maxLength();
                         logger.log(Level.SEVERE, name+""+String.format("%02d", definition.position())+" length should be "+message);

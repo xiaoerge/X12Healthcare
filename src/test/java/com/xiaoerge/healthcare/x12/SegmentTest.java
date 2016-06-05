@@ -363,4 +363,33 @@ public class SegmentTest {
         Assert.assertEquals(true, dtp.validate());
         Assert.assertEquals(x12, dtp.toString());
     }
+
+    @Test
+    public void testParseEQ() {
+        String x12 = "EQ*30**FAM~";
+        EQ eq = new EQ(x12);
+
+        Assert.assertEquals(true, eq.validate());
+        Assert.assertEquals(x12, eq.toString());
+        Assert.assertEquals("30", eq.getServiceTypeCode());
+        Assert.assertEquals("", eq.getCompositeMedicalProcedureIdentifier());
+        Assert.assertEquals("FAM", eq.getCoverageLevelCode());
+        Assert.assertEquals("", eq.getInsuranceTypeCode());
+        Assert.assertEquals("", eq.getCompositeDiagnosisCodePointer());
+    }
+
+    @Test
+    public void testCreateEQ() {
+        String x12 = "EQ*30**FAM~";
+        EQ eq = new EQ();
+
+        eq.setServiceTypeCode("30");
+        eq.setCompositeMedicalProcedureIdentifier("");
+        eq.setCoverageLevelCode("FAM");
+        eq.setInsuranceTypeCode("");
+        eq.setCompositeDiagnosisCodePointer("");
+
+        Assert.assertEquals(true, eq.validate());
+        Assert.assertEquals(x12, eq.toString());
+    }
 }

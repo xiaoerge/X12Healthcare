@@ -17,5 +17,12 @@ public class FooTest {
 
         //this will print 0,  to get it to print size, escape asterisks
         // System.out.println(asterikS.split(Pattern.quote("*")).length);
+
+        String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+        //System.out.println(methodName);
+
+        for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+            //System.out.println(element.getLineNumber());
+        }
     }
 }

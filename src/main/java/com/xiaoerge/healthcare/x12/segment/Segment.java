@@ -79,10 +79,6 @@ public class Segment implements IMessage
         return fieldSize;
     }
 
-    public String toX12String() {
-        return toString();
-    }
-
     public boolean validate()
     {
         return !parseError && validateName() && validateFieldSize()
@@ -163,6 +159,10 @@ public class Segment implements IMessage
             }
         }
         return ret;
+    }
+
+    public String toX12String() {
+        return toString();
     }
 
     @Override

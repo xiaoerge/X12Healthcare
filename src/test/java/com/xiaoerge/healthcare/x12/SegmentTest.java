@@ -392,4 +392,64 @@ public class SegmentTest {
         Assert.assertEquals(true, eq.validate());
         Assert.assertEquals(x12, eq.toString());
     }
+
+    @Test
+    public void testParseAMT() {
+        String x12 = "AMT*R*37.5~";
+        AMT amt = new AMT(x12);
+
+        Assert.assertEquals(true, amt.validate());
+        Assert.assertEquals(x12, amt.toString());
+        Assert.assertEquals("R", amt.getAmountQualifierCode());
+        Assert.assertEquals("37.5", amt.getMonetaryAmount());
+    }
+
+    @Test
+    public void testCreateAMT() {
+        String x12 = "AMT*R*37.5~";
+        AMT amt = new AMT();
+
+        amt.setAmountQualifierCode("R");
+        amt.setMonetaryAmount("37.5");
+
+        Assert.assertEquals(true, amt.validate());
+        Assert.assertEquals(x12, amt.toString());
+    }
+
+    @Test
+    public void testParseIII() {
+        String x12 = "III*ZZ*21*AA*BB*1*2*CC*DD*EE~";
+        III iii = new III(x12);
+
+        Assert.assertEquals(true, iii.validate());
+        Assert.assertEquals(x12, iii.toString());
+        Assert.assertEquals("ZZ", iii.getCodeListQualifierCode());
+        Assert.assertEquals("21", iii.getIndustryCode());
+        Assert.assertEquals("AA", iii.getCodeCategory());
+        Assert.assertEquals("BB", iii.getFreeFormMessageText());
+        Assert.assertEquals("1", iii.getQuantity());
+        Assert.assertEquals("2", iii.getCompositeUnitOfMeasure());
+        Assert.assertEquals("CC", iii.getSurfaceLayerPositionCode1());
+        Assert.assertEquals("DD", iii.getSurfaceLayerPositionCode2());
+        Assert.assertEquals("EE", iii.getSurfaceLayerPositionCode3());
+    }
+
+    @Test
+    public void testCreateIII() {
+        String x12 = "III*ZZ*21*AA*BB*1*2*CC*DD*EE~";
+        III iii = new III();
+
+        iii.setCodeListQualifierCode("ZZ");
+        iii.setIndustryCode("21");
+        iii.setCodeCategory("AA");
+        iii.setFreeFormMessageText("BB");
+        iii.setQuantity("1");
+        iii.setCompositeUnitOfMeasure("2");
+        iii.setSurfaceLayerPositionCode1("CC");
+        iii.setSurfaceLayerPositionCode2("DD");
+        iii.setSurfaceLayerPositionCode3("EE");
+
+        Assert.assertEquals(true, iii.validate());
+        Assert.assertEquals(x12, iii.toString());
+    }
 }

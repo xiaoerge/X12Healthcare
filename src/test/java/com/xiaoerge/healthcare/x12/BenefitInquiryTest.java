@@ -1,5 +1,9 @@
 package com.xiaoerge.healthcare.x12;
 
+import com.sun.org.apache.xpath.internal.functions.Function;
+import com.xiaoerge.healthcare.x12.control.FunctionalGroup;
+import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
+import com.xiaoerge.healthcare.x12.control.Transaction;
 import com.xiaoerge.healthcare.x12.message.BenefitInquiry;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,6 +34,13 @@ public class BenefitInquiryTest {
                 "IEA*1*0616~";
 
         BenefitInquiry message = (BenefitInquiry) X12Parser.fromX12Message(x12);
+        InterchangeEnvelope envelope = message.getInterchangeEnvelope();
+
+        for (FunctionalGroup group : envelope.getFunctionalGroups()) {
+            for(Transaction transaction : group.getTransactions()) {
+                Assert.assertEquals("270", transaction.getTransactionSetIDCode());
+            }
+        }
 
         Assert.assertTrue(message.validate());
         Assert.assertEquals(message.toX12String(), message.toString());

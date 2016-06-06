@@ -13,14 +13,14 @@ import java.util.List;
  */
 public class FunctionalGroup implements IMessage
 {
-    private GS gs;
+    private GS functionalGroupHeader;
     private List<Transaction> transactions;
-    private GE ge;
+    private GE functionalGroupTrailer;
 
     public FunctionalGroup() {
-        gs = new GS();
+        functionalGroupHeader = new GS();
         transactions = new ArrayList<Transaction>();
-        ge = new GE();
+        functionalGroupTrailer = new GE();
     }
     public FunctionalGroup(String s) {
         StringQueue stringQueue = new StringQueue(s);
@@ -30,10 +30,10 @@ public class FunctionalGroup implements IMessage
         while (stringQueue.hasNext()) {
             String next = stringQueue.getNext();
             if (next.startsWith("GS")) {
-                gs = new GS(next);
+                functionalGroupHeader = new GS(next);
             }
             else if (next.startsWith("GE")) {
-                ge = new GE(next);
+                functionalGroupTrailer = new GE(next);
             }
             else if (next.startsWith("ST")) {
                 builder = new StringBuilder();
@@ -61,7 +61,7 @@ public class FunctionalGroup implements IMessage
         for (Transaction transaction : transactions) {
             if (!transaction.validate()) return false;
         }
-        return gs.validate() && ge.validate();
+        return functionalGroupHeader.validate() && functionalGroupTrailer.validate();
     }
 
     public int size() {
@@ -71,13 +71,13 @@ public class FunctionalGroup implements IMessage
     public String toX12String() {
 
         StringBuilder builder = new StringBuilder();
-        builder.append(gs.toX12String());
+        builder.append(functionalGroupHeader.toX12String());
 
         for (Transaction transaction : transactions) {
             builder.append(transaction.toX12String());
         }
 
-        builder.append(ge.toX12String());
+        builder.append(functionalGroupTrailer.toX12String());
         return builder.toString();
     }
 }

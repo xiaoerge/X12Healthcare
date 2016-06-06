@@ -79,6 +79,23 @@ public class Segment implements IMessage
         return fieldSize;
     }
 
+    private String getByPosition(int position) {
+        return collection[position];
+    }
+    public String getByPosition() {
+        String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+        Class obj = this.getClass();
+        Method method = null;
+        try {
+            method = obj.getMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+
+        return "";
+    }
+
     public boolean validate()
     {
         return !parseError && validateName() && validateFieldSize()

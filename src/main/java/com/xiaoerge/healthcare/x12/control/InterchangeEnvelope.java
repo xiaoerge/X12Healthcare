@@ -2,10 +2,8 @@ package com.xiaoerge.healthcare.x12.control;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.message.IMessage;
-import com.xiaoerge.healthcare.x12.segment.GS;
 import com.xiaoerge.healthcare.x12.segment.IEA;
 import com.xiaoerge.healthcare.x12.segment.ISA;
-import com.xiaoerge.healthcare.x12.segment.Segment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +13,14 @@ import java.util.List;
  */
 public class InterchangeEnvelope implements IMessage
 {
-    private ISA isa;
+    private ISA transactionSetHeader;
     private List<FunctionalGroup> functionalGroups;
-    private IEA iea;
+    private IEA transactionSetTrailer;
 
     public InterchangeEnvelope() {
-        isa = new ISA();
+        transactionSetHeader = new ISA();
         functionalGroups = new ArrayList<FunctionalGroup>();
-        iea = new IEA();
+        transactionSetTrailer = new IEA();
     }
     public InterchangeEnvelope(String s) {
         StringQueue stringQueue = new StringQueue(s);
@@ -32,10 +30,10 @@ public class InterchangeEnvelope implements IMessage
         while (stringQueue.hasNext()) {
             String next = stringQueue.getNext();
             if (next.startsWith("ISA")) {
-                isa = new ISA(next);
+                transactionSetHeader = new ISA(next);
             }
             else if (next.startsWith("IEA")) {
-                iea = new IEA(next);
+                transactionSetTrailer = new IEA(next);
             }
             else if (next.startsWith("GS")) {
                 builder = new StringBuilder();
@@ -63,7 +61,7 @@ public class InterchangeEnvelope implements IMessage
         for (FunctionalGroup group : functionalGroups) {
             if (!group.validate()) return false;
         }
-        return isa.validate() && iea.validate();
+        return transactionSetHeader.validate() && transactionSetTrailer.validate();
     }
 
     public int size() {
@@ -72,13 +70,13 @@ public class InterchangeEnvelope implements IMessage
 
     public String toX12String() {
         StringBuilder builder = new StringBuilder();
-        builder.append(isa.toX12String());
+        builder.append(transactionSetHeader.toX12String());
 
         for (FunctionalGroup group : functionalGroups) {
             builder.append(group.toX12String());
         }
 
-        builder.append(iea.toX12String());
+        builder.append(transactionSetTrailer.toX12String());
         return builder.toString();
     }
 }

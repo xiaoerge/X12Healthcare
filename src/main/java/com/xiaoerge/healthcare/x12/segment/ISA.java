@@ -17,25 +17,25 @@ public class ISA extends Segment
         super(content);
     }
 
-    @Definition(position = 1, minLength = 2, maxLength = 2, codeValues = {"00", "03"})
+    @Definition(position = 1, minLength = 2, maxLength = 2)
     public String getAuthInfoQualifier() {return collection[1];}
 
     @Definition(position = 2, minLength = 10, maxLength = 10)
     public String getAuthInformation() {return collection[2];}
 
-    @Definition(position = 3, minLength = 2, maxLength = 2, codeValues = {"00", "01"})
+    @Definition(position = 3, minLength = 2, maxLength = 2)
     public String getSecurityInfoQualifier() {return collection[3];}
 
     @Definition(position = 4, minLength = 10, maxLength = 10)
     public String getSecurityInformation() {return collection[4];}
 
-    @Definition(position = 5, minLength = 2, maxLength = 2, codeValues = {"01", "14", "20", "27", "28", "29", "30", "33", "ZZ"})
+    @Definition(position = 5, minLength = 2, maxLength = 2)
     public String getInterchangeIDQualifierSender() {return collection[5];}
 
     @Definition(position = 6, minLength = 15, maxLength = 15)
     public String getInterchangeSenderID() {return collection[6];}
 
-    @Definition(position = 7, minLength = 2, maxLength = 2, codeValues = {"01", "14", "20", "27", "28", "29", "30", "33", "ZZ"})
+    @Definition(position = 7, minLength = 2, maxLength = 2)
     public String getInterchangeIDQualifierReceiver() {return collection[7];}
 
     @Definition(position = 8, minLength = 15, maxLength = 15)
@@ -47,7 +47,7 @@ public class ISA extends Segment
     @Definition(position = 10, minLength = 4, maxLength = 4)
     public String getInterchangeTime() {return collection[10];}
 
-    @Definition(position = 11, minLength = 1, maxLength = 1, codeValues = {"^"})
+    @Definition(position = 11, minLength = 1, maxLength = 1)
     public String getRepetitionSeparator() {return collection[11];}
 
     @Definition(position = 12, minLength = 5, maxLength = 5)
@@ -56,10 +56,10 @@ public class ISA extends Segment
     @Definition(position = 13, minLength = 9, maxLength = 9)
     public String getInterchangeControlNumber() {return collection[13];}
 
-    @Definition(position = 14, minLength = 1, maxLength = 1, codeValues = {"0", "1"})
+    @Definition(position = 14, minLength = 1, maxLength = 1)
     public String getAcknowledgmentRequested() {return collection[14];}
 
-    @Definition(position = 15, minLength = 1, maxLength = 1, codeValues = {"P", "T"})
+    @Definition(position = 15, minLength = 1, maxLength = 1)
     public String getUsageIndicator() {return collection[15];}
 
     @Definition(position = 16, minLength = 1, maxLength = 1)

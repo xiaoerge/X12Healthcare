@@ -16,10 +16,10 @@ public class NM1 extends Segment {
         super(content);
     }
 
-    @Definition(position = 1, minLength = 2, maxLength = 3, codeValues = {"1P", "2B", "36", "80", "FA", "GP", "P5", "PR"})
+    @Definition(position = 1, minLength = 2, maxLength = 3)
     public String getEntityIdentifierCode() { return collection[1]; }
 
-    @Definition(position = 2, minLength = 1, maxLength = 1, codeValues = {"1", "2"})
+    @Definition(position = 2, minLength = 1, maxLength = 1)
     public String getEntityTypeQualifier() { return collection[2]; }
 
     @Definition(position = 3, minLength = 1, maxLength = 60)
@@ -37,7 +37,7 @@ public class NM1 extends Segment {
     @Definition(position = 7, minLength = 1, maxLength = 10)
     public String getNameSuffix() { return collection[7]; }
 
-    @Definition(position = 8, minLength = 1, maxLength = 2, codeValues = {"24", "34", "FI", "PI", "PP", "SV"})
+    @Definition(position = 8, minLength = 1, maxLength = 2)
     public String getIdentificationCodeQualifier() { return collection[8]; }
 
     @Definition(position = 9, minLength = 2, maxLength = 80)

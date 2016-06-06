@@ -16,7 +16,7 @@ public class REF extends Segment {
         super(content);
     }
 
-    @Definition(position = 1, minLength = 2, maxLength = 3, codeValues = {"0B", "1C", "1D", "1J", "4A", "CT", "EL", "EO", "HPI", "JD", "N5", "N7", "Q4", "SY", "TJ"})
+    @Definition(position = 1, minLength = 2, maxLength = 3)
     public String getReferenceIdentificationQualifier() {return collection[1];}
 
     @Definition(position = 2, minLength = 1, maxLength = 50)

@@ -18,5 +18,4 @@ public @interface Definition {
     public int position();
     public int minLength();
     public int maxLength();
-    public String[] codeValues() default {};
 }

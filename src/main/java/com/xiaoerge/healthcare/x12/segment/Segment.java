@@ -98,8 +98,13 @@ public class Segment implements IMessage
 
     public boolean validate()
     {
-        return !parseError && validateName() && validateFieldSize()
-                && validateCodeValue() && validateDataLength();
+        boolean validateName = validateName(), validateFieldSize = validateFieldSize(), validateDataLength = validateDataLength();
+        if (parseError) logger.log(Level.SEVERE, "parse() failed");
+        if (!validateName) logger.log(Level.SEVERE, "validateName() failed");
+        if (!validateFieldSize) logger.log(Level.SEVERE, "validateFieldSize() failed");
+        if (!validateDataLength) logger.log(Level.SEVERE, "validateDataLength() failed");
+
+        return !parseError && validateName && validateFieldSize && validateDataLength;
     }
 
     private boolean validateName() {
@@ -109,33 +114,6 @@ public class Segment implements IMessage
             logger.log(Level.SEVERE, name+" Segment field does not match");
         }
         return v;
-    }
-
-    private boolean validateCodeValue() {
-        boolean ret = true;
-        Class obj = this.getClass();
-        for (Method method : obj.getDeclaredMethods()) {
-            if (method.isAnnotationPresent(Definition.class)) {
-                Definition definition = (Definition) method.getAnnotation(Definition.class);
-
-                if (definition.codeValues().length == 0) continue;
-                try {
-                    String code = (String) method.invoke(this);
-                    boolean v =  ArrayUtils.contains(definition.codeValues(), code);
-                    if (!v) {
-                        logger.log(Level.SEVERE, name+" validateCodeValue()");
-                        logger.log(Level.SEVERE, name+""+String.format("%02d", definition.position())+" is not a valid. Valid values are "+ArrayUtils.toString(definition.codeValues()));
-                        ret = false;
-                    }
-
-                } catch (IllegalAccessException e) {
-                    return false;
-                } catch (InvocationTargetException e) {
-                    return false;
-                }
-            }
-        }
-        return ret;
     }
 
     private boolean validateFieldSize() {

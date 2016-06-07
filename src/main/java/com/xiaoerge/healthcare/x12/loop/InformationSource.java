@@ -1,4 +1,4 @@
-package com.xiaoerge.healthcare.x12.level;
+package com.xiaoerge.healthcare.x12.loop;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.message.IMessage;
@@ -31,6 +31,10 @@ public class InformationSource implements IMessage {
 
     public String toX12String() {
         return hierarchicalLevel.toX12String()+individualOrOrganizationalName.toX12String();
+    }
+
+    public boolean isEmpty() {
+        return hierarchicalLevel.isEmpty() && individualOrOrganizationalName.isEmpty();
     }
 
     public String getHierarchicalIDNumber() { return hierarchicalLevel.getHierarchicalIDNumber(); }

@@ -27,5 +27,10 @@ public class X12Message implements IMessage {
     public String toX12String() {
         return interchangeEnvelope.toX12String();
     }
+
+    public boolean isEmpty() {
+        return interchangeEnvelope.isEmpty();
+    }
+
     public String toString() { return toX12String(); }
 }

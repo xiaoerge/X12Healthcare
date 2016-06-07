@@ -80,4 +80,11 @@ public class FunctionalGroup implements IMessage
         builder.append(functionalGroupTrailer.toX12String());
         return builder.toString();
     }
+
+    public boolean isEmpty() {
+        for (Transaction transaction : transactions) {
+            if (!transaction.isEmpty()) return false;
+        }
+        return functionalGroupHeader.isEmpty() && functionalGroupTrailer.isEmpty();
+    }
 }

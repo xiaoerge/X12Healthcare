@@ -79,4 +79,8 @@ public class InterchangeEnvelope implements IMessage
         builder.append(transactionSetTrailer.toX12String());
         return builder.toString();
     }
+
+    public boolean isEmpty() {
+        return transactionSetHeader.isEmpty() && transactionSetTrailer.isEmpty();
+    }
 }

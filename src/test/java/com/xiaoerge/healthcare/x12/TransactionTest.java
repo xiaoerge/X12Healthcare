@@ -15,6 +15,7 @@ public class TransactionTest {
         Transaction transaction = new Transaction(x12);
 
         Assert.assertFalse(transaction.validate());
+        Assert.assertFalse(transaction.isEmpty());
         Assert.assertNotEquals(x12, transaction.toX12String());
     }
 
@@ -24,6 +25,7 @@ public class TransactionTest {
         Transaction transaction = new Transaction();
 
         Assert.assertTrue(transaction.validate());
-        Assert.assertEquals(x12, transaction.toX12String());
+        Assert.assertTrue(transaction.isEmpty());
+        Assert.assertEquals("", transaction.toX12String());
     }
 }

@@ -113,7 +113,7 @@ public class SegmentTest {
 
         Assert.assertEquals(true, n3.validate());
         Assert.assertEquals(x12, n3.toString());
-        Assert.assertEquals("201 PARK AVENUE", n3.getAddressInformation());
+        Assert.assertEquals("201 PARK AVENUE", n3.getAddressInformation1());
         Assert.assertEquals("SUITE 300", n3.getAddressInformation2());
     }
 
@@ -122,7 +122,7 @@ public class SegmentTest {
         String x12 = "N3*201 PARK AVENUE*SUITE 300~";
         N3 n3 = new N3();
 
-        n3.setAddressInformation("201 PARK AVENUE");
+        n3.setAddressInformation1("201 PARK AVENUE");
         n3.setAddressInformation2("SUITE 300");
 
         Assert.assertEquals(true, n3.validate());

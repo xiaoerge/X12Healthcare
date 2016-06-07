@@ -160,11 +160,19 @@ public class Segment implements IMessage
         return toString();
     }
 
+    public boolean isEmpty() {
+        boolean ret = true;
+        for (int i = 1; i < collection.length; i++) {
+            if (collection[i].length() > 0) return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString()
     {
-        if (!validate())
-            return name.concat(StringUtils.repeat("*", fieldSize)).concat("~");
+        if (isEmpty()) return "";
+        if (!validate()) return name.concat(StringUtils.repeat("*", fieldSize)).concat("~");
 
         collection[0] = name;
         StringBuilder builder = new StringBuilder();

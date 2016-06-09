@@ -8,17 +8,17 @@ import com.xiaoerge.healthcare.x12.segment.NM1;
 /**
  * Created by xiaoerge on 6/5/16.
  */
-public class InformationSource implements IMessage {
+public class BenefitInformationSource implements IMessage {
 
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
 
-    public InformationSource() {
+    public BenefitInformationSource() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
     }
 
-    public InformationSource(String s) {
+    public BenefitInformationSource(String s) {
         StringQueue stringQueue = new StringQueue(s);
 
         hierarchicalLevel = new HL(stringQueue.getNext());

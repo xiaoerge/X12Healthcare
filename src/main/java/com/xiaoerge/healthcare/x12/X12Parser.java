@@ -22,7 +22,7 @@ public class X12Parser {
 
         Transaction transaction = groups.get(0).getTransactions().get(0);
 
-        if (transaction.getTransactionSetIDCode().equals("270")) {
+        if (transaction.getTransactionSetHeader().getTransactionSetIDCode().equals("270")) {
             return new BenefitInquiry(message);
         }
 

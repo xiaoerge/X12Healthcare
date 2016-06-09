@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12;
 
-import com.xiaoerge.healthcare.x12.loop.InformationSource;
-import com.xiaoerge.healthcare.x12.loop.InformationReceiver;
+import com.xiaoerge.healthcare.x12.loop.BenefitInformationSource;
+import com.xiaoerge.healthcare.x12.loop.BenefitInformationReceiver;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,36 +13,36 @@ public class LoopTest {
     @Test
     public void testParseInformationSource() {
         String x12 = "HL*1**20*1~NM1*PR*2*ACE INSURANCE COMPANY*****PI*87728~";
-        InformationSource informationSource = new InformationSource(x12);
+        BenefitInformationSource benefitInformationSource = new BenefitInformationSource(x12);
 
-        Assert.assertTrue(informationSource.validate());
-        Assert.assertEquals(x12, informationSource.toX12String());
-        Assert.assertEquals("1", informationSource.getHierarchicalIDNumber());
-        Assert.assertEquals("20", informationSource.getHierarchicalLevelCode());
-        Assert.assertEquals("1", informationSource.getHierarchicalChildCode());
-        Assert.assertEquals("PR", informationSource.getEntityIdentifierCode());
-        Assert.assertEquals("2", informationSource.getEntityTypeQualifier());
-        Assert.assertEquals("ACE INSURANCE COMPANY", informationSource.getNameLastOrOrganizationName());
-        Assert.assertEquals("PI", informationSource.getIdentificationCodeQualifier());
-        Assert.assertEquals("87728", informationSource.getIdentificationCode());
+        Assert.assertTrue(benefitInformationSource.validate());
+        Assert.assertEquals(x12, benefitInformationSource.toX12String());
+        Assert.assertEquals("1", benefitInformationSource.getHierarchicalIDNumber());
+        Assert.assertEquals("20", benefitInformationSource.getHierarchicalLevelCode());
+        Assert.assertEquals("1", benefitInformationSource.getHierarchicalChildCode());
+        Assert.assertEquals("PR", benefitInformationSource.getEntityIdentifierCode());
+        Assert.assertEquals("2", benefitInformationSource.getEntityTypeQualifier());
+        Assert.assertEquals("ACE INSURANCE COMPANY", benefitInformationSource.getNameLastOrOrganizationName());
+        Assert.assertEquals("PI", benefitInformationSource.getIdentificationCodeQualifier());
+        Assert.assertEquals("87728", benefitInformationSource.getIdentificationCode());
     }
 
     @Test
     public void testCreateInformationSource() {
         String x12 = "HL*1**20*1~NM1*PR*2*ACE INSURANCE COMPANY*****PI*87728~";
-        InformationSource informationSource = new InformationSource();
+        BenefitInformationSource benefitInformationSource = new BenefitInformationSource();
 
-        informationSource.setHierarchicalIDNumber("1");
-        informationSource.setHierarchicalLevelCode("20");
-        informationSource.setHierarchicalChildCode("1");
-        informationSource.setEntityIdentifierCode("PR");
-        informationSource.setEntityTypeQualifier("2");
-        informationSource.setNameLastOrOrganizationName("ACE INSURANCE COMPANY");
-        informationSource.setIdentificationCodeQualifier("PI");
-        informationSource.setIdentificationCode("87728");
+        benefitInformationSource.setHierarchicalIDNumber("1");
+        benefitInformationSource.setHierarchicalLevelCode("20");
+        benefitInformationSource.setHierarchicalChildCode("1");
+        benefitInformationSource.setEntityIdentifierCode("PR");
+        benefitInformationSource.setEntityTypeQualifier("2");
+        benefitInformationSource.setNameLastOrOrganizationName("ACE INSURANCE COMPANY");
+        benefitInformationSource.setIdentificationCodeQualifier("PI");
+        benefitInformationSource.setIdentificationCode("87728");
 
-        Assert.assertTrue(informationSource.validate());
-        Assert.assertEquals(x12, informationSource.toX12String());
+        Assert.assertTrue(benefitInformationSource.validate());
+        Assert.assertEquals(x12, benefitInformationSource.toX12String());
     }
 
     @Test
@@ -52,28 +52,28 @@ public class LoopTest {
                 "REF*EO*477563928~" +
                 "N3*201 PARK AVENUE*SUITE 300~" +
                 "N4*KANSAS CITY*MO*64108~";
-        InformationReceiver informationReceiver = new InformationReceiver(x12);
+        BenefitInformationReceiver benefitInformationReceiver = new BenefitInformationReceiver(x12);
 
-        Assert.assertTrue(informationReceiver.validate());
-        Assert.assertEquals(x12, informationReceiver.toX12String());
-        Assert.assertEquals("2", informationReceiver.getHierarchicalIDNumber());
-        Assert.assertEquals("1", informationReceiver.getHierarchicalParentIDNumber());
-        Assert.assertEquals("21", informationReceiver.getHierarchicalLevelCode());
-        Assert.assertEquals("1", informationReceiver.getHierarchicalChildCode());
-        Assert.assertEquals("1P", informationReceiver.getEntityIdentifierCode());
-        Assert.assertEquals("1", informationReceiver.getEntityTypeQualifier());
-        Assert.assertEquals("JONES", informationReceiver.getNameLastOrOrganizationName());
-        Assert.assertEquals("MARCUS", informationReceiver.getNameFirst());
-        Assert.assertEquals("MD", informationReceiver.getNameSuffix());
-        Assert.assertEquals("34", informationReceiver.getIdentificationCodeQualifier());
-        Assert.assertEquals("111223333", informationReceiver.getIdentificationCode());
-        Assert.assertEquals("EO", informationReceiver.getReferenceIdentificationQualifier());
-        Assert.assertEquals("477563928", informationReceiver.getReferenceIdentification());
-        Assert.assertEquals("201 PARK AVENUE", informationReceiver.getAddressInformation1());
-        Assert.assertEquals("SUITE 300", informationReceiver.getAddressInformation2());
-        Assert.assertEquals("KANSAS CITY", informationReceiver.getCityName());
-        Assert.assertEquals("MO", informationReceiver.getStateOrProvinceCode());
-        Assert.assertEquals("64108", informationReceiver.getPostalCode());
+        Assert.assertTrue(benefitInformationReceiver.validate());
+        Assert.assertEquals(x12, benefitInformationReceiver.toX12String());
+        Assert.assertEquals("2", benefitInformationReceiver.getHierarchicalIDNumber());
+        Assert.assertEquals("1", benefitInformationReceiver.getHierarchicalParentIDNumber());
+        Assert.assertEquals("21", benefitInformationReceiver.getHierarchicalLevelCode());
+        Assert.assertEquals("1", benefitInformationReceiver.getHierarchicalChildCode());
+        Assert.assertEquals("1P", benefitInformationReceiver.getEntityIdentifierCode());
+        Assert.assertEquals("1", benefitInformationReceiver.getEntityTypeQualifier());
+        Assert.assertEquals("JONES", benefitInformationReceiver.getNameLastOrOrganizationName());
+        Assert.assertEquals("MARCUS", benefitInformationReceiver.getNameFirst());
+        Assert.assertEquals("MD", benefitInformationReceiver.getNameSuffix());
+        Assert.assertEquals("34", benefitInformationReceiver.getIdentificationCodeQualifier());
+        Assert.assertEquals("111223333", benefitInformationReceiver.getIdentificationCode());
+        Assert.assertEquals("EO", benefitInformationReceiver.getReferenceIdentificationQualifier());
+        Assert.assertEquals("477563928", benefitInformationReceiver.getReferenceIdentification());
+        Assert.assertEquals("201 PARK AVENUE", benefitInformationReceiver.getAddressInformation1());
+        Assert.assertEquals("SUITE 300", benefitInformationReceiver.getAddressInformation2());
+        Assert.assertEquals("KANSAS CITY", benefitInformationReceiver.getCityName());
+        Assert.assertEquals("MO", benefitInformationReceiver.getStateOrProvinceCode());
+        Assert.assertEquals("64108", benefitInformationReceiver.getPostalCode());
     }
 
     @Test
@@ -83,28 +83,28 @@ public class LoopTest {
                 "REF*EO*477563928~" +
                 "N3*201 PARK AVENUE*SUITE 300~" +
                 "N4*KANSAS CITY*MO*64108~";
-        InformationReceiver informationReceiver = new InformationReceiver();
+        BenefitInformationReceiver benefitInformationReceiver = new BenefitInformationReceiver();
 
-        informationReceiver.setHierarchicalIDNumber("2");
-        informationReceiver.setHierarchicalParentIDNumber("1");
-        informationReceiver.setHierarchicalLevelCode("21");
-        informationReceiver.setHierarchicalChildCode("1");
-        informationReceiver.setEntityIdentifierCode("1P");
-        informationReceiver.setEntityTypeQualifier("1");
-        informationReceiver.setNameLastOrOrganizationName("JONES");
-        informationReceiver.setNameFirst("MARCUS");
-        informationReceiver.setNameSuffix("MD");
-        informationReceiver.setIdentificationCodeQualifier("34");
-        informationReceiver.setIdentificationCode("111223333");
-        informationReceiver.setReferenceIdentificationQualifier("EO");
-        informationReceiver.setReferenceIdentification("477563928");
-        informationReceiver.setAddressInformation1("201 PARK AVENUE");
-        informationReceiver.setAddressInformation2("SUITE 300");
-        informationReceiver.setCityName("KANSAS CITY");
-        informationReceiver.setStateOrProvinceCode("MO");
-        informationReceiver.setPostalCode("64108");
+        benefitInformationReceiver.setHierarchicalIDNumber("2");
+        benefitInformationReceiver.setHierarchicalParentIDNumber("1");
+        benefitInformationReceiver.setHierarchicalLevelCode("21");
+        benefitInformationReceiver.setHierarchicalChildCode("1");
+        benefitInformationReceiver.setEntityIdentifierCode("1P");
+        benefitInformationReceiver.setEntityTypeQualifier("1");
+        benefitInformationReceiver.setNameLastOrOrganizationName("JONES");
+        benefitInformationReceiver.setNameFirst("MARCUS");
+        benefitInformationReceiver.setNameSuffix("MD");
+        benefitInformationReceiver.setIdentificationCodeQualifier("34");
+        benefitInformationReceiver.setIdentificationCode("111223333");
+        benefitInformationReceiver.setReferenceIdentificationQualifier("EO");
+        benefitInformationReceiver.setReferenceIdentification("477563928");
+        benefitInformationReceiver.setAddressInformation1("201 PARK AVENUE");
+        benefitInformationReceiver.setAddressInformation2("SUITE 300");
+        benefitInformationReceiver.setCityName("KANSAS CITY");
+        benefitInformationReceiver.setStateOrProvinceCode("MO");
+        benefitInformationReceiver.setPostalCode("64108");
 
-        Assert.assertTrue(informationReceiver.validate());
-        Assert.assertEquals(x12, informationReceiver.toX12String());
+        Assert.assertTrue(benefitInformationReceiver.validate());
+        Assert.assertEquals(x12, benefitInformationReceiver.toX12String());
     }
 }

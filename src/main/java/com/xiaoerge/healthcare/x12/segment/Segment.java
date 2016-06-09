@@ -69,7 +69,7 @@ public class Segment implements IMessage
                 if (pCollection.length > collection.length) {
                     parseError = true;
                     logger.log(Level.SEVERE, name+" parse()");
-                    logger.log(Level.SEVERE, name+" field length should be less tha or equal to "+fieldSize);
+                    logger.log(Level.SEVERE, name+" field length should be less than or equal to "+fieldSize);
                 }
             }
         }

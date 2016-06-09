@@ -14,7 +14,6 @@ public class Transaction implements IMessage
     private ST transactionSetHeader;
     private BHT beginningOfHierarchicalTransaction;
     private SE transactionSetTrailer;
-
     private String content;
 
     public Transaction() {
@@ -26,6 +25,7 @@ public class Transaction implements IMessage
     }
 
     public Transaction(String s) {
+        this();
         StringQueue stringQueue = new StringQueue(s);
         StringBuilder builder = new StringBuilder();
 
@@ -46,12 +46,14 @@ public class Transaction implements IMessage
         }
         content = builder.toString();
     }
+    public Transaction(Transaction transaction) {
+        transactionSetHeader = transaction.getTransactionSetHeader();
+        beginningOfHierarchicalTransaction = transaction.getBeginningOfHierarchicalTransaction();
+        transactionSetTrailer = transaction.getTransactionSetTrailer();
+        content = transaction.getContent();
+    }
     public String getContent() {
         return content;
-    }
-
-    public String getTransactionSetIDCode() {
-        return transactionSetHeader.getTransactionSetIDCode();
     }
 
     public boolean validate() {
@@ -72,5 +74,29 @@ public class Transaction implements IMessage
         boolean b2 = beginningOfHierarchicalTransaction.isEmpty();
         boolean b3 = transactionSetTrailer.isEmpty();
         return b1 && b2 && b3;
+    }
+
+    public ST getTransactionSetHeader() {
+        return transactionSetHeader;
+    }
+
+    public void setTransactionSetHeader(ST transactionSetHeader) {
+        this.transactionSetHeader = transactionSetHeader;
+    }
+
+    public BHT getBeginningOfHierarchicalTransaction() {
+        return beginningOfHierarchicalTransaction;
+    }
+
+    public void setBeginningOfHierarchicalTransaction(BHT beginningOfHierarchicalTransaction) {
+        this.beginningOfHierarchicalTransaction = beginningOfHierarchicalTransaction;
+    }
+
+    public SE getTransactionSetTrailer() {
+        return transactionSetTrailer;
+    }
+
+    public void setTransactionSetTrailer(SE transactionSetTrailer) {
+        this.transactionSetTrailer = transactionSetTrailer;
     }
 }

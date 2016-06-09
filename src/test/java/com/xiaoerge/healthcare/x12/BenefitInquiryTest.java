@@ -1,6 +1,7 @@
 package com.xiaoerge.healthcare.x12;
 
 import com.sun.org.apache.xpath.internal.functions.Function;
+import com.xiaoerge.healthcare.x12.control.BenefitInquiryTransaction;
 import com.xiaoerge.healthcare.x12.control.FunctionalGroup;
 import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
 import com.xiaoerge.healthcare.x12.control.Transaction;
@@ -38,7 +39,8 @@ public class BenefitInquiryTest {
 
         for (FunctionalGroup group : envelope.getFunctionalGroups()) {
             for(Transaction transaction : group.getTransactions()) {
-                Assert.assertEquals("270", transaction.getTransactionSetIDCode());
+                BenefitInquiryTransaction benefitInquiryTransaction = (BenefitInquiryTransaction) transaction;
+                Assert.assertEquals("270", benefitInquiryTransaction.getTransactionSetHeader().getTransactionSetIDCode());
             }
         }
 

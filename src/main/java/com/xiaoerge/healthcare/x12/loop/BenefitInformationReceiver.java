@@ -7,7 +7,7 @@ import com.xiaoerge.healthcare.x12.segment.*;
 /**
  * Created by xiaoerge on 6/5/16.
  */
-public class InformationReceiver implements IMessage {
+public class BenefitInformationReceiver implements IMessage {
 
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
@@ -16,7 +16,7 @@ public class InformationReceiver implements IMessage {
     private N4 geographicLocation;
     private PRV providerInformation;
 
-    public InformationReceiver() {
+    public BenefitInformationReceiver() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
         referenceInformation = new REF();
@@ -25,7 +25,7 @@ public class InformationReceiver implements IMessage {
         providerInformation = new PRV();
     }
 
-    public InformationReceiver(String s) {
+    public BenefitInformationReceiver(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
 

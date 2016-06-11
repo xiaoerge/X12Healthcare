@@ -1,4 +1,4 @@
-package com.xiaoerge.healthcare.x12.message;
+package com.xiaoerge.healthcare.x12;
 
 /**
  * Created by xiaoerge on 5/28/16.

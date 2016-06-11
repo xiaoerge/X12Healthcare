@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12;
 
-import com.xiaoerge.healthcare.x12.loop.BenefitInformationSource;
-import com.xiaoerge.healthcare.x12.loop.BenefitInformationReceiver;
+import com.xiaoerge.healthcare.x12.benifit.BenefitInformationSource;
+import com.xiaoerge.healthcare.x12.benifit.BenefitInformationReceiver;
 import org.junit.Assert;
 import org.junit.Test;
 

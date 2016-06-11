@@ -1,7 +1,7 @@
-package com.xiaoerge.healthcare.x12.loop;
+package com.xiaoerge.healthcare.x12.benifit;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
-import com.xiaoerge.healthcare.x12.message.IMessage;
+import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.*;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class BenefitInformationReceiver implements IMessage {
 
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
-    private List<REF> referenceInformations;
+    private List<REF> referenceInformation;
     private N3 partyLocation;
     private N4 geographicLocation;
     private PRV providerInformation;
@@ -22,7 +22,7 @@ public class BenefitInformationReceiver implements IMessage {
     public BenefitInformationReceiver() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
-        referenceInformations = new ArrayList<REF>();
+        referenceInformation = new ArrayList<REF>();
         partyLocation = new N3();
         geographicLocation = new N4();
         providerInformation = new PRV();
@@ -30,6 +30,7 @@ public class BenefitInformationReceiver implements IMessage {
 
     public BenefitInformationReceiver(String s) {
         this();
+        StringBuilder stringBuilder = new StringBuilder();
         StringQueue stringQueue = new StringQueue(s);
 
         hierarchicalLevel = new HL(stringQueue.getNext());
@@ -38,7 +39,7 @@ public class BenefitInformationReceiver implements IMessage {
         while (stringQueue.hasNext()) {
             String next = stringQueue.getNext();
             if (next.startsWith("REF")) {
-                referenceInformations.add(new REF(next));
+                referenceInformation.add(new REF(next));
             }
             else if (next.startsWith("N3")) {
                 partyLocation = new N3(next);
@@ -50,14 +51,16 @@ public class BenefitInformationReceiver implements IMessage {
                 providerInformation = new PRV(next);
             }
             else {
-                System.out.println(next);
+                stringBuilder.append(next);
             }
         }
+
+        
     }
 
     public boolean validate() {
         boolean refValidate = true;
-        for (REF ref : referenceInformations) if (!ref.validate()) refValidate = false;
+        for (REF ref : referenceInformation) if (!ref.validate()) refValidate = false;
 
         return hierarchicalLevel.validate()
                 && individualOrOrganizationalName.validate()
@@ -69,7 +72,7 @@ public class BenefitInformationReceiver implements IMessage {
 
     public String toX12String() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (REF ref : referenceInformations) stringBuilder.append(ref.toX12String());
+        for (REF ref : referenceInformation) stringBuilder.append(ref.toX12String());
 
         return hierarchicalLevel.toX12String()
                 +individualOrOrganizationalName.toX12String()
@@ -98,9 +101,9 @@ public class BenefitInformationReceiver implements IMessage {
     public String getIdentificationCodeQualifier() { return individualOrOrganizationalName.getIdentificationCodeQualifier(); }
     public String getIdentificationCode() { return individualOrOrganizationalName.getIdentificationCode(); }
 
-//    public String getReferenceIdentificationQualifier() { return referenceInformations.getReferenceIdentificationQualifier(); }
-//    public String getReferenceIdentification() { return referenceInformations.getReferenceIdentification(); }
-//    public String getDescription() { return referenceInformations.getDescription(); }
+//    public String getReferenceIdentificationQualifier() { return referenceInformation.getReferenceIdentificationQualifier(); }
+//    public String getReferenceIdentification() { return referenceInformation.getReferenceIdentification(); }
+//    public String getDescription() { return referenceInformation.getDescription(); }
 
     public String getCityName() { return geographicLocation.getCityName(); }
     public String getStateOrProvinceCode() { return geographicLocation.getStateOrProvinceCode(); }
@@ -129,9 +132,9 @@ public class BenefitInformationReceiver implements IMessage {
     public void setIdentificationCodeQualifier(String s) { individualOrOrganizationalName.setIdentificationCodeQualifier(s); }
     public void setIdentificationCode(String s) { individualOrOrganizationalName.setIdentificationCode(s); }
 
-//    public void setReferenceIdentificationQualifier(String s) { referenceInformations.setReferenceIdentificationQualifier(s); }
-//    public void setReferenceIdentification(String s) { referenceInformations.setReferenceIdentification(s); }
-//    public void setDescription(String s) { referenceInformations.setDescription(s); }
+//    public void setReferenceIdentificationQualifier(String s) { referenceInformation.setReferenceIdentificationQualifier(s); }
+//    public void setReferenceIdentification(String s) { referenceInformation.setReferenceIdentification(s); }
+//    public void setDescription(String s) { referenceInformation.setDescription(s); }
 
     public void setCityName(String s) { geographicLocation.setCityName(s); }
     public void setStateOrProvinceCode(String s) { geographicLocation.setStateOrProvinceCode(s); }

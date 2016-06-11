@@ -1,7 +1,7 @@
-package com.xiaoerge.healthcare.x12.loop;
+package com.xiaoerge.healthcare.x12.benifit;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
-import com.xiaoerge.healthcare.x12.message.IMessage;
+import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.HL;
 import com.xiaoerge.healthcare.x12.segment.NM1;
 
@@ -39,6 +39,7 @@ public class BenefitInformationSource implements IMessage {
             if (new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalParentIDNumber())
                     && stringBuilder.length() > 0) {
                 stringBuilder.append(next);
+
                 BenefitInformationReceiver receiver = new BenefitInformationReceiver(stringBuilder.toString());
                 benefitInformationReceivers.add(receiver);
                 stringBuilder = new StringBuilder();

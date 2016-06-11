@@ -1,10 +1,7 @@
-package com.xiaoerge.healthcare.x12.control;
+package com.xiaoerge.healthcare.x12.benifit;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
-import com.xiaoerge.healthcare.x12.loop.BenefitInformationReceiver;
-import com.xiaoerge.healthcare.x12.loop.BenefitInformationSource;
-import com.xiaoerge.healthcare.x12.message.BenefitInquiry;
-import com.xiaoerge.healthcare.x12.message.IMessage;
+import com.xiaoerge.healthcare.x12.control.Transaction;
 import com.xiaoerge.healthcare.x12.segment.*;
 
 import java.util.ArrayList;
@@ -33,7 +30,7 @@ public class BenefitInquiryTransaction extends Transaction
         parseContent();
     }
 
-    public void parseContent() {
+    private void parseContent() {
         StringQueue stringQueue = new StringQueue(getContent());
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -44,6 +41,7 @@ public class BenefitInquiryTransaction extends Transaction
             if (new HL(peek).getHierarchicalParentIDNumber().length() == 0
                     && stringBuilder.length() > 0) {
                 stringBuilder.append(next);
+
                 BenefitInformationSource source = new BenefitInformationSource(stringBuilder.toString());
                 benefitInformationSources.add(source);
                 stringBuilder = new StringBuilder();

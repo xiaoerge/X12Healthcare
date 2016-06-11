@@ -1,4 +1,4 @@
-package com.xiaoerge.healthcare.x12.message;
+package com.xiaoerge.healthcare.x12;
 
 import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
 

@@ -4,8 +4,6 @@ import com.xiaoerge.healthcare.x12.control.FunctionalGroup;
 import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
 import com.xiaoerge.healthcare.x12.control.Transaction;
 import com.xiaoerge.healthcare.x12.message.BenefitInquiry;
-import com.xiaoerge.healthcare.x12.message.X12Message;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 

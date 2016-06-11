@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12.control;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
-import com.xiaoerge.healthcare.x12.message.IMessage;
+import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.GE;
 import com.xiaoerge.healthcare.x12.segment.GS;
 

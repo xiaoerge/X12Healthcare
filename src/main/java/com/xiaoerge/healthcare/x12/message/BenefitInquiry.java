@@ -1,12 +1,9 @@
 package com.xiaoerge.healthcare.x12.message;
 
-import com.xiaoerge.healthcare.x12.control.BenefitInquiryTransaction;
+import com.xiaoerge.healthcare.x12.X12Message;
+import com.xiaoerge.healthcare.x12.benifit.BenefitInquiryTransaction;
 import com.xiaoerge.healthcare.x12.control.FunctionalGroup;
 import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
-import com.xiaoerge.healthcare.x12.control.Transaction;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by xiaoerge on 5/23/16.

@@ -2,8 +2,7 @@ package com.xiaoerge.healthcare.x12.segment;
 
 import com.xiaoerge.healthcare.x12.annotation.Declaration;
 import com.xiaoerge.healthcare.x12.annotation.Definition;
-import com.xiaoerge.healthcare.x12.message.IMessage;
-import org.apache.commons.lang3.ArrayUtils;
+import com.xiaoerge.healthcare.x12.IMessage;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;

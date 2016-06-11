@@ -18,7 +18,7 @@ public class StringQueue {
     public String getNext() {
         return message[pointer++]+"~";
     }
-
+    public String peekNext() { return message[pointer]+"~"; }
     public void reset() {
         pointer = 0;
     }

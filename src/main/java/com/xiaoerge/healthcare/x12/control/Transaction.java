@@ -41,7 +41,7 @@ public class Transaction implements IMessage
                 transactionSetTrailer = new SE(next);
             }
             else {
-                builder.append(next).append("~");
+                builder.append(next);
             }
         }
         content = builder.toString();

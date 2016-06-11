@@ -5,10 +5,7 @@ import com.xiaoerge.healthcare.x12.loop.BenefitInformationReceiver;
 import com.xiaoerge.healthcare.x12.loop.BenefitInformationSource;
 import com.xiaoerge.healthcare.x12.message.BenefitInquiry;
 import com.xiaoerge.healthcare.x12.message.IMessage;
-import com.xiaoerge.healthcare.x12.segment.BHT;
-import com.xiaoerge.healthcare.x12.segment.HL;
-import com.xiaoerge.healthcare.x12.segment.SE;
-import com.xiaoerge.healthcare.x12.segment.ST;
+import com.xiaoerge.healthcare.x12.segment.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,16 +35,22 @@ public class BenefitInquiryTransaction extends Transaction
 
     public void parseContent() {
         StringQueue stringQueue = new StringQueue(getContent());
+        StringBuilder stringBuilder = new StringBuilder();
 
         while (stringQueue.hasNext()) {
+            String peek = stringQueue.peekNext();
             String next = stringQueue.getNext();
-            if (next.startsWith("HL")) {
-                HL level = new HL(next);
-                if (level.getHierarchicalChildCode().equals("1")) {
-                    System.out.println(level.toX12String());
-                }
 
+            if (new HL(peek).getHierarchicalParentIDNumber().length() == 0
+                    && stringBuilder.length() > 0) {
+                stringBuilder.append(next);
+                BenefitInformationSource source = new BenefitInformationSource(stringBuilder.toString());
+                benefitInformationSources.add(source);
+                stringBuilder = new StringBuilder();
+
+                System.out.println(source);
             }
+            else stringBuilder.append(next);
         }
     }
 }

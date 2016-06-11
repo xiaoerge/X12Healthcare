@@ -5,6 +5,9 @@ import com.xiaoerge.healthcare.x12.message.IMessage;
 import com.xiaoerge.healthcare.x12.segment.HL;
 import com.xiaoerge.healthcare.x12.segment.NM1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by xiaoerge on 6/5/16.
  */
@@ -13,16 +16,35 @@ public class BenefitInformationSource implements IMessage {
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
 
+    List<BenefitInformationReceiver> benefitInformationReceivers;
+
     public BenefitInformationSource() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
+        benefitInformationReceivers = new ArrayList<BenefitInformationReceiver>();
     }
 
     public BenefitInformationSource(String s) {
         StringQueue stringQueue = new StringQueue(s);
+        StringBuilder stringBuilder = new StringBuilder();
 
         hierarchicalLevel = new HL(stringQueue.getNext());
         individualOrOrganizationalName = new NM1(stringQueue.getNext());
+        benefitInformationReceivers = new ArrayList<BenefitInformationReceiver>();
+
+        while (stringQueue.hasNext()) {
+            String peek = stringQueue.peekNext();
+            String next = stringQueue.getNext();
+
+            if (new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalParentIDNumber())
+                    && stringBuilder.length() > 0) {
+                stringBuilder.append(next);
+                BenefitInformationReceiver receiver = new BenefitInformationReceiver(stringBuilder.toString());
+                benefitInformationReceivers.add(receiver);
+                stringBuilder = new StringBuilder();
+            }
+            stringBuilder.append(next);
+        }
     }
 
     public boolean validate() {
@@ -36,6 +58,8 @@ public class BenefitInformationSource implements IMessage {
     public boolean isEmpty() {
         return hierarchicalLevel.isEmpty() && individualOrOrganizationalName.isEmpty();
     }
+
+    public String toString() { return toX12String(); }
 
     public String getHierarchicalIDNumber() { return hierarchicalLevel.getHierarchicalIDNumber(); }
     public String getHierarchicalLevelCode() { return hierarchicalLevel.getHierarchicalLevelCode(); }

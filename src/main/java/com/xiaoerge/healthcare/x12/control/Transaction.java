@@ -69,6 +69,8 @@ public class Transaction implements IMessage
                 transactionSetTrailer.toString();
     }
 
+    public String toString() { return toX12String(); }
+
     public boolean isEmpty() {
         boolean b1 = transactionSetHeader.isEmpty();
         boolean b2 = beginningOfHierarchicalTransaction.isEmpty();

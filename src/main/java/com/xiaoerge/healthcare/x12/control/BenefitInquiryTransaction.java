@@ -47,10 +47,16 @@ public class BenefitInquiryTransaction extends Transaction
                 BenefitInformationSource source = new BenefitInformationSource(stringBuilder.toString());
                 benefitInformationSources.add(source);
                 stringBuilder = new StringBuilder();
-
-                System.out.println(source);
             }
             else stringBuilder.append(next);
         }
+    }
+
+    public String toX12String() {
+        StringBuilder stringBuilder = new StringBuilder(super.toX12String());
+        for (BenefitInformationSource source : benefitInformationSources) {
+            stringBuilder.append(source.toX12String());
+        }
+        return stringBuilder.toString();
     }
 }

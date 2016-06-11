@@ -43,7 +43,7 @@ public class BenefitInformationSource implements IMessage {
                 benefitInformationReceivers.add(receiver);
                 stringBuilder = new StringBuilder();
             }
-            stringBuilder.append(next);
+            else stringBuilder.append(next);
         }
     }
 
@@ -52,7 +52,12 @@ public class BenefitInformationSource implements IMessage {
     }
 
     public String toX12String() {
-        return hierarchicalLevel.toX12String()+individualOrOrganizationalName.toX12String();
+        StringBuilder stringBuilder = new StringBuilder(hierarchicalLevel.toX12String());
+        stringBuilder.append(individualOrOrganizationalName);
+        for (BenefitInformationReceiver receiver : benefitInformationReceivers) {
+            stringBuilder.append(receiver.toX12String());
+        }
+        return stringBuilder.toString();
     }
 
     public boolean isEmpty() {

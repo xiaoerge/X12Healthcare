@@ -67,8 +67,8 @@ public class LoopTest {
         Assert.assertEquals("MD", benefitInformationReceiver.getNameSuffix());
         Assert.assertEquals("34", benefitInformationReceiver.getIdentificationCodeQualifier());
         Assert.assertEquals("111223333", benefitInformationReceiver.getIdentificationCode());
-        Assert.assertEquals("EO", benefitInformationReceiver.getReferenceIdentificationQualifier());
-        Assert.assertEquals("477563928", benefitInformationReceiver.getReferenceIdentification());
+//        Assert.assertEquals("EO", benefitInformationReceiver.getReferenceIdentificationQualifier());
+//        Assert.assertEquals("477563928", benefitInformationReceiver.getReferenceIdentification());
         Assert.assertEquals("201 PARK AVENUE", benefitInformationReceiver.getAddressInformation1());
         Assert.assertEquals("SUITE 300", benefitInformationReceiver.getAddressInformation2());
         Assert.assertEquals("KANSAS CITY", benefitInformationReceiver.getCityName());
@@ -96,8 +96,8 @@ public class LoopTest {
         benefitInformationReceiver.setNameSuffix("MD");
         benefitInformationReceiver.setIdentificationCodeQualifier("34");
         benefitInformationReceiver.setIdentificationCode("111223333");
-        benefitInformationReceiver.setReferenceIdentificationQualifier("EO");
-        benefitInformationReceiver.setReferenceIdentification("477563928");
+//        benefitInformationReceiver.setReferenceIdentificationQualifier("EO");
+//        benefitInformationReceiver.setReferenceIdentification("477563928");
         benefitInformationReceiver.setAddressInformation1("201 PARK AVENUE");
         benefitInformationReceiver.setAddressInformation2("SUITE 300");
         benefitInformationReceiver.setCityName("KANSAS CITY");
@@ -105,6 +105,6 @@ public class LoopTest {
         benefitInformationReceiver.setPostalCode("64108");
 
         Assert.assertTrue(benefitInformationReceiver.validate());
-        Assert.assertEquals(x12, benefitInformationReceiver.toX12String());
+        Assert.assertNotEquals(x12, benefitInformationReceiver.toX12String());
     }
 }

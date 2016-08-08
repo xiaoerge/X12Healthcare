@@ -1,4 +1,4 @@
-package com.xiaoerge.healthcare.x12.benifit;
+package com.xiaoerge.healthcare.x12.benefit;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.IMessage;
@@ -37,7 +37,13 @@ public class BenefitInformationReceiver implements IMessage {
         individualOrOrganizationalName = new NM1(stringQueue.getNext());
 
         while (stringQueue.hasNext()) {
+            String peek = stringQueue.peekNext();
             String next = stringQueue.getNext();
+            if (peek.startsWith("HL") && new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalIDNumber())) {
+                System.out.println(stringBuilder.toString());
+
+                stringBuilder = new StringBuilder();
+            }
             if (next.startsWith("REF")) {
                 referenceInformation.add(new REF(next));
             }
@@ -54,8 +60,6 @@ public class BenefitInformationReceiver implements IMessage {
                 stringBuilder.append(next);
             }
         }
-
-        
     }
 
     public boolean validate() {

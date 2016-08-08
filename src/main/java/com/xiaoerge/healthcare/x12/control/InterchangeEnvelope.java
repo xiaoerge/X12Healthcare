@@ -53,6 +53,8 @@ public class InterchangeEnvelope implements IMessage
         }
     }
 
+    public ISA getTransactionSetHeader() { return transactionSetHeader; }
+    public IEA getTransactionSetTrailer() { return transactionSetTrailer; }
     public List<FunctionalGroup> getFunctionalGroups() {
         return functionalGroups;
     }

@@ -53,6 +53,8 @@ public class FunctionalGroup implements IMessage
         }
     }
 
+    public GS getFunctionalGroupHeader() {return functionalGroupHeader;}
+    public GE getFunctionalGroupTrailer() {return functionalGroupTrailer;}
     public List<Transaction> getTransactions() {
         return transactions;
     }
@@ -69,7 +71,17 @@ public class FunctionalGroup implements IMessage
     }
 
     public String toX12String() {
+        return toString();
+    }
 
+    public boolean isEmpty() {
+        for (Transaction transaction : transactions) {
+            if (!transaction.isEmpty()) return false;
+        }
+        return functionalGroupHeader.isEmpty() && functionalGroupTrailer.isEmpty();
+    }
+
+    public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(functionalGroupHeader.toX12String());
 
@@ -79,12 +91,5 @@ public class FunctionalGroup implements IMessage
 
         builder.append(functionalGroupTrailer.toX12String());
         return builder.toString();
-    }
-
-    public boolean isEmpty() {
-        for (Transaction transaction : transactions) {
-            if (!transaction.isEmpty()) return false;
-        }
-        return functionalGroupHeader.isEmpty() && functionalGroupTrailer.isEmpty();
     }
 }

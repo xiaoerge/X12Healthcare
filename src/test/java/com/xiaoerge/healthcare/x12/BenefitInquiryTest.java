@@ -1,10 +1,9 @@
 package com.xiaoerge.healthcare.x12;
 
-import com.xiaoerge.healthcare.x12.benifit.BenefitInquiryTransaction;
-import com.xiaoerge.healthcare.x12.control.FunctionalGroup;
-import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
-import com.xiaoerge.healthcare.x12.control.Transaction;
-import com.xiaoerge.healthcare.x12.message.BenefitInquiry;
+import com.xiaoerge.healthcare.x12.benefit.*;
+import com.xiaoerge.healthcare.x12.control.*;
+import com.xiaoerge.healthcare.x12.message.*;
+import com.xiaoerge.healthcare.x12.segment.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -46,10 +45,18 @@ public class BenefitInquiryTest {
         BenefitInquiry message = (BenefitInquiry) X12Parser.fromX12Message(x12);
         InterchangeEnvelope envelope = message.getInterchangeEnvelope();
 
+        Assert.assertEquals("ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~",
+                envelope.getTransactionSetHeader().toString());
+        Assert.assertEquals("IEA*1*0616~", envelope.getTransactionSetTrailer().toString());
+
         for (FunctionalGroup group : envelope.getFunctionalGroups()) {
+            Assert.assertEquals("GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~", group.getFunctionalGroupHeader().toString());
+            Assert.assertEquals("GE*1*0616~", group.getFunctionalGroupTrailer().toString());
+
             for(Transaction transaction : group.getTransactions()) {
                 BenefitInquiryTransaction benefitInquiryTransaction = (BenefitInquiryTransaction) transaction;
                 Assert.assertEquals("270", benefitInquiryTransaction.getTransactionSetHeader().getTransactionSetIDCode());
+                Assert.assertEquals("1234", benefitInquiryTransaction.getTransactionSetHeader().getTransactionSetControlNumber());
             }
         }
 

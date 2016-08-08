@@ -1,4 +1,4 @@
-package com.xiaoerge.healthcare.x12.benifit;
+package com.xiaoerge.healthcare.x12.benefit;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.IMessage;

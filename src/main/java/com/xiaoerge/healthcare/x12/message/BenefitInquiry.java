@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12.message;
 
 import com.xiaoerge.healthcare.x12.X12Message;
-import com.xiaoerge.healthcare.x12.benifit.BenefitInquiryTransaction;
+import com.xiaoerge.healthcare.x12.benefit.BenefitInquiryTransaction;
 import com.xiaoerge.healthcare.x12.control.FunctionalGroup;
 import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
 

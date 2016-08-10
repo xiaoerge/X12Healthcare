@@ -21,6 +21,8 @@ public class BenefitInformationReceiver implements IMessage {
     private N4 geographicLocation;
     private PRV providerInformation;
 
+    private List<BenefitSubscriber> benefitSubscribers;
+
     public BenefitInformationReceiver() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
@@ -28,6 +30,7 @@ public class BenefitInformationReceiver implements IMessage {
         partyLocation = new N3();
         geographicLocation = new N4();
         providerInformation = new PRV();
+        benefitSubscribers = new ArrayList<BenefitSubscriber>();
     }
 
     public BenefitInformationReceiver(String s) {
@@ -42,28 +45,32 @@ public class BenefitInformationReceiver implements IMessage {
             String peek = stringQueue.peekNext();
             String next = stringQueue.getNext();
             if (peek.startsWith("HL") && new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalIDNumber())) {
+
+                BenefitSubscriber subscriber = new BenefitSubscriber(stringBuilder.toString());
+                benefitSubscribers.add(subscriber);
                 stringBuilder = new StringBuilder();
-                logger.info("Start hierarchical level ", next);
+
+                logger.info("Start hierarchical level "+ next);
             }
             if (next.startsWith("REF")) {
                 referenceInformation.add(new REF(next));
-                logger.info("Found REF segment ", next);
+                logger.info("Found REF segment "+ next);
             }
             else if (next.startsWith("N3")) {
                 partyLocation = new N3(next);
-                logger.info("Found N3 segment ", next);
+                logger.info("Found N3 segment "+ next);
             }
             else if (next.startsWith("N4")) {
                 geographicLocation = new N4(next);
-                logger.info("Found N4 segment ", next);
+                logger.info("Found N4 segment "+ next);
             }
             else if (next.startsWith("PRV")) {
                 providerInformation = new PRV(next);
-                logger.info("Found PRV segment ", next);
+                logger.info("Found PRV segment "+ next);
             }
             else {
                 stringBuilder.append(next);
-                logger.info("Found segment ", next);
+                logger.info("Found segment "+ next);
             }
         }
     }
@@ -82,13 +89,17 @@ public class BenefitInformationReceiver implements IMessage {
 
     public String toX12String() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(hierarchicalLevel.toX12String());
+        stringBuilder.append(individualOrOrganizationalName.toX12String());
         for (REF ref : referenceInformation) stringBuilder.append(ref.toX12String());
 
-        return hierarchicalLevel.toX12String()
-                +individualOrOrganizationalName.toX12String()
-                + stringBuilder.toString()
-                +partyLocation.toX12String()
-                +geographicLocation.toX12String();
+        stringBuilder.append(partyLocation.toX12String());
+        stringBuilder.append(geographicLocation.toX12String());
+        stringBuilder.append(providerInformation.toX12String());
+
+        for (BenefitSubscriber subscriber : benefitSubscribers) stringBuilder.append(subscriber.toX12String());
+
+        return stringBuilder.toString();
     }
 
     public String toString() {return toX12String();}

@@ -50,11 +50,13 @@ public class BenefitInquiryTransaction extends Transaction
                 benefitInformationSources.add(source);
                 stringBuilder = new StringBuilder();
 
-                logger.info("Start hierarchical level ", next);
+                logger.info("size "+benefitInformationSources.size()+"");
+
+                logger.info("Start hierarchical level "+ next);
             }
             else {
                 stringBuilder.append(next);
-                logger.info("Found segment ", next);
+                logger.info("Found segment "+ next);
             }
         }
     }

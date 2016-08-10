@@ -47,11 +47,11 @@ public class BenefitInformationSource implements IMessage {
                 benefitInformationReceivers.add(receiver);
                 stringBuilder = new StringBuilder();
 
-                logger.info("Start hierarchical level ", next);
+                logger.info("Start hierarchical level "+ next);
             }
             else {
                 stringBuilder.append(next);
-                logger.info("Found segment ", next);
+                logger.info("Found segment "+ next);
             }
         }
     }

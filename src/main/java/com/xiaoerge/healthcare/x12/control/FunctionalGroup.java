@@ -4,6 +4,8 @@ import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.GE;
 import com.xiaoerge.healthcare.x12.segment.GS;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
  */
 public class FunctionalGroup implements IMessage
 {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private GS functionalGroupHeader;
     private List<Transaction> transactions;
     private GE functionalGroupTrailer;
@@ -31,13 +34,16 @@ public class FunctionalGroup implements IMessage
             String next = stringQueue.getNext();
             if (next.startsWith("GS")) {
                 functionalGroupHeader = new GS(next);
+                logger.info("Start functional group ", next);
             }
             else if (next.startsWith("GE")) {
                 functionalGroupTrailer = new GE(next);
+                logger.info("End functional group ", next);
             }
             else if (next.startsWith("ST")) {
                 builder = new StringBuilder();
                 builder.append(next);
+                logger.info("Start transaction ", next);
             }
             else if (next.startsWith("SE")) {
                 if (builder != null) {
@@ -45,10 +51,12 @@ public class FunctionalGroup implements IMessage
                     String groupContent = builder.toString();
                     Transaction transaction = new Transaction(groupContent);
                     transactions.add(transaction);
+                    logger.info("End transaction ", next);
                 }
             }
             else {
                 if (builder != null) builder.append(next);
+                logger.info("Found segment ", next);
             }
         }
     }

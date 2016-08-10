@@ -4,6 +4,8 @@ import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.HL;
 import com.xiaoerge.healthcare.x12.segment.NM1;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
  */
 public class BenefitInformationSource implements IMessage {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
 
@@ -43,8 +46,13 @@ public class BenefitInformationSource implements IMessage {
                 BenefitInformationReceiver receiver = new BenefitInformationReceiver(stringBuilder.toString());
                 benefitInformationReceivers.add(receiver);
                 stringBuilder = new StringBuilder();
+
+                logger.info("Start hierarchical level ", next);
             }
-            else stringBuilder.append(next);
+            else {
+                stringBuilder.append(next);
+                logger.info("Found segment ", next);
+            }
         }
     }
 
@@ -54,7 +62,7 @@ public class BenefitInformationSource implements IMessage {
 
     public String toX12String() {
         StringBuilder stringBuilder = new StringBuilder(hierarchicalLevel.toX12String());
-        stringBuilder.append(individualOrOrganizationalName);
+        stringBuilder.append(individualOrOrganizationalName.toX12String());
         for (BenefitInformationReceiver receiver : benefitInformationReceivers) {
             stringBuilder.append(receiver.toX12String());
         }

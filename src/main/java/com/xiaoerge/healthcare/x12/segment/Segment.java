@@ -4,11 +4,10 @@ import com.xiaoerge.healthcare.x12.annotation.Declaration;
 import com.xiaoerge.healthcare.x12.annotation.Definition;
 import com.xiaoerge.healthcare.x12.IMessage;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
@@ -16,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class Segment implements IMessage
 {
-    static Logger logger = Logger.getLogger(Segment.class.getName());
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private boolean parseError;
     protected int fieldSize;
@@ -49,8 +48,8 @@ public class Segment implements IMessage
         if (content.length() > 0){
             if (content.charAt(content.length() - 1) != '~') {
                 parseError = true;
-                logger.log(Level.SEVERE, name+" parse()");
-                logger.log(Level.SEVERE, name+" missing segment terminator");
+                logger.info(name+" parse()");
+                logger.warn(name+" missing segment terminator", content);
                 //collection = content.split(Pattern.quote(delimiter));
             }
             else {
@@ -62,13 +61,14 @@ public class Segment implements IMessage
                     }
                     catch (Exception ex) {
                         collection[i] = "";
+                        logger.error(ex.getMessage(), content);
                     }
                 }
 
                 if (pCollection.length > collection.length) {
                     parseError = true;
-                    logger.log(Level.SEVERE, name+" parse()");
-                    logger.log(Level.SEVERE, name+" field length should be less than or equal to "+fieldSize);
+                    logger.info(name+" parse()");
+                    logger.warn(name+" field length should be less than or equal to "+fieldSize, content);
                 }
             }
         }
@@ -98,10 +98,10 @@ public class Segment implements IMessage
     public boolean validate()
     {
         boolean validateName = validateName(), validateFieldSize = validateFieldSize(), validateDataLength = validateDataLength();
-        if (parseError) logger.log(Level.SEVERE, "parse() failed");
-        if (!validateName) logger.log(Level.SEVERE, "validateName() failed");
-        if (!validateFieldSize) logger.log(Level.SEVERE, "validateFieldSize() failed");
-        if (!validateDataLength) logger.log(Level.SEVERE, "validateDataLength() failed");
+        if (parseError) logger.warn(name+" parse() validation failed");
+        if (!validateName) logger.warn(name+" validateName() validation failed");
+        if (!validateFieldSize) logger.warn(name+" validateFieldSize() validation failed");
+        if (!validateDataLength) logger.warn(name+" validateDataLength() validation failed");
 
         return !parseError && validateName && validateFieldSize && validateDataLength;
     }
@@ -109,8 +109,8 @@ public class Segment implements IMessage
     private boolean validateName() {
         boolean v = name.length() > 0 && collection[0].equals(name);
         if (!v) {
-            logger.log(Level.SEVERE, name+" validateName()");
-            logger.log(Level.SEVERE, name+" Segment field does not match");
+            logger.info(name+" validateName()");
+            logger.warn(name+" Segment field does not match");
         }
         return v;
     }
@@ -118,8 +118,8 @@ public class Segment implements IMessage
     private boolean validateFieldSize() {
         boolean v = collection.length-1 <= fieldSize;
         if (!v) {
-            logger.log(Level.SEVERE, name+" validateFieldSize()");
-            logger.log(Level.SEVERE, name+" size should be "+fieldSize);
+            logger.info(name+" validateFieldSize()");
+            logger.warn(name+" size should be "+fieldSize);
         }
         return v;
     }
@@ -138,10 +138,10 @@ public class Segment implements IMessage
                     boolean v =  code.length() >= definition.minLength() && code.length() <= definition.maxLength();
 
                     if (!v) {
-                        logger.log(Level.SEVERE, name+" validateDataLength()");
+                        logger.warn(name+" validateDataLength()");
                         String message = (definition.minLength() == definition.maxLength()) ?
                                 definition.minLength()+"" : "between "+definition.minLength()+", "+definition.maxLength();
-                        logger.log(Level.SEVERE, name+""+String.format("%02d", definition.position())+" length should be "+message);
+                        logger.warn(name+""+String.format("%02d", definition.position())+" length should be "+message);
                         ret = false;
                     }
 

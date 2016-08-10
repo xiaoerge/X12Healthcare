@@ -3,6 +3,8 @@ package com.xiaoerge.healthcare.x12.benefit;
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  * Created by xiaoerge on 6/5/16.
  */
 public class BenefitInformationReceiver implements IMessage {
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
     private List<REF> referenceInformation;
@@ -40,24 +42,28 @@ public class BenefitInformationReceiver implements IMessage {
             String peek = stringQueue.peekNext();
             String next = stringQueue.getNext();
             if (peek.startsWith("HL") && new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalIDNumber())) {
-                System.out.println(stringBuilder.toString());
-
                 stringBuilder = new StringBuilder();
+                logger.info("Start hierarchical level ", next);
             }
             if (next.startsWith("REF")) {
                 referenceInformation.add(new REF(next));
+                logger.info("Found REF segment ", next);
             }
             else if (next.startsWith("N3")) {
                 partyLocation = new N3(next);
+                logger.info("Found N3 segment ", next);
             }
             else if (next.startsWith("N4")) {
                 geographicLocation = new N4(next);
+                logger.info("Found N4 segment ", next);
             }
             else if (next.startsWith("PRV")) {
                 providerInformation = new PRV(next);
+                logger.info("Found PRV segment ", next);
             }
             else {
                 stringBuilder.append(next);
+                logger.info("Found segment ", next);
             }
         }
     }

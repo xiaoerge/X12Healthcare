@@ -7,12 +7,17 @@ import com.xiaoerge.healthcare.x12.segment.ISA;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * Created by xiaoerge on 5/23/16.
  */
 public class InterchangeEnvelope implements IMessage
 {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private ISA transactionSetHeader;
     private List<FunctionalGroup> functionalGroups;
     private IEA transactionSetTrailer;
@@ -31,13 +36,16 @@ public class InterchangeEnvelope implements IMessage
             String next = stringQueue.getNext();
             if (next.startsWith("ISA")) {
                 transactionSetHeader = new ISA(next);
+                logger.info("Start interchange envelope ", next);
             }
             else if (next.startsWith("IEA")) {
                 transactionSetTrailer = new IEA(next);
+                logger.info("End interchange envelope ", next);
             }
             else if (next.startsWith("GS")) {
                 builder = new StringBuilder();
                 builder.append(next);
+                logger.info("Start functional group ", next);
             }
             else if (next.startsWith("GE")) {
                 if (builder != null) {
@@ -45,10 +53,12 @@ public class InterchangeEnvelope implements IMessage
                     String groupContent = builder.toString();
                     FunctionalGroup group = new FunctionalGroup(groupContent);
                     functionalGroups.add(group);
+                    logger.info("End functional group ", next);
                 }
             }
             else {
                 if (builder != null) builder.append(next);
+                logger.info("Found segment ", next);
             }
         }
     }

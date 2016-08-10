@@ -2,14 +2,17 @@ package com.xiaoerge.healthcare.x12.benefit;
 
 import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.*;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by xiaoerge on 6/11/16.
  */
 public class BenefitSubscriber implements IMessage {
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
     private HL subscriberLevel;
     private List<TRN> subscriberTraces;
     private NM1 subscriberName;

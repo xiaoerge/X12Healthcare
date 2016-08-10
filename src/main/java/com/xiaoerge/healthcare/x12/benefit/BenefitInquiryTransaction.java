@@ -3,6 +3,8 @@ package com.xiaoerge.healthcare.x12.benefit;
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.control.Transaction;
 import com.xiaoerge.healthcare.x12.segment.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.List;
  */
 public class BenefitInquiryTransaction extends Transaction
 {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private List<BenefitInformationSource> benefitInformationSources;
     public BenefitInquiryTransaction() {
         super();
@@ -45,8 +49,13 @@ public class BenefitInquiryTransaction extends Transaction
                 BenefitInformationSource source = new BenefitInformationSource(stringBuilder.toString());
                 benefitInformationSources.add(source);
                 stringBuilder = new StringBuilder();
+
+                logger.info("Start hierarchical level ", next);
             }
-            else stringBuilder.append(next);
+            else {
+                stringBuilder.append(next);
+                logger.info("Found segment ", next);
+            }
         }
     }
 

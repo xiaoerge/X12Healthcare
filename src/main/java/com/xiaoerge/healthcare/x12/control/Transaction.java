@@ -5,12 +5,16 @@ import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.BHT;
 import com.xiaoerge.healthcare.x12.segment.SE;
 import com.xiaoerge.healthcare.x12.segment.ST;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by xiaoerge on 5/27/16.
  */
 public class Transaction implements IMessage
 {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private ST transactionSetHeader;
     private BHT beginningOfHierarchicalTransaction;
     private SE transactionSetTrailer;
@@ -33,15 +37,19 @@ public class Transaction implements IMessage
             String next = stringQueue.getNext();
             if (next.startsWith("ST")) {
                 transactionSetHeader = new ST(next);
+                logger.info("Start transaction ", next);
             }
             else if (next.startsWith("BHT")) {
                 beginningOfHierarchicalTransaction = new BHT(next);
+                logger.info("Start hierarchical transaction ", next);
             }
             else if (next.startsWith("SE")) {
                 transactionSetTrailer = new SE(next);
+                logger.info("End transaction ", next);
             }
             else {
                 builder.append(next);
+                logger.info("Found segment", next);
             }
         }
         content = builder.toString();

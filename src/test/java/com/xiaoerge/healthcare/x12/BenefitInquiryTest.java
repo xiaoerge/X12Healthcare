@@ -62,5 +62,6 @@ public class BenefitInquiryTest {
 
         Assert.assertTrue(message.validate());
         Assert.assertEquals(message.toX12String(), message.toString());
+        //Assert.assertEquals(x12, message.toString());
     }
 }

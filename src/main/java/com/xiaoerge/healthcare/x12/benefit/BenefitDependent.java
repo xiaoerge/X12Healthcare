@@ -25,7 +25,7 @@ public class BenefitDependent implements IMessage {
     private DMG dependentDemographic;
     private INS dependentRelationship;
     private HI dependentHealthCareDiagnosisCode;
-    private DTP dependentDate;
+    private List<DTP> dependentDate;
     private EQ dependentEligibility;
     private III dependentAdditionalEligibility;
     private REF dependentAdditionalInformation;
@@ -42,7 +42,7 @@ public class BenefitDependent implements IMessage {
         dependentDemographic = new DMG();
         dependentRelationship = new INS();
         dependentHealthCareDiagnosisCode = new HI();
-        dependentDate = new DTP();
+        dependentDate = new ArrayList<DTP>();
         dependentEligibility = new EQ();
         dependentAdditionalEligibility = new III();
         dependentAdditionalInformation = new REF();
@@ -58,7 +58,7 @@ public class BenefitDependent implements IMessage {
         messagesDefinition.add(dependentDemographic);
         messagesDefinition.add(dependentRelationship);
         messagesDefinition.add(dependentHealthCareDiagnosisCode);
-        messagesDefinition.add(dependentDate);
+        messagesDefinition.addAll(dependentDate);
         messagesDefinition.add(dependentEligibility);
         messagesDefinition.add(dependentAdditionalEligibility);
         messagesDefinition.add(dependentAdditionalInformation);
@@ -69,76 +69,19 @@ public class BenefitDependent implements IMessage {
         StringBuilder stringBuilder = new StringBuilder();
         StringQueue stringQueue = new StringQueue(s);
 
-        dependentLevel = new HL(stringQueue.getNext());
+        if (stringQueue.peekNext().equals("HL")) dependentLevel = new HL(stringQueue.getNext());
+        while (stringQueue.peekNext().equals("TRN")) dependentTraces.add(new TRN(stringQueue.getNext()));
+        if (stringQueue.peekNext().equals("NM1")) dependentName = new NM1(stringQueue.getNext());
+        while (stringQueue.peekNext().equals("REF")) additionalIdentification.add(new REF(stringQueue.getNext()));
+        if (stringQueue.peekNext().equals("N3")) dependentAddress = new N3(stringQueue.getNext());
+        if (stringQueue.peekNext().equals("N4")) dependentCityState = new N4(stringQueue.getNext());
+        if (stringQueue.peekNext().equals("PRV")) providerInformation = new PRV(stringQueue.getNext());
+        if (stringQueue.peekNext().equals("DMG")) dependentDemographic = new DMG(stringQueue.getNext());
+        if (stringQueue.peekNext().equals("INS")) dependentRelationship = new INS(stringQueue.getNext());
+        if (stringQueue.peekNext().equals("HI")) dependentHealthCareDiagnosisCode = new HI(stringQueue.getNext());
+        while (stringQueue.peekNext().equals("DTP")) dependentDate.add(new DTP(stringQueue.getNext()));
 
-        while (stringQueue.hasNext()) {
-            String peek = stringQueue.peekNext();
-            String next = stringQueue.getNext();
-            if (peek.startsWith("HL") && new HL(peek).getHierarchicalParentIDNumber().equals(dependentLevel.getHierarchicalIDNumber())) {
-
-                //todo does not work yet
-                stringBuilder = new StringBuilder();
-
-                logger.info("Start hierarchical level "+ next);
-            }
-            if (next.startsWith("TRN")) {
-                dependentTraces.add(new TRN(next));
-                logger.info("Found TRN segment "+ next);
-            }
-            else if (next.startsWith("NM1")) {
-                dependentName = new NM1(next);
-                logger.info("Found NM1 segment "+ next);
-            }
-            else if (next.startsWith("REF")) {
-                additionalIdentification.add(new REF(next));
-                logger.info("Found REF segment "+ next);
-            }
-            else if (next.startsWith("N3")) {
-                dependentAddress = new N3(next);
-                logger.info("Found N3 segment "+ next);
-            }
-            else if (next.startsWith("N4")) {
-                dependentCityState = new N4(next);
-                logger.info("Found N4 segment "+ next);
-            }
-            else if (next.startsWith("PRV")) {
-                providerInformation = new PRV(next);
-                logger.info("Found PRV segment "+ next);
-            }
-
-            else if (next.startsWith("DMG")) {
-                dependentDemographic = new DMG(next);
-            }
-            else if (next.startsWith("INS")) {
-                dependentRelationship = new INS(next);
-            }
-            else if (next.startsWith("HI")) {
-                dependentHealthCareDiagnosisCode = new HI(next);
-            }
-            else if (next.startsWith("DTP")) {
-                dependentDate = new DTP(next);
-            }
-            else if (next.startsWith("EQ")) {
-                dependentEligibility = new EQ(next);
-            }
-            else if (next.startsWith("III")) {
-                dependentAdditionalEligibility = new III(next);
-                logger.info("Found PRV segment "+ next);
-            }
-            else if (next.startsWith("REF")) {
-                dependentAdditionalInformation = new REF(next);
-                logger.info("Found PRV segment "+ next);
-            }
-            else if (next.startsWith("DTP")) {
-                dependentEligibilityDate = new DTP(next);
-                logger.info("Found PRV segment "+ next);
-            }
-
-            else {
-                stringBuilder.append(next);
-                logger.info("Found segment "+ next);
-            }
-        }
+        //todo benefit dependent eligibility loop 2110D
     }
 
     public boolean validate() {
@@ -163,5 +106,125 @@ public class BenefitDependent implements IMessage {
             if (!message.isEmpty()) return false;
         }
         return true;
+    }
+
+    public HL getDependentLevel() {
+        return dependentLevel;
+    }
+
+    public void setDependentLevel(HL dependentLevel) {
+        this.dependentLevel = dependentLevel;
+    }
+
+    public List<TRN> getDependentTraces() {
+        return dependentTraces;
+    }
+
+    public void setDependentTraces(List<TRN> dependentTraces) {
+        this.dependentTraces = dependentTraces;
+    }
+
+    public NM1 getDependentName() {
+        return dependentName;
+    }
+
+    public void setDependentName(NM1 dependentName) {
+        this.dependentName = dependentName;
+    }
+
+    public List<REF> getAdditionalIdentification() {
+        return additionalIdentification;
+    }
+
+    public void setAdditionalIdentification(List<REF> additionalIdentification) {
+        this.additionalIdentification = additionalIdentification;
+    }
+
+    public N3 getDependentAddress() {
+        return dependentAddress;
+    }
+
+    public void setDependentAddress(N3 dependentAddress) {
+        this.dependentAddress = dependentAddress;
+    }
+
+    public N4 getDependentCityState() {
+        return dependentCityState;
+    }
+
+    public void setDependentCityState(N4 dependentCityState) {
+        this.dependentCityState = dependentCityState;
+    }
+
+    public PRV getProviderInformation() {
+        return providerInformation;
+    }
+
+    public void setProviderInformation(PRV providerInformation) {
+        this.providerInformation = providerInformation;
+    }
+
+    public DMG getDependentDemographic() {
+        return dependentDemographic;
+    }
+
+    public void setDependentDemographic(DMG dependentDemographic) {
+        this.dependentDemographic = dependentDemographic;
+    }
+
+    public INS getDependentRelationship() {
+        return dependentRelationship;
+    }
+
+    public void setDependentRelationship(INS dependentRelationship) {
+        this.dependentRelationship = dependentRelationship;
+    }
+
+    public HI getDependentHealthCareDiagnosisCode() {
+        return dependentHealthCareDiagnosisCode;
+    }
+
+    public void setDependentHealthCareDiagnosisCode(HI dependentHealthCareDiagnosisCode) {
+        this.dependentHealthCareDiagnosisCode = dependentHealthCareDiagnosisCode;
+    }
+
+    public List<DTP> getDependentDate() {
+        return dependentDate;
+    }
+
+    public void setDependentDate(List<DTP> dependentDate) {
+        this.dependentDate = dependentDate;
+    }
+
+    public EQ getDependentEligibility() {
+        return dependentEligibility;
+    }
+
+    public void setDependentEligibility(EQ dependentEligibility) {
+        this.dependentEligibility = dependentEligibility;
+    }
+
+    public III getDependentAdditionalEligibility() {
+        return dependentAdditionalEligibility;
+    }
+
+    public void setDependentAdditionalEligibility(III dependentAdditionalEligibility) {
+        this.dependentAdditionalEligibility = dependentAdditionalEligibility;
+    }
+
+    public REF getDependentAdditionalInformation() {
+        return dependentAdditionalInformation;
+    }
+
+    public void setDependentAdditionalInformation(REF dependentAdditionalInformation) {
+        this.dependentAdditionalInformation = dependentAdditionalInformation;
+    }
+
+    public DTP getDependentEligibilityDate() {
+        return dependentEligibilityDate;
+    }
+
+    public void setDependentEligibilityDate(DTP dependentEligibilityDate) {
+        this.dependentEligibilityDate = dependentEligibilityDate;
     }
 }

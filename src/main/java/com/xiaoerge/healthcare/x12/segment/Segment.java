@@ -1,5 +1,6 @@
 package com.xiaoerge.healthcare.x12.segment;
 
+import com.xiaoerge.healthcare.x12.MalformedMessageException;
 import com.xiaoerge.healthcare.x12.annotation.Declaration;
 import com.xiaoerge.healthcare.x12.annotation.Definition;
 import com.xiaoerge.healthcare.x12.IMessage;
@@ -37,7 +38,15 @@ public class Segment implements IMessage
             name = declaration.name();
         }
 
-        parse();
+        try {
+            if (c.startsWith(name)) parse();
+            else {
+                throw new MalformedMessageException("Invalid segment constructor for message "+c);
+            }
+        }
+        catch (MalformedMessageException mex) {
+            logger.error("Invalid segment constructor for message "+c);
+        }
     }
 
     private void parse() {

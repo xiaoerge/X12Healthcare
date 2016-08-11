@@ -39,7 +39,8 @@ public class BenefitInformationSource implements IMessage {
             String peek = stringQueue.peekNext();
             String next = stringQueue.getNext();
 
-            if (new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalParentIDNumber())
+            if (peek.startsWith("HL") &&
+                    new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalParentIDNumber())
                     && stringBuilder.length() > 0) {
                 stringBuilder.append(next);
 

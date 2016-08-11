@@ -44,7 +44,9 @@ public class BenefitInformationReceiver implements IMessage {
         while (stringQueue.hasNext()) {
             String peek = stringQueue.peekNext();
             String next = stringQueue.getNext();
-            if (peek.startsWith("HL") && new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalIDNumber())) {
+            if (peek.startsWith("HL") &&
+                    new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalParentIDNumber())
+                    && stringBuilder.length() > 0) {
 
                 BenefitSubscriber subscriber = new BenefitSubscriber(stringBuilder.toString());
                 benefitSubscribers.add(subscriber);

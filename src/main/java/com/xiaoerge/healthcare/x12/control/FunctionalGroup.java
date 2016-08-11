@@ -4,8 +4,6 @@ import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.GE;
 import com.xiaoerge.healthcare.x12.segment.GS;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +11,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class FunctionalGroup implements IMessage
-{
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+public class FunctionalGroup extends IMessage {
     private GS functionalGroupHeader;
     private List<Transaction> transactions;
     private GE functionalGroupTrailer;

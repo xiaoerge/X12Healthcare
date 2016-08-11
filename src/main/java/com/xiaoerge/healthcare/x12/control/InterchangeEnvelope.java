@@ -7,17 +7,12 @@ import com.xiaoerge.healthcare.x12.segment.ISA;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class InterchangeEnvelope implements IMessage
-{
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+public class InterchangeEnvelope extends IMessage {
     private ISA transactionSetHeader;
     private List<FunctionalGroup> functionalGroups;
     private IEA transactionSetTrailer;

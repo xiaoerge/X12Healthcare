@@ -3,7 +3,6 @@ package com.xiaoerge.healthcare.x12.benefit;
 import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.segment.*;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +10,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/11/16.
  */
-public class BenefitDependent implements IMessage {
-    private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final List<IMessage> messagesDefinition = new ArrayList<IMessage>();
-
+public class BenefitDependent extends IMessage {
     private HL dependentLevel;
     private List<TRN> dependentTraces;
     private NM1 dependentName;
@@ -66,7 +62,6 @@ public class BenefitDependent implements IMessage {
     }
     public BenefitDependent(String s) {
         this();
-        StringBuilder stringBuilder = new StringBuilder();
         StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.peekNext().equals("HL")) dependentLevel = new HL(stringQueue.getNext());
@@ -84,29 +79,7 @@ public class BenefitDependent implements IMessage {
         //todo benefit dependent eligibility loop 2110D
     }
 
-    public boolean validate() {
-        for (IMessage message : messagesDefinition) {
-            if (!message.validate()) return false;
-        }
-        return true;
-    }
 
-    public String toX12String() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (IMessage message : messagesDefinition) {
-            stringBuilder.append(message.toX12String());
-        }
-
-        return stringBuilder.toString();
-    }
-
-    public boolean isEmpty() {
-        for (IMessage message : messagesDefinition) {
-            if (!message.isEmpty()) return false;
-        }
-        return true;
-    }
 
     public HL getDependentLevel() {
         return dependentLevel;

@@ -5,7 +5,7 @@ import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class X12Message implements IMessage {
+public class X12Message extends IMessage {
 
     private InterchangeEnvelope interchangeEnvelope;
 

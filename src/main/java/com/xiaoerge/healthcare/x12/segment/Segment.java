@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class Segment implements IMessage
+public class Segment extends IMessage
 {
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -104,6 +104,7 @@ public class Segment implements IMessage
         return "";
     }
 
+    @Override
     public boolean validate()
     {
         boolean validateName = validateName(), validateFieldSize = validateFieldSize(), validateDataLength = validateDataLength();
@@ -164,10 +165,12 @@ public class Segment implements IMessage
         return ret;
     }
 
+    @Override
     public String toX12String() {
         return toString();
     }
 
+    @Override
     public boolean isEmpty() {
         boolean ret = true;
         for (int i = 1; i < collection.length; i++) {

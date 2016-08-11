@@ -38,27 +38,27 @@ public class BenefitInquiryTransaction extends Transaction
         StringQueue stringQueue = new StringQueue(getContent());
         StringBuilder stringBuilder = new StringBuilder();
 
-        while (stringQueue.hasNext()) {
-            String peek = stringQueue.peekNext();
-            String next = stringQueue.getNext();
-
-            if (new HL(peek).getHierarchicalParentIDNumber().length() == 0
-                    && stringBuilder.length() > 0) {
-                stringBuilder.append(next);
-
-                BenefitInformationSource source = new BenefitInformationSource(stringBuilder.toString());
-                benefitInformationSources.add(source);
-                stringBuilder = new StringBuilder();
-
-                logger.info("size "+benefitInformationSources.size()+"");
-
-                logger.info("Start hierarchical level "+ next);
-            }
-            else {
-                stringBuilder.append(next);
-                logger.info("Found segment "+ next);
-            }
-        }
+//        while (stringQueue.hasNext()) {
+//            String peek = stringQueue.peekNext();
+//            String next = stringQueue.getNext();
+//
+//            if (new HL(peek).getHierarchicalParentIDNumber().length() == 0
+//                    && stringBuilder.length() > 0) {
+//                stringBuilder.append(next);
+//
+//                BenefitInformationSource source = new BenefitInformationSource(stringBuilder.toString());
+//                benefitInformationSources.add(source);
+//                stringBuilder = new StringBuilder();
+//
+//                logger.info("size "+benefitInformationSources.size()+"");
+//
+//                logger.info("Start hierarchical level "+ next);
+//            }
+//            else {
+//                stringBuilder.append(next);
+//                logger.info("Found segment "+ next);
+//            }
+//        }
     }
 
     public String toX12String() {

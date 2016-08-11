@@ -12,8 +12,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/5/16.
  */
-public class BenefitInformationReceiver implements IMessage {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+public class BenefitInformationReceiver extends IMessage {
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
     private List<REF> referenceInformation;

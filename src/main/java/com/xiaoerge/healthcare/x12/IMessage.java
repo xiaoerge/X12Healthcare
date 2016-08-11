@@ -1,11 +1,38 @@
 package com.xiaoerge.healthcare.x12;
 
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by xiaoerge on 5/28/16.
  */
-public interface IMessage {
+public abstract class IMessage {
+    protected final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected final List<IMessage> messagesDefinition = new ArrayList<IMessage>();
 
-    public abstract boolean validate();
-    public abstract String toX12String();
-    public abstract boolean isEmpty();
+    public boolean validate() {
+        for (IMessage message : messagesDefinition) {
+            if (!message.validate()) return false;
+        }
+        return true;
+    }
+
+    public String toX12String() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (IMessage message : messagesDefinition) {
+            stringBuilder.append(message.toX12String());
+        }
+
+        return stringBuilder.toString();
+    }
+
+    public boolean isEmpty() {
+        for (IMessage message : messagesDefinition) {
+            if (!message.isEmpty()) return false;
+        }
+        return true;
+    }
 }

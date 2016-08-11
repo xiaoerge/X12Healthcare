@@ -35,4 +35,8 @@ public abstract class IMessage {
         }
         return true;
     }
+
+    public String toString() {
+        return toX12String();
+    }
 }

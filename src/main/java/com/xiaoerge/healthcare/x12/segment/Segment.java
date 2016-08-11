@@ -39,10 +39,9 @@ public class Segment extends IMessage
         }
 
         try {
-            if (c.startsWith(name)) parse();
-            else {
+            if (c.length() > 0 && !c.startsWith(name))
                 throw new MalformedMessageException("Invalid segment constructor for message "+c);
-            }
+            else parse();
         }
         catch (MalformedMessageException mex) {
             logger.error("Invalid segment constructor for message "+c);

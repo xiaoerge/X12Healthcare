@@ -14,38 +14,34 @@ import java.util.Map;
  */
 public class BenefitInquiryDependentEligibility extends IMessage {
 
-    private List<EQ> dependentEligibility;
-    private Map<EQ, III> dependentAdditionalEligibility;
-    private Map<EQ, REF> dependentAdditionalInformation;
-    private Map<EQ, DTP> dependentEligibilityDate;
+    private EQ dependentEligibility;
+    private III dependentAdditionalEligibility;
+    private REF dependentAdditionalInformation;
+    private DTP dependentEligibilityDate;
 
     public BenefitInquiryDependentEligibility() {
-        dependentEligibility = new ArrayList<EQ>();
-        dependentAdditionalEligibility = new Hashtable<EQ, III>();
-        dependentAdditionalInformation = new Hashtable<EQ, REF>();
-        dependentEligibilityDate = new Hashtable<EQ, DTP>();
+        dependentEligibility = new EQ();
+        dependentAdditionalEligibility = new III();
+        dependentAdditionalInformation = new REF();
+        dependentEligibilityDate = new DTP();
     }
     public BenefitInquiryDependentEligibility(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
-        EQ key = null;
 
-        int repeat = 99; //loop goes up to 99
-        for(int i = 0; i < repeat && stringQueue.hasNext(); i++) {
+        while(stringQueue.hasNext()) {
             String next = stringQueue.getNext();
-
             if (next.startsWith("EQ")) {
-                key = new EQ(next);
-                dependentEligibility.add(key);
+                dependentEligibility = new EQ(next);
             }
             else if (next.startsWith("III")) {
-                if (key != null) dependentAdditionalEligibility.put(key, new III(next));
+                dependentAdditionalEligibility = new III(next);
             }
-            if (next.startsWith("REF")) {
-                if (key != null) dependentAdditionalInformation.put(key, new REF(next));
+            else if (next.startsWith("REF")) {
+                dependentAdditionalInformation = new REF(next);
             }
-            if (next.startsWith("DTP")) {
-                if (key != null) dependentEligibilityDate.put(key, new DTP(next));
+            else if (next.startsWith("DTP")) {
+                dependentEligibilityDate = new DTP(next);
             }
         }
     }
@@ -53,17 +49,9 @@ public class BenefitInquiryDependentEligibility extends IMessage {
     public void loadDefinition() {
         messagesDefinition.clear();
 
-        for (EQ key : dependentEligibility) {
-            messagesDefinition.add(key);
-
-            III iiiVal = dependentAdditionalEligibility.get(key);
-            if (iiiVal != null) messagesDefinition.add(iiiVal);
-
-            REF refVal = dependentAdditionalInformation.get(key);
-            if (refVal != null) messagesDefinition.add(refVal);
-
-            DTP dtpVal = dependentEligibilityDate.get(key);
-            if (dtpVal != null) messagesDefinition.add(dtpVal);
-        }
+        messagesDefinition.add(dependentEligibility);
+        messagesDefinition.add(dependentAdditionalEligibility);
+        messagesDefinition.add(dependentAdditionalInformation);
+        messagesDefinition.add(dependentEligibilityDate);
     }
 }

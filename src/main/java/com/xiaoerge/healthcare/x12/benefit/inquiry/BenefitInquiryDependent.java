@@ -62,13 +62,15 @@ public class BenefitInquiryDependent extends IMessage {
 
             if (next.startsWith("EQ")) {
                 if (isFirst) {
-                    benefitInquiryDependentEligibilityString.append(next);
                     isFirst = false;
                 }
                 else {
                     dependentEligibility.add(new BenefitInquiryDependentEligibility(
                         benefitInquiryDependentEligibilityString.toString()));
+
+                    benefitInquiryDependentEligibilityString = new StringBuilder();
                 }
+                benefitInquiryDependentEligibilityString.append(next);
             }
             else {
                 benefitInquiryDependentEligibilityString.append(next);

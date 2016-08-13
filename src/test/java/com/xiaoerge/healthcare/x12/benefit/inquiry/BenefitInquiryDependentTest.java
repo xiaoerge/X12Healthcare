@@ -153,10 +153,10 @@ public class BenefitInquiryDependentTest {
         }
         dependent.setDependentName(new NM1("NM1*IL*1*SMITH*ROBERT****MI*11122333301~"));
         dependent.setDependentDemographic(new DMG("DMG*D8*19430519~"));
-        dependent.getDependentTraces().add(new TRN("TRN*1*109834652831*WXYZCLEARH*REALTIME~"));
         dependent.getDependentDate().add(new DTP("DTP*291*D8*20060501~"));
         dependent.setDependentLevel(new HL("HL*6*5*22*0~"));
         dependent.getDependentTraces().add(new TRN("TRN*1*93175-012547*9877281234~"));
+        dependent.getDependentTraces().add(new TRN("TRN*1*109834652831*WXYZCLEARH*REALTIME~"));
 
         Assert.assertTrue(dependent.validate());
         Assert.assertEquals(x12, dependent.toString());

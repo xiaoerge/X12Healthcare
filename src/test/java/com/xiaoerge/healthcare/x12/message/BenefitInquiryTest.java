@@ -58,8 +58,6 @@ public class BenefitInquiryTest {
                 BenefitInquiryTransaction benefitInquiryTransaction = (BenefitInquiryTransaction) transaction;
                 Assert.assertEquals("270", benefitInquiryTransaction.getTransactionSetHeader().getTransactionSetIDCode());
                 Assert.assertEquals("1234", benefitInquiryTransaction.getTransactionSetHeader().getTransactionSetControlNumber());
-
-                System.out.println(benefitInquiryTransaction.toX12String());
             }
         }
 

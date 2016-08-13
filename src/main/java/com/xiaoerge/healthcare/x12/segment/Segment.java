@@ -154,7 +154,7 @@ public class Segment extends IMessage
                         logger.warn(name+" validateDataLength()");
                         String message = (definition.minLength() == definition.maxLength()) ?
                                 definition.minLength()+"" : "between "+definition.minLength()+", "+definition.maxLength();
-                        logger.warn(name+""+String.format("%02d", definition.position())+" length should be "+message);
+                        logger.warn(name+""+String.format("%02d", definition.position())+" length should be "+message+" ("+code+")");
                         ret = false;
                     }
 

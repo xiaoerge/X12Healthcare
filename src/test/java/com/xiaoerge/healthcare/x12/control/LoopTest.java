@@ -1,4 +1,4 @@
-package com.xiaoerge.healthcare.x12;
+package com.xiaoerge.healthcare.x12.control;
 
 import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInformationSource;
 import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInformationReceiver;

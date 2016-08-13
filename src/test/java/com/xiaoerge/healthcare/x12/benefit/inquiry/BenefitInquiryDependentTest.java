@@ -1,4 +1,4 @@
-package com.xiaoerge.healthcare.x12;
+package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
 import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInquiryDependent;
 import org.junit.Assert;

@@ -103,6 +103,10 @@ public class Segment extends IMessage
         return "";
     }
 
+    public void loadDefinition() {
+        
+    }
+
     @Override
     public boolean validate()
     {
@@ -166,21 +170,7 @@ public class Segment extends IMessage
 
     @Override
     public String toX12String() {
-        return toString();
-    }
 
-    @Override
-    public boolean isEmpty() {
-        boolean ret = true;
-        for (int i = 1; i < collection.length; i++) {
-            if (collection[i].length() > 0) return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString()
-    {
         if (isEmpty()) return "";
         if (!validate()) return name.concat(StringUtils.repeat("*", fieldSize)).concat("~");
 
@@ -204,5 +194,14 @@ public class Segment extends IMessage
         builder.append("~");
 
         return builder.toString();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        boolean ret = true;
+        for (int i = 1; i < collection.length; i++) {
+            if (collection[i].length() > 0) return false;
+        }
+        return true;
     }
 }

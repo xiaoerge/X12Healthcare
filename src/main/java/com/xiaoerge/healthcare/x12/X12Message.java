@@ -21,6 +21,10 @@ public class X12Message extends IMessage {
         return interchangeEnvelope;
     }
 
+    public void loadDefinition() {
+
+    }
+
     public boolean validate() {
         return interchangeEnvelope.validate();
     }

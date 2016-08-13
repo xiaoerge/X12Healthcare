@@ -1,9 +1,8 @@
 package com.xiaoerge.healthcare.x12;
 
-import com.xiaoerge.healthcare.x12.benefit.*;
+import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInquiryTransaction;
 import com.xiaoerge.healthcare.x12.control.*;
 import com.xiaoerge.healthcare.x12.message.*;
-import com.xiaoerge.healthcare.x12.segment.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,7 +17,7 @@ public class BenefitInquiryTest {
                 "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~" +
                     "ST*270*1234*005010X279A1~" +
                         "BHT*0022*13*10001234*20060501*1319~" +
-                            "HL*1**20*1~" + //loop
+                            "HL*1**20*1~" + //inquiry
                             "NM1*PR*2*ABC COMPANY*****PI*842610001~" +
                                 "HL*2*1*21*1~" +
                                 "NM1*1P*2*BONE AND JOINT CLINIC*****SV*2000035~" +
@@ -29,7 +28,7 @@ public class BenefitInquiryTest {
                                     "DTP*291*D8*20060501~" +
                                     "EQ*30~" +
 
-                            "HL*4**20*1~" + //new loop
+                            "HL*4**20*1~" + //new inquiry
                             "NM1*PR*2*ABC COMPANY*****PI*842610001~" +
                                 "HL*5*4*21*1~" +
                                 "NM1*1P*2*BONE AND JOINT CLINIC*****SV*2000035~" +

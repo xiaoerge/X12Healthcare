@@ -63,6 +63,10 @@ public class FunctionalGroup extends IMessage {
         return transactions;
     }
 
+    public void loadDefinition() {
+
+    }
+
     public boolean validate() {
         for (Transaction transaction : transactions) {
             if (!transaction.validate()) return false;

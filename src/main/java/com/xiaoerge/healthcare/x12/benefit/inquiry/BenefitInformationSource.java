@@ -1,11 +1,9 @@
-package com.xiaoerge.healthcare.x12.benefit;
+package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.HL;
 import com.xiaoerge.healthcare.x12.segment.NM1;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +51,10 @@ public class BenefitInformationSource extends IMessage {
                 logger.info("Found segment "+ next);
             }
         }
+    }
+
+    public void loadDefinition() {
+
     }
 
     public boolean validate() {

@@ -1,10 +1,8 @@
-package com.xiaoerge.healthcare.x12.benefit;
+package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.IMessage;
 import com.xiaoerge.healthcare.x12.segment.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ public class BenefitInformationReceiver extends IMessage {
     private N4 geographicLocation;
     private PRV providerInformation;
 
-    private List<BenefitSubscriber> benefitSubscribers;
+    private List<BenefitInquirySubscriber> benefitSubscribers;
 
     public BenefitInformationReceiver() {
         hierarchicalLevel = new HL();
@@ -29,7 +27,7 @@ public class BenefitInformationReceiver extends IMessage {
         partyLocation = new N3();
         geographicLocation = new N4();
         providerInformation = new PRV();
-        benefitSubscribers = new ArrayList<BenefitSubscriber>();
+        benefitSubscribers = new ArrayList<BenefitInquirySubscriber>();
     }
 
     public BenefitInformationReceiver(String s) {
@@ -47,7 +45,7 @@ public class BenefitInformationReceiver extends IMessage {
                     new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalParentIDNumber())
                     && stringBuilder.length() > 0) {
 
-                BenefitSubscriber subscriber = new BenefitSubscriber(stringBuilder.toString());
+                BenefitInquirySubscriber subscriber = new BenefitInquirySubscriber(stringBuilder.toString());
                 benefitSubscribers.add(subscriber);
                 stringBuilder = new StringBuilder();
 
@@ -76,6 +74,10 @@ public class BenefitInformationReceiver extends IMessage {
         }
     }
 
+    public void loadDefinition() {
+
+    }
+
     public boolean validate() {
         boolean refValidate = true;
         for (REF ref : referenceInformation) if (!ref.validate()) refValidate = false;
@@ -98,7 +100,7 @@ public class BenefitInformationReceiver extends IMessage {
         stringBuilder.append(geographicLocation.toX12String());
         stringBuilder.append(providerInformation.toX12String());
 
-        for (BenefitSubscriber subscriber : benefitSubscribers) stringBuilder.append(subscriber.toX12String());
+        for (BenefitInquirySubscriber subscriber : benefitSubscribers) stringBuilder.append(subscriber.toX12String());
 
         return stringBuilder.toString();
     }

@@ -59,6 +59,10 @@ public class Transaction extends IMessage {
         return content;
     }
 
+    public void loadDefinition() {
+
+    }
+
     @Override
     public boolean validate() {
         boolean b1 = transactionSetHeader.validate();

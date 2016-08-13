@@ -64,6 +64,10 @@ public class InterchangeEnvelope extends IMessage {
         return functionalGroups;
     }
 
+    public void loadDefinition() {
+
+    }
+
     public boolean validate() {
         for (FunctionalGroup group : functionalGroups) {
             if (!group.validate()) return false;

@@ -12,7 +12,10 @@ public abstract class IMessage {
     protected final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
     protected final List<IMessage> messagesDefinition = new ArrayList<IMessage>();
 
+    public abstract void loadDefinition();
+
     public boolean validate() {
+        loadDefinition();
         for (IMessage message : messagesDefinition) {
             if (!message.validate()) return false;
         }
@@ -20,6 +23,7 @@ public abstract class IMessage {
     }
 
     public String toX12String() {
+        loadDefinition();
         StringBuilder stringBuilder = new StringBuilder();
 
         for (IMessage message : messagesDefinition) {
@@ -30,12 +34,14 @@ public abstract class IMessage {
     }
 
     public boolean isEmpty() {
+        loadDefinition();
         for (IMessage message : messagesDefinition) {
             if (!message.isEmpty()) return false;
         }
         return true;
     }
 
+    @Override
     public String toString() {
         return toX12String();
     }

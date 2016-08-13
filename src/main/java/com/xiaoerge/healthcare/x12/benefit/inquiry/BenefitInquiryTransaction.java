@@ -1,8 +1,7 @@
-package com.xiaoerge.healthcare.x12.benefit;
+package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.control.Transaction;
-import com.xiaoerge.healthcare.x12.segment.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -184,4 +184,11 @@ public class BenefitInquiryDependent extends IMessage {
     public void setDependentDate(List<DTP> dependentDate) {
         this.dependentDate = dependentDate;
     }
+
+    public List<BenefitInquiryDependentEligibility> getDependentEligibility() {
+        return dependentEligibility;
+    }
+    public void setDependentEligibility(List<BenefitInquiryDependentEligibility> dependentEligibility) {
+        this.dependentEligibility = dependentEligibility;
+    }
 }

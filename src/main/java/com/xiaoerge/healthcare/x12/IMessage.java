@@ -15,7 +15,8 @@ public abstract class IMessage {
     public abstract void loadDefinition();
 
     public boolean validate() {
-        loadDefinition();
+        if (messagesDefinition.size() == 0) loadDefinition();
+
         for (IMessage message : messagesDefinition) {
             if (!message.validate()) return false;
         }
@@ -23,7 +24,8 @@ public abstract class IMessage {
     }
 
     public String toX12String() {
-        loadDefinition();
+        if (messagesDefinition.size() == 0) loadDefinition();
+
         StringBuilder stringBuilder = new StringBuilder();
 
         for (IMessage message : messagesDefinition) {
@@ -34,7 +36,8 @@ public abstract class IMessage {
     }
 
     public boolean isEmpty() {
-        loadDefinition();
+        if (messagesDefinition.size() == 0) loadDefinition();
+
         for (IMessage message : messagesDefinition) {
             if (!message.isEmpty()) return false;
         }

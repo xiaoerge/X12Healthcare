@@ -55,10 +55,28 @@ public class BenefitInquiryDependent extends IMessage {
         if (stringQueue.peekNext().startsWith("HI")) dependentHealthCareDiagnosisCode = new HI(stringQueue.getNext());
         while (stringQueue.peekNext().startsWith("DTP")) dependentDate.add(new DTP(stringQueue.getNext()));
 
-        //inquiry 2110D 99 times
-        for(int i = 0; i < 99 && stringQueue.hasNext(); i++) {
+        StringBuilder benefitInquiryDependentEligibilityString = new StringBuilder();
+        boolean isFirst = true;
+        while (stringQueue.hasNext()) {
+            String next = stringQueue.getNext();
 
+            if (next.startsWith("EQ")) {
+                if (isFirst) {
+                    benefitInquiryDependentEligibilityString.append(next);
+                    isFirst = false;
+                }
+                else {
+                    dependentEligibility.add(new BenefitInquiryDependentEligibility(
+                        benefitInquiryDependentEligibilityString.toString()));
+                }
+            }
+            else {
+                benefitInquiryDependentEligibilityString.append(next);
+            }
         }
+        dependentEligibility.add(new BenefitInquiryDependentEligibility(
+                benefitInquiryDependentEligibilityString.toString()));
+
     }
 
     public void loadDefinition() {
@@ -75,8 +93,7 @@ public class BenefitInquiryDependent extends IMessage {
         messagesDefinition.add(dependentRelationship);
         messagesDefinition.add(dependentHealthCareDiagnosisCode);
         messagesDefinition.addAll(dependentDate);
-
-        //inquiry 2110D
+        messagesDefinition.addAll(dependentEligibility);
     }
 
 

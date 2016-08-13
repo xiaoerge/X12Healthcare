@@ -104,7 +104,7 @@ public class Segment extends IMessage
     }
 
     public void loadDefinition() {
-        
+
     }
 
     @Override

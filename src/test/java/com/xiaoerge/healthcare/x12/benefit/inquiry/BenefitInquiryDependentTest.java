@@ -23,6 +23,6 @@ public class BenefitInquiryDependentTest {
 
         Assert.assertTrue(dependent.validate());
         Assert.assertEquals(x12, dependent.toString());
-        Assert.assertEquals("HL*4**20*1~", dependent.getDependentLevel().toString());
+        Assert.assertEquals("HL*6*5*22*0~", dependent.getDependentLevel().toString());
     }
 }

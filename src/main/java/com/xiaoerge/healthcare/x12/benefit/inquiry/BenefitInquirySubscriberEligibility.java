@@ -28,12 +28,18 @@ public class BenefitInquirySubscriberEligibility extends IMessage {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
-        if (stringQueue.peekNext().startsWith("EQ")) subscriberEligibility = new EQ(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("AMT")) subscriberSpendDown = new AMT(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("AMT")) subscriberTotalBilledAmount = new AMT(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("III")) subscriberAdditionalEligibility = new III(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("REF")) subscriberAdditionalInformation = new REF(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("DTP")) subscriberEligibilityDate = new DTP(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("EQ"))
+            subscriberEligibility = new EQ(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AMT"))
+            subscriberSpendDown = new AMT(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AMT"))
+            subscriberTotalBilledAmount = new AMT(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("III"))
+            subscriberAdditionalEligibility = new III(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
+            subscriberAdditionalInformation = new REF(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
+            subscriberEligibilityDate = new DTP(stringQueue.getNext());
     }
 
     public void loadDefinition() {

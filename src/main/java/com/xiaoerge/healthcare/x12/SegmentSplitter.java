@@ -14,13 +14,13 @@ public class SegmentSplitter {
 
     private static final Logger logger = LoggerFactory.getLogger(SegmentSplitter.class);
     /**
-     * Split a string "EQ***~EQ***~EQ***~III***~EQ***~REF***~DTP***~"
+     * split a string "EQ***~EQ***~EQ***~III***~EQ***~REF***~DTP***~"
      * into array of ["EQ***~", "EQ***~", "EQ***~III***~", "EQ***~REF***~DTP***~"]
-     * by calling Split(string2Split);
+     * by calling split(string2Split);
      *
      * precondition, string2split must start with segment
      * */
-    public static String[] Split(String string2Split, String segment) {
+    public static String[] split(String string2Split, String segment) {
         if (string2Split.length() == 0 || !string2Split.startsWith(segment)) {
             logger.warn("String2Split is empty or not start with "+segment);
             return new String[0];

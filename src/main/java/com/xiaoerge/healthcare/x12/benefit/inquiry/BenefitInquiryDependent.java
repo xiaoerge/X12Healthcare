@@ -43,17 +43,28 @@ public class BenefitInquiryDependent extends IMessage {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
-        if (stringQueue.peekNext().startsWith("HL")) dependentLevel = new HL(stringQueue.getNext());
-        while (stringQueue.peekNext().startsWith("TRN")) dependentTraces.add(new TRN(stringQueue.getNext()));
-        if (stringQueue.peekNext().startsWith("NM1")) dependentName = new NM1(stringQueue.getNext());
-        while (stringQueue.peekNext().startsWith("REF")) additionalIdentification.add(new REF(stringQueue.getNext()));
-        if (stringQueue.peekNext().startsWith("N3")) dependentAddress = new N3(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("N4")) dependentCityState = new N4(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("PRV")) providerInformation = new PRV(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("DMG")) dependentDemographic = new DMG(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("INS")) dependentRelationship = new INS(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("HI")) dependentHealthCareDiagnosisCode = new HI(stringQueue.getNext());
-        while (stringQueue.peekNext().startsWith("DTP")) dependentDate.add(new DTP(stringQueue.getNext()));
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
+            dependentLevel = new HL(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("TRN"))
+            dependentTraces.add(new TRN(stringQueue.getNext()));
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
+            dependentName = new NM1(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
+            additionalIdentification.add(new REF(stringQueue.getNext()));
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
+            dependentAddress = new N3(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
+            dependentCityState = new N4(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
+            providerInformation = new PRV(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DMG"))
+            dependentDemographic = new DMG(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("INS"))
+            dependentRelationship = new INS(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HI"))
+            dependentHealthCareDiagnosisCode = new HI(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
+            dependentDate.add(new DTP(stringQueue.getNext()));
 
         StringBuilder benefitInquiryDependentEligibilityString = new StringBuilder();
         boolean isFirst = true;

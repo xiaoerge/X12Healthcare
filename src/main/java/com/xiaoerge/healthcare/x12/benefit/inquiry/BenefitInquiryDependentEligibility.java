@@ -29,10 +29,14 @@ public class BenefitInquiryDependentEligibility extends IMessage {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
-        if (stringQueue.peekNext().startsWith("EQ")) dependentEligibility = new EQ(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("III")) dependentAdditionalEligibility = new III(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("REF")) dependentAdditionalInformation = new REF(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("DTP")) dependentEligibilityDate = new DTP(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("EQ"))
+            dependentEligibility = new EQ(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("III"))
+            dependentAdditionalEligibility = new III(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
+            dependentAdditionalInformation = new REF(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
+            dependentEligibilityDate = new DTP(stringQueue.getNext());
 
         if (stringQueue.hasNext()) {
             logger.warn("Unexpected string in BenefitInquiryDependentEligibility");

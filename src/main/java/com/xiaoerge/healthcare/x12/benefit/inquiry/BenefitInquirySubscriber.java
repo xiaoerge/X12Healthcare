@@ -1,6 +1,7 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
 import com.xiaoerge.healthcare.x12.IMessage;
+import com.xiaoerge.healthcare.x12.SegmentSplitter;
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.segment.*;
 
@@ -24,6 +25,7 @@ public class BenefitInquirySubscriber extends IMessage {
     private List<DTP> subscriberDate;
 
     private List<BenefitInquirySubscriberEligibility> subscriberEligibility;
+    private List<BenefitInquiryDependent> dependents;
 
     public BenefitInquirySubscriber() {
         subscriberLevel = new HL();
@@ -38,48 +40,62 @@ public class BenefitInquirySubscriber extends IMessage {
         subscriberHealthCareDiagnosisCode = new HI();
         subscriberDate = new ArrayList<DTP>();
         subscriberEligibility = new ArrayList<BenefitInquirySubscriberEligibility>();
+        dependents = new ArrayList<BenefitInquiryDependent>();
     }
     public BenefitInquirySubscriber(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
-        if (stringQueue.peekNext().startsWith("HL")) subscriberLevel = new HL(stringQueue.getNext());
-        while (stringQueue.peekNext().startsWith("TRN")) subscriberTraces.add(new TRN(stringQueue.getNext()));
-        if (stringQueue.peekNext().startsWith("NM1")) subscriberName = new NM1(stringQueue.getNext());
-        while (stringQueue.peekNext().startsWith("REF")) additionalIdentification.add(new REF(stringQueue.getNext()));
-        if (stringQueue.peekNext().startsWith("N3")) subscriberAddress = new N3(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("N4")) subscriberCityState = new N4(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("PRV")) providerInformation = new PRV(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("DMG")) subscriberDemographic = new DMG(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("INS")) multipleBirthSequenceNumber = new INS(stringQueue.getNext());
-        if (stringQueue.peekNext().startsWith("HI")) subscriberHealthCareDiagnosisCode = new HI(stringQueue.getNext());
-        while (stringQueue.peekNext().startsWith("DTP")) subscriberDate.add(new DTP(stringQueue.getNext()));
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
+            subscriberLevel = new HL(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("TRN"))
+            subscriberTraces.add(new TRN(stringQueue.getNext()));
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
+            subscriberName = new NM1(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
+            additionalIdentification.add(new REF(stringQueue.getNext()));
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
+            subscriberAddress = new N3(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
+            subscriberCityState = new N4(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
+            providerInformation = new PRV(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DMG"))
+            subscriberDemographic = new DMG(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("INS"))
+            multipleBirthSequenceNumber = new INS(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HI"))
+            subscriberHealthCareDiagnosisCode = new HI(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
+            subscriberDate.add(new DTP(stringQueue.getNext()));
 
-        StringBuilder benefitInquirySubscriberEligibilityString = new StringBuilder();
-        boolean isFirst = true;
+        //find eligibility loop
+        StringBuilder eligibilityString = new StringBuilder();
+        while (stringQueue.hasNext() && !stringQueue.peekNext().startsWith("HL"))
+            eligibilityString.append(stringQueue.getNext());
 
-        //todo include dependent list
+        String[] eqStrings = SegmentSplitter.split(eligibilityString.toString(), "EQ");
+        for(String eqString : eqStrings) {
+            subscriberEligibility.add(new BenefitInquirySubscriberEligibility(eqString));
+        }
+
+        //find dependent loop
+        StringBuilder dependentString = new StringBuilder();
         while (stringQueue.hasNext()) {
-            String next = stringQueue.getNext();
-
-            if (next.startsWith("EQ")) {
-                if (isFirst) {
-                    isFirst = false;
-                }
-                else {
-                    subscriberEligibility.add(new BenefitInquirySubscriberEligibility(
-                            benefitInquirySubscriberEligibilityString.toString()));
-
-                    benefitInquirySubscriberEligibilityString = new StringBuilder();
-                }
-                benefitInquirySubscriberEligibilityString.append(next);
+            dependentString.append(stringQueue.getNext());
+        }
+        String[] dependentStrings = SegmentSplitter.split(dependentString.toString(), "HL");
+        for(String dString : dependentStrings) {
+            BenefitInquiryDependent dependent = new BenefitInquiryDependent(dString);
+            if (!dependent.getDependentLevel().getHierarchicalParentIDNumber()
+                    .equals(subscriberLevel.getHierarchicalIDNumber())){
+                //there's a problem with this HL
+                logger.error("Invalid HL found in BenefitInquirySubscriber to BenefitInquiryDependent "+ dependent.toString());
             }
             else {
-                benefitInquirySubscriberEligibilityString.append(next);
+                dependents.add(dependent);
             }
         }
-        subscriberEligibility.add(new BenefitInquirySubscriberEligibility(
-                benefitInquirySubscriberEligibilityString.toString()));
     }
 
     public void loadDefinition() {
@@ -97,6 +113,7 @@ public class BenefitInquirySubscriber extends IMessage {
         messagesDefinition.add(subscriberHealthCareDiagnosisCode);
         messagesDefinition.addAll(subscriberDate);
         messagesDefinition.addAll(subscriberEligibility);
+        messagesDefinition.addAll(dependents);
     }
 
     public HL getSubscriberLevel() {
@@ -193,5 +210,13 @@ public class BenefitInquirySubscriber extends IMessage {
 
     public void setSubscriberEligibility(List<BenefitInquirySubscriberEligibility> subscriberEligibility) {
         this.subscriberEligibility = subscriberEligibility;
+    }
+
+    public List<BenefitInquiryDependent> getDependents() {
+        return dependents;
+    }
+
+    public void setDependents(List<BenefitInquiryDependent> dependents) {
+        this.dependents = dependents;
     }
 }

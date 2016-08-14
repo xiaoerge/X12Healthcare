@@ -29,17 +29,17 @@ public class SegmentSplitterTest {
                 "GE*1*0616~" +
                 "IEA*1*0616~";
 
-        String[] splitArray = SegmentSplitter.Split(x12, "ISA");
+        String[] splitArray = SegmentSplitter.split(x12, "ISA");
 
         Assert.assertEquals(1, splitArray.length);
     }
 
     @Test
-    public void testRepeatSegmentSplit() {
+    public void testSegmentSplitRepeat() {
 
         String x12 = "EQ***~EQ***~EQ***~III***~EQ***~REF***~DTP***~EQ***~";
 
-        String[] splitArray = SegmentSplitter.Split(x12, "EQ");
+        String[] splitArray = SegmentSplitter.split(x12, "EQ");
 
         Assert.assertEquals(5, splitArray.length);
         Assert.assertEquals("EQ***~", splitArray[0]);
@@ -47,6 +47,26 @@ public class SegmentSplitterTest {
         Assert.assertEquals("EQ***~III***~", splitArray[2]);
         Assert.assertEquals("EQ***~REF***~DTP***~", splitArray[3]);
         Assert.assertEquals("EQ***~", splitArray[4]);
+    }
 
+    @Test
+    public void testSegmentSplitOne() {
+
+        String x12 = "EQ***~";
+
+        String[] splitArray = SegmentSplitter.split(x12, "EQ");
+
+        Assert.assertEquals(1, splitArray.length);
+        Assert.assertEquals("EQ***~", splitArray[0]);
+    }
+
+    @Test
+    public void testSegmentSplitBlank() {
+
+        String x12 = "";
+
+        String[] splitArray = SegmentSplitter.split(x12, "EQ");
+
+        Assert.assertEquals(0, splitArray.length);
     }
 }

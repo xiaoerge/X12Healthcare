@@ -29,20 +29,13 @@ public class BenefitInquiryDependentEligibility extends IMessage {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
-        while(stringQueue.hasNext()) {
-            String next = stringQueue.getNext();
-            if (next.startsWith("EQ")) {
-                dependentEligibility = new EQ(next);
-            }
-            else if (next.startsWith("III")) {
-                dependentAdditionalEligibility = new III(next);
-            }
-            else if (next.startsWith("REF")) {
-                dependentAdditionalInformation = new REF(next);
-            }
-            else if (next.startsWith("DTP")) {
-                dependentEligibilityDate = new DTP(next);
-            }
+        if (stringQueue.peekNext().startsWith("EQ")) dependentEligibility = new EQ(stringQueue.getNext());
+        if (stringQueue.peekNext().startsWith("III")) dependentAdditionalEligibility = new III(stringQueue.getNext());
+        if (stringQueue.peekNext().startsWith("REF")) dependentAdditionalInformation = new REF(stringQueue.getNext());
+        if (stringQueue.peekNext().startsWith("DTP")) dependentEligibilityDate = new DTP(stringQueue.getNext());
+
+        if (stringQueue.hasNext()) {
+            logger.warn("Unexpected string in BenefitInquiryDependentEligibility");
         }
     }
 
@@ -53,5 +46,37 @@ public class BenefitInquiryDependentEligibility extends IMessage {
         messagesDefinition.add(dependentAdditionalEligibility);
         messagesDefinition.add(dependentAdditionalInformation);
         messagesDefinition.add(dependentEligibilityDate);
+    }
+
+    public EQ getDependentEligibility() {
+        return dependentEligibility;
+    }
+
+    public void setDependentEligibility(EQ dependentEligibility) {
+        this.dependentEligibility = dependentEligibility;
+    }
+
+    public III getDependentAdditionalEligibility() {
+        return dependentAdditionalEligibility;
+    }
+
+    public void setDependentAdditionalEligibility(III dependentAdditionalEligibility) {
+        this.dependentAdditionalEligibility = dependentAdditionalEligibility;
+    }
+
+    public REF getDependentAdditionalInformation() {
+        return dependentAdditionalInformation;
+    }
+
+    public void setDependentAdditionalInformation(REF dependentAdditionalInformation) {
+        this.dependentAdditionalInformation = dependentAdditionalInformation;
+    }
+
+    public DTP getDependentEligibilityDate() {
+        return dependentEligibilityDate;
+    }
+
+    public void setDependentEligibilityDate(DTP dependentEligibilityDate) {
+        this.dependentEligibilityDate = dependentEligibilityDate;
     }
 }

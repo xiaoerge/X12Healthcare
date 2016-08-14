@@ -11,9 +11,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 5/27/16.
  */
-public class BenefitInquiryTransaction extends Transaction
-{
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+public class BenefitInquiryTransaction extends Transaction {
 
     private List<BenefitInformationSource> benefitInformationSources;
     public BenefitInquiryTransaction() {
@@ -66,5 +64,13 @@ public class BenefitInquiryTransaction extends Transaction
             stringBuilder.append(source.toX12String());
         }
         return stringBuilder.toString();
+    }
+
+    public List<BenefitInformationSource> getBenefitInformationSources() {
+        return benefitInformationSources;
+    }
+
+    public void setBenefitInformationSources(List<BenefitInformationSource> benefitInformationSources) {
+        this.benefitInformationSources = benefitInformationSources;
     }
 }

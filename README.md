@@ -13,7 +13,7 @@ Version 5010X279A1
 
 #####How to (270)
 ```java
-@Test
+    @Test
     public void testParseBenefitInquiry() {
         String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~" +
                 "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~" +

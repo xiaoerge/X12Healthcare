@@ -6,11 +6,11 @@ Version 5010X279A1
 ####Structure
 ####270/217
 ```python
-Interchange Envelope
-    Functional Groups
-        Transactions
-            Information Sources
-                Information Receivers
+InterchangeEnvelope
+    FunctionalGroup
+        Transaction
+            InformationSource
+                InformationReceiver
                     Subscriber
                         Dependent
 ```

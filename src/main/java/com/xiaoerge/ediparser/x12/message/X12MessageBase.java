@@ -22,19 +22,8 @@ public class X12MessageBase extends MessageBase {
     }
 
     public void loadDefinition() {
+        messagesDefinition.clear();
 
+        messagesDefinition.add(interchangeEnvelope);
     }
-
-    public boolean validate() {
-        return interchangeEnvelope.validate();
-    }
-    public String toX12String() {
-        return interchangeEnvelope.toX12String();
-    }
-
-    public boolean isEmpty() {
-        return interchangeEnvelope.isEmpty();
-    }
-
-    public String toString() { return toX12String(); }
 }

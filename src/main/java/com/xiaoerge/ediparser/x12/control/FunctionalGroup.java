@@ -59,40 +59,9 @@ public class FunctionalGroup extends MessageBase {
     }
 
     public void loadDefinition() {
-
-    }
-
-    public boolean validate() {
-        for (Transaction transaction : transactions) {
-            if (!transaction.validate()) return false;
-        }
-        return functionalGroupHeader.validate() && functionalGroupTrailer.validate();
-    }
-
-    public int size() {
-        return 2 + transactions.size();
-    }
-
-    public String toX12String() {
-        return toString();
-    }
-
-    public boolean isEmpty() {
-        for (Transaction transaction : transactions) {
-            if (!transaction.isEmpty()) return false;
-        }
-        return functionalGroupHeader.isEmpty() && functionalGroupTrailer.isEmpty();
-    }
-
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(functionalGroupHeader.toX12String());
-
-        for (Transaction transaction : transactions) {
-            builder.append(transaction.toX12String());
-        }
-
-        builder.append(functionalGroupTrailer.toX12String());
-        return builder.toString();
+        messagesDefinition.clear();
+        messagesDefinition.add(functionalGroupHeader);
+        messagesDefinition.addAll(transactions);
+        messagesDefinition.add(functionalGroupTrailer);
     }
 }

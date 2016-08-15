@@ -60,33 +60,9 @@ public class InterchangeEnvelope extends MessageBase {
     }
 
     public void loadDefinition() {
-
-    }
-
-    public boolean validate() {
-        for (FunctionalGroup group : functionalGroups) {
-            if (!group.validate()) return false;
-        }
-        return transactionSetHeader.validate() && transactionSetTrailer.validate();
-    }
-
-    public int size() {
-        return 2 + functionalGroups.size();
-    }
-
-    public String toX12String() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(transactionSetHeader.toX12String());
-
-        for (FunctionalGroup group : functionalGroups) {
-            builder.append(group.toX12String());
-        }
-
-        builder.append(transactionSetTrailer.toX12String());
-        return builder.toString();
-    }
-
-    public boolean isEmpty() {
-        return transactionSetHeader.isEmpty() && transactionSetTrailer.isEmpty();
+        messagesDefinition.clear();
+        messagesDefinition.add(transactionSetHeader);
+        messagesDefinition.addAll(getFunctionalGroups());
+        messagesDefinition.add(transactionSetTrailer);
     }
 }

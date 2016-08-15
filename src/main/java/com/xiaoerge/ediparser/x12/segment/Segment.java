@@ -6,6 +6,7 @@ import com.xiaoerge.ediparser.x12.annotation.Definition;
 import com.xiaoerge.ediparser.x12.message.MessageBase;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -104,7 +105,7 @@ public class Segment extends MessageBase
     }
 
     public void loadDefinition() {
-
+        throw new NotImplementedException();
     }
 
     @Override

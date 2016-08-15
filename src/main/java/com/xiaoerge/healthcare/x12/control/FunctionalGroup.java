@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12.control;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
-import com.xiaoerge.healthcare.x12.IMessage;
+import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.segment.GE;
 import com.xiaoerge.healthcare.x12.segment.GS;
 
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class FunctionalGroup extends IMessage {
+public class FunctionalGroup extends MessageBase {
     private GS functionalGroupHeader;
     private List<Transaction> transactions;
     private GE functionalGroupTrailer;

@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12.control;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
-import com.xiaoerge.healthcare.x12.IMessage;
+import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.segment.BHT;
 import com.xiaoerge.healthcare.x12.segment.SE;
 import com.xiaoerge.healthcare.x12.segment.ST;
@@ -9,7 +9,7 @@ import com.xiaoerge.healthcare.x12.segment.ST;
 /**
  * Created by xiaoerge on 5/27/16.
  */
-public class Transaction extends IMessage {
+public class Transaction extends MessageBase {
     private ST transactionSetHeader;
     private BHT beginningOfHierarchicalTransaction;
     private SE transactionSetTrailer;
@@ -55,38 +55,15 @@ public class Transaction extends IMessage {
         transactionSetTrailer = transaction.getTransactionSetTrailer();
         content = transaction.getContent();
     }
+    public void loadDefinition() {
+        messagesDefinition.clear();
+        messagesDefinition.add(transactionSetHeader);
+        messagesDefinition.add(beginningOfHierarchicalTransaction);
+        messagesDefinition.add(transactionSetTrailer);
+    }
+
     public String getContent() {
         return content;
-    }
-
-    public void loadDefinition() {
-
-    }
-
-    @Override
-    public boolean validate() {
-        boolean b1 = transactionSetHeader.validate();
-        boolean b2 = beginningOfHierarchicalTransaction.validate();
-        boolean b3 = transactionSetTrailer.validate();
-        return b1 && b2 && b3;
-    }
-
-    @Override
-    public String toX12String() {
-        return transactionSetHeader.toString() +
-                beginningOfHierarchicalTransaction.toString() +
-                transactionSetTrailer.toString();
-    }
-
-    @Override
-    public String toString() { return toX12String(); }
-
-    @Override
-    public boolean isEmpty() {
-        boolean b1 = transactionSetHeader.isEmpty();
-        boolean b2 = beginningOfHierarchicalTransaction.isEmpty();
-        boolean b3 = transactionSetTrailer.isEmpty();
-        return b1 && b2 && b3;
     }
 
     public ST getTransactionSetHeader() {

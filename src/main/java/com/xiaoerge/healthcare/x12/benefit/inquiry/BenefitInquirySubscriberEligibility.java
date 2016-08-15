@@ -1,13 +1,13 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
-import com.xiaoerge.healthcare.x12.IMessage;
+import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.segment.*;
 
 /**
  * Created by xiaoerge on 8/13/16.
  */
-public class BenefitInquirySubscriberEligibility extends IMessage {
+public class BenefitInquirySubscriberEligibility extends MessageBase {
 
     private EQ subscriberEligibility;
     private AMT subscriberSpendDown;

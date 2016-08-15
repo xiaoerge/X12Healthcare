@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12.control;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
-import com.xiaoerge.healthcare.x12.IMessage;
+import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.segment.IEA;
 import com.xiaoerge.healthcare.x12.segment.ISA;
 
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class InterchangeEnvelope extends IMessage {
+public class InterchangeEnvelope extends MessageBase {
     private ISA transactionSetHeader;
     private List<FunctionalGroup> functionalGroups;
     private IEA transactionSetTrailer;

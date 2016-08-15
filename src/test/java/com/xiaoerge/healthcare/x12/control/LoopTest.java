@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12.control;
 
+import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInquiryInformationReceiver;
 import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInquiryInformationSource;
-import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInformationReceiver;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,28 +52,28 @@ public class LoopTest {
                 "REF*EO*477563928~" +
                 "N3*201 PARK AVENUE*SUITE 300~" +
                 "N4*KANSAS CITY*MO*64108~";
-        BenefitInformationReceiver benefitInformationReceiver = new BenefitInformationReceiver(x12);
+        BenefitInquiryInformationReceiver benefitInquiryInformationReceiver = new BenefitInquiryInformationReceiver(x12);
 
-        Assert.assertTrue(benefitInformationReceiver.validate());
-        Assert.assertEquals(x12, benefitInformationReceiver.toX12String());
-        Assert.assertEquals("2", benefitInformationReceiver.getHierarchicalIDNumber());
-        Assert.assertEquals("1", benefitInformationReceiver.getHierarchicalParentIDNumber());
-        Assert.assertEquals("21", benefitInformationReceiver.getHierarchicalLevelCode());
-        Assert.assertEquals("1", benefitInformationReceiver.getHierarchicalChildCode());
-        Assert.assertEquals("1P", benefitInformationReceiver.getEntityIdentifierCode());
-        Assert.assertEquals("1", benefitInformationReceiver.getEntityTypeQualifier());
-        Assert.assertEquals("JONES", benefitInformationReceiver.getNameLastOrOrganizationName());
-        Assert.assertEquals("MARCUS", benefitInformationReceiver.getNameFirst());
-        Assert.assertEquals("MD", benefitInformationReceiver.getNameSuffix());
-        Assert.assertEquals("34", benefitInformationReceiver.getIdentificationCodeQualifier());
-        Assert.assertEquals("111223333", benefitInformationReceiver.getIdentificationCode());
-//        Assert.assertEquals("EO", benefitInformationReceiver.getReferenceIdentificationQualifier());
-//        Assert.assertEquals("477563928", benefitInformationReceiver.getReferenceIdentification());
-        Assert.assertEquals("201 PARK AVENUE", benefitInformationReceiver.getAddressInformation1());
-        Assert.assertEquals("SUITE 300", benefitInformationReceiver.getAddressInformation2());
-        Assert.assertEquals("KANSAS CITY", benefitInformationReceiver.getCityName());
-        Assert.assertEquals("MO", benefitInformationReceiver.getStateOrProvinceCode());
-        Assert.assertEquals("64108", benefitInformationReceiver.getPostalCode());
+        Assert.assertTrue(benefitInquiryInformationReceiver.validate());
+        Assert.assertEquals(x12, benefitInquiryInformationReceiver.toX12String());
+        Assert.assertEquals("2", benefitInquiryInformationReceiver.getHierarchicalIDNumber());
+        Assert.assertEquals("1", benefitInquiryInformationReceiver.getHierarchicalParentIDNumber());
+        Assert.assertEquals("21", benefitInquiryInformationReceiver.getHierarchicalLevelCode());
+        Assert.assertEquals("1", benefitInquiryInformationReceiver.getHierarchicalChildCode());
+        Assert.assertEquals("1P", benefitInquiryInformationReceiver.getEntityIdentifierCode());
+        Assert.assertEquals("1", benefitInquiryInformationReceiver.getEntityTypeQualifier());
+        Assert.assertEquals("JONES", benefitInquiryInformationReceiver.getNameLastOrOrganizationName());
+        Assert.assertEquals("MARCUS", benefitInquiryInformationReceiver.getNameFirst());
+        Assert.assertEquals("MD", benefitInquiryInformationReceiver.getNameSuffix());
+        Assert.assertEquals("34", benefitInquiryInformationReceiver.getIdentificationCodeQualifier());
+        Assert.assertEquals("111223333", benefitInquiryInformationReceiver.getIdentificationCode());
+//        Assert.assertEquals("EO", benefitInquiryInformationReceiver.getReferenceIdentificationQualifier());
+//        Assert.assertEquals("477563928", benefitInquiryInformationReceiver.getReferenceIdentification());
+        Assert.assertEquals("201 PARK AVENUE", benefitInquiryInformationReceiver.getAddressInformation1());
+        Assert.assertEquals("SUITE 300", benefitInquiryInformationReceiver.getAddressInformation2());
+        Assert.assertEquals("KANSAS CITY", benefitInquiryInformationReceiver.getCityName());
+        Assert.assertEquals("MO", benefitInquiryInformationReceiver.getStateOrProvinceCode());
+        Assert.assertEquals("64108", benefitInquiryInformationReceiver.getPostalCode());
     }
 
     @Test
@@ -83,28 +83,28 @@ public class LoopTest {
                 "REF*EO*477563928~" +
                 "N3*201 PARK AVENUE*SUITE 300~" +
                 "N4*KANSAS CITY*MO*64108~";
-        BenefitInformationReceiver benefitInformationReceiver = new BenefitInformationReceiver();
+        BenefitInquiryInformationReceiver benefitInquiryInformationReceiver = new BenefitInquiryInformationReceiver();
 
-        benefitInformationReceiver.setHierarchicalIDNumber("2");
-        benefitInformationReceiver.setHierarchicalParentIDNumber("1");
-        benefitInformationReceiver.setHierarchicalLevelCode("21");
-        benefitInformationReceiver.setHierarchicalChildCode("1");
-        benefitInformationReceiver.setEntityIdentifierCode("1P");
-        benefitInformationReceiver.setEntityTypeQualifier("1");
-        benefitInformationReceiver.setNameLastOrOrganizationName("JONES");
-        benefitInformationReceiver.setNameFirst("MARCUS");
-        benefitInformationReceiver.setNameSuffix("MD");
-        benefitInformationReceiver.setIdentificationCodeQualifier("34");
-        benefitInformationReceiver.setIdentificationCode("111223333");
-//        benefitInformationReceiver.setReferenceIdentificationQualifier("EO");
-//        benefitInformationReceiver.setReferenceIdentification("477563928");
-        benefitInformationReceiver.setAddressInformation1("201 PARK AVENUE");
-        benefitInformationReceiver.setAddressInformation2("SUITE 300");
-        benefitInformationReceiver.setCityName("KANSAS CITY");
-        benefitInformationReceiver.setStateOrProvinceCode("MO");
-        benefitInformationReceiver.setPostalCode("64108");
+        benefitInquiryInformationReceiver.setHierarchicalIDNumber("2");
+        benefitInquiryInformationReceiver.setHierarchicalParentIDNumber("1");
+        benefitInquiryInformationReceiver.setHierarchicalLevelCode("21");
+        benefitInquiryInformationReceiver.setHierarchicalChildCode("1");
+        benefitInquiryInformationReceiver.setEntityIdentifierCode("1P");
+        benefitInquiryInformationReceiver.setEntityTypeQualifier("1");
+        benefitInquiryInformationReceiver.setNameLastOrOrganizationName("JONES");
+        benefitInquiryInformationReceiver.setNameFirst("MARCUS");
+        benefitInquiryInformationReceiver.setNameSuffix("MD");
+        benefitInquiryInformationReceiver.setIdentificationCodeQualifier("34");
+        benefitInquiryInformationReceiver.setIdentificationCode("111223333");
+//        benefitInquiryInformationReceiver.setReferenceIdentificationQualifier("EO");
+//        benefitInquiryInformationReceiver.setReferenceIdentification("477563928");
+        benefitInquiryInformationReceiver.setAddressInformation1("201 PARK AVENUE");
+        benefitInquiryInformationReceiver.setAddressInformation2("SUITE 300");
+        benefitInquiryInformationReceiver.setCityName("KANSAS CITY");
+        benefitInquiryInformationReceiver.setStateOrProvinceCode("MO");
+        benefitInquiryInformationReceiver.setPostalCode("64108");
 
-        Assert.assertTrue(benefitInformationReceiver.validate());
-        Assert.assertNotEquals(x12, benefitInformationReceiver.toX12String());
+        Assert.assertTrue(benefitInquiryInformationReceiver.validate());
+        Assert.assertNotEquals(x12, benefitInquiryInformationReceiver.toX12String());
     }
 }

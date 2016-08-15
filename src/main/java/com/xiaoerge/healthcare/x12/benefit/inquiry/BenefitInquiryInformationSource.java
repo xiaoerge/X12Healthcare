@@ -1,9 +1,8 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
-import com.xiaoerge.healthcare.x12.IMessage;
-import com.xiaoerge.healthcare.x12.segment.HL;
-import com.xiaoerge.healthcare.x12.segment.NM1;
+import com.xiaoerge.healthcare.x12.message.MessageBase;
+import com.xiaoerge.healthcare.x12.segment.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,46 +10,35 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/5/16.
  */
-public class BenefitInquiryInformationSource extends IMessage {
+public class BenefitInquiryInformationSource extends MessageBase {
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
 
-    List<BenefitInformationReceiver> benefitInformationReceivers;
+    List<BenefitInquiryInformationReceiver> benefitInquiryInformationReceivers;
 
     public BenefitInquiryInformationSource() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
-        benefitInformationReceivers = new ArrayList<BenefitInformationReceiver>();
+        benefitInquiryInformationReceivers = new ArrayList<BenefitInquiryInformationReceiver>();
     }
 
     public BenefitInquiryInformationSource(String s) {
+        this();
         StringQueue stringQueue = new StringQueue(s);
-        StringBuilder stringBuilder = new StringBuilder();
 
-        hierarchicalLevel = new HL(stringQueue.getNext());
-        individualOrOrganizationalName = new NM1(stringQueue.getNext());
-        benefitInformationReceivers = new ArrayList<BenefitInformationReceiver>();
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
+            hierarchicalLevel = new HL(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
+            individualOrOrganizationalName = new NM1(stringQueue.getNext());
 
+        //todo multiple receivers
+
+        //find information receiver
+        StringBuilder receiverString = new StringBuilder();
         while (stringQueue.hasNext()) {
-            String peek = stringQueue.peekNext();
-            String next = stringQueue.getNext();
-
-            if (peek.startsWith("HL") &&
-                    new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalParentIDNumber())
-                    && stringBuilder.length() > 0) {
-                stringBuilder.append(next);
-
-                BenefitInformationReceiver receiver = new BenefitInformationReceiver(stringBuilder.toString());
-                benefitInformationReceivers.add(receiver);
-                stringBuilder = new StringBuilder();
-
-                logger.info("Start hierarchical level "+ next);
-            }
-            else {
-                stringBuilder.append(next);
-                logger.info("Found segment "+ next);
-            }
+            receiverString.append(stringQueue.getNext());
         }
+        benefitInquiryInformationReceivers.add(new BenefitInquiryInformationReceiver(receiverString.toString()));
     }
 
     public void loadDefinition() {
@@ -58,9 +46,10 @@ public class BenefitInquiryInformationSource extends IMessage {
 
         messagesDefinition.add(hierarchicalLevel);
         messagesDefinition.add(individualOrOrganizationalName);
-        messagesDefinition.addAll(benefitInformationReceivers);
+        messagesDefinition.addAll(benefitInquiryInformationReceivers);
     }
 
+    //todo remove these
     public String getHierarchicalIDNumber() { return hierarchicalLevel.getHierarchicalIDNumber(); }
     public String getHierarchicalLevelCode() { return hierarchicalLevel.getHierarchicalLevelCode(); }
     public String getHierarchicalChildCode() { return hierarchicalLevel.getHierarchicalChildCode(); }
@@ -86,4 +75,28 @@ public class BenefitInquiryInformationSource extends IMessage {
     public void setNameSuffix(String s) { individualOrOrganizationalName.setNameSuffix(s); }
     public void setIdentificationCodeQualifier(String s) { individualOrOrganizationalName.setIdentificationCodeQualifier(s); }
     public void setIdentificationCode(String s) { individualOrOrganizationalName.setIdentificationCode(s); }
+
+    public HL getHierarchicalLevel() {
+        return hierarchicalLevel;
+    }
+
+    public void setHierarchicalLevel(HL hierarchicalLevel) {
+        this.hierarchicalLevel = hierarchicalLevel;
+    }
+
+    public NM1 getIndividualOrOrganizationalName() {
+        return individualOrOrganizationalName;
+    }
+
+    public void setIndividualOrOrganizationalName(NM1 individualOrOrganizationalName) {
+        this.individualOrOrganizationalName = individualOrOrganizationalName;
+    }
+
+    public List<BenefitInquiryInformationReceiver> getBenefitInquiryInformationReceivers() {
+        return benefitInquiryInformationReceivers;
+    }
+
+    public void setBenefitInquiryInformationReceivers(List<BenefitInquiryInformationReceiver> benefitInquiryInformationReceivers) {
+        this.benefitInquiryInformationReceivers = benefitInquiryInformationReceivers;
+    }
 }

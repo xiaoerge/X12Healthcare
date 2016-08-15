@@ -35,6 +35,7 @@ public class BenefitInquiryTransaction extends Transaction {
         String[] sourceStrings = SegmentStringUtil.split(getContent(), "HL");
         String[] informationSources = SegmentStringUtil.joinLevel(sourceStrings);
 
+        //multiple sources
         for (String sourceString : informationSources) {
             benefitInquiryInformationSources.add(new BenefitInquiryInformationSource(sourceString));
         }
@@ -42,7 +43,10 @@ public class BenefitInquiryTransaction extends Transaction {
 
     public void loadDefinition() {
         messagesDefinition.clear();
+        messagesDefinition.add(getTransactionSetHeader());
+        messagesDefinition.add(getBeginningOfHierarchicalTransaction());
         messagesDefinition.addAll(benefitInquiryInformationSources);
+        messagesDefinition.add(getTransactionSetTrailer());
     }
 
     public List<BenefitInquiryInformationSource> getBenefitInquiryInformationSources() {

@@ -4,6 +4,7 @@ import com.xiaoerge.healthcare.x12.control.FunctionalGroup;
 import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
 import com.xiaoerge.healthcare.x12.control.Transaction;
 import com.xiaoerge.healthcare.x12.message.BenefitInquiry;
+import com.xiaoerge.healthcare.x12.message.X12MessageBase;
 
 import java.util.List;
 
@@ -12,9 +13,9 @@ import java.util.List;
  */
 public class X12Parser {
 
-    public static X12Message fromX12Message(String s) {
+    public static X12MessageBase fromX12Message(String s) {
 
-        X12Message message = new X12Message(s);
+        X12MessageBase message = new X12MessageBase(s);
         InterchangeEnvelope envelope = message.getInterchangeEnvelope();
         List<FunctionalGroup> groups = envelope.getFunctionalGroups();
 

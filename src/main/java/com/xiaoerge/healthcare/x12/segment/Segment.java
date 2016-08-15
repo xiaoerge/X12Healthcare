@@ -3,7 +3,7 @@ package com.xiaoerge.healthcare.x12.segment;
 import com.xiaoerge.healthcare.x12.MalformedMessageException;
 import com.xiaoerge.healthcare.x12.annotation.Declaration;
 import com.xiaoerge.healthcare.x12.annotation.Definition;
-import com.xiaoerge.healthcare.x12.IMessage;
+import com.xiaoerge.healthcare.x12.message.MessageBase;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class Segment extends IMessage
+public class Segment extends MessageBase
 {
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 

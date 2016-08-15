@@ -11,7 +11,8 @@ public class TransactionTest {
 
     @Test
     public void testParseTransaction() {
-        String x12 = "ST***~BHT*\\*\\*\\*\\*\\*\\*\\*~SE**~";
+        //need to escape *
+        String x12 = "ST***~BHT\\*\\*\\*\\*\\*\\*~SE**~";
         Transaction transaction = new Transaction(x12);
 
         Assert.assertFalse(transaction.validate());

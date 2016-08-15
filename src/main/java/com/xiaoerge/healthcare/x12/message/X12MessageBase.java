@@ -1,19 +1,19 @@
-package com.xiaoerge.healthcare.x12;
+package com.xiaoerge.healthcare.x12.message;
 
 import com.xiaoerge.healthcare.x12.control.InterchangeEnvelope;
 
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class X12Message extends IMessage {
+public class X12MessageBase extends MessageBase {
 
     private InterchangeEnvelope interchangeEnvelope;
 
-    public X12Message() { interchangeEnvelope = new InterchangeEnvelope(); }
-    public X12Message(String s) {
+    public X12MessageBase() { interchangeEnvelope = new InterchangeEnvelope(); }
+    public X12MessageBase(String s) {
         interchangeEnvelope = new InterchangeEnvelope(s);
     }
-    public X12Message(X12Message message) {
+    public X12MessageBase(X12MessageBase message) {
         this.interchangeEnvelope = message.getInterchangeEnvelope();
     }
 

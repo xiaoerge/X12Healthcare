@@ -1,18 +1,13 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
-import com.xiaoerge.healthcare.x12.IMessage;
+import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.segment.*;
-
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xiaoerge on 8/13/16.
  */
-public class BenefitInquiryDependentEligibility extends IMessage {
+public class BenefitInquiryDependentEligibility extends MessageBase {
 
     private EQ dependentEligibility;
     private III dependentAdditionalEligibility;

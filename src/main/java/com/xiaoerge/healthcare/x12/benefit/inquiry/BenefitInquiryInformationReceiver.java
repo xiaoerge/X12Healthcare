@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
 import com.xiaoerge.healthcare.x12.StringQueue;
-import com.xiaoerge.healthcare.x12.IMessage;
+import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.segment.*;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/5/16.
  */
-public class BenefitInformationReceiver extends IMessage {
+public class BenefitInquiryInformationReceiver extends MessageBase {
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
     private List<REF> referenceInformation;
@@ -20,7 +20,7 @@ public class BenefitInformationReceiver extends IMessage {
 
     private List<BenefitInquirySubscriber> benefitSubscribers;
 
-    public BenefitInformationReceiver() {
+    public BenefitInquiryInformationReceiver() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
         referenceInformation = new ArrayList<REF>();
@@ -30,48 +30,31 @@ public class BenefitInformationReceiver extends IMessage {
         benefitSubscribers = new ArrayList<BenefitInquirySubscriber>();
     }
 
-    public BenefitInformationReceiver(String s) {
+    public BenefitInquiryInformationReceiver(String s) {
         this();
-        StringBuilder stringBuilder = new StringBuilder();
         StringQueue stringQueue = new StringQueue(s);
 
-        hierarchicalLevel = new HL(stringQueue.getNext());
-        individualOrOrganizationalName = new NM1(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
+            hierarchicalLevel = new HL(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
+            individualOrOrganizationalName = new NM1(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
+            referenceInformation.add(new REF(stringQueue.getNext()));
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
+            partyLocation = new N3(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
+            geographicLocation = new N4(stringQueue.getNext());
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
+            providerInformation = new PRV(stringQueue.getNext());
 
+        //todo multiple subscribers
+
+        //find information receiver
+        StringBuilder stringBuilder = new StringBuilder();
         while (stringQueue.hasNext()) {
-            String peek = stringQueue.peekNext();
-            String next = stringQueue.getNext();
-            if (peek.startsWith("HL") &&
-                    new HL(peek).getHierarchicalParentIDNumber().equals(hierarchicalLevel.getHierarchicalParentIDNumber())
-                    && stringBuilder.length() > 0) {
-
-                BenefitInquirySubscriber subscriber = new BenefitInquirySubscriber(stringBuilder.toString());
-                benefitSubscribers.add(subscriber);
-                stringBuilder = new StringBuilder();
-
-                logger.info("Start hierarchical level "+ next);
-            }
-            if (next.startsWith("REF")) {
-                referenceInformation.add(new REF(next));
-                logger.info("Found REF segment "+ next);
-            }
-            else if (next.startsWith("N3")) {
-                partyLocation = new N3(next);
-                logger.info("Found N3 segment "+ next);
-            }
-            else if (next.startsWith("N4")) {
-                geographicLocation = new N4(next);
-                logger.info("Found N4 segment "+ next);
-            }
-            else if (next.startsWith("PRV")) {
-                providerInformation = new PRV(next);
-                logger.info("Found PRV segment "+ next);
-            }
-            else {
-                stringBuilder.append(next);
-                logger.info("Found segment "+ next);
-            }
+            stringBuilder.append(stringQueue.getNext());
         }
+        benefitSubscribers.add(new BenefitInquirySubscriber(stringBuilder.toString()));
     }
 
     public void loadDefinition() {

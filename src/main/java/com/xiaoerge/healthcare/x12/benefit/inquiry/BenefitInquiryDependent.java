@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
-import com.xiaoerge.healthcare.x12.IMessage;
+import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.segment.*;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/11/16.
  */
-public class BenefitInquiryDependent extends IMessage {
+public class BenefitInquiryDependent extends MessageBase {
     private HL dependentLevel;
     private List<TRN> dependentTraces;
     private NM1 dependentName;

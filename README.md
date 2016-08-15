@@ -11,7 +11,7 @@ Interchange Envelope
             Information Sources
                 Information Receivers
                     Subscriber
-                        Dependent
+                        Dependent  
 
 ###Progress
 

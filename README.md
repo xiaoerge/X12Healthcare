@@ -3,6 +3,16 @@ Version 5010X279A1
 
 ###Will support parsing and creating of messages such as 837, 835, 277, 270, 271, 999, 997, TA1.
 
+####Structure
+####270/217
+Interchange Envelope
+    Functional Groups
+        Transactions
+            Information Sources
+                Information Receivers
+                    Subscriber
+                        Dependent
+
 ###Progress
 
 ####270 (Done)
@@ -150,8 +160,6 @@ Version 5010X279A1
 999
 997
 TA1 (In progress)
-
-####X12 (In progress)
-	1. Message envelope is done, tested. 
-	2. Message group is done, tested.
-	3. Message transaction is done, tested.
+    1. Message envelope is done, tested.
+    2. Message group is done, tested.
+    3. Message transaction is done, tested.

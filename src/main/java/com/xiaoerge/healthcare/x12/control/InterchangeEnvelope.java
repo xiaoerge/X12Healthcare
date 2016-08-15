@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12.control;
 
-import com.xiaoerge.healthcare.x12.StringQueue;
+import com.xiaoerge.healthcare.x12.util.StringQueue;
 import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.segment.IEA;
 import com.xiaoerge.healthcare.x12.segment.ISA;
@@ -31,16 +31,13 @@ public class InterchangeEnvelope extends MessageBase {
             String next = stringQueue.getNext();
             if (next.startsWith("ISA")) {
                 transactionSetHeader = new ISA(next);
-                logger.info("Start interchange envelope ", next);
             }
             else if (next.startsWith("IEA")) {
                 transactionSetTrailer = new IEA(next);
-                logger.info("End interchange envelope ", next);
             }
             else if (next.startsWith("GS")) {
                 builder = new StringBuilder();
                 builder.append(next);
-                logger.info("Start functional group ", next);
             }
             else if (next.startsWith("GE")) {
                 if (builder != null) {
@@ -48,12 +45,10 @@ public class InterchangeEnvelope extends MessageBase {
                     String groupContent = builder.toString();
                     FunctionalGroup group = new FunctionalGroup(groupContent);
                     functionalGroups.add(group);
-                    logger.info("End functional group ", next);
                 }
             }
             else {
                 if (builder != null) builder.append(next);
-                logger.info("Found segment ", next);
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12.control;
 
-import com.xiaoerge.healthcare.x12.StringQueue;
+import com.xiaoerge.healthcare.x12.util.StringQueue;
 import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.segment.BHT;
 import com.xiaoerge.healthcare.x12.segment.SE;
@@ -32,19 +32,15 @@ public class Transaction extends MessageBase {
             String next = stringQueue.getNext();
             if (next.startsWith("ST")) {
                 transactionSetHeader = new ST(next);
-                logger.info("Start transaction ", next);
             }
             else if (next.startsWith("BHT")) {
                 beginningOfHierarchicalTransaction = new BHT(next);
-                logger.info("Start hierarchical transaction ", next);
             }
             else if (next.startsWith("SE")) {
                 transactionSetTrailer = new SE(next);
-                logger.info("End transaction ", next);
             }
             else {
                 builder.append(next);
-                logger.info("Found segment", next);
             }
         }
         content = builder.toString();

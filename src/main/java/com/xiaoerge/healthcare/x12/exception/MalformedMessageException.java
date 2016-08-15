@@ -1,4 +1,4 @@
-package com.xiaoerge.healthcare.x12;
+package com.xiaoerge.healthcare.x12.exception;
 
 /**
  * Created by xiaoerge on 5/30/16.

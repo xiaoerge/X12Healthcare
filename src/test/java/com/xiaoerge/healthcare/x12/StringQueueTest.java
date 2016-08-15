@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12;
 
-import com.xiaoerge.healthcare.x12.segment.ISA;
+import com.xiaoerge.healthcare.x12.util.StringQueue;
 import org.junit.Assert;
 import org.junit.Test;
 

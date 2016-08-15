@@ -1,4 +1,4 @@
-package com.xiaoerge.healthcare.x12;
+package com.xiaoerge.healthcare.x12.util;
 
 import com.xiaoerge.healthcare.x12.segment.HL;
 import org.slf4j.Logger;

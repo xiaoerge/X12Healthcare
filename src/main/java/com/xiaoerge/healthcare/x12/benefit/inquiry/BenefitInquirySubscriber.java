@@ -1,8 +1,8 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
 import com.xiaoerge.healthcare.x12.message.MessageBase;
-import com.xiaoerge.healthcare.x12.SegmentStringUtil;
-import com.xiaoerge.healthcare.x12.StringQueue;
+import com.xiaoerge.healthcare.x12.util.SegmentStringUtil;
+import com.xiaoerge.healthcare.x12.util.StringQueue;
 import com.xiaoerge.healthcare.x12.segment.*;
 
 import java.util.ArrayList;

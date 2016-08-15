@@ -1,5 +1,6 @@
 package com.xiaoerge.healthcare.x12;
 
+import com.xiaoerge.healthcare.x12.util.SegmentStringUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12.segment;
 
-import com.xiaoerge.healthcare.x12.MalformedMessageException;
+import com.xiaoerge.healthcare.x12.exception.MalformedMessageException;
 import com.xiaoerge.healthcare.x12.annotation.Declaration;
 import com.xiaoerge.healthcare.x12.annotation.Definition;
 import com.xiaoerge.healthcare.x12.message.MessageBase;

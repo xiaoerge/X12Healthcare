@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12.message;
 
-import com.xiaoerge.healthcare.x12.X12Parser;
+import com.xiaoerge.healthcare.x12.util.X12Parser;
 import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInquiryInformationSource;
 import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInquiryTransaction;
 import com.xiaoerge.healthcare.x12.control.*;

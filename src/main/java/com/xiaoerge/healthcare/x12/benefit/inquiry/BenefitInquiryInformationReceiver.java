@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
-import com.xiaoerge.healthcare.x12.StringQueue;
+import com.xiaoerge.healthcare.x12.util.StringQueue;
 import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.segment.*;
 
@@ -49,7 +49,7 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
 
         //todo multiple subscribers
 
-        //find information receiver
+        //find inquiry receiver
         StringBuilder stringBuilder = new StringBuilder();
         while (stringQueue.hasNext()) {
             stringBuilder.append(stringQueue.getNext());

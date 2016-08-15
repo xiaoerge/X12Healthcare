@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12.control;
 
-import com.xiaoerge.healthcare.x12.StringQueue;
+import com.xiaoerge.healthcare.x12.util.StringQueue;
 import com.xiaoerge.healthcare.x12.message.MessageBase;
 import com.xiaoerge.healthcare.x12.segment.GE;
 import com.xiaoerge.healthcare.x12.segment.GS;
@@ -30,16 +30,13 @@ public class FunctionalGroup extends MessageBase {
             String next = stringQueue.getNext();
             if (next.startsWith("GS")) {
                 functionalGroupHeader = new GS(next);
-                logger.info("Start functional group ", next);
             }
             else if (next.startsWith("GE")) {
                 functionalGroupTrailer = new GE(next);
-                logger.info("End functional group ", next);
             }
             else if (next.startsWith("ST")) {
                 builder = new StringBuilder();
                 builder.append(next);
-                logger.info("Start transaction ", next);
             }
             else if (next.startsWith("SE")) {
                 if (builder != null) {
@@ -47,12 +44,10 @@ public class FunctionalGroup extends MessageBase {
                     String groupContent = builder.toString();
                     Transaction transaction = new Transaction(groupContent);
                     transactions.add(transaction);
-                    logger.info("End transaction ", next);
                 }
             }
             else {
                 if (builder != null) builder.append(next);
-                logger.info("Found segment ", next);
             }
         }
     }

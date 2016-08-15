@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
-import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInquiryDependent;
+import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInquiryDependentEligibility;
 import com.xiaoerge.healthcare.x12.segment.*;
 import org.junit.Assert;
 import org.junit.Test;

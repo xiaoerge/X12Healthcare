@@ -5,13 +5,15 @@ Version 5010X279A1
 
 ####Structure
 ####270/217
+```python
 Interchange Envelope
     Functional Groups
         Transactions
             Information Sources
                 Information Receivers
                     Subscriber
-                        Dependent  
+                        Dependent
+```
 
 ###Progress
 

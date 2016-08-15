@@ -1,7 +1,7 @@
-#ANSI ASC X12 implementation for healthcare
+#EDI Parser
 Version 5010X279A1
 
-[![Build Status](https://travis-ci.org/xiaoerge/healthcare.svg?branch=master)](https://travis-ci.org/xiaoerge/healthcare)
+[![Build Status](https://travis-ci.org/xiaoerge/EDIParser.svg?branch=master)](https://travis-ci.org/xiaoerge/EDIParser)
 
 ###Will support parsing and creating of messages such as 837, 835, 277, 270, 271, 999, 997, TA1.
 

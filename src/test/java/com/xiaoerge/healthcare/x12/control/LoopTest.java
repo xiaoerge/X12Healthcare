@@ -1,6 +1,6 @@
 package com.xiaoerge.healthcare.x12.control;
 
-import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInformationSource;
+import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInquiryInformationSource;
 import com.xiaoerge.healthcare.x12.benefit.inquiry.BenefitInformationReceiver;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,36 +13,36 @@ public class LoopTest {
     @Test
     public void testParseInformationSource() {
         String x12 = "HL*1**20*1~NM1*PR*2*ACE INSURANCE COMPANY*****PI*87728~";
-        BenefitInformationSource benefitInformationSource = new BenefitInformationSource(x12);
+        BenefitInquiryInformationSource benefitInquiryInformationSource = new BenefitInquiryInformationSource(x12);
 
-        Assert.assertTrue(benefitInformationSource.validate());
-        Assert.assertEquals(x12, benefitInformationSource.toX12String());
-        Assert.assertEquals("1", benefitInformationSource.getHierarchicalIDNumber());
-        Assert.assertEquals("20", benefitInformationSource.getHierarchicalLevelCode());
-        Assert.assertEquals("1", benefitInformationSource.getHierarchicalChildCode());
-        Assert.assertEquals("PR", benefitInformationSource.getEntityIdentifierCode());
-        Assert.assertEquals("2", benefitInformationSource.getEntityTypeQualifier());
-        Assert.assertEquals("ACE INSURANCE COMPANY", benefitInformationSource.getNameLastOrOrganizationName());
-        Assert.assertEquals("PI", benefitInformationSource.getIdentificationCodeQualifier());
-        Assert.assertEquals("87728", benefitInformationSource.getIdentificationCode());
+        Assert.assertTrue(benefitInquiryInformationSource.validate());
+        Assert.assertEquals(x12, benefitInquiryInformationSource.toX12String());
+        Assert.assertEquals("1", benefitInquiryInformationSource.getHierarchicalIDNumber());
+        Assert.assertEquals("20", benefitInquiryInformationSource.getHierarchicalLevelCode());
+        Assert.assertEquals("1", benefitInquiryInformationSource.getHierarchicalChildCode());
+        Assert.assertEquals("PR", benefitInquiryInformationSource.getEntityIdentifierCode());
+        Assert.assertEquals("2", benefitInquiryInformationSource.getEntityTypeQualifier());
+        Assert.assertEquals("ACE INSURANCE COMPANY", benefitInquiryInformationSource.getNameLastOrOrganizationName());
+        Assert.assertEquals("PI", benefitInquiryInformationSource.getIdentificationCodeQualifier());
+        Assert.assertEquals("87728", benefitInquiryInformationSource.getIdentificationCode());
     }
 
     @Test
     public void testCreateInformationSource() {
         String x12 = "HL*1**20*1~NM1*PR*2*ACE INSURANCE COMPANY*****PI*87728~";
-        BenefitInformationSource benefitInformationSource = new BenefitInformationSource();
+        BenefitInquiryInformationSource benefitInquiryInformationSource = new BenefitInquiryInformationSource();
 
-        benefitInformationSource.setHierarchicalIDNumber("1");
-        benefitInformationSource.setHierarchicalLevelCode("20");
-        benefitInformationSource.setHierarchicalChildCode("1");
-        benefitInformationSource.setEntityIdentifierCode("PR");
-        benefitInformationSource.setEntityTypeQualifier("2");
-        benefitInformationSource.setNameLastOrOrganizationName("ACE INSURANCE COMPANY");
-        benefitInformationSource.setIdentificationCodeQualifier("PI");
-        benefitInformationSource.setIdentificationCode("87728");
+        benefitInquiryInformationSource.setHierarchicalIDNumber("1");
+        benefitInquiryInformationSource.setHierarchicalLevelCode("20");
+        benefitInquiryInformationSource.setHierarchicalChildCode("1");
+        benefitInquiryInformationSource.setEntityIdentifierCode("PR");
+        benefitInquiryInformationSource.setEntityTypeQualifier("2");
+        benefitInquiryInformationSource.setNameLastOrOrganizationName("ACE INSURANCE COMPANY");
+        benefitInquiryInformationSource.setIdentificationCodeQualifier("PI");
+        benefitInquiryInformationSource.setIdentificationCode("87728");
 
-        Assert.assertTrue(benefitInformationSource.validate());
-        Assert.assertEquals(x12, benefitInformationSource.toX12String());
+        Assert.assertTrue(benefitInquiryInformationSource.validate());
+        Assert.assertEquals(x12, benefitInquiryInformationSource.toX12String());
     }
 
     @Test

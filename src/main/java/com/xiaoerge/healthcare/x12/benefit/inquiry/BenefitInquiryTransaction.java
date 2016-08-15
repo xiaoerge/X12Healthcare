@@ -1,9 +1,9 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
+import com.xiaoerge.healthcare.x12.SegmentStringUtil;
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.control.Transaction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.xiaoerge.healthcare.x12.segment.HL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,64 +13,43 @@ import java.util.List;
  */
 public class BenefitInquiryTransaction extends Transaction {
 
-    private List<BenefitInformationSource> benefitInformationSources;
+    private List<BenefitInquiryInformationSource> benefitInquiryInformationSources;
     public BenefitInquiryTransaction() {
         super();
-        benefitInformationSources = new ArrayList<BenefitInformationSource>();
+        benefitInquiryInformationSources = new ArrayList<BenefitInquiryInformationSource>();
     }
 
     public BenefitInquiryTransaction(String s) {
         super(s);
-        benefitInformationSources = new ArrayList<BenefitInformationSource>();
+        benefitInquiryInformationSources = new ArrayList<BenefitInquiryInformationSource>();
         parseContent();
     }
 
     public BenefitInquiryTransaction(Transaction transaction) {
         super(transaction);
-        benefitInformationSources = new ArrayList<BenefitInformationSource>();
+        benefitInquiryInformationSources = new ArrayList<BenefitInquiryInformationSource>();
         parseContent();
     }
 
     private void parseContent() {
-        StringQueue stringQueue = new StringQueue(getContent());
-        StringBuilder stringBuilder = new StringBuilder();
+        String[] sourceStrings = SegmentStringUtil.split(getContent(), "HL");
+        String[] informationSources = SegmentStringUtil.joinLevel(sourceStrings);
 
-//        while (stringQueue.hasNext()) {
-//            String peek = stringQueue.peekNext();
-//            String next = stringQueue.getNext();
-//
-//            if (new HL(peek).getHierarchicalParentIDNumber().length() == 0
-//                    && stringBuilder.length() > 0) {
-//                stringBuilder.append(next);
-//
-//                BenefitInformationSource source = new BenefitInformationSource(stringBuilder.toString());
-//                benefitInformationSources.add(source);
-//                stringBuilder = new StringBuilder();
-//
-//                logger.info("size "+benefitInformationSources.size()+"");
-//
-//                logger.info("Start hierarchical level "+ next);
-//            }
-//            else {
-//                stringBuilder.append(next);
-//                logger.info("Found segment "+ next);
-//            }
-//        }
-    }
-
-    public String toX12String() {
-        StringBuilder stringBuilder = new StringBuilder(super.toX12String());
-        for (BenefitInformationSource source : benefitInformationSources) {
-            stringBuilder.append(source.toX12String());
+        for (String sourceString : informationSources) {
+            benefitInquiryInformationSources.add(new BenefitInquiryInformationSource(sourceString));
         }
-        return stringBuilder.toString();
     }
 
-    public List<BenefitInformationSource> getBenefitInformationSources() {
-        return benefitInformationSources;
+    public void loadDefinition() {
+        messagesDefinition.clear();
+        messagesDefinition.addAll(benefitInquiryInformationSources);
     }
 
-    public void setBenefitInformationSources(List<BenefitInformationSource> benefitInformationSources) {
-        this.benefitInformationSources = benefitInformationSources;
+    public List<BenefitInquiryInformationSource> getBenefitInquiryInformationSources() {
+        return benefitInquiryInformationSources;
+    }
+
+    public void setBenefitInquiryInformationSources(List<BenefitInquiryInformationSource> benefitInquiryInformationSources) {
+        this.benefitInquiryInformationSources = benefitInquiryInformationSources;
     }
 }

@@ -1,7 +1,7 @@
 package com.xiaoerge.healthcare.x12.benefit.inquiry;
 
 import com.xiaoerge.healthcare.x12.IMessage;
-import com.xiaoerge.healthcare.x12.SegmentSplitter;
+import com.xiaoerge.healthcare.x12.SegmentStringUtil;
 import com.xiaoerge.healthcare.x12.StringQueue;
 import com.xiaoerge.healthcare.x12.segment.*;
 
@@ -74,7 +74,7 @@ public class BenefitInquirySubscriber extends IMessage {
         while (stringQueue.hasNext() && !stringQueue.peekNext().startsWith("HL"))
             eligibilityString.append(stringQueue.getNext());
 
-        String[] eqStrings = SegmentSplitter.split(eligibilityString.toString(), "EQ");
+        String[] eqStrings = SegmentStringUtil.split(eligibilityString.toString(), "EQ");
         for(String eqString : eqStrings) {
             subscriberEligibility.add(new BenefitInquirySubscriberEligibility(eqString));
         }
@@ -84,7 +84,7 @@ public class BenefitInquirySubscriber extends IMessage {
         while (stringQueue.hasNext()) {
             dependentString.append(stringQueue.getNext());
         }
-        String[] dependentStrings = SegmentSplitter.split(dependentString.toString(), "HL");
+        String[] dependentStrings = SegmentStringUtil.split(dependentString.toString(), "HL");
         for(String dString : dependentStrings) {
             BenefitInquiryDependent dependent = new BenefitInquiryDependent(dString);
             if (!dependent.getDependentLevel().getHierarchicalParentIDNumber()

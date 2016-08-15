@@ -11,19 +11,19 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/5/16.
  */
-public class BenefitInformationSource extends IMessage {
+public class BenefitInquiryInformationSource extends IMessage {
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
 
     List<BenefitInformationReceiver> benefitInformationReceivers;
 
-    public BenefitInformationSource() {
+    public BenefitInquiryInformationSource() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
         benefitInformationReceivers = new ArrayList<BenefitInformationReceiver>();
     }
 
-    public BenefitInformationSource(String s) {
+    public BenefitInquiryInformationSource(String s) {
         StringQueue stringQueue = new StringQueue(s);
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -54,27 +54,12 @@ public class BenefitInformationSource extends IMessage {
     }
 
     public void loadDefinition() {
+        messagesDefinition.clear();
 
+        messagesDefinition.add(hierarchicalLevel);
+        messagesDefinition.add(individualOrOrganizationalName);
+        messagesDefinition.addAll(benefitInformationReceivers);
     }
-
-    public boolean validate() {
-        return hierarchicalLevel.validate() && individualOrOrganizationalName.validate();
-    }
-
-    public String toX12String() {
-        StringBuilder stringBuilder = new StringBuilder(hierarchicalLevel.toX12String());
-        stringBuilder.append(individualOrOrganizationalName.toX12String());
-        for (BenefitInformationReceiver receiver : benefitInformationReceivers) {
-            stringBuilder.append(receiver.toX12String());
-        }
-        return stringBuilder.toString();
-    }
-
-    public boolean isEmpty() {
-        return hierarchicalLevel.isEmpty() && individualOrOrganizationalName.isEmpty();
-    }
-
-    public String toString() { return toX12String(); }
 
     public String getHierarchicalIDNumber() { return hierarchicalLevel.getHierarchicalIDNumber(); }
     public String getHierarchicalLevelCode() { return hierarchicalLevel.getHierarchicalLevelCode(); }

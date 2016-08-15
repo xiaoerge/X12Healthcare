@@ -75,40 +75,14 @@ public class BenefitInformationReceiver extends IMessage {
     }
 
     public void loadDefinition() {
-
-    }
-
-    public boolean validate() {
-        boolean refValidate = true;
-        for (REF ref : referenceInformation) if (!ref.validate()) refValidate = false;
-
-        return hierarchicalLevel.validate()
-                && individualOrOrganizationalName.validate()
-                && refValidate
-                && partyLocation.validate()
-                && geographicLocation.validate()
-                && providerInformation.validate();
-    }
-
-    public String toX12String() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(hierarchicalLevel.toX12String());
-        stringBuilder.append(individualOrOrganizationalName.toX12String());
-        for (REF ref : referenceInformation) stringBuilder.append(ref.toX12String());
-
-        stringBuilder.append(partyLocation.toX12String());
-        stringBuilder.append(geographicLocation.toX12String());
-        stringBuilder.append(providerInformation.toX12String());
-
-        for (BenefitInquirySubscriber subscriber : benefitSubscribers) stringBuilder.append(subscriber.toX12String());
-
-        return stringBuilder.toString();
-    }
-
-    public String toString() {return toX12String();}
-
-    public boolean isEmpty() {
-        return false;
+        messagesDefinition.clear();
+        messagesDefinition.add(hierarchicalLevel);
+        messagesDefinition.add(individualOrOrganizationalName);
+        messagesDefinition.addAll(referenceInformation);
+        messagesDefinition.add(partyLocation);
+        messagesDefinition.add(geographicLocation);
+        messagesDefinition.add(providerInformation);
+        messagesDefinition.addAll(benefitSubscribers);
     }
 
     public String getHierarchicalIDNumber() { return hierarchicalLevel.getHierarchicalIDNumber(); }

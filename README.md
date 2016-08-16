@@ -1,7 +1,7 @@
-#EDI Parser
-Version 5010X279A1
+#X12Healthcare v5010X279A1
+##ANSI ASC X12 implementation for healthcare
 
-[![Build Status](https://travis-ci.org/xiaoerge/EDIParser.svg?branch=master)](https://travis-ci.org/xiaoerge/EDIParser)
+[![Build Status](https://travis-ci.org/xiaoerge/X12Healthcare.svg?branch=master)](https://travis-ci.org/xiaoerge/X12Healthcare)
 [![codecov](https://codecov.io/gh/xiaoerge/EDIParser/branch/master/graph/badge.svg)](https://codecov.io/gh/xiaoerge/EDIParser)
 
 

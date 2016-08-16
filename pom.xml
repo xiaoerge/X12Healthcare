@@ -8,6 +8,7 @@
     <artifactId>x12healthcare</artifactId>
     <version>16-8-005010X279A1</version>
 
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

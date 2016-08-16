@@ -17,28 +17,28 @@ public class GS extends Segment
     }
 
     @Definition(position = 1, minLength = 2, maxLength = 2)
-    public String getFunctionalIDCode() {return collection[1];}
+    public String getFunctionalIDCode() {return getByDefinition(); }
 
     @Definition(position = 2, minLength = 2, maxLength = 15)
-    public String getApplicationSendersCode() {return collection[2];}
+    public String getApplicationSendersCode() {return getByDefinition(); }
 
     @Definition(position = 3, minLength = 2, maxLength = 15)
-    public String getApplicationReceiversCode() {return collection[3];}
+    public String getApplicationReceiversCode() {return getByDefinition(); }
 
     @Definition(position = 4, minLength = 8, maxLength = 8)
-    public String getDate() {return collection[4];}
+    public String getDate() {return getByDefinition(); }
 
     @Definition(position = 5, minLength = 4, maxLength = 8)
-    public String getTime() {return collection[5];}
+    public String getTime() {return getByDefinition(); }
 
     @Definition(position = 6, minLength = 1, maxLength = 9)
-    public String getGroupControlNumber() {return collection[6];}
+    public String getGroupControlNumber() {return getByDefinition(); }
 
     @Definition(position = 7, minLength = 1, maxLength = 2)
-    public String getResponsibleAgencyCode() {return collection[7];}
+    public String getResponsibleAgencyCode() {return getByDefinition(); }
 
     @Definition(position = 8, minLength = 1, maxLength = 12)
-    public String getVersionReleaseIndustryIDCode() {return collection[8];}
+    public String getVersionReleaseIndustryIDCode() {return getByDefinition(); }
 
     public void setFunctionalIDCode(String s) { collection[1] = s;}
     public void setApplicationSendersCode(String s) { collection[2] = s;}

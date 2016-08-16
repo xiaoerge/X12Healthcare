@@ -14,13 +14,13 @@ public class AMT extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 3)
-    public String getAmountQualifierCode() { return collection[1]; }
+    public String getAmountQualifierCode() { return getByDefinition(); }
 
     @Definition(position = 2, minLength = 1, maxLength = 18)
-    public String getMonetaryAmount() { return collection[2]; }
+    public String getMonetaryAmount() { return getByDefinition(); }
 
     @Definition(position = 3, minLength = 1, maxLength = 1)
-    public String getCreditDebitFlagCode() { return collection[3]; }
+    public String getCreditDebitFlagCode() { return getByDefinition(); }
 
     public void setAmountQualifierCode(String s) { collection[1] = s; }
     public void setMonetaryAmount(String s) { collection[2] = s; }

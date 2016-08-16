@@ -17,52 +17,52 @@ public class ISA extends Segment
     }
 
     @Definition(position = 1, minLength = 2, maxLength = 2)
-    public String getAuthInfoQualifier() {return collection[1];}
+    public String getAuthInfoQualifier() {return getByDefinition(); }
 
     @Definition(position = 2, minLength = 10, maxLength = 10)
-    public String getAuthInformation() {return collection[2];}
+    public String getAuthInformation() {return getByDefinition(); }
 
     @Definition(position = 3, minLength = 2, maxLength = 2)
-    public String getSecurityInfoQualifier() {return collection[3];}
+    public String getSecurityInfoQualifier() {return getByDefinition(); }
 
     @Definition(position = 4, minLength = 10, maxLength = 10)
-    public String getSecurityInformation() {return collection[4];}
+    public String getSecurityInformation() {return getByDefinition(); }
 
     @Definition(position = 5, minLength = 2, maxLength = 2)
-    public String getInterchangeIDQualifierSender() {return collection[5];}
+    public String getInterchangeIDQualifierSender() {return getByDefinition(); }
 
     @Definition(position = 6, minLength = 15, maxLength = 15)
-    public String getInterchangeSenderID() {return collection[6];}
+    public String getInterchangeSenderID() {return getByDefinition(); }
 
     @Definition(position = 7, minLength = 2, maxLength = 2)
-    public String getInterchangeIDQualifierReceiver() {return collection[7];}
+    public String getInterchangeIDQualifierReceiver() {return getByDefinition(); }
 
     @Definition(position = 8, minLength = 15, maxLength = 15)
-    public String getInterchangeReceiverID() {return collection[8];}
+    public String getInterchangeReceiverID() {return getByDefinition(); }
 
     @Definition(position = 9, minLength = 6, maxLength = 6)
-    public String getInterchangeDate() {return collection[9];}
+    public String getInterchangeDate() {return getByDefinition(); }
 
     @Definition(position = 10, minLength = 4, maxLength = 4)
-    public String getInterchangeTime() {return collection[10];}
+    public String getInterchangeTime() {return getByDefinition(); }
 
     @Definition(position = 11, minLength = 1, maxLength = 1)
-    public String getRepetitionSeparator() {return collection[11];}
+    public String getRepetitionSeparator() {return getByDefinition(); }
 
     @Definition(position = 12, minLength = 5, maxLength = 5)
-    public String getInterchangeControlVersionNumber() {return collection[12];}
+    public String getInterchangeControlVersionNumber() {return getByDefinition(); }
 
     @Definition(position = 13, minLength = 9, maxLength = 9)
-    public String getInterchangeControlNumber() {return collection[13];}
+    public String getInterchangeControlNumber() {return getByDefinition(); }
 
     @Definition(position = 14, minLength = 1, maxLength = 1)
-    public String getAcknowledgmentRequested() {return collection[14];}
+    public String getAcknowledgmentRequested() {return getByDefinition(); }
 
     @Definition(position = 15, minLength = 1, maxLength = 1)
-    public String getUsageIndicator() {return collection[15];}
+    public String getUsageIndicator() {return getByDefinition(); }
 
     @Definition(position = 16, minLength = 1, maxLength = 1)
-    public String getComponentElementSeparator() {return collection[16];}
+    public String getComponentElementSeparator() {return getByDefinition(); }
 
     public void setAuthInfoQualifier(String s) { collection[1] = s;}
     public void setAuthInformation(String s) { collection[2] = s;}

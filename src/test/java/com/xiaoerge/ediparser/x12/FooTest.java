@@ -1,5 +1,6 @@
 package com.xiaoerge.ediparser.x12;
 
+import com.xiaoerge.ediparser.x12.segment.PER;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,5 +25,9 @@ public class FooTest {
         for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
             //System.out.println(element.getLineNumber());
         }
+
+        PER per = new PER("PER*1*2*3*4*5*6*7*8*~");
+
+        //System.out.println(per.getContactFunctionCode());
     }
 }

@@ -14,19 +14,19 @@ public class EQ extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 2)
-    public String getServiceTypeCode() { return collection[1]; }
+    public String getServiceTypeCode() { return getByDefinition(); }
 
     @Definition(position = 2, minLength = 2, maxLength = 176)
-    public String getCompositeMedicalProcedureIdentifier() { return collection[2]; }
+    public String getCompositeMedicalProcedureIdentifier() { return getByDefinition(); }
 
     @Definition(position = 3, minLength = 3, maxLength = 3)
-    public String getCoverageLevelCode() { return collection[3]; }
+    public String getCoverageLevelCode() { return getByDefinition(); }
 
     @Definition(position = 4, minLength = 1, maxLength = 3)
-    public String getInsuranceTypeCode() { return collection[4]; }
+    public String getInsuranceTypeCode() { return getByDefinition(); }
 
     @Definition(position = 5, minLength = 1, maxLength = 8)
-    public String getCompositeDiagnosisCodePointer() { return collection[5]; }
+    public String getCompositeDiagnosisCodePointer() { return getByDefinition(); }
 
     public void setServiceTypeCode(String s) {collection[1] = s;}
     public void setCompositeMedicalProcedureIdentifier(String s) {collection[2] = s;}

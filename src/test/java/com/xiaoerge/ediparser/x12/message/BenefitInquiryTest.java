@@ -44,14 +44,14 @@ public class BenefitInquiryTest {
                 "EQ*30~" +
                 "SE*13*1234~" +
                 "GE*1*0616~" +
-                "IEA*1*0616~";
+                "IEA*1*024277220~";
 
         BenefitInquiry message = (BenefitInquiry) X12Parser.fromX12Message(x12);
         InterchangeEnvelope envelope = message.getInterchangeEnvelope();
 
         Assert.assertEquals("ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~",
                 envelope.getTransactionSetHeader().toString());
-        Assert.assertEquals("IEA*1*0616~", envelope.getTransactionSetTrailer().toString());
+        Assert.assertEquals("IEA*1*024277220~", envelope.getTransactionSetTrailer().toString());
 
         for (FunctionalGroup group : envelope.getFunctionalGroups()) {
             Assert.assertEquals("GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~", group.getFunctionalGroupHeader().toString());
@@ -135,7 +135,7 @@ public class BenefitInquiryTest {
                 "EQ*30~" +
                 "SE*13*1234~" +
                 "GE*1*0616~" +
-                "IEA*1*0616~";
+                "IEA*1*024277220~";
 
         BenefitInquiry benefitInquiry = (BenefitInquiry) X12Parser.fromX12Message(x12);
         BenefitInquiry benefitInquiry2 = new BenefitInquiry(benefitInquiry.toString());

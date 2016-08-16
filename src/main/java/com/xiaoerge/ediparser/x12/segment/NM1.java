@@ -16,40 +16,40 @@ public class NM1 extends Segment {
     }
 
     @Definition(position = 1, minLength = 2, maxLength = 3)
-    public String getEntityIdentifierCode() { return collection[1]; }
+    public String getEntityIdentifierCode() { return getByDefinition(); }
 
     @Definition(position = 2, minLength = 1, maxLength = 1)
-    public String getEntityTypeQualifier() { return collection[2]; }
+    public String getEntityTypeQualifier() { return getByDefinition(); }
 
     @Definition(position = 3, minLength = 1, maxLength = 60)
-    public String getNameLastOrOrganizationName() { return collection[3]; }
+    public String getNameLastOrOrganizationName() { return getByDefinition(); }
 
     @Definition(position = 4, minLength = 1, maxLength = 35)
-    public String getNameFirst() { return collection[4]; }
+    public String getNameFirst() { return getByDefinition(); }
 
     @Definition(position = 5, minLength = 1, maxLength = 25)
-    public String getNameMiddle() { return collection[5]; }
+    public String getNameMiddle() { return getByDefinition(); }
 
     @Definition(position = 6, minLength = 1, maxLength = 10)
-    public String getNamePrefix() { return collection[6]; }
+    public String getNamePrefix() { return getByDefinition(); }
 
     @Definition(position = 7, minLength = 1, maxLength = 10)
-    public String getNameSuffix() { return collection[7]; }
+    public String getNameSuffix() { return getByDefinition(); }
 
     @Definition(position = 8, minLength = 1, maxLength = 2)
-    public String getIdentificationCodeQualifier() { return collection[8]; }
+    public String getIdentificationCodeQualifier() { return getByDefinition(); }
 
     @Definition(position = 9, minLength = 2, maxLength = 80)
-    public String getIdentificationCode() { return collection[9]; }
+    public String getIdentificationCode() { return getByDefinition(); }
 
     @Definition(position = 10, minLength = 2, maxLength = 2)
-    public String getEntityRelationshipCode() { return collection[10]; }
+    public String getEntityRelationshipCode() { return getByDefinition(); }
 
     @Definition(position = 11, minLength = 2, maxLength = 3)
-    public String getEntityIdentifierCodeNotUsed() { return collection[11]; }
+    public String getEntityIdentifierCodeNotUsed() { return getByDefinition(); }
 
     @Definition(position = 12, minLength = 1, maxLength = 60)
-    public String getNameLastOrOrganizationNameNotUsed() { return collection[12]; }
+    public String getNameLastOrOrganizationNameNotUsed() { return getByDefinition(); }
 
     public void setEntityIdentifierCode(String s) { collection[1] = s; }
     public void setEntityTypeQualifier(String s) { collection[2] = s; }

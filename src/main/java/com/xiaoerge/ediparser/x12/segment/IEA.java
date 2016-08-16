@@ -1,6 +1,7 @@
 package com.xiaoerge.ediparser.x12.segment;
 
 import com.xiaoerge.ediparser.x12.annotation.Declaration;
+import com.xiaoerge.ediparser.x12.annotation.Definition;
 
 /**
  * Created by xiaoerge on 5/23/16.
@@ -12,8 +13,11 @@ public class IEA extends Segment {
         super(content);
     }
 
-    public String getNumberOfIncludedFunctionalGroups() { return collection[1]; }
-    public String getInterchangeControlNumber() { return collection[2]; }
+    @Definition(position = 1, minLength = 1, maxLength = 5)
+    public String getNumberOfIncludedFunctionalGroups() { return getByDefinition(); }
+
+    @Definition(position = 2, minLength = 9, maxLength = 9)
+    public String getInterchangeControlNumber() { return getByDefinition(); }
 
     public void setNumberOfIncludedFunctionalGroups(String s) { collection[1] = s; }
     public void setInterchangeControlNumber(String s) { collection[2] = s; }

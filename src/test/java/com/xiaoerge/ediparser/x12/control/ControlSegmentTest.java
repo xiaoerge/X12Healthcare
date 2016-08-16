@@ -199,22 +199,22 @@ public class ControlSegmentTest {
 
     @Test
     public void testParseIEA() {
-        String x12 = "IEA*1*0616~";
+        String x12 = "IEA*1*024277220~";
         IEA iea = new IEA(x12);
 
         Assert.assertEquals(true, iea.validate());
         Assert.assertEquals(x12, iea.toString());
         Assert.assertEquals("1", iea.getNumberOfIncludedFunctionalGroups());
-        Assert.assertEquals("0616", iea.getInterchangeControlNumber());
+        Assert.assertEquals("024277220", iea.getInterchangeControlNumber());
     }
 
     @Test
     public void testCreateIEA() {
-        String x12 = "IEA*1*0616~";
+        String x12 = "IEA*1*024277220~";
         IEA iea = new IEA();
 
         iea.setNumberOfIncludedFunctionalGroups("1");
-        iea.setInterchangeControlNumber("0616");
+        iea.setInterchangeControlNumber("024277220");
 
         Assert.assertEquals(true, iea.validate());
         Assert.assertEquals(x12, iea.toString());

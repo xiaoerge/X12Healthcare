@@ -16,16 +16,16 @@ public class HL extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 12)
-    public String getHierarchicalIDNumber() {return collection[1];}
+    public String getHierarchicalIDNumber() {return getByDefinition(); }
 
     @Definition(position = 2, minLength = 1, maxLength = 12)
-    public String getHierarchicalParentIDNumber() {return collection[2];}
+    public String getHierarchicalParentIDNumber() {return getByDefinition(); }
 
     @Definition(position = 3, minLength = 1, maxLength = 2)
-    public String getHierarchicalLevelCode() {return collection[3];}
+    public String getHierarchicalLevelCode() {return getByDefinition(); }
 
     @Definition(position = 4, minLength = 1, maxLength = 1)
-    public String getHierarchicalChildCode() {return collection[4];}
+    public String getHierarchicalChildCode() {return getByDefinition(); }
 
     public void setHierarchicalIDNumber(String s) { collection[1] = s;}
     public void setHierarchicalParentIDNumber(String s) { collection[2] = s;}

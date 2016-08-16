@@ -14,37 +14,37 @@ public class DMG extends Segment {
     }
     
     @Definition(position = 1, minLength = 2, maxLength = 3)
-    public String getDateTimePeriodFormatQualifier() { return collection[1]; }
+    public String getDateTimePeriodFormatQualifier() { return getByDefinition(); }
 
     @Definition(position = 2, minLength = 1, maxLength = 35)
-    public String getDateTimePeriod() { return collection[2]; }
+    public String getDateTimePeriod() { return getByDefinition(); }
 
     @Definition(position = 3, minLength = 1, maxLength = 1)
-    public String getGenderCode() { return collection[3]; }
+    public String getGenderCode() { return getByDefinition(); }
 
     @Definition(position = 4, minLength = 1, maxLength = 1)
-    public String getMaritalStatusCode() { return collection[4]; }
+    public String getMaritalStatusCode() { return getByDefinition(); }
 
     @Definition(position = 5, minLength = 1, maxLength = 10)
-    public String getCompositeRaceOrEthnicityInformation() { return collection[5]; }
+    public String getCompositeRaceOrEthnicityInformation() { return getByDefinition(); }
 
     @Definition(position = 6, minLength = 1, maxLength = 2)
-    public String getCitizenshipStatusCode() { return collection[6]; }
+    public String getCitizenshipStatusCode() { return getByDefinition(); }
 
     @Definition(position = 7, minLength = 2, maxLength = 3)
-    public String getCountryCode() { return collection[7]; }
+    public String getCountryCode() { return getByDefinition(); }
 
     @Definition(position = 8, minLength = 1, maxLength = 2)
-    public String getBasisOfVerificationCode() { return collection[8]; }
+    public String getBasisOfVerificationCode() { return getByDefinition(); }
 
     @Definition(position = 9, minLength = 1, maxLength = 15)
-    public String getQuantity() { return collection[9]; }
+    public String getQuantity() { return getByDefinition(); }
 
     @Definition(position = 10, minLength = 1, maxLength = 13)
-    public String getCodeListQualifierCode() { return collection[10]; }
+    public String getCodeListQualifierCode() { return getByDefinition(); }
 
     @Definition(position = 11, minLength = 1, maxLength = 30)
-    public String getIndustryCode() { return collection[11]; }
+    public String getIndustryCode() { return getByDefinition(); }
 
     public void setDateTimePeriodFormatQualifier(String s) { collection[1] = s; }
     public void setDateTimePeriod(String s) { collection[2] = s; }

@@ -14,13 +14,13 @@ public class ST extends Segment {
     }
 
     @Definition(position = 1, minLength = 3, maxLength = 3)
-    public String getTransactionSetIDCode() { return collection[1]; }
+    public String getTransactionSetIDCode() { return getByDefinition(); }
 
     @Definition(position = 2, minLength = 4, maxLength = 9)
-    public String getTransactionSetControlNumber() { return collection[2]; }
+    public String getTransactionSetControlNumber() { return getByDefinition(); }
 
     @Definition(position = 3, minLength = 1, maxLength = 35)
-    public String getImplementationConventionReference() { return collection[3]; }
+    public String getImplementationConventionReference() { return getByDefinition(); }
 
     public void setTransactionSetIDCode(String s) { collection[1] = s; }
     public void setTransactionSetControlNumber(String s) { collection[2] = s; }

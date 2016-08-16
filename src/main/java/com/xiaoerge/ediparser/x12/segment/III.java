@@ -14,31 +14,31 @@ public class III extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 3)
-    public String getCodeListQualifierCode() { return collection[1]; }
+    public String getCodeListQualifierCode() { return getByDefinition(); }
 
     @Definition(position = 2, minLength = 1, maxLength = 30)
-    public String getIndustryCode() { return collection[2]; }
+    public String getIndustryCode() { return getByDefinition(); }
 
     @Definition(position = 3, minLength = 2, maxLength = 2)
-    public String getCodeCategory() { return collection[3]; }
+    public String getCodeCategory() { return getByDefinition(); }
 
     @Definition(position = 4, minLength = 1, maxLength = 264)
-    public String getFreeFormMessageText() { return collection[4]; }
+    public String getFreeFormMessageText() { return getByDefinition(); }
 
     @Definition(position = 5, minLength = 1, maxLength = 15)
-    public String getQuantity() { return collection[5]; }
+    public String getQuantity() { return getByDefinition(); }
 
     @Definition(position = 6, minLength = 1, maxLength = 10)
-    public String getCompositeUnitOfMeasure() { return collection[6]; }
+    public String getCompositeUnitOfMeasure() { return getByDefinition(); }
 
     @Definition(position = 7, minLength = 2, maxLength = 2)
-    public String getSurfaceLayerPositionCode1() { return collection[7]; }
+    public String getSurfaceLayerPositionCode1() { return getByDefinition(); }
 
     @Definition(position = 8, minLength = 2, maxLength = 2)
-    public String getSurfaceLayerPositionCode2() { return collection[8]; }
+    public String getSurfaceLayerPositionCode2() { return getByDefinition(); }
 
     @Definition(position = 9, minLength = 2, maxLength = 2)
-    public String getSurfaceLayerPositionCode3() { return collection[9]; }
+    public String getSurfaceLayerPositionCode3() { return getByDefinition(); }
 
     public void setCodeListQualifierCode(String s) { collection[1] = s; }
     public void setIndustryCode(String s) { collection[2] = s; }

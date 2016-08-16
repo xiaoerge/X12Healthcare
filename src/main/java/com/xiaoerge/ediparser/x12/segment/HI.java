@@ -14,40 +14,40 @@ public class HI extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation1() { return collection[1]; }
+    public String getHealthCareCodeInformation1() { return getByDefinition(); }
 
     @Definition(position = 2, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation2() { return collection[2]; }
+    public String getHealthCareCodeInformation2() { return getByDefinition(); }
 
     @Definition(position = 3, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation3() { return collection[3]; }
+    public String getHealthCareCodeInformation3() { return getByDefinition(); }
 
     @Definition(position = 4, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation4() { return collection[4]; }
+    public String getHealthCareCodeInformation4() { return getByDefinition(); }
 
     @Definition(position = 5, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation5() { return collection[5]; }
+    public String getHealthCareCodeInformation5() { return getByDefinition(); }
 
     @Definition(position = 6, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation6() { return collection[6]; }
+    public String getHealthCareCodeInformation6() { return getByDefinition(); }
 
     @Definition(position = 7, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation7() { return collection[7]; }
+    public String getHealthCareCodeInformation7() { return getByDefinition(); }
 
     @Definition(position = 8, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation8() { return collection[8]; }
+    public String getHealthCareCodeInformation8() { return getByDefinition(); }
 
     @Definition(position = 9, minLength = 1, maxLength = 1)
-    public String getHealthCareCodeInformation9() { return collection[9]; }
+    public String getHealthCareCodeInformation9() { return getByDefinition(); }
 
     @Definition(position = 10, minLength = 1, maxLength = 13)
-    public String getHealthCareCodeInformation10() { return collection[10]; }
+    public String getHealthCareCodeInformation10() { return getByDefinition(); }
 
     @Definition(position = 11, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation11() { return collection[11]; }
+    public String getHealthCareCodeInformation11() { return getByDefinition(); }
 
     @Definition(position = 12, minLength = 1, maxLength = 30)
-    public String getHealthCareCodeInformation12() { return collection[12]; }
+    public String getHealthCareCodeInformation12() { return getByDefinition(); }
 
     public void setHealthCareCodeInformation1(String s) { collection[1] = s; }
     public void setHealthCareCodeInformation2(String s) { collection[2] = s; }

@@ -14,10 +14,10 @@ public class SE extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 10)
-    public String getTransactionSegmentCount() { return collection[1]; }
+    public String getTransactionSegmentCount() { return getByDefinition(); }
 
     @Definition(position = 2, minLength = 4, maxLength = 9)
-    public String getTransactionSetControlNumber() { return collection[2]; }
+    public String getTransactionSetControlNumber() { return getByDefinition(); }
 
     public void setTransactionSegmentCount(String s) { collection[1] = s; }
     public void setTransactionSetControlNumber(String s) { collection[2] = s; }

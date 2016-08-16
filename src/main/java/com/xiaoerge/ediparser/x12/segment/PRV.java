@@ -14,22 +14,22 @@ public class PRV extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 3)
-    public String getProviderCode() { return collection[1]; }
+    public String getProviderCode() { return getByDefinition(); }
 
     @Definition(position = 2, minLength = 2, maxLength = 3)
-    public String getReferenceIdentificationQualifier() { return collection[2]; }
+    public String getReferenceIdentificationQualifier() { return getByDefinition(); }
 
     @Definition(position = 3, minLength = 1, maxLength = 50)
-    public String getReferenceIdentification() { return collection[3]; }
+    public String getReferenceIdentification() { return getByDefinition(); }
 
     @Definition(position = 4, minLength = 2, maxLength = 2)
-    public String getStateOrProvinceCode() { return collection[4]; }
+    public String getStateOrProvinceCode() { return getByDefinition(); }
 
     @Definition(position = 5, minLength = 1, maxLength = 10)
-    public String getProviderSpecialtyInformation() { return collection[5]; }
+    public String getProviderSpecialtyInformation() { return getByDefinition(); }
 
     @Definition(position = 6, minLength = 3, maxLength = 3)
-    public String getProviderOrganizationCode() { return collection[6]; }
+    public String getProviderOrganizationCode() { return getByDefinition(); }
 
     public void setProviderCode(String s) { collection[1] = s; }
     public void setReferenceIdentificationQualifier(String s) { collection[2] = s; }

@@ -153,10 +153,3 @@ InterchangeEnvelope
         Assert.assertEquals(x12, benefitInquiry2.toString());
     }
 ```
-
-####Todo
-`toString()` method probably needs a better strategy other printing default on invalid segments.
-
-`toString()` should print to uppercase
-
-`setters` should limit by length

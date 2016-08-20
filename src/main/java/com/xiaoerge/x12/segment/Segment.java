@@ -154,7 +154,7 @@ public class Segment extends MessageBase
     @Override
     public String toX12String() {
 
-        if (isEmpty()) return name+"~";
+        if (isEmpty()) return "";
         if (!validate()) return name.concat(StringUtils.repeat("*", fieldSize)).concat("~");
 
         collection[0] = name;

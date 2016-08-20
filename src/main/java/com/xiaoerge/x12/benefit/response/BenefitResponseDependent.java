@@ -1,5 +1,6 @@
-package com.xiaoerge.x12.benefit.inquiry;
+package com.xiaoerge.x12.benefit.response;
 
+import com.xiaoerge.x12.benefit.inquiry.BenefitInquiryDependentEligibility;
 import com.xiaoerge.x12.message.MessageBase;
 import com.xiaoerge.x12.util.SegmentStringUtil;
 import com.xiaoerge.x12.util.StringQueue;
@@ -11,36 +12,40 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/11/16.
  */
-public class BenefitInquiryDependent extends MessageBase {
+public class BenefitResponseDependent extends MessageBase {
     private HL dependentLevel;
     private List<TRN> dependentTraces;
     private NM1 dependentName;
     private List<REF> additionalIdentification;
     private N3 dependentAddress;
     private N4 dependentCityState;
+    private List<AAA> dependentRequestValidation;
     private PRV providerInformation;
     private DMG dependentDemographic;
     private INS dependentRelationship;
     private HI dependentHealthCareDiagnosisCode;
     private List<DTP> dependentDate;
+    private MPI dependentMilitaryPersonnelInformation;
 
-    private List<BenefitInquiryDependentEligibility> dependentEligibility;
+    private List<BenefitResponseDependentEligibility> dependentEligibility;
 
-    public BenefitInquiryDependent() {
+    public BenefitResponseDependent() {
         dependentLevel = new HL();
         dependentTraces = new ArrayList<TRN>();
         dependentName = new NM1();
         additionalIdentification = new ArrayList<REF>();
         dependentAddress = new N3();
         dependentCityState = new N4();
+        dependentRequestValidation = new ArrayList<AAA>();
         providerInformation = new PRV();
         dependentDemographic = new DMG();
         dependentRelationship = new INS();
         dependentHealthCareDiagnosisCode = new HI();
         dependentDate = new ArrayList<DTP>();
-        dependentEligibility = new ArrayList<BenefitInquiryDependentEligibility>();
+        dependentMilitaryPersonnelInformation = new MPI();
+        dependentEligibility = new ArrayList<BenefitResponseDependentEligibility>();
     }
-    public BenefitInquiryDependent(String s) {
+    public BenefitResponseDependent(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
@@ -56,6 +61,8 @@ public class BenefitInquiryDependent extends MessageBase {
             dependentAddress = new N3(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
             dependentCityState = new N4(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AAA"))
+            dependentRequestValidation.add(new AAA(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
             providerInformation = new PRV(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DMG"))
@@ -66,15 +73,17 @@ public class BenefitInquiryDependent extends MessageBase {
             dependentHealthCareDiagnosisCode = new HI(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
             dependentDate.add(new DTP(stringQueue.getNext()));
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("MPI"))
+            dependentMilitaryPersonnelInformation = new MPI(stringQueue.getNext());
 
         StringBuilder builder = new StringBuilder();
         while (stringQueue.hasNext()) {
             builder.append(stringQueue.getNext());
         }
 
-        String[] splitArray = SegmentStringUtil.split(builder.toString(), "EQ");
+        String[] splitArray = SegmentStringUtil.split(builder.toString(), "EB");
         for(String str : splitArray) {
-            dependentEligibility.add(new BenefitInquiryDependentEligibility(str));
+            dependentEligibility.add(new BenefitResponseDependentEligibility(str));
         }
     }
 
@@ -87,107 +96,13 @@ public class BenefitInquiryDependent extends MessageBase {
         messagesDefinition.addAll(additionalIdentification);
         messagesDefinition.add(dependentAddress);
         messagesDefinition.add(dependentCityState);
+        messagesDefinition.addAll(dependentRequestValidation);
         messagesDefinition.add(providerInformation);
         messagesDefinition.add(dependentDemographic);
         messagesDefinition.add(dependentRelationship);
         messagesDefinition.add(dependentHealthCareDiagnosisCode);
         messagesDefinition.addAll(dependentDate);
+        messagesDefinition.add(dependentMilitaryPersonnelInformation);
         messagesDefinition.addAll(dependentEligibility);
-    }
-
-
-    public HL getDependentLevel() {
-        return dependentLevel;
-    }
-
-    public void setDependentLevel(HL dependentLevel) {
-        this.dependentLevel = dependentLevel;
-    }
-
-    public List<TRN> getDependentTraces() {
-        return dependentTraces;
-    }
-
-    public void setDependentTraces(List<TRN> dependentTraces) {
-        this.dependentTraces = dependentTraces;
-    }
-
-    public NM1 getDependentName() {
-        return dependentName;
-    }
-
-    public void setDependentName(NM1 dependentName) {
-        this.dependentName = dependentName;
-    }
-
-    public List<REF> getAdditionalIdentification() {
-        return additionalIdentification;
-    }
-
-    public void setAdditionalIdentification(List<REF> additionalIdentification) {
-        this.additionalIdentification = additionalIdentification;
-    }
-
-    public N3 getDependentAddress() {
-        return dependentAddress;
-    }
-
-    public void setDependentAddress(N3 dependentAddress) {
-        this.dependentAddress = dependentAddress;
-    }
-
-    public N4 getDependentCityState() {
-        return dependentCityState;
-    }
-
-    public void setDependentCityState(N4 dependentCityState) {
-        this.dependentCityState = dependentCityState;
-    }
-
-    public PRV getProviderInformation() {
-        return providerInformation;
-    }
-
-    public void setProviderInformation(PRV providerInformation) {
-        this.providerInformation = providerInformation;
-    }
-
-    public DMG getDependentDemographic() {
-        return dependentDemographic;
-    }
-
-    public void setDependentDemographic(DMG dependentDemographic) {
-        this.dependentDemographic = dependentDemographic;
-    }
-
-    public INS getDependentRelationship() {
-        return dependentRelationship;
-    }
-
-    public void setDependentRelationship(INS dependentRelationship) {
-        this.dependentRelationship = dependentRelationship;
-    }
-
-    public HI getDependentHealthCareDiagnosisCode() {
-        return dependentHealthCareDiagnosisCode;
-    }
-
-    public void setDependentHealthCareDiagnosisCode(HI dependentHealthCareDiagnosisCode) {
-        this.dependentHealthCareDiagnosisCode = dependentHealthCareDiagnosisCode;
-    }
-
-    public List<DTP> getDependentDate() {
-        return dependentDate;
-    }
-
-    public void setDependentDate(List<DTP> dependentDate) {
-        this.dependentDate = dependentDate;
-    }
-
-    public List<BenefitInquiryDependentEligibility> getDependentEligibility() {
-        return dependentEligibility;
-    }
-    public void setDependentEligibility(List<BenefitInquiryDependentEligibility> dependentEligibility) {
-        this.dependentEligibility = dependentEligibility;
     }
 }

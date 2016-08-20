@@ -37,7 +37,7 @@ public class BenefitInquiryDependentEligibility extends MessageBase {
             dependentEligibilityDate = new DTP(stringQueue.getNext());
 
         if (stringQueue.hasNext()) {
-            logger.warn("Unexpected string in BenefitInquiryDependentEligibility");
+            logger.warn("Unexpected string in "+this.getClass().getName());
         }
     }
 

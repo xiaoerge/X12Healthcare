@@ -12,34 +12,34 @@ import java.util.List;
  * Created by xiaoerge on 6/11/16.
  */
 public class BenefitInquirySubscriber extends MessageBase {
-    private HL subscriberLevel;
-    private List<TRN> subscriberTraces;
-    private NM1 subscriberName;
+    private HL hierarchicalLevel;
+    private List<TRN> traceNumber;
+    private NM1 name;
     private List<REF> additionalIdentification;
-    private N3 subscriberAddress;
-    private N4 subscriberCityState;
+    private N3 address;
+    private N4 cityStateZip;
     private PRV providerInformation;
-    private DMG subscriberDemographic;
+    private DMG demographic;
     private INS multipleBirthSequenceNumber;
-    private HI subscriberHealthCareDiagnosisCode;
-    private List<DTP> subscriberDate;
+    private HI healthCareDiagnosisCode;
+    private List<DTP> date;
 
-    private List<BenefitInquirySubscriberEligibility> subscriberEligibility;
+    private List<BenefitInquirySubscriberEligibility> Eligibility;
     private List<BenefitInquiryDependent> dependents;
 
     public BenefitInquirySubscriber() {
-        subscriberLevel = new HL();
-        subscriberTraces = new ArrayList<TRN>();
-        subscriberName = new NM1();
+        hierarchicalLevel = new HL();
+        traceNumber = new ArrayList<TRN>();
+        name = new NM1();
         additionalIdentification = new ArrayList<REF>();
-        subscriberAddress = new N3();
-        subscriberCityState = new N4();
+        address = new N3();
+        cityStateZip = new N4();
         providerInformation = new PRV();
-        subscriberDemographic = new DMG();
+        demographic = new DMG();
         multipleBirthSequenceNumber = new INS();
-        subscriberHealthCareDiagnosisCode = new HI();
-        subscriberDate = new ArrayList<DTP>();
-        subscriberEligibility = new ArrayList<BenefitInquirySubscriberEligibility>();
+        healthCareDiagnosisCode = new HI();
+        date = new ArrayList<DTP>();
+        Eligibility = new ArrayList<BenefitInquirySubscriberEligibility>();
         dependents = new ArrayList<BenefitInquiryDependent>();
     }
     public BenefitInquirySubscriber(String s) {
@@ -47,27 +47,27 @@ public class BenefitInquirySubscriber extends MessageBase {
         StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
-            subscriberLevel = new HL(stringQueue.getNext());
+            hierarchicalLevel = new HL(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("TRN"))
-            subscriberTraces.add(new TRN(stringQueue.getNext()));
+            traceNumber.add(new TRN(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
-            subscriberName = new NM1(stringQueue.getNext());
+            name = new NM1(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
             additionalIdentification.add(new REF(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
-            subscriberAddress = new N3(stringQueue.getNext());
+            address = new N3(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
-            subscriberCityState = new N4(stringQueue.getNext());
+            cityStateZip = new N4(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
             providerInformation = new PRV(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DMG"))
-            subscriberDemographic = new DMG(stringQueue.getNext());
+            demographic = new DMG(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("INS"))
             multipleBirthSequenceNumber = new INS(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HI"))
-            subscriberHealthCareDiagnosisCode = new HI(stringQueue.getNext());
+            healthCareDiagnosisCode = new HI(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            subscriberDate.add(new DTP(stringQueue.getNext()));
+            date.add(new DTP(stringQueue.getNext()));
 
         //find eligibility loop
         StringBuilder eligibilityString = new StringBuilder();
@@ -76,7 +76,7 @@ public class BenefitInquirySubscriber extends MessageBase {
 
         String[] eqStrings = SegmentStringUtil.split(eligibilityString.toString(), "EQ");
         for(String eqString : eqStrings) {
-            subscriberEligibility.add(new BenefitInquirySubscriberEligibility(eqString));
+            Eligibility.add(new BenefitInquirySubscriberEligibility(eqString));
         }
 
         //find dependent loop
@@ -87,8 +87,8 @@ public class BenefitInquirySubscriber extends MessageBase {
         String[] dependentStrings = SegmentStringUtil.split(dependentString.toString(), "HL");
         for(String dString : dependentStrings) {
             BenefitInquiryDependent dependent = new BenefitInquiryDependent(dString);
-            if (!dependent.getDependentLevel().getHierarchicalParentIDNumber()
-                    .equals(subscriberLevel.getHierarchicalIDNumber())){
+            if (!dependent.getHierarchicalLevel().getHierarchicalParentIDNumber()
+                    .equals(hierarchicalLevel.getHierarchicalIDNumber())){
                 //there's a problem with this HL
                 logger.error("Invalid HL found in BenefitInquirySubscriber to BenefitInquiryDependent "+ dependent.toString());
             }
@@ -101,43 +101,43 @@ public class BenefitInquirySubscriber extends MessageBase {
     public void loadDefinition() {
         messagesDefinition.clear();
 
-        messagesDefinition.add(subscriberLevel);
-        messagesDefinition.addAll(subscriberTraces);
-        messagesDefinition.add(subscriberName);
+        messagesDefinition.add(hierarchicalLevel);
+        messagesDefinition.addAll(traceNumber);
+        messagesDefinition.add(name);
         messagesDefinition.addAll(additionalIdentification);
-        messagesDefinition.add(subscriberAddress);
-        messagesDefinition.add(subscriberCityState);
+        messagesDefinition.add(address);
+        messagesDefinition.add(cityStateZip);
         messagesDefinition.add(providerInformation);
-        messagesDefinition.add(subscriberDemographic);
+        messagesDefinition.add(demographic);
         messagesDefinition.add(multipleBirthSequenceNumber);
-        messagesDefinition.add(subscriberHealthCareDiagnosisCode);
-        messagesDefinition.addAll(subscriberDate);
-        messagesDefinition.addAll(subscriberEligibility);
+        messagesDefinition.add(healthCareDiagnosisCode);
+        messagesDefinition.addAll(date);
+        messagesDefinition.addAll(Eligibility);
         messagesDefinition.addAll(dependents);
     }
 
-    public HL getSubscriberLevel() {
-        return subscriberLevel;
+    public HL getHierarchicalLevel() {
+        return hierarchicalLevel;
     }
 
-    public void setSubscriberLevel(HL subscriberLevel) {
-        this.subscriberLevel = subscriberLevel;
+    public void setHierarchicalLevel(HL hierarchicalLevel) {
+        this.hierarchicalLevel = hierarchicalLevel;
     }
 
-    public List<TRN> getSubscriberTraces() {
-        return subscriberTraces;
+    public List<TRN> getTraceNumber() {
+        return traceNumber;
     }
 
-    public void setSubscriberTraces(List<TRN> subscriberTraces) {
-        this.subscriberTraces = subscriberTraces;
+    public void setTraceNumber(List<TRN> traceNumber) {
+        this.traceNumber = traceNumber;
     }
 
-    public NM1 getSubscriberName() {
-        return subscriberName;
+    public NM1 getName() {
+        return name;
     }
 
-    public void setSubscriberName(NM1 subscriberName) {
-        this.subscriberName = subscriberName;
+    public void setName(NM1 name) {
+        this.name = name;
     }
 
     public List<REF> getAdditionalIdentification() {
@@ -148,20 +148,20 @@ public class BenefitInquirySubscriber extends MessageBase {
         this.additionalIdentification = additionalIdentification;
     }
 
-    public N3 getSubscriberAddress() {
-        return subscriberAddress;
+    public N3 getAddress() {
+        return address;
     }
 
-    public void setSubscriberAddress(N3 subscriberAddress) {
-        this.subscriberAddress = subscriberAddress;
+    public void setAddress(N3 address) {
+        this.address = address;
     }
 
-    public N4 getSubscriberCityState() {
-        return subscriberCityState;
+    public N4 getCityStateZip() {
+        return cityStateZip;
     }
 
-    public void setSubscriberCityState(N4 subscriberCityState) {
-        this.subscriberCityState = subscriberCityState;
+    public void setCityStateZip(N4 cityStateZip) {
+        this.cityStateZip = cityStateZip;
     }
 
     public PRV getProviderInformation() {
@@ -172,12 +172,12 @@ public class BenefitInquirySubscriber extends MessageBase {
         this.providerInformation = providerInformation;
     }
 
-    public DMG getSubscriberDemographic() {
-        return subscriberDemographic;
+    public DMG getDemographic() {
+        return demographic;
     }
 
-    public void setSubscriberDemographic(DMG subscriberDemographic) {
-        this.subscriberDemographic = subscriberDemographic;
+    public void setDemographic(DMG demographic) {
+        this.demographic = demographic;
     }
 
     public INS getMultipleBirthSequenceNumber() {
@@ -188,28 +188,28 @@ public class BenefitInquirySubscriber extends MessageBase {
         this.multipleBirthSequenceNumber = multipleBirthSequenceNumber;
     }
 
-    public HI getSubscriberHealthCareDiagnosisCode() {
-        return subscriberHealthCareDiagnosisCode;
+    public HI getHealthCareDiagnosisCode() {
+        return healthCareDiagnosisCode;
     }
 
-    public void setSubscriberHealthCareDiagnosisCode(HI subscriberHealthCareDiagnosisCode) {
-        this.subscriberHealthCareDiagnosisCode = subscriberHealthCareDiagnosisCode;
+    public void setHealthCareDiagnosisCode(HI healthCareDiagnosisCode) {
+        this.healthCareDiagnosisCode = healthCareDiagnosisCode;
     }
 
-    public List<DTP> getSubscriberDate() {
-        return subscriberDate;
+    public List<DTP> getDate() {
+        return date;
     }
 
-    public void setSubscriberDate(List<DTP> subscriberDate) {
-        this.subscriberDate = subscriberDate;
+    public void setDate(List<DTP> date) {
+        this.date = date;
     }
 
-    public List<BenefitInquirySubscriberEligibility> getSubscriberEligibility() {
-        return subscriberEligibility;
+    public List<BenefitInquirySubscriberEligibility> getEligibility() {
+        return Eligibility;
     }
 
-    public void setSubscriberEligibility(List<BenefitInquirySubscriberEligibility> subscriberEligibility) {
-        this.subscriberEligibility = subscriberEligibility;
+    public void setEligibility(List<BenefitInquirySubscriberEligibility> eligibility) {
+        this.Eligibility = eligibility;
     }
 
     public List<BenefitInquiryDependent> getDependents() {

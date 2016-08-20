@@ -60,31 +60,31 @@ public class BenefitInquirySubscriberTest {
 
         Assert.assertTrue(subscriber.validate());
         Assert.assertEquals(subscriberString+dependentString, subscriber.toString());
-        Assert.assertEquals("HL*5*4*22*1~", subscriber.getSubscriberLevel().toString());
-        Assert.assertEquals("TRN*1*109834652831*WXYZCLEARH*REALTIME~", subscriber.getSubscriberTraces().get(0).toString());
-        Assert.assertEquals(1, subscriber.getSubscriberTraces().size());
-        Assert.assertEquals("NM1*IL*1*SMITH*JOHN*L***MI*444115555~", subscriber.getSubscriberName().toString());
+        Assert.assertEquals("HL*5*4*22*1~", subscriber.getHierarchicalLevel().toString());
+        Assert.assertEquals("TRN*1*109834652831*WXYZCLEARH*REALTIME~", subscriber.getTraceNumber().get(0).toString());
+        Assert.assertEquals(1, subscriber.getTraceNumber().size());
+        Assert.assertEquals("NM1*IL*1*SMITH*JOHN*L***MI*444115555~", subscriber.getName().toString());
         Assert.assertEquals("REF*1L*660415~", subscriber.getAdditionalIdentification().get(0).toString());
-        Assert.assertEquals("N3*15197 BROADWAY AVENUE*APT 215~", subscriber.getSubscriberAddress().toString());
-        Assert.assertEquals("N4*KANSAS CITY*MO*64108~", subscriber.getSubscriberCityState().toString());
+        Assert.assertEquals("N3*15197 BROADWAY AVENUE*APT 215~", subscriber.getAddress().toString());
+        Assert.assertEquals("N4*KANSAS CITY*MO*64108~", subscriber.getCityStateZip().toString());
         Assert.assertEquals("PRV*RF*PXC*207Q00000X~", subscriber.getProviderInformation().toString());
-        Assert.assertEquals("DMG*D8*19430917*M~", subscriber.getSubscriberDemographic().toString());
+        Assert.assertEquals("DMG*D8*19430917*M~", subscriber.getDemographic().toString());
         Assert.assertEquals("INS*Y*18***************3~", subscriber.getMultipleBirthSequenceNumber().toString());
-        Assert.assertEquals("HI*BK:8901*BF:87200*BF:5559~", subscriber.getSubscriberHealthCareDiagnosisCode().toString());
-        Assert.assertEquals("DTP*281*D8*20051015~", subscriber.getSubscriberDate().get(0).toString());
-        Assert.assertEquals("DTP*291*D8*20051015~", subscriber.getSubscriberDate().get(1).toString());
-        Assert.assertEquals(2, subscriber.getSubscriberDate().size());
+        Assert.assertEquals("HI*BK:8901*BF:87200*BF:5559~", subscriber.getHealthCareDiagnosisCode().toString());
+        Assert.assertEquals("DTP*281*D8*20051015~", subscriber.getDate().get(0).toString());
+        Assert.assertEquals("DTP*291*D8*20051015~", subscriber.getDate().get(1).toString());
+        Assert.assertEquals(2, subscriber.getDate().size());
 
         for(int i = 0; i < 5; i++) {
-            BenefitInquirySubscriberEligibility benefitInquirySubscriberEligibility = subscriber.getSubscriberEligibility().get(i);
+            BenefitInquirySubscriberEligibility benefitInquirySubscriberEligibility = subscriber.getEligibility().get(i);
             Assert.assertEquals("EQ*"+(30+i)+"**FAM~",
                     benefitInquirySubscriberEligibility.toString());
         }
-        Assert.assertEquals(5, subscriber.getSubscriberEligibility().size());
+        Assert.assertEquals(5, subscriber.getEligibility().size());
 
         Assert.assertEquals(1, subscriber.getDependents().size());
         Assert.assertEquals(dependentString, subscriber.getDependents().get(0).toString());
-        Assert.assertEquals("5", subscriber.getDependents().get(0).getDependentLevel().getHierarchicalParentIDNumber());
+        Assert.assertEquals("5", subscriber.getDependents().get(0).getHierarchicalLevel().getHierarchicalParentIDNumber());
         Assert.assertEquals(5, subscriber.getDependents().get(0).getDependentEligibility().size());
     }
 
@@ -136,51 +136,51 @@ public class BenefitInquirySubscriberTest {
                 "DTP*291*D8*20051031~";
 
         BenefitInquirySubscriber subscriber = new BenefitInquirySubscriber();
-        subscriber.setSubscriberLevel(new HL("HL*5*4*22*1~"));
-        subscriber.getSubscriberTraces().add(new TRN("TRN*1*109834652831*WXYZCLEARH*REALTIME~"));
-        subscriber.setSubscriberName(new NM1("NM1*IL*1*SMITH*JOHN*L***MI*444115555~"));
+        subscriber.setHierarchicalLevel(new HL("HL*5*4*22*1~"));
+        subscriber.getTraceNumber().add(new TRN("TRN*1*109834652831*WXYZCLEARH*REALTIME~"));
+        subscriber.setName(new NM1("NM1*IL*1*SMITH*JOHN*L***MI*444115555~"));
         subscriber.getAdditionalIdentification().add(new REF("REF*1L*660415~"));
-        subscriber.setSubscriberAddress(new N3("N3*15197 BROADWAY AVENUE*APT 215~"));
-        subscriber.setSubscriberCityState(new N4("N4*KANSAS CITY*MO*64108~"));
+        subscriber.setAddress(new N3("N3*15197 BROADWAY AVENUE*APT 215~"));
+        subscriber.setCityStateZip(new N4("N4*KANSAS CITY*MO*64108~"));
         subscriber.setProviderInformation(new PRV("PRV*RF*PXC*207Q00000X~"));
-        subscriber.setSubscriberDemographic(new DMG("DMG*D8*19430917*M~"));
+        subscriber.setDemographic(new DMG("DMG*D8*19430917*M~"));
         subscriber.setMultipleBirthSequenceNumber(new INS("INS*Y*18***************3~"));
-        subscriber.setSubscriberHealthCareDiagnosisCode(new HI("HI*BK:8901*BF:87200*BF:5559~"));
-        subscriber.getSubscriberDate().add(new DTP("DTP*281*D8*20051015~"));
-        subscriber.getSubscriberDate().add(new DTP("DTP*291*D8*20051015~"));
+        subscriber.setHealthCareDiagnosisCode(new HI("HI*BK:8901*BF:87200*BF:5559~"));
+        subscriber.getDate().add(new DTP("DTP*281*D8*20051015~"));
+        subscriber.getDate().add(new DTP("DTP*291*D8*20051015~"));
 
         for(int i = 0; i < 5; i++) {
-            subscriber.getSubscriberEligibility().add(new BenefitInquirySubscriberEligibility("EQ*"+(30+i)+"**FAM~"));
+            subscriber.getEligibility().add(new BenefitInquirySubscriberEligibility("EQ*"+(30+i)+"**FAM~"));
         }
         subscriber.getDependents().add(new BenefitInquiryDependent(dependentString));
 
         Assert.assertTrue(subscriber.validate());
         Assert.assertEquals(subscriberString+dependentString, subscriber.toString());
-        Assert.assertEquals("HL*5*4*22*1~", subscriber.getSubscriberLevel().toString());
-        Assert.assertEquals("TRN*1*109834652831*WXYZCLEARH*REALTIME~", subscriber.getSubscriberTraces().get(0).toString());
-        Assert.assertEquals(1, subscriber.getSubscriberTraces().size());
-        Assert.assertEquals("NM1*IL*1*SMITH*JOHN*L***MI*444115555~", subscriber.getSubscriberName().toString());
+        Assert.assertEquals("HL*5*4*22*1~", subscriber.getHierarchicalLevel().toString());
+        Assert.assertEquals("TRN*1*109834652831*WXYZCLEARH*REALTIME~", subscriber.getTraceNumber().get(0).toString());
+        Assert.assertEquals(1, subscriber.getTraceNumber().size());
+        Assert.assertEquals("NM1*IL*1*SMITH*JOHN*L***MI*444115555~", subscriber.getName().toString());
         Assert.assertEquals("REF*1L*660415~", subscriber.getAdditionalIdentification().get(0).toString());
-        Assert.assertEquals("N3*15197 BROADWAY AVENUE*APT 215~", subscriber.getSubscriberAddress().toString());
-        Assert.assertEquals("N4*KANSAS CITY*MO*64108~", subscriber.getSubscriberCityState().toString());
+        Assert.assertEquals("N3*15197 BROADWAY AVENUE*APT 215~", subscriber.getAddress().toString());
+        Assert.assertEquals("N4*KANSAS CITY*MO*64108~", subscriber.getCityStateZip().toString());
         Assert.assertEquals("PRV*RF*PXC*207Q00000X~", subscriber.getProviderInformation().toString());
-        Assert.assertEquals("DMG*D8*19430917*M~", subscriber.getSubscriberDemographic().toString());
+        Assert.assertEquals("DMG*D8*19430917*M~", subscriber.getDemographic().toString());
         Assert.assertEquals("INS*Y*18***************3~", subscriber.getMultipleBirthSequenceNumber().toString());
-        Assert.assertEquals("HI*BK:8901*BF:87200*BF:5559~", subscriber.getSubscriberHealthCareDiagnosisCode().toString());
-        Assert.assertEquals("DTP*281*D8*20051015~", subscriber.getSubscriberDate().get(0).toString());
-        Assert.assertEquals("DTP*291*D8*20051015~", subscriber.getSubscriberDate().get(1).toString());
-        Assert.assertEquals(2, subscriber.getSubscriberDate().size());
+        Assert.assertEquals("HI*BK:8901*BF:87200*BF:5559~", subscriber.getHealthCareDiagnosisCode().toString());
+        Assert.assertEquals("DTP*281*D8*20051015~", subscriber.getDate().get(0).toString());
+        Assert.assertEquals("DTP*291*D8*20051015~", subscriber.getDate().get(1).toString());
+        Assert.assertEquals(2, subscriber.getDate().size());
 
         for(int i = 0; i < 5; i++) {
-            BenefitInquirySubscriberEligibility benefitInquirySubscriberEligibility = subscriber.getSubscriberEligibility().get(i);
+            BenefitInquirySubscriberEligibility benefitInquirySubscriberEligibility = subscriber.getEligibility().get(i);
             Assert.assertEquals("EQ*"+(30+i)+"**FAM~",
                     benefitInquirySubscriberEligibility.toString());
         }
-        Assert.assertEquals(5, subscriber.getSubscriberEligibility().size());
+        Assert.assertEquals(5, subscriber.getEligibility().size());
 
         Assert.assertEquals(1, subscriber.getDependents().size());
         Assert.assertEquals(dependentString, subscriber.getDependents().get(0).toString());
-        Assert.assertEquals("5", subscriber.getDependents().get(0).getDependentLevel().getHierarchicalParentIDNumber());
+        Assert.assertEquals("5", subscriber.getDependents().get(0).getHierarchicalLevel().getHierarchicalParentIDNumber());
         Assert.assertEquals(5, subscriber.getDependents().get(0).getDependentEligibility().size());
     }
 }

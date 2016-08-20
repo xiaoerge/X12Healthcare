@@ -12,32 +12,32 @@ import java.util.List;
  * Created by xiaoerge on 6/11/16.
  */
 public class BenefitInquiryDependent extends MessageBase {
-    private HL dependentLevel;
-    private List<TRN> dependentTraces;
-    private NM1 dependentName;
+    private HL hierarchicalLevel;
+    private List<TRN> traceNumber;
+    private NM1 name;
     private List<REF> additionalIdentification;
-    private N3 dependentAddress;
-    private N4 dependentCityState;
+    private N3 address;
+    private N4 cityStateZip;
     private PRV providerInformation;
-    private DMG dependentDemographic;
-    private INS dependentRelationship;
-    private HI dependentHealthCareDiagnosisCode;
-    private List<DTP> dependentDate;
+    private DMG demographicInformation;
+    private INS relationship;
+    private HI healthCareDiagnosisCode;
+    private List<DTP> date;
 
     private List<BenefitInquiryDependentEligibility> dependentEligibility;
 
     public BenefitInquiryDependent() {
-        dependentLevel = new HL();
-        dependentTraces = new ArrayList<TRN>();
-        dependentName = new NM1();
+        hierarchicalLevel = new HL();
+        traceNumber = new ArrayList<TRN>();
+        name = new NM1();
         additionalIdentification = new ArrayList<REF>();
-        dependentAddress = new N3();
-        dependentCityState = new N4();
+        address = new N3();
+        cityStateZip = new N4();
         providerInformation = new PRV();
-        dependentDemographic = new DMG();
-        dependentRelationship = new INS();
-        dependentHealthCareDiagnosisCode = new HI();
-        dependentDate = new ArrayList<DTP>();
+        demographicInformation = new DMG();
+        relationship = new INS();
+        healthCareDiagnosisCode = new HI();
+        date = new ArrayList<DTP>();
         dependentEligibility = new ArrayList<BenefitInquiryDependentEligibility>();
     }
     public BenefitInquiryDependent(String s) {
@@ -45,27 +45,27 @@ public class BenefitInquiryDependent extends MessageBase {
         StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
-            dependentLevel = new HL(stringQueue.getNext());
+            hierarchicalLevel = new HL(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("TRN"))
-            dependentTraces.add(new TRN(stringQueue.getNext()));
+            traceNumber.add(new TRN(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
-            dependentName = new NM1(stringQueue.getNext());
+            name = new NM1(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
             additionalIdentification.add(new REF(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
-            dependentAddress = new N3(stringQueue.getNext());
+            address = new N3(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
-            dependentCityState = new N4(stringQueue.getNext());
+            cityStateZip = new N4(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
             providerInformation = new PRV(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DMG"))
-            dependentDemographic = new DMG(stringQueue.getNext());
+            demographicInformation = new DMG(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("INS"))
-            dependentRelationship = new INS(stringQueue.getNext());
+            relationship = new INS(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HI"))
-            dependentHealthCareDiagnosisCode = new HI(stringQueue.getNext());
+            healthCareDiagnosisCode = new HI(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            dependentDate.add(new DTP(stringQueue.getNext()));
+            date.add(new DTP(stringQueue.getNext()));
 
         StringBuilder builder = new StringBuilder();
         while (stringQueue.hasNext()) {
@@ -81,43 +81,43 @@ public class BenefitInquiryDependent extends MessageBase {
     public void loadDefinition() {
         messagesDefinition.clear();
 
-        messagesDefinition.add(dependentLevel);
-        messagesDefinition.addAll(dependentTraces);
-        messagesDefinition.add(dependentName);
+        messagesDefinition.add(hierarchicalLevel);
+        messagesDefinition.addAll(traceNumber);
+        messagesDefinition.add(name);
         messagesDefinition.addAll(additionalIdentification);
-        messagesDefinition.add(dependentAddress);
-        messagesDefinition.add(dependentCityState);
+        messagesDefinition.add(address);
+        messagesDefinition.add(cityStateZip);
         messagesDefinition.add(providerInformation);
-        messagesDefinition.add(dependentDemographic);
-        messagesDefinition.add(dependentRelationship);
-        messagesDefinition.add(dependentHealthCareDiagnosisCode);
-        messagesDefinition.addAll(dependentDate);
+        messagesDefinition.add(demographicInformation);
+        messagesDefinition.add(relationship);
+        messagesDefinition.add(healthCareDiagnosisCode);
+        messagesDefinition.addAll(date);
         messagesDefinition.addAll(dependentEligibility);
     }
 
 
-    public HL getDependentLevel() {
-        return dependentLevel;
+    public HL getHierarchicalLevel() {
+        return hierarchicalLevel;
     }
 
-    public void setDependentLevel(HL dependentLevel) {
-        this.dependentLevel = dependentLevel;
+    public void setHierarchicalLevel(HL hierarchicalLevel) {
+        this.hierarchicalLevel = hierarchicalLevel;
     }
 
-    public List<TRN> getDependentTraces() {
-        return dependentTraces;
+    public List<TRN> getTraceNumber() {
+        return traceNumber;
     }
 
-    public void setDependentTraces(List<TRN> dependentTraces) {
-        this.dependentTraces = dependentTraces;
+    public void setTraceNumber(List<TRN> traceNumber) {
+        this.traceNumber = traceNumber;
     }
 
-    public NM1 getDependentName() {
-        return dependentName;
+    public NM1 getName() {
+        return name;
     }
 
-    public void setDependentName(NM1 dependentName) {
-        this.dependentName = dependentName;
+    public void setName(NM1 name) {
+        this.name = name;
     }
 
     public List<REF> getAdditionalIdentification() {
@@ -128,20 +128,20 @@ public class BenefitInquiryDependent extends MessageBase {
         this.additionalIdentification = additionalIdentification;
     }
 
-    public N3 getDependentAddress() {
-        return dependentAddress;
+    public N3 getAddress() {
+        return address;
     }
 
-    public void setDependentAddress(N3 dependentAddress) {
-        this.dependentAddress = dependentAddress;
+    public void setAddress(N3 address) {
+        this.address = address;
     }
 
-    public N4 getDependentCityState() {
-        return dependentCityState;
+    public N4 getCityStateZip() {
+        return cityStateZip;
     }
 
-    public void setDependentCityState(N4 dependentCityState) {
-        this.dependentCityState = dependentCityState;
+    public void setCityStateZip(N4 cityStateZip) {
+        this.cityStateZip = cityStateZip;
     }
 
     public PRV getProviderInformation() {
@@ -152,36 +152,36 @@ public class BenefitInquiryDependent extends MessageBase {
         this.providerInformation = providerInformation;
     }
 
-    public DMG getDependentDemographic() {
-        return dependentDemographic;
+    public DMG getDemographicInformation() {
+        return demographicInformation;
     }
 
-    public void setDependentDemographic(DMG dependentDemographic) {
-        this.dependentDemographic = dependentDemographic;
+    public void setDemographicInformation(DMG demographicInformation) {
+        this.demographicInformation = demographicInformation;
     }
 
-    public INS getDependentRelationship() {
-        return dependentRelationship;
+    public INS getRelationship() {
+        return relationship;
     }
 
-    public void setDependentRelationship(INS dependentRelationship) {
-        this.dependentRelationship = dependentRelationship;
+    public void setRelationship(INS relationship) {
+        this.relationship = relationship;
     }
 
-    public HI getDependentHealthCareDiagnosisCode() {
-        return dependentHealthCareDiagnosisCode;
+    public HI getHealthCareDiagnosisCode() {
+        return healthCareDiagnosisCode;
     }
 
-    public void setDependentHealthCareDiagnosisCode(HI dependentHealthCareDiagnosisCode) {
-        this.dependentHealthCareDiagnosisCode = dependentHealthCareDiagnosisCode;
+    public void setHealthCareDiagnosisCode(HI healthCareDiagnosisCode) {
+        this.healthCareDiagnosisCode = healthCareDiagnosisCode;
     }
 
-    public List<DTP> getDependentDate() {
-        return dependentDate;
+    public List<DTP> getDate() {
+        return date;
     }
 
-    public void setDependentDate(List<DTP> dependentDate) {
-        this.dependentDate = dependentDate;
+    public void setDate(List<DTP> date) {
+        this.date = date;
     }
 
     public List<BenefitInquiryDependentEligibility> getDependentEligibility() {

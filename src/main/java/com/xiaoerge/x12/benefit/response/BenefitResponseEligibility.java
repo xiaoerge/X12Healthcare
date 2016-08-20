@@ -11,50 +11,50 @@ import java.util.List;
 /**
  * Created by xiaoerge on 8/13/16.
  */
-public class BenefitResponseDependentEligibility extends MessageBase {
+public class BenefitResponseEligibility extends MessageBase {
 
-    private EB dependentEligibility;
+    private EB eligibility;
     private List<HSD> healthCareServiceDelivery;
-    private List<REF> dependentAdditionalInformation;
-    private List<DTP> dependentEligibilityDate;
-    private List<AAA> dependentRequestValidation;
+    private List<REF> additionalInformation;
+    private List<DTP> eligibilityDate;
+    private List<AAA> requestValidation;
     private List<MSG> messageText;
-    private List<III> dependentAdditionalEligibility;
+    private List<III> additionalEligibility;
 
     private LS loopHeader;
-    private List<BenefitResponseDependentBenefitRelatedEntity> relatedEntities;
+    private List<BenefitResponseBenefitRelatedEntity> relatedEntities;
     private LE loopTrailer;
 
-    public BenefitResponseDependentEligibility() {
-        dependentEligibility = new EB();
+    public BenefitResponseEligibility() {
+        eligibility = new EB();
         healthCareServiceDelivery = new ArrayList<HSD>();
-        dependentAdditionalInformation = new ArrayList<REF>();
-        dependentEligibilityDate = new ArrayList<DTP>();
-        dependentRequestValidation = new ArrayList<AAA>();
+        additionalInformation = new ArrayList<REF>();
+        eligibilityDate = new ArrayList<DTP>();
+        requestValidation = new ArrayList<AAA>();
         messageText = new ArrayList<MSG>();
-        dependentAdditionalEligibility = new ArrayList<III>();
+        additionalEligibility = new ArrayList<III>();
         loopHeader = new LS();
-        relatedEntities = new ArrayList<BenefitResponseDependentBenefitRelatedEntity>();
+        relatedEntities = new ArrayList<BenefitResponseBenefitRelatedEntity>();
         loopTrailer = new LE();
     }
-    public BenefitResponseDependentEligibility(String s) {
+    public BenefitResponseEligibility(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("EB"))
-            dependentEligibility = new EB(stringQueue.getNext());
+            eligibility = new EB(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HSD"))
             healthCareServiceDelivery.add(new HSD(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            dependentAdditionalInformation.add(new REF(stringQueue.getNext()));
+            additionalInformation.add(new REF(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            dependentEligibilityDate.add(new DTP(stringQueue.getNext()));
+            eligibilityDate.add(new DTP(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AAA"))
-            dependentRequestValidation.add(new AAA(stringQueue.getNext()));
+            requestValidation.add(new AAA(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("MSG"))
             messageText.add(new MSG(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("III"))
-            dependentAdditionalEligibility.add(new III(stringQueue.getNext()));
+            additionalEligibility.add(new III(stringQueue.getNext()));
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("LS"))
             loopHeader = new LS(stringQueue.getNext());
@@ -67,7 +67,7 @@ public class BenefitResponseDependentEligibility extends MessageBase {
 
         String[] splitArray = SegmentStringUtil.split(relatedEntityBuilder.toString(), "NM1");
         for (String relatedStr : splitArray) {
-            relatedEntities.add(new BenefitResponseDependentBenefitRelatedEntity(relatedStr));
+            relatedEntities.add(new BenefitResponseBenefitRelatedEntity(relatedStr));
         }
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("LE"))
@@ -81,13 +81,13 @@ public class BenefitResponseDependentEligibility extends MessageBase {
     public void loadDefinition() {
         messagesDefinition.clear();
 
-        messagesDefinition.add(dependentEligibility);
+        messagesDefinition.add(eligibility);
         messagesDefinition.addAll(healthCareServiceDelivery);
-        messagesDefinition.addAll(dependentAdditionalInformation);
-        messagesDefinition.addAll(dependentEligibilityDate);
-        messagesDefinition.addAll(dependentRequestValidation);
+        messagesDefinition.addAll(additionalInformation);
+        messagesDefinition.addAll(eligibilityDate);
+        messagesDefinition.addAll(requestValidation);
         messagesDefinition.addAll(messageText);
-        messagesDefinition.addAll(dependentAdditionalEligibility);
+        messagesDefinition.addAll(additionalEligibility);
         messagesDefinition.add(loopHeader);
         messagesDefinition.addAll(relatedEntities);
         messagesDefinition.add(loopTrailer);

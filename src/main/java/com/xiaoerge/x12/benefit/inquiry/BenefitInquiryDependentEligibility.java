@@ -12,29 +12,29 @@ import com.xiaoerge.x12.util.StringQueue;
  */
 public class BenefitInquiryDependentEligibility extends MessageBase {
 
-    private EQ dependentEligibility;
-    private III dependentAdditionalEligibility;
-    private REF dependentAdditionalInformation;
-    private DTP dependentEligibilityDate;
+    private EQ eligibility;
+    private III additionalEligibility;
+    private REF additionalInformation;
+    private DTP eligibilityDate;
 
     public BenefitInquiryDependentEligibility() {
-        dependentEligibility = new EQ();
-        dependentAdditionalEligibility = new III();
-        dependentAdditionalInformation = new REF();
-        dependentEligibilityDate = new DTP();
+        eligibility = new EQ();
+        additionalEligibility = new III();
+        additionalInformation = new REF();
+        eligibilityDate = new DTP();
     }
     public BenefitInquiryDependentEligibility(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("EQ"))
-            dependentEligibility = new EQ(stringQueue.getNext());
+            eligibility = new EQ(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("III"))
-            dependentAdditionalEligibility = new III(stringQueue.getNext());
+            additionalEligibility = new III(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            dependentAdditionalInformation = new REF(stringQueue.getNext());
+            additionalInformation = new REF(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            dependentEligibilityDate = new DTP(stringQueue.getNext());
+            eligibilityDate = new DTP(stringQueue.getNext());
 
         if (stringQueue.hasNext()) {
             logger.warn("Unexpected string in "+this.getClass().getName());
@@ -44,41 +44,41 @@ public class BenefitInquiryDependentEligibility extends MessageBase {
     public void loadDefinition() {
         messagesDefinition.clear();
 
-        messagesDefinition.add(dependentEligibility);
-        messagesDefinition.add(dependentAdditionalEligibility);
-        messagesDefinition.add(dependentAdditionalInformation);
-        messagesDefinition.add(dependentEligibilityDate);
+        messagesDefinition.add(eligibility);
+        messagesDefinition.add(additionalEligibility);
+        messagesDefinition.add(additionalInformation);
+        messagesDefinition.add(eligibilityDate);
     }
 
-    public EQ getDependentEligibility() {
-        return dependentEligibility;
+    public EQ getEligibility() {
+        return eligibility;
     }
 
-    public void setDependentEligibility(EQ dependentEligibility) {
-        this.dependentEligibility = dependentEligibility;
+    public void setEligibility(EQ eligibility) {
+        this.eligibility = eligibility;
     }
 
-    public III getDependentAdditionalEligibility() {
-        return dependentAdditionalEligibility;
+    public III getAdditionalEligibility() {
+        return additionalEligibility;
     }
 
-    public void setDependentAdditionalEligibility(III dependentAdditionalEligibility) {
-        this.dependentAdditionalEligibility = dependentAdditionalEligibility;
+    public void setAdditionalEligibility(III additionalEligibility) {
+        this.additionalEligibility = additionalEligibility;
     }
 
-    public REF getDependentAdditionalInformation() {
-        return dependentAdditionalInformation;
+    public REF getAdditionalInformation() {
+        return additionalInformation;
     }
 
-    public void setDependentAdditionalInformation(REF dependentAdditionalInformation) {
-        this.dependentAdditionalInformation = dependentAdditionalInformation;
+    public void setAdditionalInformation(REF additionalInformation) {
+        this.additionalInformation = additionalInformation;
     }
 
-    public DTP getDependentEligibilityDate() {
-        return dependentEligibilityDate;
+    public DTP getEligibilityDate() {
+        return eligibilityDate;
     }
 
-    public void setDependentEligibilityDate(DTP dependentEligibilityDate) {
-        this.dependentEligibilityDate = dependentEligibilityDate;
+    public void setEligibilityDate(DTP eligibilityDate) {
+        this.eligibilityDate = eligibilityDate;
     }
 }

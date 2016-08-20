@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 8/13/16.
  */
-public class BenefitResponseDependentBenefitRelatedEntity extends MessageBase {
+public class BenefitResponseBenefitRelatedEntity extends MessageBase {
 
     private NM1 relatedEntityName;
     private N3 relatedEntityAddress;
@@ -18,14 +18,14 @@ public class BenefitResponseDependentBenefitRelatedEntity extends MessageBase {
     private List<PER> relatedEntityContactInformation;
     private PRV relatedProviderInformation;
 
-    public BenefitResponseDependentBenefitRelatedEntity() {
+    public BenefitResponseBenefitRelatedEntity() {
         relatedEntityName = new NM1();
         relatedEntityAddress = new N3();
         relatedEntityCityStateZip = new N4();
         relatedEntityContactInformation = new ArrayList<PER>();
         relatedProviderInformation = new PRV();
     }
-    public BenefitResponseDependentBenefitRelatedEntity(String s) {
+    public BenefitResponseBenefitRelatedEntity(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
 

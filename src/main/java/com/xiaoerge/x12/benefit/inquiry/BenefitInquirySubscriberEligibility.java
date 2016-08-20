@@ -9,95 +9,95 @@ import com.xiaoerge.x12.util.StringQueue;
  */
 public class BenefitInquirySubscriberEligibility extends MessageBase {
 
-    private EQ subscriberEligibility;
-    private AMT subscriberSpendDown;
-    private AMT subscriberTotalBilledAmount;
-    private III subscriberAdditionalEligibility;
-    private REF subscriberAdditionalInformation;
-    private DTP subscriberEligibilityDate;
+    private EQ eligibility;
+    private AMT spendDown;
+    private AMT totalBilledAmount;
+    private III additionalEligibility;
+    private REF additionalInformation;
+    private DTP eligibilityDate;
 
     public BenefitInquirySubscriberEligibility() {
-        subscriberEligibility = new EQ();
-        subscriberSpendDown = new AMT();
-        subscriberTotalBilledAmount = new AMT();
-        subscriberAdditionalEligibility = new III();
-        subscriberAdditionalInformation = new REF();
-        subscriberEligibilityDate = new DTP();
+        eligibility = new EQ();
+        spendDown = new AMT();
+        totalBilledAmount = new AMT();
+        additionalEligibility = new III();
+        additionalInformation = new REF();
+        eligibilityDate = new DTP();
     }
     public BenefitInquirySubscriberEligibility(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("EQ"))
-            subscriberEligibility = new EQ(stringQueue.getNext());
+            eligibility = new EQ(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AMT"))
-            subscriberSpendDown = new AMT(stringQueue.getNext());
+            spendDown = new AMT(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AMT"))
-            subscriberTotalBilledAmount = new AMT(stringQueue.getNext());
+            totalBilledAmount = new AMT(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("III"))
-            subscriberAdditionalEligibility = new III(stringQueue.getNext());
+            additionalEligibility = new III(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            subscriberAdditionalInformation = new REF(stringQueue.getNext());
+            additionalInformation = new REF(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            subscriberEligibilityDate = new DTP(stringQueue.getNext());
+            eligibilityDate = new DTP(stringQueue.getNext());
     }
 
     public void loadDefinition() {
         messagesDefinition.clear();
 
-        messagesDefinition.add(subscriberEligibility);
-        messagesDefinition.add(subscriberSpendDown);
-        messagesDefinition.add(subscriberTotalBilledAmount);
-        messagesDefinition.add(subscriberAdditionalEligibility);
-        messagesDefinition.add(subscriberAdditionalInformation);
-        messagesDefinition.add(subscriberEligibilityDate);
+        messagesDefinition.add(eligibility);
+        messagesDefinition.add(spendDown);
+        messagesDefinition.add(totalBilledAmount);
+        messagesDefinition.add(additionalEligibility);
+        messagesDefinition.add(additionalInformation);
+        messagesDefinition.add(eligibilityDate);
     }
 
-    public EQ getSubscriberEligibility() {
-        return subscriberEligibility;
+    public EQ getEligibility() {
+        return eligibility;
     }
 
-    public void setSubscriberEligibility(EQ subscriberEligibility) {
-        this.subscriberEligibility = subscriberEligibility;
+    public void setEligibility(EQ eligibility) {
+        this.eligibility = eligibility;
     }
 
-    public AMT getSubscriberSpendDown() {
-        return subscriberSpendDown;
+    public AMT getSpendDown() {
+        return spendDown;
     }
 
-    public void setSubscriberSpendDown(AMT subscriberSpendDown) {
-        this.subscriberSpendDown = subscriberSpendDown;
+    public void setSpendDown(AMT spendDown) {
+        this.spendDown = spendDown;
     }
 
-    public AMT getSubscriberTotalBilledAmount() {
-        return subscriberTotalBilledAmount;
+    public AMT getTotalBilledAmount() {
+        return totalBilledAmount;
     }
 
-    public void setSubscriberTotalBilledAmount(AMT subscriberTotalBilledAmount) {
-        this.subscriberTotalBilledAmount = subscriberTotalBilledAmount;
+    public void setTotalBilledAmount(AMT totalBilledAmount) {
+        this.totalBilledAmount = totalBilledAmount;
     }
 
-    public III getSubscriberAdditionalEligibility() {
-        return subscriberAdditionalEligibility;
+    public III getAdditionalEligibility() {
+        return additionalEligibility;
     }
 
-    public void setSubscriberAdditionalEligibility(III subscriberAdditionalEligibility) {
-        this.subscriberAdditionalEligibility = subscriberAdditionalEligibility;
+    public void setAdditionalEligibility(III additionalEligibility) {
+        this.additionalEligibility = additionalEligibility;
     }
 
-    public REF getSubscriberAdditionalInformation() {
-        return subscriberAdditionalInformation;
+    public REF getAdditionalInformation() {
+        return additionalInformation;
     }
 
-    public void setSubscriberAdditionalInformation(REF subscriberAdditionalInformation) {
-        this.subscriberAdditionalInformation = subscriberAdditionalInformation;
+    public void setAdditionalInformation(REF additionalInformation) {
+        this.additionalInformation = additionalInformation;
     }
 
-    public DTP getSubscriberEligibilityDate() {
-        return subscriberEligibilityDate;
+    public DTP getEligibilityDate() {
+        return eligibilityDate;
     }
 
-    public void setSubscriberEligibilityDate(DTP subscriberEligibilityDate) {
-        this.subscriberEligibilityDate = subscriberEligibilityDate;
+    public void setEligibilityDate(DTP eligibilityDate) {
+        this.eligibilityDate = eligibilityDate;
     }
 }

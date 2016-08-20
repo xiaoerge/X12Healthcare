@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.benefit.response;
 
-import com.xiaoerge.x12.benefit.inquiry.BenefitInquiryDependentEligibility;
 import com.xiaoerge.x12.message.MessageBase;
 import com.xiaoerge.x12.util.SegmentStringUtil;
 import com.xiaoerge.x12.util.StringQueue;
@@ -27,7 +26,7 @@ public class BenefitResponseDependent extends MessageBase {
     private List<DTP> dependentDate;
     private MPI dependentMilitaryPersonnelInformation;
 
-    private List<BenefitResponseDependentEligibility> dependentEligibility;
+    private List<BenefitResponseEligibility> dependentEligibility;
 
     public BenefitResponseDependent() {
         dependentLevel = new HL();
@@ -43,7 +42,7 @@ public class BenefitResponseDependent extends MessageBase {
         dependentHealthCareDiagnosisCode = new HI();
         dependentDate = new ArrayList<DTP>();
         dependentMilitaryPersonnelInformation = new MPI();
-        dependentEligibility = new ArrayList<BenefitResponseDependentEligibility>();
+        dependentEligibility = new ArrayList<BenefitResponseEligibility>();
     }
     public BenefitResponseDependent(String s) {
         this();
@@ -83,7 +82,7 @@ public class BenefitResponseDependent extends MessageBase {
 
         String[] splitArray = SegmentStringUtil.split(builder.toString(), "EB");
         for(String str : splitArray) {
-            dependentEligibility.add(new BenefitResponseDependentEligibility(str));
+            dependentEligibility.add(new BenefitResponseEligibility(str));
         }
     }
 

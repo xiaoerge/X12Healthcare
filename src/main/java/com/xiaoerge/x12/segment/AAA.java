@@ -14,16 +14,16 @@ public class AAA extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 1)
-    public String getYesNoConditionOrResponseCode() { return getByPosition(); }
+    public String getYesNoConditionOrResponseCode() { return collection[1]; }
 
     @Definition(position = 2, minLength = 2, maxLength = 2)
-    public String getAgencyQualifierCode() { return getByPosition(); }
+    public String getAgencyQualifierCode() { return collection[2]; }
 
     @Definition(position = 3, minLength = 2, maxLength = 2)
-    public String getRejectReasonCode() { return getByPosition(); }
+    public String getRejectReasonCode() { return collection[3]; }
 
     @Definition(position = 4, minLength = 1, maxLength = 1)
-    public String getFollowupActionCode() { return getByPosition(); }
+    public String getFollowupActionCode() { return collection[4]; }
 
     public void setYesNoConditionOrResponseCode(String s) { collection[1] = s; }
     public void setAgencyQualifierCode(String s) { collection[2] = s; }

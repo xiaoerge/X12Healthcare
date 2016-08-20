@@ -14,55 +14,55 @@ public class INS extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 1)
-    public String getYesNoConditionOrResponseCode() { return getByPosition(); }
+    public String getYesNoConditionOrResponseCode() { return collection[1]; }
 
     @Definition(position = 2, minLength = 2, maxLength = 2)
-    public String getIndividualRelationshipCode() { return getByPosition(); }
+    public String getIndividualRelationshipCode() { return collection[2]; }
 
     @Definition(position = 3, minLength = 3, maxLength = 3)
-    public String getMaintenanceTypeCode() { return getByPosition(); }
+    public String getMaintenanceTypeCode() { return collection[3]; }
 
     @Definition(position = 4, minLength = 2, maxLength = 3)
-    public String getMaintenanceReasonCode() { return getByPosition(); }
+    public String getMaintenanceReasonCode() { return collection[4]; }
 
     @Definition(position = 5, minLength = 1, maxLength = 1)
-    public String getBenefitStatusCode() { return getByPosition(); }
+    public String getBenefitStatusCode() { return collection[5]; }
 
     @Definition(position = 6, minLength = 1, maxLength = 10)
-    public String getMedicareStatusCode() { return getByPosition(); }
+    public String getMedicareStatusCode() { return collection[6]; }
 
     @Definition(position = 7, minLength = 1, maxLength = 2)
-    public String getConsolidatedOmnibusBudgetReconciliationActQualifying() { return getByPosition(); }
+    public String getConsolidatedOmnibusBudgetReconciliationActQualifying() { return collection[7]; }
 
     @Definition(position = 8, minLength = 2, maxLength = 2)
-    public String getEmploymentStatusCode() { return getByPosition(); }
+    public String getEmploymentStatusCode() { return collection[8]; }
 
     @Definition(position = 9, minLength = 1, maxLength = 1)
-    public String getStudentStatusCode() { return getByPosition(); }
+    public String getStudentStatusCode() { return collection[9]; }
 
     @Definition(position = 10, minLength = 1, maxLength = 1)
-    public String getYesNoConditionOrResponseCode2() { return getByPosition(); }
+    public String getYesNoConditionOrResponseCode2() { return collection[10]; }
 
     @Definition(position = 11, minLength = 2, maxLength = 3)
-    public String getDateTimePeriodFormatQualifier() { return getByPosition(); }
+    public String getDateTimePeriodFormatQualifier() { return collection[11]; }
 
     @Definition(position = 12, minLength = 1, maxLength = 35)
-    public String getDateTimePeriod() { return getByPosition(); }
+    public String getDateTimePeriod() { return collection[12]; }
 
     @Definition(position = 13, minLength = 1, maxLength = 1)
-    public String getConfidentialityCode() { return getByPosition(); }
+    public String getConfidentialityCode() { return collection[13]; }
 
     @Definition(position = 14, minLength = 2, maxLength = 30)
-    public String getCityName() { return getByPosition(); }
+    public String getCityName() { return collection[14]; }
 
     @Definition(position = 15, minLength = 2, maxLength = 2)
-    public String getStateOrProvinceCode() { return getByPosition(); }
+    public String getStateOrProvinceCode() { return collection[15]; }
 
     @Definition(position = 16, minLength = 2, maxLength = 3)
-    public String getCountryCode() { return getByPosition(); }
+    public String getCountryCode() { return collection[16]; }
 
     @Definition(position = 17, minLength = 1, maxLength = 9)
-    public String getNumber() { return getByPosition(); }
+    public String getNumber() { return collection[17]; }
 
     public void setYesNoConditionOrResponseCode(String s) { collection[1] = s; }
     public void setIndividualRelationshipCode(String s) { collection[2] = s; }

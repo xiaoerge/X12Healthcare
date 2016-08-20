@@ -16,25 +16,25 @@ public class MPI extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 1)
-    public String getInformationStatusCode() { return getByPosition(); }
+    public String getInformationStatusCode() { return collection[1]; }
 
     @Definition(position = 2, minLength = 2, maxLength = 2)
-    public String getEmploymentStatusCode() { return getByPosition(); }
+    public String getEmploymentStatusCode() { return collection[2]; }
 
     @Definition(position = 3, minLength = 1, maxLength = 1)
-    public String getGovernmentServiceAffiliationCode() { return getByPosition(); }
+    public String getGovernmentServiceAffiliationCode() { return collection[3]; }
 
     @Definition(position = 4, minLength = 1, maxLength = 80)
-    public String getDescription() { return getByPosition(); }
+    public String getDescription() { return collection[4]; }
 
     @Definition(position = 5, minLength = 2, maxLength = 2)
-    public String getMilitaryServiceRankCode() { return getByPosition(); }
+    public String getMilitaryServiceRankCode() { return collection[5]; }
 
     @Definition(position = 6, minLength = 2, maxLength = 3)
-    public String getDateTimePeriodFormatQualifier() { return getByPosition(); }
+    public String getDateTimePeriodFormatQualifier() { return collection[6]; }
 
     @Definition(position = 7, minLength = 1, maxLength = 35)
-    public String getDateTimePeriod() { return getByPosition(); }
+    public String getDateTimePeriod() { return collection[7]; }
 
     public void setInformationStatusCode(String s) { collection[1] = s; }
     public void setEmploymentStatusCode(String s) { collection[2] = s; }

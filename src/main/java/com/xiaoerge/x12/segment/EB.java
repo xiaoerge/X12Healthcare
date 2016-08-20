@@ -14,46 +14,46 @@ public class EB extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 2)
-    public String getEligibilityOrBenefitInformationCode() { return getByPosition(); }
+    public String getEligibilityOrBenefitInformationCode() { return collection[1]; }
 
     @Definition(position = 2, minLength = 3, maxLength = 3)
-    public String getCoverageLevelCode() { return getByPosition(); }
+    public String getCoverageLevelCode() { return collection[2]; }
 
     @Definition(position = 3, minLength = 1, maxLength = 2)
-    public String getServiceTypeCode() { return getByPosition(); }
+    public String getServiceTypeCode() { return collection[3]; }
 
     @Definition(position = 4, minLength = 1, maxLength = 3)
-    public String getInsuranceTypeCode() { return getByPosition(); }
+    public String getInsuranceTypeCode() { return collection[4]; }
 
     @Definition(position = 5, minLength = 1, maxLength = 50)
-    public String getPlanCoverageDescription() { return getByPosition(); }
+    public String getPlanCoverageDescription() { return collection[5]; }
 
     @Definition(position = 6, minLength = 1, maxLength = 2)
-    public String getTimePeriodQualifier() { return getByPosition(); }
+    public String getTimePeriodQualifier() { return collection[6]; }
 
     @Definition(position = 7, minLength = 1, maxLength = 18)
-    public String getMonetaryAmount() { return getByPosition(); }
+    public String getMonetaryAmount() { return collection[7]; }
 
     @Definition(position = 8, minLength = 1, maxLength = 10)
-    public String getPercentageAsDecimal() { return getByPosition(); }
+    public String getPercentageAsDecimal() { return collection[8]; }
 
     @Definition(position = 9, minLength = 2, maxLength = 2)
-    public String getQuantityQualifier() { return getByPosition(); }
+    public String getQuantityQualifier() { return collection[9]; }
 
     @Definition(position = 10, minLength = 1, maxLength = 15)
-    public String getQuantity() { return getByPosition(); }
+    public String getQuantity() { return collection[10]; }
 
     @Definition(position = 11, minLength = 1, maxLength = 1)
-    public String getYesNoConditionOrResponseCode() { return getByPosition(); }
+    public String getYesNoConditionOrResponseCode() { return collection[11]; }
 
     @Definition(position = 12, minLength = 1, maxLength = 1)
-    public String getYesNoConditionOrResponseCode2() { return getByPosition(); }
+    public String getYesNoConditionOrResponseCode2() { return collection[12]; }
 
     @Definition(position = 13, minLength = 13, maxLength = 186)
-    public String getCompositeMedicalProcedureIdentifier() { return getByPosition(); }
+    public String getCompositeMedicalProcedureIdentifier() { return collection[13]; }
 
     @Definition(position = 14, minLength = 4, maxLength = 8)
-    public String getCompositeDiagnosisCodePointer() { return getByPosition(); }
+    public String getCompositeDiagnosisCodePointer() { return collection[14]; }
 
     public void setEligibilityOrBenefitInformationCode(String s) {collection[1] = s;}
     public void setCoverageLevelCode(String s) {collection[2] = s;}

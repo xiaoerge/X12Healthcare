@@ -14,13 +14,13 @@ public class DTP extends Segment {
     }
 
     @Definition(position = 1, minLength = 3, maxLength = 3)
-    public String getDateTimeQualifier() { return getByPosition(); }
+    public String getDateTimeQualifier() { return collection[1]; }
 
     @Definition(position = 2, minLength = 2, maxLength = 3)
-    public String getDateTimePeriodFormatQualifier() { return getByPosition(); }
+    public String getDateTimePeriodFormatQualifier() { return collection[2]; }
 
     @Definition(position = 3, minLength = 1, maxLength = 35)
-    public String getDateTimePeriod() { return getByPosition(); }
+    public String getDateTimePeriod() { return collection[3]; }
 
     public void setDateTimeQualifier(String s) { collection[1] = s; }
     public void setDateTimePeriodFormatQualifier(String s) { collection[2] = s; }

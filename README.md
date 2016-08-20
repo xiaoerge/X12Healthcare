@@ -21,10 +21,7 @@ InterchangeEnvelope
 ###Progress
 
 ####270 (Done)
-	1. Segments for 270 are done, tested.
-	2. Dependent loop is done, tested.
-	3, Subscriber is done, tested.
-	3, Transaction is done, tested.
+####271, 835, 837, 277, 999, 997, TA1 (In progress)
 
 #####How to (270)
 ```java
@@ -157,19 +154,9 @@ InterchangeEnvelope
     }
 ```
 
-
-271
-835
-837
-277
-999
-997
-TA1 (In progress)
-    1. Message envelope is done, tested.
-    2. Message group is done, tested.
-    3. Message transaction is done, tested.
-
 ####Todo
 `toString()` method probably needs a better strategy other printing default on invalid segments.
+
 `toString()` should print to uppercase
+
 `setters` should limit by length

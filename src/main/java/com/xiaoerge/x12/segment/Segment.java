@@ -86,24 +86,6 @@ public class Segment extends MessageBase
     public int size() {
         return fieldSize;
     }
-
-    private String setByPosition(int position) {
-        return collection[position];
-    }
-    public String getByPosition() {
-        Class obj = this.getClass();
-        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-        for (Method method : obj.getDeclaredMethods()) {
-            if (method.getName().equals(methodName) &&
-                    method.isAnnotationPresent(Definition.class)) {
-                Definition definition = (Definition) method.getAnnotation(Definition.class);
-
-                return collection[definition.position()];
-            }
-        }
-        return "";
-    }
-
     public void loadDefinition() {
         throw new NotImplementedException();
     }

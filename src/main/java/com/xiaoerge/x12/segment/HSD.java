@@ -16,28 +16,28 @@ public class HSD extends Segment {
     }
 
     @Definition(position = 1, minLength = 2, maxLength = 2)
-    public String getQuantityQualifier() {return getByPosition(); }
+    public String getQuantityQualifier() {return collection[1]; }
 
     @Definition(position = 2, minLength = 1, maxLength = 15)
-    public String getQuantity() {return getByPosition(); }
+    public String getQuantity() {return collection[2]; }
 
     @Definition(position = 3, minLength = 2, maxLength = 2)
-    public String getUnitOrBasisForMeasurementCode() {return getByPosition(); }
+    public String getUnitOrBasisForMeasurementCode() {return collection[3]; }
 
     @Definition(position = 4, minLength = 1, maxLength = 6)
-    public String getSampleSelectionModulus() {return getByPosition(); }
+    public String getSampleSelectionModulus() {return collection[4]; }
 
     @Definition(position = 5, minLength = 1, maxLength = 2)
-    public String getTimePeriodQualifier() {return getByPosition(); }
+    public String getTimePeriodQualifier() {return collection[5]; }
 
     @Definition(position = 6, minLength = 1, maxLength = 3)
-    public String getNumberOfPeriods() {return getByPosition(); }
+    public String getNumberOfPeriods() {return collection[6]; }
 
     @Definition(position = 7, minLength = 1, maxLength = 2)
-    public String getShipDeliveryOrCalendarPatternCode() {return getByPosition(); }
+    public String getShipDeliveryOrCalendarPatternCode() {return collection[7]; }
 
     @Definition(position = 8, minLength = 1, maxLength = 1)
-    public String getShipDeliveryPatternTimeCode() {return getByPosition(); }
+    public String getShipDeliveryPatternTimeCode() {return collection[8]; }
 
     public void setQuantityQualifier(String s) { collection[1] = s;}
     public void setQuantity(String s) { collection[2] = s;}

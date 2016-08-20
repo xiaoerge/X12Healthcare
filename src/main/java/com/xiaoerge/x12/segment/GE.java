@@ -14,10 +14,10 @@ public class GE extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 6)
-    public String getNumberOfTransactionsSetsIncluded() { return getByPosition(); }
+    public String getNumberOfTransactionsSetsIncluded() { return collection[1]; }
 
     @Definition(position = 2, minLength = 1, maxLength = 9)
-    public String getGroupControlNumber() { return getByPosition(); }
+    public String getGroupControlNumber() { return collection[2]; }
 
     public void setNumberOfTransactionsSetsIncluded(String s) { collection[1] = s; }
     public void setGroupControlNumber(String s) { collection[2] = s; }

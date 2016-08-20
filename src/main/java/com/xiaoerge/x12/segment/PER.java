@@ -14,31 +14,31 @@ public class PER extends Segment {
     }
 
     @Definition(position = 1, minLength = 2, maxLength = 2)
-    public String getContactFunctionCode() { return getByPosition(); }
+    public String getContactFunctionCode() { return collection[1]; }
 
     @Definition(position = 2, minLength = 1, maxLength = 60)
-    public String getName() { return getByPosition(); }
+    public String getName() { return collection[2]; }
 
     @Definition(position = 3, minLength = 2, maxLength = 2)
-    public String getCommunicationNumberQualifier1() { return getByPosition(); }
+    public String getCommunicationNumberQualifier1() { return collection[3]; }
 
     @Definition(position = 4, minLength = 1, maxLength = 256)
-    public String getCommunicationNumber1() { return getByPosition(); }
+    public String getCommunicationNumber1() { return collection[4]; }
 
     @Definition(position = 5, minLength = 2, maxLength = 2)
-    public String getCommunicationNumberQualifier2() { return getByPosition(); }
+    public String getCommunicationNumberQualifier2() { return collection[5]; }
 
     @Definition(position = 6, minLength = 1, maxLength = 256)
-    public String getCommunicationNumber2() { return getByPosition(); }
+    public String getCommunicationNumber2() { return collection[6]; }
 
     @Definition(position = 7, minLength = 2, maxLength = 2)
-    public String getCommunicationNumberQualifier3() { return getByPosition(); }
+    public String getCommunicationNumberQualifier3() { return collection[7]; }
 
     @Definition(position = 8, minLength = 1, maxLength = 256)
-    public String getCommunicationNumber3() { return getByPosition(); }
+    public String getCommunicationNumber3() { return collection[8]; }
 
     @Definition(position = 9, minLength = 1, maxLength = 20)
-    public String getContactInquiryReference() { return getByPosition(); }
+    public String getContactInquiryReference() { return collection[9]; }
 
     public void setContactFunctionCode(String s) { collection[1] = s; }
     public void setName(String s) { collection[2] = s; }

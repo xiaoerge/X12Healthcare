@@ -68,11 +68,11 @@ public class BenefitInquiryDependentTest {
         Assert.assertEquals("DTP*291*D8*20060501~", dependent.getDates().get(0).toString());
 
         for(int i = 0; i < 5; i++) {
-            BenefitInquiryDependentEligibility benefitInquiryDependentEligibility = dependent.getDependentEligibilities().get(i);
+            BenefitInquiryDependentEligibility benefitInquiryDependentEligibility = dependent.getEligibilities().get(i);
             Assert.assertEquals("EQ*30~III*ZZ*21~REF*9F*660415~DTP*291*D8*20051031~",
                     benefitInquiryDependentEligibility.toString());
         }
-        Assert.assertEquals(5, dependent.getDependentEligibilities().size());
+        Assert.assertEquals(5, dependent.getEligibilities().size());
     }
 
     @Test
@@ -126,12 +126,12 @@ public class BenefitInquiryDependentTest {
         dependent.setDates(new ArrayList<DTP>());
         dependent.setDemographicInformation(new DMG("DMG*D8*19430519~"));
         dependent.getDates().add(new DTP("DTP*291*D8*20060501~"));
-        dependent.setDependentEligibilities(new ArrayList<BenefitInquiryDependentEligibility>());
+        dependent.setEligibilities(new ArrayList<BenefitInquiryDependentEligibility>());
         for(int i = 0; i < 5; i++) {
             BenefitInquiryDependentEligibility benefitInquiryDependentEligibility =
                     new BenefitInquiryDependentEligibility("EQ*30~III*ZZ*21~REF*9F*660415~DTP*291*D8*20051031~");
 
-            dependent.getDependentEligibilities().add(benefitInquiryDependentEligibility);
+            dependent.getEligibilities().add(benefitInquiryDependentEligibility);
         }
 
         Assert.assertTrue(dependent.validate());
@@ -142,7 +142,7 @@ public class BenefitInquiryDependentTest {
         Assert.assertEquals(2, dependent.getTraceNumbers().size());
         Assert.assertEquals("NM1*IL*1*SMITH*ROBERT****MI*11122333301~", dependent.getName().toString());
         Assert.assertEquals("DTP*291*D8*20060501~", dependent.getDates().get(0).toString());
-        Assert.assertEquals(5, dependent.getDependentEligibilities().size());
+        Assert.assertEquals(5, dependent.getEligibilities().size());
     }
 
     @Test
@@ -179,7 +179,7 @@ public class BenefitInquiryDependentTest {
             BenefitInquiryDependentEligibility benefitInquiryDependentEligibility =
                     new BenefitInquiryDependentEligibility("EQ*30~III*ZZ*21~REF*9F*660415~DTP*291*D8*20051031~");
 
-            dependent.getDependentEligibilities().add(benefitInquiryDependentEligibility);
+            dependent.getEligibilities().add(benefitInquiryDependentEligibility);
         }
         dependent.setName(new NM1("NM1*IL*1*SMITH*ROBERT****MI*11122333301~"));
         dependent.setDemographicInformation(new DMG("DMG*D8*19430519~"));
@@ -196,6 +196,6 @@ public class BenefitInquiryDependentTest {
         Assert.assertEquals(2, dependent.getTraceNumbers().size());
         Assert.assertEquals("NM1*IL*1*SMITH*ROBERT****MI*11122333301~", dependent.getName().toString());
         Assert.assertEquals("DTP*291*D8*20060501~", dependent.getDates().get(0).toString());
-        Assert.assertEquals(5, dependent.getDependentEligibilities().size());
+        Assert.assertEquals(5, dependent.getEligibilities().size());
     }
 }

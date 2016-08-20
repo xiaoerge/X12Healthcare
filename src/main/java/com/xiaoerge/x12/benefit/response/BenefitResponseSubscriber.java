@@ -44,6 +44,7 @@ public class BenefitResponseSubscriber extends MessageBase {
         dates = new ArrayList<DTP>();
         militaryPersonnelInformation = new MPI();
         eligibilities = new ArrayList<BenefitResponseEligibility>();
+        dependents = new ArrayList<BenefitResponseDependent>();
     }
     public BenefitResponseSubscriber(String s) {
         this();

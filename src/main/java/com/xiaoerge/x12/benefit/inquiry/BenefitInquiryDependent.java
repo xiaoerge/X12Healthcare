@@ -24,7 +24,7 @@ public class BenefitInquiryDependent extends MessageBase {
     private HI healthCareDiagnosisCode;
     private List<DTP> dates;
 
-    private List<BenefitInquiryDependentEligibility> dependentEligibilities;
+    private List<BenefitInquiryDependentEligibility> eligibilities;
 
     public BenefitInquiryDependent() {
         hierarchicalLevel = new HL();
@@ -38,7 +38,7 @@ public class BenefitInquiryDependent extends MessageBase {
         relationship = new INS();
         healthCareDiagnosisCode = new HI();
         dates = new ArrayList<DTP>();
-        dependentEligibilities = new ArrayList<BenefitInquiryDependentEligibility>();
+        eligibilities = new ArrayList<BenefitInquiryDependentEligibility>();
     }
     public BenefitInquiryDependent(String s) {
         this();
@@ -74,7 +74,7 @@ public class BenefitInquiryDependent extends MessageBase {
 
         String[] splitArray = SegmentStringUtil.split(builder.toString(), "EQ");
         for(String str : splitArray) {
-            dependentEligibilities.add(new BenefitInquiryDependentEligibility(str));
+            eligibilities.add(new BenefitInquiryDependentEligibility(str));
         }
     }
 
@@ -92,7 +92,7 @@ public class BenefitInquiryDependent extends MessageBase {
         messagesDefinition.add(relationship);
         messagesDefinition.add(healthCareDiagnosisCode);
         messagesDefinition.addAll(dates);
-        messagesDefinition.addAll(dependentEligibilities);
+        messagesDefinition.addAll(eligibilities);
     }
 
 
@@ -184,10 +184,10 @@ public class BenefitInquiryDependent extends MessageBase {
         this.dates = dates;
     }
 
-    public List<BenefitInquiryDependentEligibility> getDependentEligibilities() {
-        return dependentEligibilities;
+    public List<BenefitInquiryDependentEligibility> getEligibilities() {
+        return eligibilities;
     }
-    public void setDependentEligibilities(List<BenefitInquiryDependentEligibility> dependentEligibilities) {
-        this.dependentEligibilities = dependentEligibilities;
+    public void setEligibilities(List<BenefitInquiryDependentEligibility> eligibilities) {
+        this.eligibilities = eligibilities;
     }
 }

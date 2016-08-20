@@ -85,7 +85,7 @@ public class BenefitInquirySubscriberTest {
         Assert.assertEquals(1, subscriber.getDependents().size());
         Assert.assertEquals(dependentString, subscriber.getDependents().get(0).toString());
         Assert.assertEquals("5", subscriber.getDependents().get(0).getHierarchicalLevel().getHierarchicalParentIDNumber());
-        Assert.assertEquals(5, subscriber.getDependents().get(0).getDependentEligibilities().size());
+        Assert.assertEquals(5, subscriber.getDependents().get(0).getEligibilities().size());
     }
 
     @Test
@@ -181,6 +181,6 @@ public class BenefitInquirySubscriberTest {
         Assert.assertEquals(1, subscriber.getDependents().size());
         Assert.assertEquals(dependentString, subscriber.getDependents().get(0).toString());
         Assert.assertEquals("5", subscriber.getDependents().get(0).getHierarchicalLevel().getHierarchicalParentIDNumber());
-        Assert.assertEquals(5, subscriber.getDependents().get(0).getDependentEligibilities().size());
+        Assert.assertEquals(5, subscriber.getDependents().get(0).getEligibilities().size());
     }
 }

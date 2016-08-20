@@ -13,7 +13,7 @@ import java.util.List;
 public class BenefitInquiryInformationReceiver extends MessageBase {
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
-    private List<REF> referenceInformation;
+    private List<REF> referenceInformations;
     private N3 partyLocation;
     private N4 geographicLocation;
     private PRV providerInformation;
@@ -23,7 +23,7 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
     public BenefitInquiryInformationReceiver() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
-        referenceInformation = new ArrayList<REF>();
+        referenceInformations = new ArrayList<REF>();
         partyLocation = new N3();
         geographicLocation = new N4();
         providerInformation = new PRV();
@@ -39,7 +39,7 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
             individualOrOrganizationalName = new NM1(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            referenceInformation.add(new REF(stringQueue.getNext()));
+            referenceInformations.add(new REF(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
             partyLocation = new N3(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
@@ -61,7 +61,7 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
         messagesDefinition.clear();
         messagesDefinition.add(hierarchicalLevel);
         messagesDefinition.add(individualOrOrganizationalName);
-        messagesDefinition.addAll(referenceInformation);
+        messagesDefinition.addAll(referenceInformations);
         messagesDefinition.add(partyLocation);
         messagesDefinition.add(geographicLocation);
         messagesDefinition.add(providerInformation);
@@ -82,9 +82,9 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
     public String getIdentificationCodeQualifier() { return individualOrOrganizationalName.getIdentificationCodeQualifier(); }
     public String getIdentificationCode() { return individualOrOrganizationalName.getIdentificationCode(); }
 
-//    public String getReferenceIdentificationQualifier() { return referenceInformation.getReferenceIdentificationQualifier(); }
-//    public String getReferenceIdentification() { return referenceInformation.getReferenceIdentification(); }
-//    public String getDescription() { return referenceInformation.getDescription(); }
+//    public String getReferenceIdentificationQualifier() { return referenceInformations.getReferenceIdentificationQualifier(); }
+//    public String getReferenceIdentification() { return referenceInformations.getReferenceIdentification(); }
+//    public String getDescription() { return referenceInformations.getDescription(); }
 
     public String getCityName() { return geographicLocation.getCityName(); }
     public String getStateOrProvinceCode() { return geographicLocation.getStateOrProvinceCode(); }
@@ -113,9 +113,9 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
     public void setIdentificationCodeQualifier(String s) { individualOrOrganizationalName.setIdentificationCodeQualifier(s); }
     public void setIdentificationCode(String s) { individualOrOrganizationalName.setIdentificationCode(s); }
 
-//    public void setReferenceIdentificationQualifier(String s) { referenceInformation.setReferenceIdentificationQualifier(s); }
-//    public void setReferenceIdentification(String s) { referenceInformation.setReferenceIdentification(s); }
-//    public void setDescription(String s) { referenceInformation.setDescription(s); }
+//    public void setReferenceIdentificationQualifier(String s) { referenceInformations.setReferenceIdentificationQualifier(s); }
+//    public void setReferenceIdentification(String s) { referenceInformations.setReferenceIdentification(s); }
+//    public void setDescription(String s) { referenceInformations.setDescription(s); }
 
     public void setCityName(String s) { geographicLocation.setCityName(s); }
     public void setStateOrProvinceCode(String s) { geographicLocation.setStateOrProvinceCode(s); }

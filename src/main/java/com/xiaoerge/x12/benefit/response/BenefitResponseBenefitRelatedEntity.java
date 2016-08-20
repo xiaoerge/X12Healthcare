@@ -15,14 +15,14 @@ public class BenefitResponseBenefitRelatedEntity extends MessageBase {
     private NM1 relatedEntityName;
     private N3 relatedEntityAddress;
     private N4 relatedEntityCityStateZip;
-    private List<PER> relatedEntityContactInformation;
+    private List<PER> relatedEntityContactInformations;
     private PRV relatedProviderInformation;
 
     public BenefitResponseBenefitRelatedEntity() {
         relatedEntityName = new NM1();
         relatedEntityAddress = new N3();
         relatedEntityCityStateZip = new N4();
-        relatedEntityContactInformation = new ArrayList<PER>();
+        relatedEntityContactInformations = new ArrayList<PER>();
         relatedProviderInformation = new PRV();
     }
     public BenefitResponseBenefitRelatedEntity(String s) {
@@ -36,7 +36,7 @@ public class BenefitResponseBenefitRelatedEntity extends MessageBase {
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
             relatedEntityCityStateZip = new N4(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PER"))
-            relatedEntityContactInformation.add(new PER(stringQueue.getNext()));
+            relatedEntityContactInformations.add(new PER(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
             relatedProviderInformation = new PRV(stringQueue.getNext());
 
@@ -51,7 +51,7 @@ public class BenefitResponseBenefitRelatedEntity extends MessageBase {
         messagesDefinition.add(relatedEntityName);
         messagesDefinition.add(relatedEntityAddress);
         messagesDefinition.add(relatedEntityCityStateZip);
-        messagesDefinition.addAll(relatedEntityContactInformation);
+        messagesDefinition.addAll(relatedEntityContactInformations);
         messagesDefinition.add(relatedProviderInformation);
     }
 
@@ -79,12 +79,12 @@ public class BenefitResponseBenefitRelatedEntity extends MessageBase {
         this.relatedEntityCityStateZip = relatedEntityCityStateZip;
     }
 
-    public List<PER> getRelatedEntityContactInformation() {
-        return relatedEntityContactInformation;
+    public List<PER> getRelatedEntityContactInformations() {
+        return relatedEntityContactInformations;
     }
 
-    public void setRelatedEntityContactInformation(List<PER> relatedEntityContactInformation) {
-        this.relatedEntityContactInformation = relatedEntityContactInformation;
+    public void setRelatedEntityContactInformations(List<PER> relatedEntityContactInformations) {
+        this.relatedEntityContactInformations = relatedEntityContactInformations;
     }
 
     public PRV getRelatedProviderInformation() {
@@ -94,4 +94,5 @@ public class BenefitResponseBenefitRelatedEntity extends MessageBase {
     public void setRelatedProviderInformation(PRV relatedProviderInformation) {
         this.relatedProviderInformation = relatedProviderInformation;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.xiaoerge.x12.benefit.inquiry;
+package com.xiaoerge.x12.benefit.response;
 
 import com.xiaoerge.x12.message.MessageBase;
 import com.xiaoerge.x12.segment.*;
@@ -11,38 +11,41 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/11/16.
  */
-public class BenefitInquirySubscriber extends MessageBase {
+public class BenefitResponseSubscriber extends MessageBase {
     private HL hierarchicalLevel;
     private List<TRN> traceNumbers;
     private NM1 name;
     private List<REF> additionalIdentifications;
     private N3 address;
     private N4 cityStateZip;
+    private List<AAA> requestValidations;
     private PRV providerInformation;
     private DMG demographic;
-    private INS multipleBirthSequenceNumber;
+    private INS relationship;
     private HI healthCareDiagnosisCode;
     private List<DTP> dates;
+    private MPI militaryPersonnelInformation;
 
-    private List<BenefitInquirySubscriberEligibility> eligibilities;
-    private List<BenefitInquiryDependent> dependents;
+    private List<BenefitResponseEligibility> eligibilities;
+    private List<BenefitResponseDependent> dependents;
 
-    public BenefitInquirySubscriber() {
+    public BenefitResponseSubscriber() {
         hierarchicalLevel = new HL();
         traceNumbers = new ArrayList<TRN>();
         name = new NM1();
         additionalIdentifications = new ArrayList<REF>();
         address = new N3();
         cityStateZip = new N4();
+        requestValidations = new ArrayList<AAA>();
         providerInformation = new PRV();
         demographic = new DMG();
-        multipleBirthSequenceNumber = new INS();
+        relationship = new INS();
         healthCareDiagnosisCode = new HI();
         dates = new ArrayList<DTP>();
-        eligibilities = new ArrayList<BenefitInquirySubscriberEligibility>();
-        dependents = new ArrayList<BenefitInquiryDependent>();
+        militaryPersonnelInformation = new MPI();
+        eligibilities = new ArrayList<BenefitResponseEligibility>();
     }
-    public BenefitInquirySubscriber(String s) {
+    public BenefitResponseSubscriber(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
@@ -58,43 +61,39 @@ public class BenefitInquirySubscriber extends MessageBase {
             address = new N3(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
             cityStateZip = new N4(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AAA"))
+            requestValidations.add(new AAA(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
             providerInformation = new PRV(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DMG"))
             demographic = new DMG(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("INS"))
-            multipleBirthSequenceNumber = new INS(stringQueue.getNext());
+            relationship = new INS(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HI"))
             healthCareDiagnosisCode = new HI(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
             dates.add(new DTP(stringQueue.getNext()));
+        if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("MPI"))
+            militaryPersonnelInformation = new MPI(stringQueue.getNext());
 
-        //find eligibility loop
-        StringBuilder eligibilityString = new StringBuilder();
-        while (stringQueue.hasNext() && !stringQueue.peekNext().startsWith("HL"))
-            eligibilityString.append(stringQueue.getNext());
-
-        String[] eqStrings = SegmentStringUtil.split(eligibilityString.toString(), "EQ");
-        for(String eqString : eqStrings) {
-            eligibilities.add(new BenefitInquirySubscriberEligibility(eqString));
+        StringBuilder builder = new StringBuilder();
+        while (stringQueue.hasNext() && !stringQueue.peekNext().startsWith("HL")) {
+            builder.append(stringQueue.getNext());
         }
 
-        //find dependent loop
-        StringBuilder dependentString = new StringBuilder();
+        String[] splitArray = SegmentStringUtil.split(builder.toString(), "EB");
+        for(String str : splitArray) {
+            eligibilities.add(new BenefitResponseEligibility(str));
+        }
+
+        builder = new StringBuilder();
         while (stringQueue.hasNext()) {
-            dependentString.append(stringQueue.getNext());
+            builder.append(stringQueue.getNext());
         }
-        String[] dependentStrings = SegmentStringUtil.split(dependentString.toString(), "HL");
-        for(String dString : dependentStrings) {
-            BenefitInquiryDependent dependent = new BenefitInquiryDependent(dString);
-            if (!dependent.getHierarchicalLevel().getHierarchicalParentIDNumber()
-                    .equals(hierarchicalLevel.getHierarchicalIDNumber())){
-                //there's a problem with this HL
-                logger.error("Invalid HL found in BenefitInquirySubscriber to BenefitInquiryDependent "+ dependent.toString());
-            }
-            else {
-                dependents.add(dependent);
-            }
+
+        String[] dArray = SegmentStringUtil.split(builder.toString(), "HL");
+        for (String str : dArray) {
+            dependents.add(new BenefitResponseDependent(str));
         }
     }
 
@@ -107,11 +106,13 @@ public class BenefitInquirySubscriber extends MessageBase {
         messagesDefinition.addAll(additionalIdentifications);
         messagesDefinition.add(address);
         messagesDefinition.add(cityStateZip);
+        messagesDefinition.addAll(requestValidations);
         messagesDefinition.add(providerInformation);
         messagesDefinition.add(demographic);
-        messagesDefinition.add(multipleBirthSequenceNumber);
+        messagesDefinition.add(relationship);
         messagesDefinition.add(healthCareDiagnosisCode);
         messagesDefinition.addAll(dates);
+        messagesDefinition.add(militaryPersonnelInformation);
         messagesDefinition.addAll(eligibilities);
         messagesDefinition.addAll(dependents);
     }
@@ -164,6 +165,14 @@ public class BenefitInquirySubscriber extends MessageBase {
         this.cityStateZip = cityStateZip;
     }
 
+    public List<AAA> getRequestValidations() {
+        return requestValidations;
+    }
+
+    public void setRequestValidations(List<AAA> requestValidations) {
+        this.requestValidations = requestValidations;
+    }
+
     public PRV getProviderInformation() {
         return providerInformation;
     }
@@ -180,12 +189,12 @@ public class BenefitInquirySubscriber extends MessageBase {
         this.demographic = demographic;
     }
 
-    public INS getMultipleBirthSequenceNumber() {
-        return multipleBirthSequenceNumber;
+    public INS getRelationship() {
+        return relationship;
     }
 
-    public void setMultipleBirthSequenceNumber(INS multipleBirthSequenceNumber) {
-        this.multipleBirthSequenceNumber = multipleBirthSequenceNumber;
+    public void setRelationship(INS relationship) {
+        this.relationship = relationship;
     }
 
     public HI getHealthCareDiagnosisCode() {
@@ -204,19 +213,27 @@ public class BenefitInquirySubscriber extends MessageBase {
         this.dates = dates;
     }
 
-    public List<BenefitInquirySubscriberEligibility> getEligibilities() {
+    public MPI getMilitaryPersonnelInformation() {
+        return militaryPersonnelInformation;
+    }
+
+    public void setMilitaryPersonnelInformation(MPI militaryPersonnelInformation) {
+        this.militaryPersonnelInformation = militaryPersonnelInformation;
+    }
+
+    public List<BenefitResponseEligibility> getEligibilities() {
         return eligibilities;
     }
 
-    public void setEligibilities(List<BenefitInquirySubscriberEligibility> eligibilities) {
+    public void setEligibilities(List<BenefitResponseEligibility> eligibilities) {
         this.eligibilities = eligibilities;
     }
 
-    public List<BenefitInquiryDependent> getDependents() {
+    public List<BenefitResponseDependent> getDependents() {
         return dependents;
     }
 
-    public void setDependents(List<BenefitInquiryDependent> dependents) {
+    public void setDependents(List<BenefitResponseDependent> dependents) {
         this.dependents = dependents;
     }
 }

@@ -13,32 +13,32 @@ import java.util.List;
  */
 public class BenefitInquiryDependent extends MessageBase {
     private HL hierarchicalLevel;
-    private List<TRN> traceNumber;
+    private List<TRN> traceNumbers;
     private NM1 name;
-    private List<REF> additionalIdentification;
+    private List<REF> additionalIdentifications;
     private N3 address;
     private N4 cityStateZip;
     private PRV providerInformation;
     private DMG demographicInformation;
     private INS relationship;
     private HI healthCareDiagnosisCode;
-    private List<DTP> date;
+    private List<DTP> dates;
 
-    private List<BenefitInquiryDependentEligibility> dependentEligibility;
+    private List<BenefitInquiryDependentEligibility> dependentEligibilities;
 
     public BenefitInquiryDependent() {
         hierarchicalLevel = new HL();
-        traceNumber = new ArrayList<TRN>();
+        traceNumbers = new ArrayList<TRN>();
         name = new NM1();
-        additionalIdentification = new ArrayList<REF>();
+        additionalIdentifications = new ArrayList<REF>();
         address = new N3();
         cityStateZip = new N4();
         providerInformation = new PRV();
         demographicInformation = new DMG();
         relationship = new INS();
         healthCareDiagnosisCode = new HI();
-        date = new ArrayList<DTP>();
-        dependentEligibility = new ArrayList<BenefitInquiryDependentEligibility>();
+        dates = new ArrayList<DTP>();
+        dependentEligibilities = new ArrayList<BenefitInquiryDependentEligibility>();
     }
     public BenefitInquiryDependent(String s) {
         this();
@@ -47,11 +47,11 @@ public class BenefitInquiryDependent extends MessageBase {
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
             hierarchicalLevel = new HL(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("TRN"))
-            traceNumber.add(new TRN(stringQueue.getNext()));
+            traceNumbers.add(new TRN(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
             name = new NM1(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            additionalIdentification.add(new REF(stringQueue.getNext()));
+            additionalIdentifications.add(new REF(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
             address = new N3(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
@@ -65,7 +65,7 @@ public class BenefitInquiryDependent extends MessageBase {
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HI"))
             healthCareDiagnosisCode = new HI(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            date.add(new DTP(stringQueue.getNext()));
+            dates.add(new DTP(stringQueue.getNext()));
 
         StringBuilder builder = new StringBuilder();
         while (stringQueue.hasNext()) {
@@ -74,7 +74,7 @@ public class BenefitInquiryDependent extends MessageBase {
 
         String[] splitArray = SegmentStringUtil.split(builder.toString(), "EQ");
         for(String str : splitArray) {
-            dependentEligibility.add(new BenefitInquiryDependentEligibility(str));
+            dependentEligibilities.add(new BenefitInquiryDependentEligibility(str));
         }
     }
 
@@ -82,17 +82,17 @@ public class BenefitInquiryDependent extends MessageBase {
         messagesDefinition.clear();
 
         messagesDefinition.add(hierarchicalLevel);
-        messagesDefinition.addAll(traceNumber);
+        messagesDefinition.addAll(traceNumbers);
         messagesDefinition.add(name);
-        messagesDefinition.addAll(additionalIdentification);
+        messagesDefinition.addAll(additionalIdentifications);
         messagesDefinition.add(address);
         messagesDefinition.add(cityStateZip);
         messagesDefinition.add(providerInformation);
         messagesDefinition.add(demographicInformation);
         messagesDefinition.add(relationship);
         messagesDefinition.add(healthCareDiagnosisCode);
-        messagesDefinition.addAll(date);
-        messagesDefinition.addAll(dependentEligibility);
+        messagesDefinition.addAll(dates);
+        messagesDefinition.addAll(dependentEligibilities);
     }
 
 
@@ -104,12 +104,12 @@ public class BenefitInquiryDependent extends MessageBase {
         this.hierarchicalLevel = hierarchicalLevel;
     }
 
-    public List<TRN> getTraceNumber() {
-        return traceNumber;
+    public List<TRN> getTraceNumbers() {
+        return traceNumbers;
     }
 
-    public void setTraceNumber(List<TRN> traceNumber) {
-        this.traceNumber = traceNumber;
+    public void setTraceNumbers(List<TRN> traceNumbers) {
+        this.traceNumbers = traceNumbers;
     }
 
     public NM1 getName() {
@@ -120,12 +120,12 @@ public class BenefitInquiryDependent extends MessageBase {
         this.name = name;
     }
 
-    public List<REF> getAdditionalIdentification() {
-        return additionalIdentification;
+    public List<REF> getAdditionalIdentifications() {
+        return additionalIdentifications;
     }
 
-    public void setAdditionalIdentification(List<REF> additionalIdentification) {
-        this.additionalIdentification = additionalIdentification;
+    public void setAdditionalIdentifications(List<REF> additionalIdentifications) {
+        this.additionalIdentifications = additionalIdentifications;
     }
 
     public N3 getAddress() {
@@ -176,18 +176,18 @@ public class BenefitInquiryDependent extends MessageBase {
         this.healthCareDiagnosisCode = healthCareDiagnosisCode;
     }
 
-    public List<DTP> getDate() {
-        return date;
+    public List<DTP> getDates() {
+        return dates;
     }
 
-    public void setDate(List<DTP> date) {
-        this.date = date;
+    public void setDates(List<DTP> dates) {
+        this.dates = dates;
     }
 
-    public List<BenefitInquiryDependentEligibility> getDependentEligibility() {
-        return dependentEligibility;
+    public List<BenefitInquiryDependentEligibility> getDependentEligibilities() {
+        return dependentEligibilities;
     }
-    public void setDependentEligibility(List<BenefitInquiryDependentEligibility> dependentEligibility) {
-        this.dependentEligibility = dependentEligibility;
+    public void setDependentEligibilities(List<BenefitInquiryDependentEligibility> dependentEligibilities) {
+        this.dependentEligibilities = dependentEligibilities;
     }
 }

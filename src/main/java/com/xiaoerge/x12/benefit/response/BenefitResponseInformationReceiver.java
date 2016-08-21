@@ -1,8 +1,8 @@
-package com.xiaoerge.x12.benefit.inquiry;
+package com.xiaoerge.x12.benefit.response;
 
 import com.xiaoerge.x12.message.MessageBase;
-import com.xiaoerge.x12.util.StringQueue;
 import com.xiaoerge.x12.segment.*;
+import com.xiaoerge.x12.util.StringQueue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,27 +10,29 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/5/16.
  */
-public class BenefitInquiryInformationReceiver extends MessageBase {
+public class BenefitResponseInformationReceiver extends MessageBase {
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
     private List<REF> referenceInformations;
     private N3 address;
     private N4 cityStateZip;
+    private List<AAA> requestValidations;
     private PRV providerInformation;
 
-    private List<BenefitInquirySubscriber> benefitSubscribers;
+    private List<BenefitResponseSubscriber> subscribers;
 
-    public BenefitInquiryInformationReceiver() {
+    public BenefitResponseInformationReceiver() {
         hierarchicalLevel = new HL();
         individualOrOrganizationalName = new NM1();
         referenceInformations = new ArrayList<REF>();
         address = new N3();
         cityStateZip = new N4();
         providerInformation = new PRV();
-        benefitSubscribers = new ArrayList<BenefitInquirySubscriber>();
+        requestValidations = new ArrayList<AAA>();
+        subscribers = new ArrayList<BenefitResponseSubscriber>();
     }
 
-    public BenefitInquiryInformationReceiver(String s) {
+    public BenefitResponseInformationReceiver(String s) {
         this();
         StringQueue stringQueue = new StringQueue(s);
 
@@ -54,7 +56,7 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
         while (stringQueue.hasNext()) {
             stringBuilder.append(stringQueue.getNext());
         }
-        benefitSubscribers.add(new BenefitInquirySubscriber(stringBuilder.toString()));
+        subscribers.add(new BenefitResponseSubscriber(stringBuilder.toString()));
     }
 
     public void loadDefinition() {
@@ -65,7 +67,7 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
         messagesDefinition.add(address);
         messagesDefinition.add(cityStateZip);
         messagesDefinition.add(providerInformation);
-        messagesDefinition.addAll(benefitSubscribers);
+        messagesDefinition.addAll(subscribers);
     }
 
     public HL getHierarchicalLevel() {
@@ -108,6 +110,14 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
         this.cityStateZip = cityStateZip;
     }
 
+    public List<AAA> getRequestValidations() {
+        return requestValidations;
+    }
+
+    public void setRequestValidations(List<AAA> requestValidations) {
+        this.requestValidations = requestValidations;
+    }
+
     public PRV getProviderInformation() {
         return providerInformation;
     }
@@ -116,11 +126,11 @@ public class BenefitInquiryInformationReceiver extends MessageBase {
         this.providerInformation = providerInformation;
     }
 
-    public List<BenefitInquirySubscriber> getBenefitSubscribers() {
-        return benefitSubscribers;
+    public List<BenefitResponseSubscriber> getSubscribers() {
+        return subscribers;
     }
 
-    public void setBenefitSubscribers(List<BenefitInquirySubscriber> benefitSubscribers) {
-        this.benefitSubscribers = benefitSubscribers;
+    public void setSubscribers(List<BenefitResponseSubscriber> subscribers) {
+        this.subscribers = subscribers;
     }
 }

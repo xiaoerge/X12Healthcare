@@ -11,17 +11,21 @@ import java.util.List;
  */
 public class BenefitResponseTransaction extends Transaction {
 
+    private List<BenefitResponseInformationSource> informationSources;
     public BenefitResponseTransaction() {
         super();
+        informationSources = new ArrayList<BenefitResponseInformationSource>();
     }
 
     public BenefitResponseTransaction(String s) {
         super(s);
+        informationSources = new ArrayList<BenefitResponseInformationSource>();
         parseContent();
     }
 
     public BenefitResponseTransaction(Transaction transaction) {
         super(transaction);
+        informationSources = new ArrayList<BenefitResponseInformationSource>();
         parseContent();
     }
 
@@ -34,7 +38,7 @@ public class BenefitResponseTransaction extends Transaction {
         messagesDefinition.clear();
         messagesDefinition.add(getTransactionSetHeader());
         messagesDefinition.add(getBeginningOfHierarchicalTransaction());
-        //messagesDefinition.addAll(benefitInquiryInformationSources);
+        messagesDefinition.addAll(informationSources);
         messagesDefinition.add(getTransactionSetTrailer());
     }
 }

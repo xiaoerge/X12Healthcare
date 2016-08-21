@@ -26,6 +26,7 @@ public class BenefitResponseInformationSource extends MessageBase {
 
     public BenefitResponseInformationSource() {
         hierarchicalLevel = new HL();
+        requestValidation = new ArrayList<AAA>();
         individualOrOrganizationalName = new NM1();
         contactInformation = new ArrayList<PER>();
         requestValidation2 = new ArrayList<AAA>();
@@ -38,8 +39,14 @@ public class BenefitResponseInformationSource extends MessageBase {
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
             hierarchicalLevel = new HL(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AAA"))
+            requestValidation.add(new AAA(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
             individualOrOrganizationalName = new NM1(stringQueue.getNext());
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PER"))
+            contactInformation.add(new PER(stringQueue.getNext()));
+        while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AAA"))
+            requestValidation2.add(new AAA(stringQueue.getNext()));
 
         //todo multiple receivers
 
@@ -55,7 +62,10 @@ public class BenefitResponseInformationSource extends MessageBase {
         messagesDefinition.clear();
 
         messagesDefinition.add(hierarchicalLevel);
+        messagesDefinition.addAll(requestValidation);
         messagesDefinition.add(individualOrOrganizationalName);
+        messagesDefinition.addAll(contactInformation);
+        messagesDefinition.addAll(requestValidation2);
         messagesDefinition.addAll(informationReceivers);
     }
 

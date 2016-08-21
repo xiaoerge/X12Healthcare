@@ -32,9 +32,15 @@ public class StringQueueTest {
 
         StringQueue stringQueue = new StringQueue(x12);
 
+        Assert.assertEquals(17, stringQueue.size());
+
         while (stringQueue.hasNext()) {
             String next = stringQueue.getNext();
             Assert.assertTrue(next.length() > 0);
         }
+
+        Assert.assertFalse(stringQueue.hasNext());
+        stringQueue.reset();
+        Assert.assertTrue(stringQueue.hasNext());
     }
 }

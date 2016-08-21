@@ -52,16 +52,34 @@ public class FunctionalGroup extends MessageBase {
         }
     }
 
-    public GS getFunctionalGroupHeader() {return functionalGroupHeader;}
-    public GE getFunctionalGroupTrailer() {return functionalGroupTrailer;}
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
-
     public void loadDefinition() {
         messagesDefinition.clear();
         messagesDefinition.add(functionalGroupHeader);
         messagesDefinition.addAll(transactions);
         messagesDefinition.add(functionalGroupTrailer);
+    }
+
+    public GS getFunctionalGroupHeader() {
+        return functionalGroupHeader;
+    }
+
+    public void setFunctionalGroupHeader(GS functionalGroupHeader) {
+        this.functionalGroupHeader = functionalGroupHeader;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public GE getFunctionalGroupTrailer() {
+        return functionalGroupTrailer;
+    }
+
+    public void setFunctionalGroupTrailer(GE functionalGroupTrailer) {
+        this.functionalGroupTrailer = functionalGroupTrailer;
     }
 }

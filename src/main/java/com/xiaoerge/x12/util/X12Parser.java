@@ -4,6 +4,7 @@ import com.xiaoerge.x12.control.FunctionalGroup;
 import com.xiaoerge.x12.control.InterchangeEnvelope;
 import com.xiaoerge.x12.control.Transaction;
 import com.xiaoerge.x12.message.BenefitInquiry;
+import com.xiaoerge.x12.message.BenefitResponse;
 import com.xiaoerge.x12.message.X12MessageBase;
 
 import java.util.List;
@@ -23,6 +24,9 @@ public class X12Parser {
 
         if (transaction.getTransactionSetHeader().getTransactionSetIDCode().equals("270")) {
             return new BenefitInquiry(message);
+        }
+        else if (transaction.getTransactionSetHeader().getTransactionSetIDCode().equals("271")) {
+            return new BenefitResponse(message);
         }
 
         return message;

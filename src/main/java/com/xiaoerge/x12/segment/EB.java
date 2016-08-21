@@ -49,10 +49,10 @@ public class EB extends Segment {
     @Definition(position = 12, minLength = 1, maxLength = 1)
     public String getYesNoConditionOrResponseCode2() { return collection[12]; }
 
-    @Definition(position = 13, minLength = 13, maxLength = 186)
+    @Definition(position = 13, minLength = 1, maxLength = 186)
     public String getCompositeMedicalProcedureIdentifier() { return collection[13]; }
 
-    @Definition(position = 14, minLength = 4, maxLength = 8)
+    @Definition(position = 14, minLength = 1, maxLength = 8)
     public String getCompositeDiagnosisCodePointer() { return collection[14]; }
 
     public void setEligibilityOrBenefitInformationCode(String s) {collection[1] = s;}

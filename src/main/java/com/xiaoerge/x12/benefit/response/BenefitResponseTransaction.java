@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.benefit.response;
 
+import com.xiaoerge.x12.benefit.inquiry.BenefitInquiryInformationSource;
 import com.xiaoerge.x12.control.Transaction;
 import com.xiaoerge.x12.util.SegmentStringUtil;
 
@@ -31,7 +32,11 @@ public class BenefitResponseTransaction extends Transaction {
 
     private void parseContent() {
         String[] sourceStrings = SegmentStringUtil.split(getContent(), "HL");
-        String[] informationSources = SegmentStringUtil.joinLevel(sourceStrings);
+        String[] sources = SegmentStringUtil.joinLevel(sourceStrings);
+
+        for (String str : sources) {
+            informationSources.add(new BenefitResponseInformationSource(str));
+        }
     }
 
     public void loadDefinition() {
@@ -40,5 +45,13 @@ public class BenefitResponseTransaction extends Transaction {
         messagesDefinition.add(getBeginningOfHierarchicalTransaction());
         messagesDefinition.addAll(informationSources);
         messagesDefinition.add(getTransactionSetTrailer());
+    }
+
+    public List<BenefitResponseInformationSource> getInformationSources() {
+        return informationSources;
+    }
+
+    public void setInformationSources(List<BenefitResponseInformationSource> informationSources) {
+        this.informationSources = informationSources;
     }
 }

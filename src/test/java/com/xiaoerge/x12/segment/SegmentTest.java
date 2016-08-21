@@ -8,6 +8,15 @@ import org.junit.Test;
  */
 public class SegmentTest {
 
+    @Test(expected = NullPointerException.class)
+    public void testParseError() {
+        String x12 = "HL*1* *20*1~";
+        ISA isa = new ISA(x12);
+
+        //collection[0] is null because parse() failed prematurely due to invalid constructor call
+        Assert.assertFalse(isa.validate());
+    }
+
     @Test
     public void testParseISA() {
         String x12 = "HL*1* *20*1~";

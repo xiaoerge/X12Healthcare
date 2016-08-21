@@ -8,6 +8,7 @@ import com.xiaoerge.x12.message.BenefitResponse;
 import com.xiaoerge.x12.message.X12MessageBase;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xiaoerge on 5/28/16.

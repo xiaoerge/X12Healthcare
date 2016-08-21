@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.segment;
 
-import com.xiaoerge.x12.exception.MalformedMessageException;
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
 import com.xiaoerge.x12.message.MessageBase;
@@ -39,14 +38,11 @@ public class Segment extends MessageBase
             name = declaration.name();
         }
 
-        try {
-            if (c.length() > 0 && !c.startsWith(name))
-                throw new MalformedMessageException("Invalid segment constructor for message "+c);
-            else parse();
+
+        if (c.length() > 0 && !c.startsWith(name)) {
+            logger.error(String.format("Invalid segment constructor %s for message %s", name, c));
         }
-        catch (MalformedMessageException mex) {
-            logger.error("Invalid segment constructor for message "+c);
-        }
+        else parse();
     }
 
     private void parse() {

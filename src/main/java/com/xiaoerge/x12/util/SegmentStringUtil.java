@@ -1,6 +1,6 @@
 package com.xiaoerge.x12.util;
 
-import com.xiaoerge.x12.segment.HL;
+import com.xiaoerge.x12.message.segment.HL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

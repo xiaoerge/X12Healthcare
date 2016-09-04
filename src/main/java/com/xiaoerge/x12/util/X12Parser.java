@@ -1,14 +1,14 @@
 package com.xiaoerge.x12.util;
 
-import com.xiaoerge.x12.control.FunctionalGroup;
-import com.xiaoerge.x12.control.InterchangeEnvelope;
-import com.xiaoerge.x12.control.Transaction;
-import com.xiaoerge.x12.message.BenefitInquiry;
-import com.xiaoerge.x12.message.BenefitResponse;
+import com.xiaoerge.x12.message.benefit.inquiry.ClaimPayment;
+import com.xiaoerge.x12.message.control.FunctionalGroup;
+import com.xiaoerge.x12.message.control.InterchangeEnvelope;
+import com.xiaoerge.x12.message.control.Transaction;
+import com.xiaoerge.x12.message.benefit.inquiry.BenefitInquiry;
+import com.xiaoerge.x12.message.benefit.response.BenefitResponse;
 import com.xiaoerge.x12.message.X12MessageBase;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xiaoerge on 5/28/16.
@@ -28,6 +28,9 @@ public class X12Parser {
         }
         else if (transaction.getTransactionSetHeader().getTransactionSetIDCode().equals("271")) {
             return new BenefitResponse(message);
+        }
+        else if (transaction.getTransactionSetHeader().getTransactionSetIDCode().equals("835")) {
+            return new ClaimPayment(message);
         }
 
         return message;

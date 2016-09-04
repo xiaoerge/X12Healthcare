@@ -1,6 +1,6 @@
 package com.xiaoerge.x12;
 
-import com.xiaoerge.x12.segment.PER;
+import com.xiaoerge.x12.message.segment.PER;
 import org.junit.Test;
 
 /**

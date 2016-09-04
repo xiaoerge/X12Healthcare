@@ -1,6 +1,6 @@
 package com.xiaoerge.x12.message;
 
-import com.xiaoerge.x12.control.InterchangeEnvelope;
+import com.xiaoerge.x12.message.control.InterchangeEnvelope;
 
 /**
  * Created by xiaoerge on 5/23/16.

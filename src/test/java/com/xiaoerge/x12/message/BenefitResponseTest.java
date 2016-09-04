@@ -1,15 +1,14 @@
 package com.xiaoerge.x12.message;
 
-import com.xiaoerge.x12.benefit.response.BenefitResponseInformationReceiver;
-import com.xiaoerge.x12.benefit.response.BenefitResponseInformationSource;
-import com.xiaoerge.x12.benefit.response.BenefitResponseTransaction;
-import com.xiaoerge.x12.control.FunctionalGroup;
-import com.xiaoerge.x12.control.InterchangeEnvelope;
+import com.xiaoerge.x12.message.benefit.response.BenefitResponse;
+import com.xiaoerge.x12.message.benefit.response.BenefitResponseInformationReceiver;
+import com.xiaoerge.x12.message.benefit.response.BenefitResponseInformationSource;
+import com.xiaoerge.x12.message.benefit.response.BenefitResponseTransaction;
+import com.xiaoerge.x12.message.control.FunctionalGroup;
+import com.xiaoerge.x12.message.control.InterchangeEnvelope;
 import com.xiaoerge.x12.util.X12Parser;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.List;
 
 /**
  * Created by xiaoerge on 5/23/16.

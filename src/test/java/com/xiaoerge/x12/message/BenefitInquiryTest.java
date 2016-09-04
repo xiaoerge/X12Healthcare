@@ -1,10 +1,11 @@
 package com.xiaoerge.x12.message;
 
-import com.xiaoerge.x12.benefit.inquiry.BenefitInquiryInformationSource;
-import com.xiaoerge.x12.benefit.inquiry.BenefitInquiryTransaction;
-import com.xiaoerge.x12.control.FunctionalGroup;
-import com.xiaoerge.x12.control.InterchangeEnvelope;
-import com.xiaoerge.x12.control.Transaction;
+import com.xiaoerge.x12.message.benefit.inquiry.BenefitInquiry;
+import com.xiaoerge.x12.message.benefit.inquiry.BenefitInquiryInformationSource;
+import com.xiaoerge.x12.message.benefit.inquiry.BenefitInquiryTransaction;
+import com.xiaoerge.x12.message.control.FunctionalGroup;
+import com.xiaoerge.x12.message.control.InterchangeEnvelope;
+import com.xiaoerge.x12.message.control.Transaction;
 import com.xiaoerge.x12.util.X12Parser;
 import org.junit.Assert;
 import org.junit.Test;

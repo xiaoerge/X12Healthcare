@@ -1,4 +1,4 @@
-package com.xiaoerge.x12.message.claim;
+package com.xiaoerge.x12.message.claim.payment;
 
 import com.xiaoerge.x12.message.control.Transaction;
 

@@ -1,6 +1,6 @@
 package com.xiaoerge.x12.util;
 
-import com.xiaoerge.x12.message.benefit.inquiry.ClaimPayment;
+import com.xiaoerge.x12.message.claim.payment.ClaimPayment;
 import com.xiaoerge.x12.message.control.FunctionalGroup;
 import com.xiaoerge.x12.message.control.InterchangeEnvelope;
 import com.xiaoerge.x12.message.control.Transaction;

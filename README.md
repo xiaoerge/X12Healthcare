@@ -7,13 +7,12 @@
 ###Will support parsing and creating of messages such as 837, 835, 277, 270, 271, 999, 997, TA1.
 
 ##Important license information
-Must agree to xiaoerge.license to use this library
+Must agree to `xiaoerge.license` to use this library
 
 ####Note on code coverage
 Code coverage will defer until message parsings are done.
 
-####Structure
-####270/217
+####Message Structure
 ```python
 InterchangeEnvelope
     FunctionalGroup
@@ -27,7 +26,7 @@ InterchangeEnvelope
 ###Progress
 ####Done - 270, 271
 ####In Progress - 835, 837
-####Roadmap - 277, 999, 997, TA1
+####On Roadmap - 277, 999, 997, TA1
 
 ####How to use
 See unit test for examples

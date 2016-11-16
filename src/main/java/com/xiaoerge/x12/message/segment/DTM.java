@@ -6,7 +6,7 @@ import com.xiaoerge.x12.annotation.Definition;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-@Declaration(fieldSize = 11, name = "DTM")
+@Declaration(fieldSize = 6, name = "DTM")
 public class DTM extends Segment {
     public DTM() { super(); }
     public DTM(String content) {

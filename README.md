@@ -6,6 +6,9 @@
 
 ###Will support parsing and creating of messages such as 837, 835, 277, 270, 271, 999, 997, TA1.
 
+###Note on code coverage
+Code coverage will deferred until message parsings are done.
+
 ####Structure
 ####270/217
 ```python

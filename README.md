@@ -1,4 +1,4 @@
-#X12Healthcare v5010X279A1
+#X12Healthcare v5010
 ##ANSI ASC X12 implementation for healthcare
 
 [![Build Status](https://travis-ci.org/xiaoerge/X12Healthcare.svg?branch=master)](https://travis-ci.org/xiaoerge/X12Healthcare)

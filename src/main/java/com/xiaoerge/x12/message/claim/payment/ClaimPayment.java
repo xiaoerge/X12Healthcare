@@ -1,18 +1,22 @@
 package com.xiaoerge.x12.message.claim.payment;
 
-import com.xiaoerge.x12.message.X12MessageBase;
+import com.xiaoerge.x12.message.X12MessageLoopBase;
 import com.xiaoerge.x12.message.control.FunctionalGroup;
 import com.xiaoerge.x12.message.control.InterchangeEnvelope;
 
 /**
  * Created by xiaoerge on 9/3/16.
  */
-public class ClaimPayment extends X12MessageBase {
+public class ClaimPayment extends X12MessageLoopBase {
+
+    public ClaimPayment() {
+        super();
+    }
     public ClaimPayment(String s) {
         super(s);
         parse();
     }
-    public ClaimPayment(X12MessageBase message) {
+    public ClaimPayment(X12MessageLoopBase message) {
         super(message);
         parse();
     }
@@ -25,4 +29,6 @@ public class ClaimPayment extends X12MessageBase {
             }
         }
     }
+
+    //todo load definition
 }

@@ -3,7 +3,7 @@ package com.xiaoerge.x12.message.control;
 import com.xiaoerge.x12.message.segment.GE;
 import com.xiaoerge.x12.message.segment.GS;
 import com.xiaoerge.x12.util.StringQueue;
-import com.xiaoerge.x12.message.MessageBase;
+import com.xiaoerge.x12.message.MessageLoopBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class FunctionalGroup extends MessageBase {
+public class FunctionalGroup extends MessageLoopBase {
     private GS functionalGroupHeader;
     private List<Transaction> transactions;
     private GE functionalGroupTrailer;

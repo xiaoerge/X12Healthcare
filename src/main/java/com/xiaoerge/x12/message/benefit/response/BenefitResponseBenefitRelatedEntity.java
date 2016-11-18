@@ -1,6 +1,6 @@
 package com.xiaoerge.x12.message.benefit.response;
 
-import com.xiaoerge.x12.message.MessageBase;
+import com.xiaoerge.x12.message.MessageLoopBase;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.StringQueue;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 8/13/16.
  */
-public class BenefitResponseBenefitRelatedEntity extends MessageBase {
+public class BenefitResponseBenefitRelatedEntity extends MessageLoopBase {
 
     private NM1 relatedEntityName;
     private N3 relatedEntityAddress;

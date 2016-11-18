@@ -3,7 +3,7 @@ package com.xiaoerge.x12.message.benefit.inquiry;
 import com.xiaoerge.x12.message.segment.HL;
 import com.xiaoerge.x12.message.segment.NM1;
 import com.xiaoerge.x12.util.StringQueue;
-import com.xiaoerge.x12.message.MessageBase;
+import com.xiaoerge.x12.message.MessageLoopBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/5/16.
  */
-public class BenefitInquiryInformationSource extends MessageBase {
+public class BenefitInquiryInformationSource extends MessageLoopBase {
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
 

@@ -1,7 +1,9 @@
 package com.xiaoerge.x12.message.claim.payment;
 
+import com.sun.deploy.util.StringUtils;
 import com.xiaoerge.x12.message.control.Transaction;
 import com.xiaoerge.x12.message.segment.*;
+import com.xiaoerge.x12.util.SegmentStringUtil;
 import com.xiaoerge.x12.util.StringQueue;
 
 /**
@@ -37,9 +39,6 @@ public class ClaimPaymentTransaction extends Transaction {
     }
 
     private void parseContent() {
-
-        System.out.println(getContent());
-
         StringBuilder builder = new StringBuilder();
         StringQueue stringQueue = new StringQueue(getContent());
 
@@ -61,6 +60,11 @@ public class ClaimPaymentTransaction extends Transaction {
         }
 
         System.out.println(builder.toString());
+
+        String[] s2 = SegmentStringUtil.split(builder.toString(), "N1");
+        for(String s : s2) {
+            System.out.println(s);
+        }
     }
 
     public void loadDefinition() {

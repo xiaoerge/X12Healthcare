@@ -1,13 +1,13 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
-import com.xiaoerge.x12.message.MessageBase;
+import com.xiaoerge.x12.message.MessageLoopBase;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.StringQueue;
 
 /**
  * Created by xiaoerge on 8/13/16.
  */
-public class BenefitInquirySubscriberEligibility extends MessageBase {
+public class BenefitInquirySubscriberEligibility extends MessageLoopBase {
 
     private EQ eligibility;
     private AMT spendDown;

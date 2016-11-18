@@ -8,16 +8,16 @@ import java.util.List;
 /**
  * Created by xiaoerge on 5/28/16.
  */
-public abstract class MessageBase {
+public abstract class MessageLoopBase {
     protected final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
-    protected final List<MessageBase> messagesDefinition = new ArrayList<MessageBase>();
+    protected final List<MessageLoopBase> messagesDefinition = new ArrayList<MessageLoopBase>();
 
     public abstract void loadDefinition();
 
     public boolean validate() {
         if (messagesDefinition.size() == 0) loadDefinition();
 
-        for (MessageBase message : messagesDefinition) {
+        for (MessageLoopBase message : messagesDefinition) {
             if (!message.validate()) return false;
         }
         return true;
@@ -28,7 +28,7 @@ public abstract class MessageBase {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (MessageBase message : messagesDefinition) {
+        for (MessageLoopBase message : messagesDefinition) {
             stringBuilder.append(message.toX12String());
         }
 
@@ -38,7 +38,7 @@ public abstract class MessageBase {
     public boolean isEmpty() {
         if (messagesDefinition.size() == 0) loadDefinition();
 
-        for (MessageBase message : messagesDefinition) {
+        for (MessageLoopBase message : messagesDefinition) {
             if (!message.isEmpty()) return false;
         }
         return true;

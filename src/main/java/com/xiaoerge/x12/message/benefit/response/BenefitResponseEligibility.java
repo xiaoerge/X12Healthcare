@@ -1,6 +1,6 @@
 package com.xiaoerge.x12.message.benefit.response;
 
-import com.xiaoerge.x12.message.MessageBase;
+import com.xiaoerge.x12.message.MessageLoopBase;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.SegmentStringUtil;
 import com.xiaoerge.x12.util.StringQueue;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 8/13/16.
  */
-public class BenefitResponseEligibility extends MessageBase {
+public class BenefitResponseEligibility extends MessageLoopBase {
 
     private EB eligibility;
     private List<HSD> healthCareServiceDeliveries;

@@ -1,7 +1,7 @@
 package com.xiaoerge.x12.message.control;
 
 import com.xiaoerge.x12.util.StringQueue;
-import com.xiaoerge.x12.message.MessageBase;
+import com.xiaoerge.x12.message.MessageLoopBase;
 import com.xiaoerge.x12.message.segment.IEA;
 import com.xiaoerge.x12.message.segment.ISA;
 
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class InterchangeEnvelope extends MessageBase {
+public class InterchangeEnvelope extends MessageLoopBase {
     private ISA transactionSetHeader;
     private List<FunctionalGroup> functionalGroups;
     private IEA transactionSetTrailer;

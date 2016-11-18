@@ -5,15 +5,15 @@ import com.xiaoerge.x12.message.control.InterchangeEnvelope;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class X12MessageBase extends MessageBase {
+public class X12MessageLoopBase extends MessageLoopBase {
 
     private InterchangeEnvelope interchangeEnvelope;
 
-    public X12MessageBase() { interchangeEnvelope = new InterchangeEnvelope(); }
-    public X12MessageBase(String s) {
+    public X12MessageLoopBase() { interchangeEnvelope = new InterchangeEnvelope(); }
+    public X12MessageLoopBase(String s) {
         interchangeEnvelope = new InterchangeEnvelope(s);
     }
-    public X12MessageBase(X12MessageBase message) {
+    public X12MessageLoopBase(X12MessageLoopBase message) {
         this.interchangeEnvelope = message.getInterchangeEnvelope();
     }
 

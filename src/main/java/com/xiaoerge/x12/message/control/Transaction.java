@@ -4,12 +4,12 @@ import com.xiaoerge.x12.message.segment.BHT;
 import com.xiaoerge.x12.message.segment.SE;
 import com.xiaoerge.x12.message.segment.ST;
 import com.xiaoerge.x12.util.StringQueue;
-import com.xiaoerge.x12.message.MessageBase;
+import com.xiaoerge.x12.message.MessageLoopBase;
 
 /**
  * Created by xiaoerge on 5/27/16.
  */
-public class Transaction extends MessageBase {
+public class Transaction extends MessageLoopBase {
     private ST transactionSetHeader;
     private BHT beginningOfHierarchicalTransaction;
     private SE transactionSetTrailer;

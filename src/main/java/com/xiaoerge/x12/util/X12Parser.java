@@ -6,7 +6,7 @@ import com.xiaoerge.x12.message.control.InterchangeEnvelope;
 import com.xiaoerge.x12.message.control.Transaction;
 import com.xiaoerge.x12.message.benefit.inquiry.BenefitInquiry;
 import com.xiaoerge.x12.message.benefit.response.BenefitResponse;
-import com.xiaoerge.x12.message.X12MessageBase;
+import com.xiaoerge.x12.message.X12MessageLoopBase;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class X12Parser {
 
-    public static X12MessageBase fromX12Message(String s) {
+    public static X12MessageLoopBase fromX12Message(String s) {
 
-        X12MessageBase message = new X12MessageBase(s);
+        X12MessageLoopBase message = new X12MessageLoopBase(s);
         InterchangeEnvelope envelope = message.getInterchangeEnvelope();
         List<FunctionalGroup> groups = envelope.getFunctionalGroups();
 

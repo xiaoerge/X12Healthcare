@@ -1,6 +1,6 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
-import com.xiaoerge.x12.message.MessageBase;
+import com.xiaoerge.x12.message.MessageLoopBase;
 import com.xiaoerge.x12.util.StringQueue;
 import com.xiaoerge.x12.message.segment.*;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 6/5/16.
  */
-public class BenefitInquiryInformationReceiver extends MessageBase {
+public class BenefitInquiryInformationReceiver extends MessageLoopBase {
     private HL hierarchicalLevel;
     private NM1 individualOrOrganizationalName;
     private List<REF> referenceInformations;

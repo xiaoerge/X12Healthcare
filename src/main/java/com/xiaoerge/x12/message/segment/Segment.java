@@ -121,7 +121,7 @@ public class Segment extends MessageLoopBase
         Class obj = this.getClass();
         for (Method method : obj.getDeclaredMethods()) {
             if (method.isAnnotationPresent(Definition.class)) {
-                Definition definition = (Definition) method.getAnnotation(Definition.class);
+                Definition definition = method.getAnnotation(Definition.class);
 
                 try {
                     String code = (String) method.invoke(this);

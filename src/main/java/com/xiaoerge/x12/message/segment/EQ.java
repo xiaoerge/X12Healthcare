@@ -1,7 +1,7 @@
 package com.xiaoerge.x12.message.segment;
 
-import com.xiaoerge.x12.annotation.Definition;
 import com.xiaoerge.x12.annotation.Declaration;
+import com.xiaoerge.x12.annotation.Definition;
 
 /**
  * Created by xiaoerge on 5/23/16.

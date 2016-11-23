@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.message.claim.payment;
 
-import com.sun.deploy.util.StringUtils;
 import com.xiaoerge.x12.message.control.Transaction;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.SegmentStringUtil;

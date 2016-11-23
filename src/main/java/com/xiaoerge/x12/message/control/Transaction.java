@@ -1,10 +1,10 @@
 package com.xiaoerge.x12.message.control;
 
+import com.xiaoerge.x12.message.MessageLoopBase;
 import com.xiaoerge.x12.message.segment.BHT;
 import com.xiaoerge.x12.message.segment.SE;
 import com.xiaoerge.x12.message.segment.ST;
 import com.xiaoerge.x12.util.StringQueue;
-import com.xiaoerge.x12.message.MessageLoopBase;
 
 /**
  * Created by xiaoerge on 5/27/16.

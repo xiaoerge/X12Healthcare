@@ -1,9 +1,9 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
 import com.xiaoerge.x12.message.MessageLoopBase;
+import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.SegmentStringUtil;
 import com.xiaoerge.x12.util.StringQueue;
-import com.xiaoerge.x12.message.segment.*;
 
 import java.util.ArrayList;
 import java.util.List;

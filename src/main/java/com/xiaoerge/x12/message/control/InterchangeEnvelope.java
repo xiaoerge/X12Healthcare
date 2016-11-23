@@ -1,9 +1,9 @@
 package com.xiaoerge.x12.message.control;
 
-import com.xiaoerge.x12.util.StringQueue;
 import com.xiaoerge.x12.message.MessageLoopBase;
 import com.xiaoerge.x12.message.segment.IEA;
 import com.xiaoerge.x12.message.segment.ISA;
+import com.xiaoerge.x12.util.StringQueue;
 
 import java.util.ArrayList;
 import java.util.List;

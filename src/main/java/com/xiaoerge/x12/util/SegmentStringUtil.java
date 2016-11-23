@@ -4,7 +4,9 @@ import com.xiaoerge.x12.message.segment.HL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by xiaoerge on 8/13/16.

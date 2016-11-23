@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Definition {
 
-    public int position();
-    public int minLength();
-    public int maxLength();
+    int position();
+    int minLength();
+    int maxLength();
 }

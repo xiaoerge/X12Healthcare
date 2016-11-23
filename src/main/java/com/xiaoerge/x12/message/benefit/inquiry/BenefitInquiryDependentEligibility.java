@@ -1,6 +1,6 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
-import com.xiaoerge.x12.message.MessageLoopBase;
+import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.DTP;
 import com.xiaoerge.x12.message.segment.EQ;
 import com.xiaoerge.x12.message.segment.III;
@@ -10,7 +10,7 @@ import com.xiaoerge.x12.util.StringQueue;
 /**
  * Created by xiaoerge on 8/13/16.
  */
-public class BenefitInquiryDependentEligibility extends MessageLoopBase {
+public class BenefitInquiryDependentEligibility extends MessageLoop {
 
     private EQ eligibility;
     private III additionalEligibility;

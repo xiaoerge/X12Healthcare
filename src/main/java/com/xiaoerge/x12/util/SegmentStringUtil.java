@@ -23,7 +23,7 @@ public class SegmentStringUtil {
      * */
     public static String[] split(String string2Split, String segment) {
         if (string2Split.length() == 0 || !string2Split.startsWith(segment)) {
-            logger.warn("String2Split is empty or not start with "+segment);
+            logger.warn("String2Split is empty or not starting with "+segment);
             return new String[0];
         }
 

@@ -2,7 +2,7 @@ package com.xiaoerge.x12.message.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
-import com.xiaoerge.x12.message.MessageLoopBase;
+import com.xiaoerge.x12.message.MessageLoop;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class Segment extends MessageLoopBase
+public class Segment extends MessageLoop
 {
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 

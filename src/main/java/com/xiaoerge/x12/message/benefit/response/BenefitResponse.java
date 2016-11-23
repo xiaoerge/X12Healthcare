@@ -1,18 +1,18 @@
 package com.xiaoerge.x12.message.benefit.response;
 
-import com.xiaoerge.x12.message.X12MessageLoopBase;
+import com.xiaoerge.x12.message.X12Message;
 import com.xiaoerge.x12.message.control.FunctionalGroup;
 import com.xiaoerge.x12.message.control.InterchangeEnvelope;
 
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class BenefitResponse extends X12MessageLoopBase {
+public class BenefitResponse extends X12Message {
     public BenefitResponse(String s) {
         super(s);
         parse();
     }
-    public BenefitResponse(X12MessageLoopBase message) {
+    public BenefitResponse(X12Message message) {
         super(message);
         parse();
     }

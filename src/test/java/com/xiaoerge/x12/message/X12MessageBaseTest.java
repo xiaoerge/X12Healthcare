@@ -8,7 +8,7 @@ import org.junit.Test;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class X12MessageLoopBaseTest {
+public class X12MessageBaseTest {
 
     @Test(expected = ClassCastException.class)
     public void testParseBenefitInquiry() {
@@ -45,7 +45,7 @@ public class X12MessageLoopBaseTest {
 
     @Test
     public void testCreateX12MessageBase() {
-        X12MessageLoopBase messageBase = new X12MessageLoopBase();
+        X12Message messageBase = new X12Message();
 
         Assert.assertEquals("", messageBase.toString());
         Assert.assertEquals(true, messageBase.isEmpty());

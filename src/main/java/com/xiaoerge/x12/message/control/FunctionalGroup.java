@@ -1,6 +1,6 @@
 package com.xiaoerge.x12.message.control;
 
-import com.xiaoerge.x12.message.MessageLoopBase;
+import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.GE;
 import com.xiaoerge.x12.message.segment.GS;
 import com.xiaoerge.x12.util.StringQueue;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by xiaoerge on 5/23/16.
  */
-public class FunctionalGroup extends MessageLoopBase {
+public class FunctionalGroup extends MessageLoop {
     private GS functionalGroupHeader;
     private List<Transaction> transactions;
     private GE functionalGroupTrailer;

@@ -5,7 +5,6 @@ import com.xiaoerge.x12.annotation.Definition;
 import com.xiaoerge.x12.message.MessageLoop;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -83,7 +82,7 @@ public class Segment extends MessageLoop
         return fieldSize;
     }
     public void loadDefinition() {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.xiaoerge.x12.util;
 
+import com.xiaoerge.x12.message.MessageFormat;
+import com.xiaoerge.x12.message.MessageFormatException;
 import com.xiaoerge.x12.message.X12Message;
 import com.xiaoerge.x12.message.benefit.inquiry.BenefitInquiry;
 import com.xiaoerge.x12.message.benefit.response.BenefitResponse;
@@ -15,15 +17,17 @@ import java.util.List;
  */
 public class X12Parser {
 
-    public static X12Message fromX12Message(String s) {
+    public static X12Message fromX12Message(String s) throws MessageFormatException {
 
-        X12Message message = new X12Message(s);
+    	MessageFormat mf = new MessageFormat(s);
+        X12Message message = new X12Message(s, mf);
         InterchangeEnvelope envelope = message.getInterchangeEnvelope();
         List<FunctionalGroup> groups = envelope.getFunctionalGroups();
 
         Transaction transaction = groups.get(0).getTransactions().get(0);
 
         if (transaction.getTransactionSetHeader().getTransactionSetIDCode().equals("270")) {
+            X12Message m = new BenefitInquiry(message);
             return new BenefitInquiry(message);
         }
         else if (transaction.getTransactionSetHeader().getTransactionSetIDCode().equals("271")) {

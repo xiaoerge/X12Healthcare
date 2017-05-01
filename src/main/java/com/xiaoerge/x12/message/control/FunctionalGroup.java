@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.control;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.GE;
 import com.xiaoerge.x12.message.segment.GS;
@@ -21,18 +22,18 @@ public class FunctionalGroup extends MessageLoop {
         transactions = new ArrayList<Transaction>();
         functionalGroupTrailer = new GE();
     }
-    public FunctionalGroup(String s) {
-        StringQueue stringQueue = new StringQueue(s);
+    public FunctionalGroup(String s, MessageFormat mf) {
+        StringQueue stringQueue = new StringQueue(s, mf);
         transactions = new ArrayList<Transaction>();
 
         StringBuilder builder = null;
         while (stringQueue.hasNext()) {
             String next = stringQueue.getNext();
             if (next.startsWith("GS")) {
-                functionalGroupHeader = new GS(next);
+                functionalGroupHeader = new GS(next, mf);
             }
             else if (next.startsWith("GE")) {
-                functionalGroupTrailer = new GE(next);
+                functionalGroupTrailer = new GE(next, mf);
             }
             else if (next.startsWith("ST")) {
                 builder = new StringBuilder();
@@ -42,7 +43,7 @@ public class FunctionalGroup extends MessageLoop {
                 if (builder != null) {
                     builder.append(next);
                     String groupContent = builder.toString();
-                    Transaction transaction = new Transaction(groupContent);
+                    Transaction transaction = new Transaction(groupContent, mf);
                     transactions.add(transaction);
                 }
             }

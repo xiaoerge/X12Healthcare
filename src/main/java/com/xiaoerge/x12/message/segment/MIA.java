@@ -2,6 +2,7 @@ package com.xiaoerge.x12.message.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
+import com.xiaoerge.x12.message.MessageFormat;
 
 /**
  * Created by xiaoerge on 5/23/16.
@@ -9,8 +10,8 @@ import com.xiaoerge.x12.annotation.Definition;
 @Declaration(fieldSize = 24, name = "MIA")
 public class MIA extends Segment {
     public MIA() {super();}
-    public MIA(String content) {
-        super(content);
+    public MIA(String content, MessageFormat mf) {
+        super(content, mf);
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 15)

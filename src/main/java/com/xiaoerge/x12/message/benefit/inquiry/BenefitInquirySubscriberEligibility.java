@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.StringQueue;
@@ -24,22 +25,22 @@ public class BenefitInquirySubscriberEligibility extends MessageLoop {
         additionalInformation = new REF();
         eligibilityDate = new DTP();
     }
-    public BenefitInquirySubscriberEligibility(String s) {
+    public BenefitInquirySubscriberEligibility(String s, MessageFormat mf) {
         this();
-        StringQueue stringQueue = new StringQueue(s);
+        StringQueue stringQueue = new StringQueue(s, mf);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("EQ"))
-            eligibility = new EQ(stringQueue.getNext());
+            eligibility = new EQ(stringQueue.getNext(), mf);
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AMT"))
-            spendDown = new AMT(stringQueue.getNext());
+            spendDown = new AMT(stringQueue.getNext(), mf);
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AMT"))
-            totalBilledAmount = new AMT(stringQueue.getNext());
+            totalBilledAmount = new AMT(stringQueue.getNext(), mf);
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("III"))
-            additionalEligibility = new III(stringQueue.getNext());
+            additionalEligibility = new III(stringQueue.getNext(), mf);
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            additionalInformation = new REF(stringQueue.getNext());
+            additionalInformation = new REF(stringQueue.getNext(), mf);
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            eligibilityDate = new DTP(stringQueue.getNext());
+            eligibilityDate = new DTP(stringQueue.getNext(), mf);
     }
 
     public void loadDefinition() {

@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.benefit.response;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.StringQueue;
@@ -25,20 +26,20 @@ public class BenefitResponseBenefitRelatedEntity extends MessageLoop {
         relatedEntityContactInformations = new ArrayList<PER>();
         relatedProviderInformation = new PRV();
     }
-    public BenefitResponseBenefitRelatedEntity(String s) {
+    public BenefitResponseBenefitRelatedEntity(String s, MessageFormat mf) {
         this();
-        StringQueue stringQueue = new StringQueue(s);
+        StringQueue stringQueue = new StringQueue(s, mf);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
-            relatedEntityName = new NM1(stringQueue.getNext());
+            relatedEntityName = new NM1(stringQueue.getNext(), mf);
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
-            relatedEntityAddress = new N3(stringQueue.getNext());
+            relatedEntityAddress = new N3(stringQueue.getNext(), mf);
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
-            relatedEntityCityStateZip = new N4(stringQueue.getNext());
+            relatedEntityCityStateZip = new N4(stringQueue.getNext(), mf);
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PER"))
-            relatedEntityContactInformations.add(new PER(stringQueue.getNext()));
+            relatedEntityContactInformations.add(new PER(stringQueue.getNext(), mf));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
-            relatedProviderInformation = new PRV(stringQueue.getNext());
+            relatedProviderInformation = new PRV(stringQueue.getNext(), mf);
 
         if (stringQueue.hasNext()) {
             logger.warn("Unexpected string in "+this.getClass().getName());

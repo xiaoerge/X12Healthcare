@@ -11,6 +11,7 @@ import java.util.List;
 public abstract class MessageLoop {
     protected final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
     protected final List<MessageLoop> messagesDefinition = new ArrayList<MessageLoop>();
+    protected MessageFormat messageFormat;
 
     public abstract void loadDefinition();
 
@@ -47,5 +48,9 @@ public abstract class MessageLoop {
     @Override
     public String toString() {
         return toX12String();
+    }
+    
+    public MessageFormat getMessageFormat() {
+    	return messageFormat;
     }
 }

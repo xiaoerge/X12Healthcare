@@ -12,7 +12,7 @@ public class StringQueue {
     private String[] message;
     
     public StringQueue(String s) {
-    	MessageFormat mf = new MessageFormat();
+    	mf = new MessageFormat();
         message = s.split(mf.getSegmentTerminator());
         pointer = 0;
     }

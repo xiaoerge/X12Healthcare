@@ -18,7 +18,7 @@ import java.util.List;
 public class BenefitInquiryTest {
 
     @Test
-    public void testParseBenefitInquiry() {
+    public void testParseBenefitInquiry() throws MessageFormatException {
         String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~" +
                 "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~" +
                 "ST*270*1234*005010X279A1~" +
@@ -109,7 +109,7 @@ public class BenefitInquiryTest {
     }
 
     @Test
-    public void testParseCreateBenefitInquiry() {
+    public void testParseCreateBenefitInquiry() throws MessageFormatException {
         String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~" +
                 "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~" +
                 "ST*270*1234*005010X279A1~" +
@@ -139,7 +139,7 @@ public class BenefitInquiryTest {
                 "IEA*1*024277220~";
 
         BenefitInquiry benefitInquiry = (BenefitInquiry) X12Parser.fromX12Message(x12);
-        BenefitInquiry benefitInquiry2 = new BenefitInquiry(benefitInquiry.toString());
+        BenefitInquiry benefitInquiry2 = new BenefitInquiry(benefitInquiry.toString(), new MessageFormat());
 
         Assert.assertEquals(x12, benefitInquiry.toString());
         Assert.assertEquals(x12, benefitInquiry2.toString());

@@ -2,6 +2,7 @@ package com.xiaoerge.x12.message.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
+import com.xiaoerge.x12.message.MessageFormat;
 
 /**
  * Created by xiaoerge on 5/23/16.
@@ -11,8 +12,8 @@ public class SVC extends Segment {
     public SVC() {
         super();
     }
-    public SVC(String content) {
-        super(content);
+    public SVC(String content, MessageFormat mf) {
+        super(content, mf);
     }
 
     @Definition(position = 1, minLength = 13, maxLength = 196)

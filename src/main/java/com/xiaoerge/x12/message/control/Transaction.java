@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.control;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.BHT;
 import com.xiaoerge.x12.message.segment.SE;
@@ -23,21 +24,22 @@ public class Transaction extends MessageLoop {
         content = "";
     }
 
-    public Transaction(String s) {
+    public Transaction(String s, MessageFormat mf) {
         this();
-        StringQueue stringQueue = new StringQueue(s);
+        this.messageFormat = mf;
+        StringQueue stringQueue = new StringQueue(s, mf);
         StringBuilder builder = new StringBuilder();
 
         while (stringQueue.hasNext()) {
             String next = stringQueue.getNext();
             if (next.startsWith("ST")) {
-                transactionSetHeader = new ST(next);
+                transactionSetHeader = new ST(next, mf);
             }
             else if (next.startsWith("BHT")) {
-                beginningOfHierarchicalTransaction = new BHT(next);
+                beginningOfHierarchicalTransaction = new BHT(next, mf);
             }
             else if (next.startsWith("SE")) {
-                transactionSetTrailer = new SE(next);
+                transactionSetTrailer = new SE(next, mf);
             }
             else {
                 builder.append(next);
@@ -50,6 +52,7 @@ public class Transaction extends MessageLoop {
         beginningOfHierarchicalTransaction = transaction.getBeginningOfHierarchicalTransaction();
         transactionSetTrailer = transaction.getTransactionSetTrailer();
         content = transaction.getContent();
+        this.messageFormat = transaction.getMessageFormat();
     }
     public void loadDefinition() {
         messagesDefinition.clear();

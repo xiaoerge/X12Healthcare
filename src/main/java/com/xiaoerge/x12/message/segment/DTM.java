@@ -2,6 +2,7 @@ package com.xiaoerge.x12.message.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
+import com.xiaoerge.x12.message.MessageFormat;
 
 /**
  * Created by xiaoerge on 5/23/16.
@@ -9,8 +10,8 @@ import com.xiaoerge.x12.annotation.Definition;
 @Declaration(fieldSize = 6, name = "DTM")
 public class DTM extends Segment {
     public DTM() { super(); }
-    public DTM(String content) {
-        super(content);
+    public DTM(String content, MessageFormat mf) {
+        super(content, mf);
     }
     
     @Definition(position = 1, minLength = 3, maxLength = 3)

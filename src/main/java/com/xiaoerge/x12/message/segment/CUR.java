@@ -2,6 +2,7 @@ package com.xiaoerge.x12.message.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
+import com.xiaoerge.x12.message.MessageFormat;
 
 /**
  * Created by xiaoerge on 5/23/16.
@@ -9,8 +10,8 @@ import com.xiaoerge.x12.annotation.Definition;
 @Declaration(fieldSize = 21, name = "CUR")
 public class CUR extends Segment {
     public CUR() {super();}
-    public CUR(String content) {
-        super(content);
+    public CUR(String content, MessageFormat mf) {
+        super(content, mf);
     }
 
     @Definition(position = 1, minLength = 2, maxLength = 3)

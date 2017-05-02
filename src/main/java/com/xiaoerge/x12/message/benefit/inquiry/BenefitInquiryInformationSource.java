@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.HL;
 import com.xiaoerge.x12.message.segment.NM1;
@@ -23,14 +24,14 @@ public class BenefitInquiryInformationSource extends MessageLoop {
         benefitInquiryInformationReceivers = new ArrayList<BenefitInquiryInformationReceiver>();
     }
 
-    public BenefitInquiryInformationSource(String s) {
+    public BenefitInquiryInformationSource(String s, MessageFormat mf) {
         this();
-        StringQueue stringQueue = new StringQueue(s);
+        StringQueue stringQueue = new StringQueue(s, mf);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
-            hierarchicalLevel = new HL(stringQueue.getNext());
+            hierarchicalLevel = new HL(stringQueue.getNext(), mf);
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
-            individualOrOrganizationalName = new NM1(stringQueue.getNext());
+            individualOrOrganizationalName = new NM1(stringQueue.getNext(), mf);
 
         //todo multiple receivers
 
@@ -39,7 +40,7 @@ public class BenefitInquiryInformationSource extends MessageLoop {
         while (stringQueue.hasNext()) {
             receiverString.append(stringQueue.getNext());
         }
-        benefitInquiryInformationReceivers.add(new BenefitInquiryInformationReceiver(receiverString.toString()));
+        benefitInquiryInformationReceivers.add(new BenefitInquiryInformationReceiver(receiverString.toString(), mf));
     }
 
     public void loadDefinition() {

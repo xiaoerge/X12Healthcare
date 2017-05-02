@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.message.benefit.response;
 
-import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.StringQueue;
@@ -33,22 +32,22 @@ public class BenefitResponseInformationReceiver extends MessageLoop {
         subscribers = new ArrayList<BenefitResponseSubscriber>();
     }
 
-    public BenefitResponseInformationReceiver(String s, MessageFormat mf) {
+    public BenefitResponseInformationReceiver(String s) {
         this();
-        StringQueue stringQueue = new StringQueue(s, mf);
+        StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
-            hierarchicalLevel = new HL(stringQueue.getNext(), mf);
+            hierarchicalLevel = new HL(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
-            individualOrOrganizationalName = new NM1(stringQueue.getNext(), mf);
+            individualOrOrganizationalName = new NM1(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            referenceInformations.add(new REF(stringQueue.getNext(), mf));
+            referenceInformations.add(new REF(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
-            address = new N3(stringQueue.getNext(), mf);
+            address = new N3(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
-            cityStateZip = new N4(stringQueue.getNext(), mf);
+            cityStateZip = new N4(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
-            providerInformation = new PRV(stringQueue.getNext(), mf);
+            providerInformation = new PRV(stringQueue.getNext());
 
         //todo multiple subscribers
 
@@ -57,7 +56,7 @@ public class BenefitResponseInformationReceiver extends MessageLoop {
         while (stringQueue.hasNext()) {
             stringBuilder.append(stringQueue.getNext());
         }
-        subscribers.add(new BenefitResponseSubscriber(stringBuilder.toString(), mf));
+        subscribers.add(new BenefitResponseSubscriber(stringBuilder.toString()));
     }
 
     public void loadDefinition() {

@@ -1,7 +1,5 @@
 package com.xiaoerge.x12.message;
 
-import java.util.regex.Pattern;
-
 import com.xiaoerge.x12.message.control.InterchangeEnvelope;
 
 /**
@@ -11,15 +9,12 @@ public class X12Message extends MessageLoop {
 
     private InterchangeEnvelope interchangeEnvelope;
 
-    public X12Message() { interchangeEnvelope = new InterchangeEnvelope(messageFormat); }
-    public X12Message(String s, MessageFormat messageFormat) {
- 
-    	this.messageFormat = messageFormat;
-        interchangeEnvelope = new InterchangeEnvelope(s, messageFormat);
+    public X12Message() { interchangeEnvelope = new InterchangeEnvelope(); }
+    public X12Message(String s) {
+        interchangeEnvelope = new InterchangeEnvelope(s);
     }
     public X12Message(X12Message message) {
         this.interchangeEnvelope = message.getInterchangeEnvelope();
-        this.messageFormat = message.getMessageFormat();
     }
 
     public InterchangeEnvelope getInterchangeEnvelope() {
@@ -31,5 +26,4 @@ public class X12Message extends MessageLoop {
 
         messagesDefinition.add(interchangeEnvelope);
     }
-
 }

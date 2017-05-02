@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.message.control;
 
-import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.IEA;
 import com.xiaoerge.x12.message.segment.ISA;
@@ -18,25 +17,23 @@ public class InterchangeEnvelope extends MessageLoop {
     private List<FunctionalGroup> functionalGroups;
     private IEA transactionSetTrailer;
 
-    public InterchangeEnvelope(MessageFormat messageFormat) {
+    public InterchangeEnvelope() {
         transactionSetHeader = new ISA();
         functionalGroups = new ArrayList<FunctionalGroup>();
         transactionSetTrailer = new IEA();
-        this.messageFormat = messageFormat;
     }
-    public InterchangeEnvelope(String s, MessageFormat mf) {
-        this.messageFormat = messageFormat;
-        StringQueue stringQueue = new StringQueue(s, mf);
+    public InterchangeEnvelope(String s) {
+        StringQueue stringQueue = new StringQueue(s);
         functionalGroups = new ArrayList<FunctionalGroup>();
 
         StringBuilder builder = null;
         while (stringQueue.hasNext()) {
             String next = stringQueue.getNext();
             if (next.startsWith("ISA")) {
-                transactionSetHeader = new ISA(next, mf);
+                transactionSetHeader = new ISA(next);
             }
             else if (next.startsWith("IEA")) {
-                transactionSetTrailer = new IEA(next, mf);
+                transactionSetTrailer = new IEA(next);
             }
             else if (next.startsWith("GS")) {
                 builder = new StringBuilder();
@@ -46,7 +43,7 @@ public class InterchangeEnvelope extends MessageLoop {
                 if (builder != null) {
                     builder.append(next);
                     String groupContent = builder.toString();
-                    FunctionalGroup group = new FunctionalGroup(groupContent, mf);
+                    FunctionalGroup group = new FunctionalGroup(groupContent);
                     functionalGroups.add(group);
                 }
             }

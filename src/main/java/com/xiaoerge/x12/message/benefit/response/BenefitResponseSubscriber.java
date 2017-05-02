@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.message.benefit.response;
 
-import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.SegmentStringUtil;
@@ -47,45 +46,45 @@ public class BenefitResponseSubscriber extends MessageLoop {
         eligibilities = new ArrayList<BenefitResponseEligibility>();
         dependents = new ArrayList<BenefitResponseDependent>();
     }
-    public BenefitResponseSubscriber(String s, MessageFormat mf) {
+    public BenefitResponseSubscriber(String s) {
         this();
-        StringQueue stringQueue = new StringQueue(s, mf);
+        StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
-            hierarchicalLevel = new HL(stringQueue.getNext(), mf);
+            hierarchicalLevel = new HL(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("TRN"))
-            traceNumbers.add(new TRN(stringQueue.getNext(), mf));
+            traceNumbers.add(new TRN(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
-            name = new NM1(stringQueue.getNext(), mf);
+            name = new NM1(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            additionalIdentifications.add(new REF(stringQueue.getNext(), mf));
+            additionalIdentifications.add(new REF(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
-            address = new N3(stringQueue.getNext(), mf);
+            address = new N3(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
-            cityStateZip = new N4(stringQueue.getNext(), mf);
+            cityStateZip = new N4(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AAA"))
-            requestValidations.add(new AAA(stringQueue.getNext(), mf));
+            requestValidations.add(new AAA(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
-            providerInformation = new PRV(stringQueue.getNext(), mf);
+            providerInformation = new PRV(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DMG"))
-            demographic = new DMG(stringQueue.getNext(), mf);
+            demographic = new DMG(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("INS"))
-            relationship = new INS(stringQueue.getNext(), mf);
+            relationship = new INS(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HI"))
-            healthCareDiagnosisCode = new HI(stringQueue.getNext(), mf);
+            healthCareDiagnosisCode = new HI(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            dates.add(new DTP(stringQueue.getNext(), mf));
+            dates.add(new DTP(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("MPI"))
-            militaryPersonnelInformation = new MPI(stringQueue.getNext(), mf);
+            militaryPersonnelInformation = new MPI(stringQueue.getNext());
 
         StringBuilder builder = new StringBuilder();
         while (stringQueue.hasNext() && !stringQueue.peekNext().startsWith("HL")) {
             builder.append(stringQueue.getNext());
         }
 
-        String[] splitArray = SegmentStringUtil.split(builder.toString(), "EB", mf);
+        String[] splitArray = SegmentStringUtil.split(builder.toString(), "EB");
         for(String str : splitArray) {
-            eligibilities.add(new BenefitResponseEligibility(str, mf));
+            eligibilities.add(new BenefitResponseEligibility(str));
         }
 
         builder = new StringBuilder();
@@ -93,9 +92,9 @@ public class BenefitResponseSubscriber extends MessageLoop {
             builder.append(stringQueue.getNext());
         }
 
-        String[] dArray = SegmentStringUtil.split(builder.toString(), "HL", mf);
+        String[] dArray = SegmentStringUtil.split(builder.toString(), "HL");
         for (String str : dArray) {
-            dependents.add(new BenefitResponseDependent(str, mf));
+            dependents.add(new BenefitResponseDependent(str));
         }
     }
 

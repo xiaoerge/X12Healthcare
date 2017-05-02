@@ -2,7 +2,6 @@ package com.xiaoerge.x12.message.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
-import com.xiaoerge.x12.message.MessageFormat;
 
 /**
  * Created by xiaoerge on 8/13/16.
@@ -10,8 +9,8 @@ import com.xiaoerge.x12.message.MessageFormat;
 @Declaration(fieldSize = 4, name = "AAA")
 public class AAA extends Segment {
     public AAA() { super(); }
-    public AAA(String content, MessageFormat mf) {
-        super(content, mf);
+    public AAA(String content) {
+        super(content);
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 1)

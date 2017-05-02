@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
-import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.SegmentStringUtil;
@@ -43,42 +42,41 @@ public class BenefitInquirySubscriber extends MessageLoop {
         eligibilities = new ArrayList<BenefitInquirySubscriberEligibility>();
         dependents = new ArrayList<BenefitInquiryDependent>();
     }
-    public BenefitInquirySubscriber(String s, MessageFormat mf) {
+    public BenefitInquirySubscriber(String s) {
         this();
-        this.messageFormat = mf;
-        StringQueue stringQueue = new StringQueue(s, mf);
+        StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
-            hierarchicalLevel = new HL(stringQueue.getNext(), mf);
+            hierarchicalLevel = new HL(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("TRN"))
-            traceNumbers.add(new TRN(stringQueue.getNext(), mf));
+            traceNumbers.add(new TRN(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
-            name = new NM1(stringQueue.getNext(), mf);
+            name = new NM1(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            additionalIdentifications.add(new REF(stringQueue.getNext(), mf));
+            additionalIdentifications.add(new REF(stringQueue.getNext()));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N3"))
-            address = new N3(stringQueue.getNext(), mf);
+            address = new N3(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("N4"))
-            cityStateZip = new N4(stringQueue.getNext(), mf);
+            cityStateZip = new N4(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PRV"))
-            providerInformation = new PRV(stringQueue.getNext(), mf);
+            providerInformation = new PRV(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DMG"))
-            demographic = new DMG(stringQueue.getNext(), mf);
+            demographic = new DMG(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("INS"))
-            multipleBirthSequenceNumber = new INS(stringQueue.getNext(), mf);
+            multipleBirthSequenceNumber = new INS(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HI"))
-            healthCareDiagnosisCode = new HI(stringQueue.getNext(), mf);
+            healthCareDiagnosisCode = new HI(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            dates.add(new DTP(stringQueue.getNext(), mf));
+            dates.add(new DTP(stringQueue.getNext()));
 
         //find eligibility loop
         StringBuilder eligibilityString = new StringBuilder();
         while (stringQueue.hasNext() && !stringQueue.peekNext().startsWith("HL"))
             eligibilityString.append(stringQueue.getNext());
 
-        String[] eqStrings = SegmentStringUtil.split(eligibilityString.toString(), "EQ", mf);
+        String[] eqStrings = SegmentStringUtil.split(eligibilityString.toString(), "EQ");
         for(String eqString : eqStrings) {
-            eligibilities.add(new BenefitInquirySubscriberEligibility(eqString, mf));
+            eligibilities.add(new BenefitInquirySubscriberEligibility(eqString));
         }
 
         //find dependent loop
@@ -86,9 +84,9 @@ public class BenefitInquirySubscriber extends MessageLoop {
         while (stringQueue.hasNext()) {
             dependentString.append(stringQueue.getNext());
         }
-        String[] dependentStrings = SegmentStringUtil.split(dependentString.toString(), "HL", mf);
+        String[] dependentStrings = SegmentStringUtil.split(dependentString.toString(), "HL");
         for(String dString : dependentStrings) {
-            BenefitInquiryDependent dependent = new BenefitInquiryDependent(dString, mf);
+            BenefitInquiryDependent dependent = new BenefitInquiryDependent(dString);
             if (!dependent.getHierarchicalLevel().getHierarchicalParentIDNumber()
                     .equals(hierarchicalLevel.getHierarchicalIDNumber())){
                 //there's a problem with this HL

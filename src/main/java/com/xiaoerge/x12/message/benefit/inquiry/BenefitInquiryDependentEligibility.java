@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
-import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.DTP;
 import com.xiaoerge.x12.message.segment.EQ;
@@ -24,18 +23,18 @@ public class BenefitInquiryDependentEligibility extends MessageLoop {
         additionalInformation = new REF();
         eligibilityDate = new DTP();
     }
-    public BenefitInquiryDependentEligibility(String s, MessageFormat mf) {
+    public BenefitInquiryDependentEligibility(String s) {
         this();
-        StringQueue stringQueue = new StringQueue(s, mf);
+        StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("EQ"))
-            eligibility = new EQ(stringQueue.getNext(), mf);
+            eligibility = new EQ(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("III"))
-            additionalEligibility = new III(stringQueue.getNext(), mf);
+            additionalEligibility = new III(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            additionalInformation = new REF(stringQueue.getNext(), mf);
+            additionalInformation = new REF(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            eligibilityDate = new DTP(stringQueue.getNext(), mf);
+            eligibilityDate = new DTP(stringQueue.getNext());
 
         if (stringQueue.hasNext()) {
             logger.warn("Unexpected string in "+this.getClass().getName());

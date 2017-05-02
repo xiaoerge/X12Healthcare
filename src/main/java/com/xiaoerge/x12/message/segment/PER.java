@@ -2,7 +2,6 @@ package com.xiaoerge.x12.message.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
-import com.xiaoerge.x12.message.MessageFormat;
 
 /**
  * Created by xiaoerge on 8/13/16.
@@ -10,8 +9,8 @@ import com.xiaoerge.x12.message.MessageFormat;
 @Declaration(fieldSize = 9, name = "PER")
 public class PER extends Segment {
     public PER() { super(); }
-    public PER(String content, MessageFormat mf) {
-        super(content, mf);
+    public PER(String content) {
+        super(content);
     }
 
     @Definition(position = 1, minLength = 2, maxLength = 2)

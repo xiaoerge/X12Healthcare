@@ -1,7 +1,5 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
-import com.xiaoerge.x12.message.MessageFormat;
-import com.xiaoerge.x12.message.MessageFormatException;
 import com.xiaoerge.x12.message.X12Message;
 import com.xiaoerge.x12.message.control.FunctionalGroup;
 import com.xiaoerge.x12.message.control.InterchangeEnvelope;
@@ -10,8 +8,8 @@ import com.xiaoerge.x12.message.control.InterchangeEnvelope;
  * Created by xiaoerge on 5/23/16.
  */
 public class BenefitInquiry extends X12Message {
-    public BenefitInquiry(String s, MessageFormat mf) {
-        super(s, mf);
+    public BenefitInquiry(String s) {
+        super(s);
         parse();
     }
     public BenefitInquiry(X12Message message) {

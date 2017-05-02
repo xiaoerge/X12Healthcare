@@ -1,7 +1,5 @@
 package com.xiaoerge.x12.message.claim.payment;
 
-import com.xiaoerge.x12.message.MessageFormat;
-import com.xiaoerge.x12.message.MessageFormatException;
 import com.xiaoerge.x12.message.X12Message;
 import com.xiaoerge.x12.message.control.FunctionalGroup;
 import com.xiaoerge.x12.message.control.InterchangeEnvelope;
@@ -14,8 +12,8 @@ public class ClaimPayment extends X12Message {
     public ClaimPayment() {
         super();
     }
-    public ClaimPayment(String s, MessageFormat mf) {
-        super(s, mf);
+    public ClaimPayment(String s) {
+        super(s);
         parse();
     }
     public ClaimPayment(X12Message message) {

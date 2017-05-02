@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.message.benefit.response;
 
-import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.SegmentStringUtil;
@@ -38,27 +37,27 @@ public class BenefitResponseEligibility extends MessageLoop {
         relatedEntities = new ArrayList<BenefitResponseBenefitRelatedEntity>();
         loopTrailer = new LE();
     }
-    public BenefitResponseEligibility(String s, MessageFormat mf) {
+    public BenefitResponseEligibility(String s) {
         this();
-        StringQueue stringQueue = new StringQueue(s, mf);
+        StringQueue stringQueue = new StringQueue(s);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("EB"))
-            eligibility = new EB(stringQueue.getNext(), mf);
+            eligibility = new EB(stringQueue.getNext());
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HSD"))
-            healthCareServiceDeliveries.add(new HSD(stringQueue.getNext(), mf));
+            healthCareServiceDeliveries.add(new HSD(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            additionalInformations.add(new REF(stringQueue.getNext(), mf));
+            additionalInformations.add(new REF(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTP"))
-            eligibilityDates.add(new DTP(stringQueue.getNext(), mf));
+            eligibilityDates.add(new DTP(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AAA"))
-            requestValidations.add(new AAA(stringQueue.getNext(), mf));
+            requestValidations.add(new AAA(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("MSG"))
-            messageTexts.add(new MSG(stringQueue.getNext(), mf));
+            messageTexts.add(new MSG(stringQueue.getNext()));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("III"))
-            additionalEligibilities.add(new III(stringQueue.getNext(), mf));
+            additionalEligibilities.add(new III(stringQueue.getNext()));
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("LS"))
-            loopHeader = new LS(stringQueue.getNext(), mf);
+            loopHeader = new LS(stringQueue.getNext());
 
         //build string upto trailer
         StringBuilder relatedEntityBuilder = new StringBuilder();
@@ -66,13 +65,13 @@ public class BenefitResponseEligibility extends MessageLoop {
             relatedEntityBuilder.append(stringQueue.getNext());
         }
 
-        String[] splitArray = SegmentStringUtil.split(relatedEntityBuilder.toString(), "NM1", mf);
+        String[] splitArray = SegmentStringUtil.split(relatedEntityBuilder.toString(), "NM1");
         for (String relatedStr : splitArray) {
-            relatedEntities.add(new BenefitResponseBenefitRelatedEntity(relatedStr, mf));
+            relatedEntities.add(new BenefitResponseBenefitRelatedEntity(relatedStr));
         }
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("LE"))
-            loopTrailer = new LE(stringQueue.getNext(), mf);
+            loopTrailer = new LE(stringQueue.getNext());
 
         if (stringQueue.hasNext()) {
             logger.warn(String.format("Unexpected string (%s) in %s",

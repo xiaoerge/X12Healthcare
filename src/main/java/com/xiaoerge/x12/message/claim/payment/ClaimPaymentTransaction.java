@@ -1,6 +1,5 @@
 package com.xiaoerge.x12.message.claim.payment;
 
-import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.control.Transaction;
 import com.xiaoerge.x12.message.segment.*;
 import com.xiaoerge.x12.util.SegmentStringUtil;
@@ -28,33 +27,32 @@ public class ClaimPaymentTransaction extends Transaction {
         productionDate = new DTM();
     }
 
-    public ClaimPaymentTransaction(String s, MessageFormat mf) {
-        super(s, mf);
+    public ClaimPaymentTransaction(String s) {
+        super(s);
         parseContent();
     }
 
     public ClaimPaymentTransaction(Transaction transaction) {
         super(transaction);
         parseContent();
-        this.messageFormat = transaction.getMessageFormat();
     }
 
     private void parseContent() {
         StringBuilder builder = new StringBuilder();
-        StringQueue stringQueue = new StringQueue(getContent(), messageFormat);
+        StringQueue stringQueue = new StringQueue(getContent());
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("BPR"))
-            financialInformation = new BPR(stringQueue.getNext(), messageFormat);
+            financialInformation = new BPR(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("TRN"))
-            reassociationTraceNumber = new TRN(stringQueue.getNext(), messageFormat);
+            reassociationTraceNumber = new TRN(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("CUR"))
-            foreignCurrencyInformation = new CUR(stringQueue.getNext(), messageFormat);
+            foreignCurrencyInformation = new CUR(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))
-            receiverIdentification = new REF(stringQueue.getNext(), messageFormat);
+            receiverIdentification = new REF(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("REF"))//todo check order
-            versionIdentification = new REF(stringQueue.getNext(), messageFormat);
+            versionIdentification = new REF(stringQueue.getNext());
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("DTM"))
-            productionDate = new DTM(stringQueue.getNext(), messageFormat);
+            productionDate = new DTM(stringQueue.getNext());
 
         while (stringQueue.hasNext()) {
             builder.append(stringQueue.getNext());
@@ -62,7 +60,7 @@ public class ClaimPaymentTransaction extends Transaction {
 
         System.out.println(builder.toString());
 
-        String[] s2 = SegmentStringUtil.split(builder.toString(), "N1", messageFormat);
+        String[] s2 = SegmentStringUtil.split(builder.toString(), "N1");
         for(String s : s2) {
             System.out.println(s);
         }

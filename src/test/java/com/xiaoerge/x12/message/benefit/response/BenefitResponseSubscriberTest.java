@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.benefit.response;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.segment.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,7 +40,7 @@ public class BenefitResponseSubscriberTest {
                 "NM1*P3*1*JONES*MARCUS****SV*0202034~"+
                 "LE*2120~";
 
-        BenefitResponseSubscriber subscriber = new BenefitResponseSubscriber(subscriberString+dependentString);
+        BenefitResponseSubscriber subscriber = new BenefitResponseSubscriber(subscriberString+dependentString, new MessageFormat());
 
         Assert.assertTrue(subscriber.validate());
         Assert.assertEquals(subscriberString+dependentString, subscriber.toString());
@@ -86,15 +87,16 @@ public class BenefitResponseSubscriberTest {
                 "NM1*P3*1*JONES*MARCUS****SV*0202034~"+
                 "LE*2120~";
 
+        MessageFormat mf = new MessageFormat();
         BenefitResponseSubscriber subscriber = new BenefitResponseSubscriber();
-        subscriber.setHierarchicalLevel(new HL("HL*3*2*22*1~"));
-        subscriber.setName(new NM1("NM1*IL*1*SMITH*JOHN****MI*123456789~"));
-        subscriber.setAddress(new N3("N3*15197 BROADWAY AVENUE*APT 215~"));
-        subscriber.setCityStateZip(new N4("N4*KANSAS CITY*MO*64108~"));
-        subscriber.setProviderInformation(new PRV("PRV*RF*PXC*207Q00000X~"));
-        subscriber.setDemographic(new DMG("DMG*D8*19630519*M~"));
+        subscriber.setHierarchicalLevel(new HL("HL*3*2*22*1~", mf));
+        subscriber.setName(new NM1("NM1*IL*1*SMITH*JOHN****MI*123456789~", mf));
+        subscriber.setAddress(new N3("N3*15197 BROADWAY AVENUE*APT 215~", mf));
+        subscriber.setCityStateZip(new N4("N4*KANSAS CITY*MO*64108~", mf));
+        subscriber.setProviderInformation(new PRV("PRV*RF*PXC*207Q00000X~", mf));
+        subscriber.setDemographic(new DMG("DMG*D8*19630519*M~", mf));
 
-        subscriber.getDependents().add(new BenefitResponseDependent(dependentString));
+        subscriber.getDependents().add(new BenefitResponseDependent(dependentString, mf));
 
         Assert.assertTrue(subscriber.validate());
         Assert.assertEquals(subscriberString+dependentString, subscriber.toString());

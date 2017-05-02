@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.segment.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -56,7 +57,7 @@ public class BenefitInquirySubscriberTest {
                 "REF*9F*660415~" +
                 "DTP*291*D8*20051031~";
 
-        BenefitInquirySubscriber subscriber = new BenefitInquirySubscriber(subscriberString+dependentString);
+        BenefitInquirySubscriber subscriber = new BenefitInquirySubscriber(subscriberString+dependentString, new MessageFormat());
 
         Assert.assertTrue(subscriber.validate());
         Assert.assertEquals(subscriberString+dependentString, subscriber.toString());
@@ -135,24 +136,25 @@ public class BenefitInquirySubscriberTest {
                 "REF*9F*660415~" +
                 "DTP*291*D8*20051031~";
 
+        MessageFormat mf = new MessageFormat();
         BenefitInquirySubscriber subscriber = new BenefitInquirySubscriber();
-        subscriber.setHierarchicalLevel(new HL("HL*5*4*22*1~"));
-        subscriber.getTraceNumbers().add(new TRN("TRN*1*109834652831*WXYZCLEARH*REALTIME~"));
-        subscriber.setName(new NM1("NM1*IL*1*SMITH*JOHN*L***MI*444115555~"));
-        subscriber.getAdditionalIdentifications().add(new REF("REF*1L*660415~"));
-        subscriber.setAddress(new N3("N3*15197 BROADWAY AVENUE*APT 215~"));
-        subscriber.setCityStateZip(new N4("N4*KANSAS CITY*MO*64108~"));
-        subscriber.setProviderInformation(new PRV("PRV*RF*PXC*207Q00000X~"));
-        subscriber.setDemographic(new DMG("DMG*D8*19430917*M~"));
-        subscriber.setMultipleBirthSequenceNumber(new INS("INS*Y*18***************3~"));
-        subscriber.setHealthCareDiagnosisCode(new HI("HI*BK:8901*BF:87200*BF:5559~"));
-        subscriber.getDates().add(new DTP("DTP*281*D8*20051015~"));
-        subscriber.getDates().add(new DTP("DTP*291*D8*20051015~"));
+        subscriber.setHierarchicalLevel(new HL("HL*5*4*22*1~", mf));
+        subscriber.getTraceNumbers().add(new TRN("TRN*1*109834652831*WXYZCLEARH*REALTIME~", mf));
+        subscriber.setName(new NM1("NM1*IL*1*SMITH*JOHN*L***MI*444115555~", mf));
+        subscriber.getAdditionalIdentifications().add(new REF("REF*1L*660415~", mf));
+        subscriber.setAddress(new N3("N3*15197 BROADWAY AVENUE*APT 215~", mf));
+        subscriber.setCityStateZip(new N4("N4*KANSAS CITY*MO*64108~", mf));
+        subscriber.setProviderInformation(new PRV("PRV*RF*PXC*207Q00000X~", mf));
+        subscriber.setDemographic(new DMG("DMG*D8*19430917*M~", mf));
+        subscriber.setMultipleBirthSequenceNumber(new INS("INS*Y*18***************3~", mf));
+        subscriber.setHealthCareDiagnosisCode(new HI("HI*BK:8901*BF:87200*BF:5559~", mf));
+        subscriber.getDates().add(new DTP("DTP*281*D8*20051015~", mf));
+        subscriber.getDates().add(new DTP("DTP*291*D8*20051015~", mf));
 
         for(int i = 0; i < 5; i++) {
-            subscriber.getEligibilities().add(new BenefitInquirySubscriberEligibility("EQ*"+(30+i)+"**FAM~"));
+            subscriber.getEligibilities().add(new BenefitInquirySubscriberEligibility("EQ*"+(30+i)+"**FAM~", mf));
         }
-        subscriber.getDependents().add(new BenefitInquiryDependent(dependentString));
+        subscriber.getDependents().add(new BenefitInquiryDependent(dependentString, mf));
 
         Assert.assertTrue(subscriber.validate());
         Assert.assertEquals(subscriberString+dependentString, subscriber.toString());

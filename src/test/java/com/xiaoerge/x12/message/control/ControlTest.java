@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.control;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.segment.*;
 import org.junit.*;
 
@@ -47,7 +48,7 @@ public class ControlTest {
     public void testParseTransaction() {
         //need to escape *
         String x12 = "ST***~BHT\\*\\*\\*\\*\\*\\*~SE**~";
-        Transaction transaction = new Transaction(x12);
+        Transaction transaction = new Transaction(x12, new MessageFormat());
 
         Assert.assertFalse(transaction.validate());
         Assert.assertFalse(transaction.isEmpty());

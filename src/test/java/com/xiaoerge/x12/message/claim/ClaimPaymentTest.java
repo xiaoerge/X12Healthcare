@@ -1,5 +1,7 @@
 package com.xiaoerge.x12.message.claim;
 
+import com.xiaoerge.x12.message.MessageFormat;
+import com.xiaoerge.x12.message.MessageFormatException;
 import com.xiaoerge.x12.message.claim.payment.ClaimPayment;
 import org.junit.Test;
 
@@ -9,7 +11,7 @@ import org.junit.Test;
 public class ClaimPaymentTest {
 
     @Test
-    public void testCreateClaimPayment() {
+    public void testCreateClaimPayment() throws MessageFormatException {
         String x12 = "ISA*00*          *00*          *ZZ*EMEDNYBAT      *ZZ*ETIN           *100101*1000*^*00501*006000600*0*T*:~" +
                 "GS*HP*EMEDNYBAT*ETIN*20100101*1050*6000600*X*005010X221A1~" +
                 "ST*835*1740" +
@@ -45,7 +47,8 @@ public class ClaimPaymentTest {
                 "SE*31*1740~" +
                 "GE*1*6000600~" +
                 "IEA*1*006000600~";
-
-        ClaimPayment claimPayment = new ClaimPayment(x12);
+        
+        MessageFormat mf = new MessageFormat(x12);
+        ClaimPayment claimPayment = new ClaimPayment(x12, mf);
     }
 }

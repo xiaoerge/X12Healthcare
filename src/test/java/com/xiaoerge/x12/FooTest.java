@@ -1,5 +1,6 @@
 package com.xiaoerge.x12;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.segment.PER;
 import org.junit.Test;
 
@@ -22,7 +23,7 @@ public class FooTest {
             //System.out.println(element.getLineNumber());
         }
 
-        PER per = new PER("PER*1*2*3*4*5*6*7*8*~");
+        PER per = new PER("PER*1*2*3*4*5*6*7*8*~", new MessageFormat());
 
         //System.out.println(per.getContactFunctionCode());
     }

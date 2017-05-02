@@ -1,5 +1,6 @@
 package com.xiaoerge.x12;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.util.SegmentStringUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class SegmentStringUtilTest {
                 "GE*1*0616~" +
                 "IEA*1*0616~";
 
-        String[] splitArray = SegmentStringUtil.split(x12, "ISA");
+        String[] splitArray = SegmentStringUtil.split(x12, "ISA", new MessageFormat());
 
         Assert.assertEquals(1, splitArray.length);
     }
@@ -40,7 +41,7 @@ public class SegmentStringUtilTest {
 
         String x12 = "EQ***~EQ***~EQ***~III***~EQ***~REF***~DTP***~EQ***~";
 
-        String[] splitArray = SegmentStringUtil.split(x12, "EQ");
+        String[] splitArray = SegmentStringUtil.split(x12, "EQ", new MessageFormat());
 
         Assert.assertEquals(5, splitArray.length);
         Assert.assertEquals("EQ***~", splitArray[0]);
@@ -55,7 +56,7 @@ public class SegmentStringUtilTest {
 
         String x12 = "EQ***~";
 
-        String[] splitArray = SegmentStringUtil.split(x12, "EQ");
+        String[] splitArray = SegmentStringUtil.split(x12, "EQ", new MessageFormat());
 
         Assert.assertEquals(1, splitArray.length);
         Assert.assertEquals("EQ***~", splitArray[0]);
@@ -66,7 +67,7 @@ public class SegmentStringUtilTest {
 
         String x12 = "";
 
-        String[] splitArray = SegmentStringUtil.split(x12, "EQ");
+        String[] splitArray = SegmentStringUtil.split(x12, "EQ", new MessageFormat());
 
         Assert.assertEquals(0, splitArray.length);
     }
@@ -81,8 +82,9 @@ public class SegmentStringUtilTest {
                 "HL*5*4*21*1~NM1*1P*2*BONE AND JOINT CLINIC*****SV*2000035~" +
                 "HL*6*5*22*0~TRN*1*93175-012547*9877281234~NM1*IL*1*SMITH*ROBERT****MI*11122333301~DMG*D8*19430519~DTP*291*D8*20060501~EQ*30~";
 
-        String[] splitArray = SegmentStringUtil.split(x12, "HL");
-        String[] levelArray = SegmentStringUtil.joinLevel(splitArray);
+        MessageFormat mf = new MessageFormat();
+        String[] splitArray = SegmentStringUtil.split(x12, "HL", mf);
+        String[] levelArray = SegmentStringUtil.joinLevel(splitArray, mf);
 
         Assert.assertEquals(2, levelArray.length);
         Assert.assertEquals("HL*1**20*1~" +

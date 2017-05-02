@@ -3,6 +3,8 @@ package com.xiaoerge.x12.message.segment;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.xiaoerge.x12.message.MessageFormat;
+
 /**
  * Created by xiaoerge on 5/23/16.
  */
@@ -11,7 +13,7 @@ public class SegmentTest {
     @Test(expected = NullPointerException.class)
     public void testParseError() {
         String x12 = "HL*1* *20*1~";
-        ISA isa = new ISA(x12);
+        ISA isa = new ISA(x12, new MessageFormat());
 
         //collection[0] is null because parse() failed prematurely due to invalid constructor call
         Assert.assertFalse(isa.validate());
@@ -20,7 +22,7 @@ public class SegmentTest {
     @Test
     public void testParseISA() {
         String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~";
-        ISA isa = new ISA(x12);
+        ISA isa = new ISA(x12, new MessageFormat());
 
         Assert.assertEquals(true, isa.validate());
         Assert.assertEquals(x12, isa.toString());
@@ -72,7 +74,7 @@ public class SegmentTest {
     @Test
     public void testParseGS() {
         String x12 = "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~";
-        GS gs = new GS(x12);
+        GS gs = new GS(x12, new MessageFormat());
 
         Assert.assertEquals(true, gs.validate());
         Assert.assertEquals(x12, gs.toString());
@@ -107,7 +109,7 @@ public class SegmentTest {
     @Test
     public void testParseST() {
         String x12 = "ST*837*0001*005010X222A1~";
-        ST st = new ST(x12);
+        ST st = new ST(x12, new MessageFormat());
 
         Assert.assertEquals(true, st.validate());
         Assert.assertEquals(x12, st.toString());
@@ -132,7 +134,7 @@ public class SegmentTest {
     @Test
     public void testParseBHT() {
         String x12 = "BHT*0019*00*123*20160525*0616*00~";
-        BHT bht = new BHT(x12);
+        BHT bht = new BHT(x12, new MessageFormat());
 
         Assert.assertEquals(true, bht.validate());
         Assert.assertEquals(x12, bht.toString());
@@ -163,7 +165,7 @@ public class SegmentTest {
     @Test
     public void testParseSE() {
         String x12 = "SE*1*0001~";
-        SE se = new SE(x12);
+        SE se = new SE(x12, new MessageFormat());
 
         Assert.assertEquals(true, se.validate());
         Assert.assertEquals(x12, se.toString());
@@ -186,7 +188,7 @@ public class SegmentTest {
     @Test
     public void testParseGE() {
         String x12 = "GE*1*0616~";
-        GE gs = new GE(x12);
+        GE gs = new GE(x12, new MessageFormat());
 
         Assert.assertEquals(true, gs.validate());
         Assert.assertEquals(x12, gs.toString());
@@ -209,7 +211,7 @@ public class SegmentTest {
     @Test
     public void testParseIEA() {
         String x12 = "IEA*1*024277220~";
-        IEA iea = new IEA(x12);
+        IEA iea = new IEA(x12, new MessageFormat());
 
         Assert.assertEquals(true, iea.validate());
         Assert.assertEquals(x12, iea.toString());
@@ -232,7 +234,7 @@ public class SegmentTest {
     @Test
     public void testParseHL() {
         String x12 = "HL*1* *20*1~";
-        HL hl = new HL(x12);
+        HL hl = new HL(x12, new MessageFormat());
 
         Assert.assertEquals(true, hl.validate());
         Assert.assertEquals(x12, hl.toString());
@@ -259,7 +261,7 @@ public class SegmentTest {
     @Test
     public void testParseNM1() {
         String x12 = "NM1*1P*1*JONES*MARCUS*A*MR*MD*34*111223333*AA*BB*C~";
-        NM1 nm1 = new NM1(x12);
+        NM1 nm1 = new NM1(x12, new MessageFormat());
 
         Assert.assertEquals(true, nm1.validate());
         Assert.assertEquals(x12, nm1.toString());
@@ -302,7 +304,7 @@ public class SegmentTest {
     @Test
     public void testParseREF() {
         String x12 = "REF*EO*477563928**ZZ~";
-        REF ref = new REF(x12);
+        REF ref = new REF(x12, new MessageFormat());
 
         Assert.assertEquals(true, ref.validate());
         Assert.assertEquals(x12, ref.toString());
@@ -329,7 +331,7 @@ public class SegmentTest {
     @Test
     public void testParseN3() {
         String x12 = "N3*201 PARK AVENUE*SUITE 300~";
-        N3 n3 = new N3(x12);
+        N3 n3 = new N3(x12, new MessageFormat());
 
         Assert.assertEquals(true, n3.validate());
         Assert.assertEquals(x12, n3.toString());
@@ -352,7 +354,7 @@ public class SegmentTest {
     @Test
     public void testParseN4() {
         String x12 = "N4*KANSAS CITY*MO*64108*USA*1*2*3~";
-        N4 n4 = new N4(x12);
+        N4 n4 = new N4(x12, new MessageFormat());
 
         Assert.assertEquals(true, n4.validate());
         Assert.assertEquals(x12, n4.toString());
@@ -385,7 +387,7 @@ public class SegmentTest {
     @Test
     public void testParsePRV() {
         String x12 = "PRV*RF*PXC*207Q00000X*PA*AA*AAA~";
-        PRV prv = new PRV(x12);
+        PRV prv = new PRV(x12, new MessageFormat());
 
         Assert.assertEquals(true, prv.validate());
         Assert.assertEquals(x12, prv.toString());
@@ -416,7 +418,7 @@ public class SegmentTest {
     @Test
     public void testParseTRN() {
         String x12 = "TRN*1*98175-012547*8877281234*RADIOLOGY~";
-        TRN trn = new TRN(x12);
+        TRN trn = new TRN(x12, new MessageFormat());
 
         Assert.assertEquals(true, trn.validate());
         Assert.assertEquals(x12, trn.toString());
@@ -443,7 +445,7 @@ public class SegmentTest {
     @Test
     public void testParseDMG() {
         String x12 = "DMG*D8*19430917*M*M*A*US*USA*A*1*2*3~";
-        DMG dmg = new DMG(x12);
+        DMG dmg = new DMG(x12, new MessageFormat());
 
         Assert.assertEquals(true, dmg.validate());
         Assert.assertEquals(x12, dmg.toString());
@@ -484,7 +486,7 @@ public class SegmentTest {
     @Test
     public void testParseINS() {
         String x12 = "INS*Y*18*AAA*BBB*C*D*CO*EM*S*N*D8*HHMM*C*New York*NY*USA*3~";
-        INS ins = new INS(x12);
+        INS ins = new INS(x12, new MessageFormat());
 
         Assert.assertEquals(true, ins.validate());
         Assert.assertEquals(x12, ins.toString());
@@ -537,7 +539,7 @@ public class SegmentTest {
     @Test
     public void testParseHI() {
         String x12 = "HI*BK:8901*BF:87200*BF:5559~";
-        HI hi = new HI(x12);
+        HI hi = new HI(x12, new MessageFormat());
 
         Assert.assertEquals(true, hi.validate());
         Assert.assertEquals(x12, hi.toString());
@@ -562,7 +564,7 @@ public class SegmentTest {
     @Test
     public void testParseDTP() {
         String x12 = "DTP*291*D8*20051015~";
-        DTP dtp = new DTP(x12);
+        DTP dtp = new DTP(x12, new MessageFormat());
 
         Assert.assertEquals(true, dtp.validate());
         Assert.assertEquals(x12, dtp.toString());
@@ -587,7 +589,7 @@ public class SegmentTest {
     @Test
     public void testParseEQ() {
         String x12 = "EQ*30**FAM~";
-        EQ eq = new EQ(x12);
+        EQ eq = new EQ(x12, new MessageFormat());
 
         Assert.assertEquals(true, eq.validate());
         Assert.assertEquals(x12, eq.toString());
@@ -616,7 +618,7 @@ public class SegmentTest {
     @Test
     public void testParseAMT() {
         String x12 = "AMT*R*37.5*D~";
-        AMT amt = new AMT(x12);
+        AMT amt = new AMT(x12, new MessageFormat());
 
         Assert.assertEquals(true, amt.validate());
         Assert.assertEquals(x12, amt.toString());
@@ -641,7 +643,7 @@ public class SegmentTest {
     @Test
     public void testParseIII() {
         String x12 = "III*ZZ*21*AA*BB*1*2*CC*DD*EE~";
-        III iii = new III(x12);
+        III iii = new III(x12, new MessageFormat());
 
         Assert.assertEquals(true, iii.validate());
         Assert.assertEquals(x12, iii.toString());
@@ -678,7 +680,7 @@ public class SegmentTest {
     @Test
     public void testParseAAA() {
         String x12 = "AAA*Y*79*42*N~";
-        AAA aaa = new AAA(x12);
+        AAA aaa = new AAA(x12, new MessageFormat());
 
         Assert.assertEquals(true, aaa.validate());
         Assert.assertEquals(x12, aaa.toString());
@@ -705,7 +707,7 @@ public class SegmentTest {
     @Test
     public void testParsePER() {
         String x12 = "PER*IC*MEMBER SERVICES*TE*8005551654*FX*2128769304~";
-        PER per = new PER(x12);
+        PER per = new PER(x12, new MessageFormat());
 
         Assert.assertEquals(true, per.validate());
         Assert.assertEquals(x12, per.toString());
@@ -736,7 +738,7 @@ public class SegmentTest {
     @Test
     public void testParseMPI() {
         String x12 = "MPI*C*AO*A**L3~";
-        MPI mpi = new MPI(x12);
+        MPI mpi = new MPI(x12, new MessageFormat());
 
         Assert.assertEquals(true, mpi.validate());
         Assert.assertEquals(x12, mpi.toString());
@@ -763,7 +765,7 @@ public class SegmentTest {
     @Test
     public void testParseEB() {
         String x12 = "EB*C*FAM****23*600~";
-        EB eb = new EB(x12);
+        EB eb = new EB(x12, new MessageFormat());
 
         Assert.assertEquals(true, eb.validate());
         Assert.assertEquals(x12, eb.toString());
@@ -790,7 +792,7 @@ public class SegmentTest {
     @Test
     public void testParseHSD() {
         String x12 = "HSD*VS*12*WK*3*34*1~";
-        HSD hsd = new HSD(x12);
+        HSD hsd = new HSD(x12, new MessageFormat());
 
         Assert.assertEquals(true, hsd.validate());
         Assert.assertEquals(x12, hsd.toString());
@@ -821,7 +823,7 @@ public class SegmentTest {
     @Test
     public void testParseMSG() {
         String x12 = "MSG*Free form text is discouraged~";
-        MSG msg = new MSG(x12);
+        MSG msg = new MSG(x12, new MessageFormat());
 
         Assert.assertEquals(true, msg.validate());
         Assert.assertEquals(x12, msg.toString());
@@ -842,7 +844,7 @@ public class SegmentTest {
     @Test
     public void testParseLS() {
         String x12 = "LS*2120~";
-        LS ls = new LS(x12);
+        LS ls = new LS(x12, new MessageFormat());
 
         Assert.assertEquals(true, ls.validate());
         Assert.assertEquals(x12, ls.toString());
@@ -863,7 +865,7 @@ public class SegmentTest {
     @Test
     public void testParseLE() {
         String x12 = "LE*2120~";
-        LE le = new LE(x12);
+        LE le = new LE(x12, new MessageFormat());
 
         Assert.assertEquals(true, le.validate());
         Assert.assertEquals(x12, le.toString());

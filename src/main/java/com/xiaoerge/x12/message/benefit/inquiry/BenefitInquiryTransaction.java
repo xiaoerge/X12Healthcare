@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.benefit.inquiry;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.control.Transaction;
 import com.xiaoerge.x12.util.SegmentStringUtil;
 
@@ -17,8 +18,8 @@ public class BenefitInquiryTransaction extends Transaction {
         benefitInquiryInformationSources = new ArrayList<BenefitInquiryInformationSource>();
     }
 
-    public BenefitInquiryTransaction(String s) {
-        super(s);
+    public BenefitInquiryTransaction(String s, MessageFormat mf) {
+        super(s, mf);
         benefitInquiryInformationSources = new ArrayList<BenefitInquiryInformationSource>();
         parseContent();
     }
@@ -30,12 +31,12 @@ public class BenefitInquiryTransaction extends Transaction {
     }
 
     private void parseContent() {
-        String[] sourceStrings = SegmentStringUtil.split(getContent(), "HL");
-        String[] informationSources = SegmentStringUtil.joinLevel(sourceStrings);
+        String[] sourceStrings = SegmentStringUtil.split(getContent(), "HL", messageFormat);
+        String[] informationSources = SegmentStringUtil.joinLevel(sourceStrings, messageFormat);
 
         //multiple sources
         for (String sourceString : informationSources) {
-            benefitInquiryInformationSources.add(new BenefitInquiryInformationSource(sourceString));
+            benefitInquiryInformationSources.add(new BenefitInquiryInformationSource(sourceString, messageFormat));
         }
     }
 

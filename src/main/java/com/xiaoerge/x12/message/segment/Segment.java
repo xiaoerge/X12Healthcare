@@ -2,6 +2,7 @@ package com.xiaoerge.x12.message.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
@@ -19,16 +20,16 @@ public class Segment extends MessageLoop
 
     private boolean parseError;
     protected int fieldSize;
-    protected String name, content, delimiter;
+    protected String name, content;
     protected String[] collection;
 
     public Segment() {
-        this("");
+        this("", new MessageFormat());
     }
-    public Segment(String c) {
+    public Segment(String c, MessageFormat mf) {
         parseError = false;
         content = c;
-        delimiter = "*";
+    	this.messageFormat = mf;
 
         Class obj = this.getClass();
         if (obj.isAnnotationPresent(Declaration.class)) {
@@ -50,14 +51,15 @@ public class Segment extends MessageLoop
         for (int i = 1; i < collection.length; i++) collection[i] = "";
 
         if (content.length() > 0){
-            if (content.charAt(content.length() - 1) != '~') {
+        	String c = content.trim();
+            if (c.charAt(c.length() - 1) != messageFormat.getSegmentTerminator().charAt(0)) {
                 parseError = true;
                 logger.info(name+" parse()");
                 logger.warn(name+" missing segment terminator", content);
-                //collection = content.split(Pattern.quote(delimiter));
+                //collection = content.split(Pattern.quote(dataElementSeparator));
             }
             else {
-                String[] pCollection = content.substring(0, content.length()-1).split(Pattern.quote(delimiter));
+                String[] pCollection = c.substring(0, c.length()-1).split(Pattern.quote(messageFormat.getDataElementSeparator()));
                 int min = Math.min(collection.length, pCollection.length);
                 for (int i = 0; i < min; i++) {
                     try {
@@ -150,7 +152,7 @@ public class Segment extends MessageLoop
     public String toX12String() {
 
         if (isEmpty()) return "";
-        if (!validate()) return name.concat(StringUtils.repeat("*", fieldSize)).concat("~");
+        if (!validate()) return name.concat(StringUtils.repeat("*", fieldSize)).concat(messageFormat.getSegmentTerminator());
 
         collection[0] = name;
         StringBuilder builder = new StringBuilder();
@@ -169,7 +171,7 @@ public class Segment extends MessageLoop
             builder.append(collection[i]).append("*");
         }
         builder.deleteCharAt(builder.length()-1);
-        builder.append("~");
+        builder.append(messageFormat.getSegmentTerminator());
 
         return builder.toString();
     }

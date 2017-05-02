@@ -1,6 +1,7 @@
 package com.xiaoerge.x12.message.control;
 
 import com.xiaoerge.x12.message.benefit.inquiry.BenefitInquiryInformationSource;
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.benefit.inquiry.BenefitInquiryInformationReceiver;
 import com.xiaoerge.x12.message.segment.*;
 import org.junit.Assert;
@@ -17,7 +18,7 @@ public class LoopTest {
     @Test
     public void testParseInformationSource() {
         String x12 = "HL*1**20*1~NM1*PR*2*ACE INSURANCE COMPANY*****PI*87728~";
-        BenefitInquiryInformationSource benefitInquiryInformationSource = new BenefitInquiryInformationSource(x12);
+        BenefitInquiryInformationSource benefitInquiryInformationSource = new BenefitInquiryInformationSource(x12, new MessageFormat());
         HL hierarchicalLevel = benefitInquiryInformationSource.getHierarchicalLevel();
         NM1 individualOrOrganizationalName = benefitInquiryInformationSource.getIndividualOrOrganizationalName();
 
@@ -63,7 +64,7 @@ public class LoopTest {
                 "REF*EO*477563928~" +
                 "N3*201 PARK AVENUE*SUITE 300~" +
                 "N4*KANSAS CITY*MO*64108~";
-        BenefitInquiryInformationReceiver benefitInquiryInformationReceiver = new BenefitInquiryInformationReceiver(x12);
+        BenefitInquiryInformationReceiver benefitInquiryInformationReceiver = new BenefitInquiryInformationReceiver(x12, new MessageFormat());
         HL hierarchicalLevel = benefitInquiryInformationReceiver.getHierarchicalLevel();
         NM1 individualOrOrganizationalName = benefitInquiryInformationReceiver.getIndividualOrOrganizationalName();
         List<REF> referenceInformations = benefitInquiryInformationReceiver.getReferenceInformations();

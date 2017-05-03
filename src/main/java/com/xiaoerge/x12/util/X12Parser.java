@@ -1,7 +1,6 @@
 package com.xiaoerge.x12.util;
 
 import com.xiaoerge.x12.message.MessageFormat;
-import com.xiaoerge.x12.message.MessageFormatException;
 import com.xiaoerge.x12.message.X12Message;
 import com.xiaoerge.x12.message.benefit.inquiry.BenefitInquiry;
 import com.xiaoerge.x12.message.benefit.response.BenefitResponse;
@@ -21,7 +20,7 @@ public class X12Parser {
 	
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(X12Parser.class);
 
-    public static X12Message fromX12Message(String s) throws MessageFormatException {
+    public static X12Message fromX12Message(String s) {
 
     	MessageFormat mf = parseMessageFormat(s);
     	if (mf==null) return null;

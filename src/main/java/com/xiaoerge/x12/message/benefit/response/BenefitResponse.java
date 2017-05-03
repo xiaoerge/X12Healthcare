@@ -1,7 +1,6 @@
 package com.xiaoerge.x12.message.benefit.response;
 
 import com.xiaoerge.x12.message.MessageFormat;
-import com.xiaoerge.x12.message.MessageFormatException;
 import com.xiaoerge.x12.message.X12Message;
 import com.xiaoerge.x12.message.control.FunctionalGroup;
 import com.xiaoerge.x12.message.control.InterchangeEnvelope;

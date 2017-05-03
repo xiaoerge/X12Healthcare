@@ -11,7 +11,7 @@ import org.junit.Test;
 public class X12MessageBaseTest {
 
     @Test(expected = ClassCastException.class)
-    public void testParseBenefitInquiry() throws MessageFormatException {
+    public void testParseBenefitInquiry() {
         String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~" +
                 "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~" +
                 "ST*99*1234*005010X279A1~" +

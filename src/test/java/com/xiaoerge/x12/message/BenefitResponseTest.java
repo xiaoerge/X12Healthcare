@@ -16,7 +16,7 @@ import org.junit.Test;
 public class BenefitResponseTest {
 
     @Test
-    public void testParseBenefitInquiry() throws MessageFormatException {
+    public void testParseBenefitInquiry() {
         String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~" +
                 "GS*HB*89070*RXXXXXX*20130122*16091723*171107529*X*005010X279A1~" +
                 "ST*271*0001*005010X279A1~" +
@@ -299,7 +299,7 @@ public class BenefitResponseTest {
     }
 
     @Test
-    public void testParseCreateBenefitInquiry() throws MessageFormatException {
+    public void testParseCreateBenefitInquiry() {
         String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~" +
                 "GS*HB*89070*RXXXXXX*20130122*16091723*171107529*X*005010X279A1~" +
                 "ST*271*0001*005010X279A1~" +

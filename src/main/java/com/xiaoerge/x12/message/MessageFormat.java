@@ -7,7 +7,7 @@ public class MessageFormat {
     private String componentElementSeparator = "\\";
     private String segmentTerminator = "~";
     private String repetitionSeparator = "^";
-    private String suffix = null;
+    private String suffix = "";
     
     public MessageFormat() {
 	}

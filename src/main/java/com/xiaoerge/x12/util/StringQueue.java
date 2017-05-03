@@ -26,8 +26,7 @@ public class StringQueue {
     }
 
     public String format(String s) {
-    	if (mf.getSuffix()!=null) return s.trim() + mf.getSegmentTerminator()  + mf.getSuffix();
-    	else return s.trim() + mf.getSegmentTerminator();
+    	return s.trim() + mf.getSegmentTerminator() + mf.getSuffix();
     }
     public String getNext() {
         return format(message[pointer++]);

@@ -11,38 +11,31 @@ public class MessageFormat {
     
     public MessageFormat() {
 	}
-    public MessageFormat(String s) throws MessageFormatException {
-    	if (s==null || s.length()<106) {
-    		throw new MessageFormatException();
-    	}
-    	String s2 = s.substring(0, 108);
-    	dataElementSeparator = s2.substring(3,4);
-    	segmentTerminator = s2.substring(105,106);
-    	String[] fields = s.split(Pattern.quote(dataElementSeparator.toString()));
-    	repetitionSeparator = fields[11].substring(0,1);
-    	componentElementSeparator = fields[16].substring(0,1);
-    	String s3 = s2.substring(106,107);
-    	if (s2.charAt(106) == '\r' && s2.charAt(107)=='\n') {
-    		suffix = "\r\n";
-    	} else if (s2.charAt(106) == '\r') {
-    		suffix = "\r";
-    	} else if (s2.charAt(106) == '\n') {
-    		suffix = "\n";
-    	}
-    }
     
 	public String getDataElementSeparator() {
     	return dataElementSeparator;
     }
+	public void setDataElementSeparator(String dataElementSeparator) {
+		this.dataElementSeparator = dataElementSeparator;
+	}
     public String getComponentElementSeparator() {
     	return componentElementSeparator;
     }
+	public void setComponentElementSeparator(String componentElementSeparator) {
+		this.componentElementSeparator = componentElementSeparator;
+	}
     public String getSegmentTerminator() {
     	return segmentTerminator;
     }
+	public void setSegmentTerminator(String segmentTerminator) {
+		this.segmentTerminator = segmentTerminator;
+	}
     public String getRepetitionSeparator() {
     	return repetitionSeparator;
     }
+	public void setRepetitionSeparator(String repetitionSeparator) {
+		this.repetitionSeparator = repetitionSeparator;
+	}
 	public String getSuffix() {
 		return suffix;
 	}

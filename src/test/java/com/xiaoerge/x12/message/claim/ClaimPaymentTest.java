@@ -48,7 +48,7 @@ public class ClaimPaymentTest {
                 "GE*1*6000600~" +
                 "IEA*1*006000600~";
         
-        MessageFormat mf = new MessageFormat(x12);
+        MessageFormat mf = new MessageFormat();
         ClaimPayment claimPayment = new ClaimPayment(x12, mf);
     }
 }

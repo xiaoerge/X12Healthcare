@@ -50,4 +50,74 @@ public class X12MessageBaseTest {
         Assert.assertEquals("", messageBase.toString());
         Assert.assertEquals(true, messageBase.isEmpty());
     }
+    
+    @Test
+    public void testParseNoISA() {
+        String x12 = "NM1*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*:~";
+        
+        MessageFormat mf = X12Parser.parseMessageFormat(x12);
+
+        Assert.assertNotNull(mf);
+    }
+    
+    @Test
+    public void testParseShortISA() {
+        String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID~";
+        
+        MessageFormat mf = X12Parser.parseMessageFormat(x12);
+        Assert.assertNotNull(mf);
+    }
+    
+    @Test
+    public void testParseDefaultDelimeters() {
+        String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*\\~" +
+                "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~";
+    
+        MessageFormat mf = X12Parser.parseMessageFormat(x12);
+        Assert.assertEquals("~", mf.getSegmentTerminator());
+        Assert.assertEquals("*", mf.getDataElementSeparator());
+        Assert.assertEquals("\\", mf.getComponentElementSeparator());
+        Assert.assertEquals("^", mf.getRepetitionSeparator());
+        Assert.assertEquals("", mf.getSuffix());
+    }
+    
+    @Test
+    public void testParseNonDefaultDelimeters() {
+        String x12 = "ISA|00|          |01|SECRET    |ZZ|SUBMITTERS   ID|ZZ|RECEIVERS    ID|030101|1253|}|00602|000000905|0|T|:$" +
+        	"GS|HC|SUBMITTERS Code|RECEIVERS Code|20160524|0616|126|X|005010X222A1$";
+        
+        MessageFormat mf = X12Parser.parseMessageFormat(x12);
+        Assert.assertEquals("$", mf.getSegmentTerminator());
+        Assert.assertEquals("|", mf.getDataElementSeparator());
+        Assert.assertEquals(":", mf.getComponentElementSeparator());
+        Assert.assertEquals("}", mf.getRepetitionSeparator());
+        Assert.assertEquals("", mf.getSuffix());
+    }
+    
+    @Test
+    public void testParseSuffixCr() {
+        String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*\\~\r" +
+                "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~";
+        
+        MessageFormat mf = X12Parser.parseMessageFormat(x12);
+        Assert.assertEquals("\r", mf.getSuffix());
+    }
+    
+    @Test
+    public void testParseSuffixLf() {
+        String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*\\~\n" +
+                "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~";
+        
+        MessageFormat mf = X12Parser.parseMessageFormat(x12);
+        Assert.assertEquals("\n", mf.getSuffix());
+    }
+    
+    @Test
+    public void testParseSuffixCrLf() {
+        String x12 = "ISA*00*          *01*SECRET    *ZZ*SUBMITTERS   ID*ZZ*RECEIVERS    ID*030101*1253*^*00602*000000905*0*T*\\~\r\n" +
+                "GS*HC*SUBMITTERS Code*RECEIVERS Code*20160524*0616*126*X*005010X222A1~";
+        
+        MessageFormat mf = X12Parser.parseMessageFormat(x12);
+        Assert.assertEquals("\r\n", mf.getSuffix());
+    }
 }

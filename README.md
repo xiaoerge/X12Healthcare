@@ -9,7 +9,7 @@
 ### Will support parsing and creating of messages such as 837, 835, 277, 270, 271, 999, 997, TA1.
 
 ## Important license information
-Must agree to `xiaoerge.license` to use this library
+Read license.txt
 
 #### Note on code coverage
 Code coverage will defer until message parsings are done.

@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.benefit.response;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.MessageLoop;
 import com.xiaoerge.x12.message.segment.AAA;
 import com.xiaoerge.x12.message.segment.HL;
@@ -31,20 +32,20 @@ public class BenefitResponseInformationSource extends MessageLoop {
         informationReceivers = new ArrayList<BenefitResponseInformationReceiver>();
     }
 
-    public BenefitResponseInformationSource(String s) {
+    public BenefitResponseInformationSource(String s, MessageFormat mf) {
         this();
-        StringQueue stringQueue = new StringQueue(s);
+        StringQueue stringQueue = new StringQueue(s, mf);
 
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("HL"))
-            hierarchicalLevel = new HL(stringQueue.getNext());
+            hierarchicalLevel = new HL(stringQueue.getNext(), mf);
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AAA"))
-            requestValidation.add(new AAA(stringQueue.getNext()));
+            requestValidation.add(new AAA(stringQueue.getNext(), mf));
         if (stringQueue.hasNext() && stringQueue.peekNext().startsWith("NM1"))
-            individualOrOrganizationalName = new NM1(stringQueue.getNext());
+            individualOrOrganizationalName = new NM1(stringQueue.getNext(), mf);
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("PER"))
-            contactInformation.add(new PER(stringQueue.getNext()));
+            contactInformation.add(new PER(stringQueue.getNext(), mf));
         while (stringQueue.hasNext() && stringQueue.peekNext().startsWith("AAA"))
-            requestValidation2.add(new AAA(stringQueue.getNext()));
+            requestValidation2.add(new AAA(stringQueue.getNext(), mf));
 
         //todo multiple receivers
 
@@ -53,7 +54,7 @@ public class BenefitResponseInformationSource extends MessageLoop {
         while (stringQueue.hasNext()) {
             receiverString.append(stringQueue.getNext());
         }
-        informationReceivers.add(new BenefitResponseInformationReceiver(receiverString.toString()));
+        informationReceivers.add(new BenefitResponseInformationReceiver(receiverString.toString(), mf));
     }
 
     public void loadDefinition() {

@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.benefit.response;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.segment.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class BenefitResponseDependentTest {
                     "NM1*P3*1*JONES*MARCUS****SV*0202034~"+
                     "LE*2120~";
 
-        BenefitResponseDependent dependent = new BenefitResponseDependent(x12);
+        BenefitResponseDependent dependent = new BenefitResponseDependent(x12, new MessageFormat());
 
         Assert.assertTrue(dependent.validate());
         Assert.assertEquals(x12, dependent.toString());
@@ -85,23 +86,24 @@ public class BenefitResponseDependentTest {
                 "NM1*P3*1*JONES*MARCUS****SV*0202034~"+
                 "LE*2120~";
 
+        MessageFormat mf = new MessageFormat();
         BenefitResponseDependent dependent = new BenefitResponseDependent();
-        dependent.setHierarchicalLevel(new HL("HL*4*3*23*1~"));
+        dependent.setHierarchicalLevel(new HL("HL*4*3*23*1~", mf));
         dependent.setTraceNumbers(new ArrayList<TRN>());
-        dependent.getTraceNumbers().add(new TRN("TRN*1*93175-012547*9877281234~"));
-        dependent.getTraceNumbers().add(new TRN("TRN*1*109834652831*WXYZCLEARH*REALTIME~"));
-        dependent.setName(new NM1("NM1*IL*1*SMITH*ROBERT****MI*11122333301~"));
+        dependent.getTraceNumbers().add(new TRN("TRN*1*93175-012547*9877281234~", mf));
+        dependent.getTraceNumbers().add(new TRN("TRN*1*109834652831*WXYZCLEARH*REALTIME~", mf));
+        dependent.setName(new NM1("NM1*IL*1*SMITH*ROBERT****MI*11122333301~", mf));
         for(int i = 0; i < 9; i++) {
-            REF additionalInformation = new REF("REF*1L*660415~");
+            REF additionalInformation = new REF("REF*1L*660415~", mf);
             dependent.getAdditionalIdentifications().add(additionalInformation);
         }
         dependent.setDates(new ArrayList<DTP>());
-        dependent.setDemographic(new DMG("DMG*D8*19430519~"));
-        dependent.getDates().add(new DTP("DTP*291*D8*20060501~"));
+        dependent.setDemographic(new DMG("DMG*D8*19430519~", mf));
+        dependent.getDates().add(new DTP("DTP*291*D8*20060501~", mf));
         dependent.setEligibilities(new ArrayList<BenefitResponseEligibility>());
 
-        dependent.getEligibilities().add(new BenefitResponseEligibility("EB*1**30**GOLD 123 PLAN~"));
-        dependent.getEligibilities().add(new BenefitResponseEligibility("EB*L~LS*2120~NM1*P3*1*JONES*MARCUS****SV*0202034~LE*2120~"));
+        dependent.getEligibilities().add(new BenefitResponseEligibility("EB*1**30**GOLD 123 PLAN~", mf));
+        dependent.getEligibilities().add(new BenefitResponseEligibility("EB*L~LS*2120~NM1*P3*1*JONES*MARCUS****SV*0202034~LE*2120~", mf));
 
         Assert.assertTrue(dependent.validate());
         Assert.assertEquals(x12, dependent.toString());

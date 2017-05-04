@@ -2,6 +2,7 @@ package com.xiaoerge.x12.message.segment;
 
 import com.xiaoerge.x12.annotation.Declaration;
 import com.xiaoerge.x12.annotation.Definition;
+import com.xiaoerge.x12.message.MessageFormat;
 
 /**
  * Created by xiaoerge on 5/23/16.
@@ -11,8 +12,8 @@ public class NM1 extends Segment {
     public NM1() {
         super();
     }
-    public NM1(String content) {
-        super(content);
+    public NM1(String content, MessageFormat mf) {
+        super(content, mf);
     }
 
     @Definition(position = 1, minLength = 2, maxLength = 3)

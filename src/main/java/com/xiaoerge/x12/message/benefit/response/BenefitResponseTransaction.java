@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.benefit.response;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.control.Transaction;
 import com.xiaoerge.x12.util.SegmentStringUtil;
 
@@ -17,8 +18,8 @@ public class BenefitResponseTransaction extends Transaction {
         informationSources = new ArrayList<BenefitResponseInformationSource>();
     }
 
-    public BenefitResponseTransaction(String s) {
-        super(s);
+    public BenefitResponseTransaction(String s, MessageFormat mf) {
+        super(s, mf);
         informationSources = new ArrayList<BenefitResponseInformationSource>();
         parseContent();
     }
@@ -30,11 +31,11 @@ public class BenefitResponseTransaction extends Transaction {
     }
 
     private void parseContent() {
-        String[] sourceStrings = SegmentStringUtil.split(getContent(), "HL");
-        String[] sources = SegmentStringUtil.joinLevel(sourceStrings);
+        String[] sourceStrings = SegmentStringUtil.split(getContent(), "HL", messageFormat);
+        String[] sources = SegmentStringUtil.joinLevel(sourceStrings, messageFormat);
 
         for (String str : sources) {
-            informationSources.add(new BenefitResponseInformationSource(str));
+            informationSources.add(new BenefitResponseInformationSource(str, messageFormat));
         }
     }
 

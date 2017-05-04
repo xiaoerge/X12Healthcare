@@ -139,7 +139,7 @@ public class BenefitInquiryTest {
                 "IEA*1*024277220~";
 
         BenefitInquiry benefitInquiry = (BenefitInquiry) X12Parser.fromX12Message(x12);
-        BenefitInquiry benefitInquiry2 = new BenefitInquiry(benefitInquiry.toString());
+        BenefitInquiry benefitInquiry2 = new BenefitInquiry(benefitInquiry.toString(), new MessageFormat());
 
         Assert.assertEquals(x12, benefitInquiry.toString());
         Assert.assertEquals(x12, benefitInquiry2.toString());

@@ -1,5 +1,6 @@
 package com.xiaoerge.x12.message.claim;
 
+import com.xiaoerge.x12.message.MessageFormat;
 import com.xiaoerge.x12.message.claim.payment.ClaimPayment;
 import org.junit.Test;
 
@@ -45,7 +46,8 @@ public class ClaimPaymentTest {
                 "SE*31*1740~" +
                 "GE*1*6000600~" +
                 "IEA*1*006000600~";
-
-        ClaimPayment claimPayment = new ClaimPayment(x12);
+        
+        MessageFormat mf = new MessageFormat();
+        ClaimPayment claimPayment = new ClaimPayment(x12, mf);
     }
 }

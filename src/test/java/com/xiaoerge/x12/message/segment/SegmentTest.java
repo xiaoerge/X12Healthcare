@@ -774,6 +774,22 @@ public class SegmentTest {
         Assert.assertEquals("23", eb.getTimePeriodQualifier());
         Assert.assertEquals("600", eb.getMonetaryAmount());
     }
+    
+    @Test
+    public void testParseEBRepetitionGood() {
+    	String x12 = "EB*C*IND*33^47^48^51^52***23*0*****Y~";
+        EB eb = new EB(x12, new MessageFormat());
+    	
+        Assert.assertTrue(eb.validate());
+        Assert.assertEquals("33^47^48^51^52", eb.getServiceTypeCode());
+    }
+    @Test
+    public void testParseEBRepetitionBad() {
+    	String x12 = "EB*C*IND*33^479^48^51^52***23*0*****Y~";
+        EB eb = new EB(x12, new MessageFormat());
+    	
+        Assert.assertFalse(eb.validate());
+    }
 
     @Test
     public void testCreateEB() {

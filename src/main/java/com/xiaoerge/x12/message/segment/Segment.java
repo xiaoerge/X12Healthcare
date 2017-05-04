@@ -116,6 +116,18 @@ public class Segment extends MessageLoop
         }
         return v;
     }
+    private boolean validateDataLength(String code, Definition definition)
+    {
+        boolean v =  code.length() >= definition.minLength() && code.length() <= definition.maxLength();
+    	if (!v) {
+    		logger.warn(name+" validateDataLength()");
+    		String message = (definition.minLength() == definition.maxLength()) ?
+    		definition.minLength()+"" : "between "+definition.minLength()+", "+definition.maxLength();
+            logger.warn(name+""+String.format("%02d", definition.position())+" length should be "+message+" ("+code+")");
+            return false;
+    	}
+    	return true;
+    }
 
     private boolean validateDataLength() {
         boolean ret = true;
@@ -127,17 +139,18 @@ public class Segment extends MessageLoop
                 try {
                     String code = (String) method.invoke(this);
                     if (code.length() == 0) continue;
-
-                    boolean v =  code.length() >= definition.minLength() && code.length() <= definition.maxLength();
-
-                    if (!v) {
-                        logger.warn(name+" validateDataLength()");
-                        String message = (definition.minLength() == definition.maxLength()) ?
-                                definition.minLength()+"" : "between "+definition.minLength()+", "+definition.maxLength();
-                        logger.warn(name+""+String.format("%02d", definition.position())+" length should be "+message+" ("+code+")");
-                        ret = false;
+                    
+                    if (code.indexOf(messageFormat.getRepetitionSeparator()) >= 0) 
+                    {
+                    	String[] codes = code.split(Pattern.quote(messageFormat.getRepetitionSeparator()));
+                    	ret = true;
+                    	for (String code2 : codes) {
+                    		if (!validateDataLength(code2, definition)) ret = false;
+                    	}
+                    } else {
+                   		if (!validateDataLength(code, definition)) ret = false;
                     }
-
+                    
                 } catch (IllegalAccessException e) {
                     return false;
                 } catch (InvocationTargetException e) {

@@ -15,7 +15,7 @@ public class LE extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 4)
-    public String getLoopIdentifierCode() { return collection[1]; }
+    public String getLoopIdentifierCode() { return getField(1); }
 
-    public void setLoopIdentifierCode(String s) { collection[1] = s; }
+    public void setLoopIdentifierCode(String s) { setField(1,s); }
 }

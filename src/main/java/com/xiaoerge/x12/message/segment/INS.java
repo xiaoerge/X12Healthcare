@@ -15,71 +15,71 @@ public class INS extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 1)
-    public String getYesNoConditionOrResponseCode() { return collection[1]; }
+    public String getYesNoConditionOrResponseCode() { return getField(1); }
 
     @Definition(position = 2, minLength = 2, maxLength = 2)
-    public String getIndividualRelationshipCode() { return collection[2]; }
+    public String getIndividualRelationshipCode() { return getField(2); }
 
     @Definition(position = 3, minLength = 3, maxLength = 3)
-    public String getMaintenanceTypeCode() { return collection[3]; }
+    public String getMaintenanceTypeCode() { return getField(3); }
 
     @Definition(position = 4, minLength = 2, maxLength = 3)
-    public String getMaintenanceReasonCode() { return collection[4]; }
+    public String getMaintenanceReasonCode() { return getField(4); }
 
     @Definition(position = 5, minLength = 1, maxLength = 1)
-    public String getBenefitStatusCode() { return collection[5]; }
+    public String getBenefitStatusCode() { return getField(5); }
 
     @Definition(position = 6, minLength = 1, maxLength = 10)
-    public String getMedicareStatusCode() { return collection[6]; }
+    public String getMedicareStatusCode() { return getField(6); }
 
     @Definition(position = 7, minLength = 1, maxLength = 2)
-    public String getConsolidatedOmnibusBudgetReconciliationActQualifying() { return collection[7]; }
+    public String getConsolidatedOmnibusBudgetReconciliationActQualifying() { return getField(7); }
 
     @Definition(position = 8, minLength = 2, maxLength = 2)
-    public String getEmploymentStatusCode() { return collection[8]; }
+    public String getEmploymentStatusCode() { return getField(8); }
 
     @Definition(position = 9, minLength = 1, maxLength = 1)
-    public String getStudentStatusCode() { return collection[9]; }
+    public String getStudentStatusCode() { return getField(9); }
 
     @Definition(position = 10, minLength = 1, maxLength = 1)
-    public String getYesNoConditionOrResponseCode2() { return collection[10]; }
+    public String getYesNoConditionOrResponseCode2() { return getField(10); }
 
     @Definition(position = 11, minLength = 2, maxLength = 3)
-    public String getDateTimePeriodFormatQualifier() { return collection[11]; }
+    public String getDateTimePeriodFormatQualifier() { return getField(11); }
 
     @Definition(position = 12, minLength = 1, maxLength = 35)
-    public String getDateTimePeriod() { return collection[12]; }
+    public String getDateTimePeriod() { return getField(12); }
 
     @Definition(position = 13, minLength = 1, maxLength = 1)
-    public String getConfidentialityCode() { return collection[13]; }
+    public String getConfidentialityCode() { return getField(13); }
 
     @Definition(position = 14, minLength = 2, maxLength = 30)
-    public String getCityName() { return collection[14]; }
+    public String getCityName() { return getField(14); }
 
     @Definition(position = 15, minLength = 2, maxLength = 2)
-    public String getStateOrProvinceCode() { return collection[15]; }
+    public String getStateOrProvinceCode() { return getField(15); }
 
     @Definition(position = 16, minLength = 2, maxLength = 3)
-    public String getCountryCode() { return collection[16]; }
+    public String getCountryCode() { return getField(16); }
 
     @Definition(position = 17, minLength = 1, maxLength = 9)
-    public String getNumber() { return collection[17]; }
+    public String getNumber() { return getField(17); }
 
-    public void setYesNoConditionOrResponseCode(String s) { collection[1] = s; }
-    public void setIndividualRelationshipCode(String s) { collection[2] = s; }
-    public void setMaintenanceTypeCode(String s) { collection[3] = s; }
-    public void setMaintenanceReasonCode(String s) { collection[4] = s; }
-    public void setBenefitStatusCode(String s) { collection[5] = s; }
-    public void setMedicareStatusCode(String s) { collection[6] = s; }
-    public void setConsolidatedOmnibusBudgetReconciliationActQualifying(String s) { collection[7] = s; }
-    public void setEmploymentStatusCode(String s) { collection[8] = s; }
-    public void setStudentStatusCode(String s) { collection[9] = s; }
-    public void setYesNoConditionOrResponseCode2(String s) { collection[10] = s; }
-    public void setDateTimePeriodFormatQualifier(String s) { collection[11] = s; }
-    public void setDateTimePeriod(String s) { collection[12] = s; }
-    public void setConfidentialityCode(String s) { collection[13] = s; }
-    public void setCityName(String s) { collection[14] = s; }
-    public void setStateOrProvinceCode(String s) { collection[15] = s; }
-    public void setCountryCode(String s) { collection[16] = s; }
-    public void setNumber(String s) { collection[17] = s; }
+    public void setYesNoConditionOrResponseCode(String s) { setField(1,s); }
+    public void setIndividualRelationshipCode(String s) { setField(2,s); }
+    public void setMaintenanceTypeCode(String s) { setField(3,s); }
+    public void setMaintenanceReasonCode(String s) { setField(4,s); }
+    public void setBenefitStatusCode(String s) { setField(5,s); }
+    public void setMedicareStatusCode(String s) { setField(6,s); }
+    public void setConsolidatedOmnibusBudgetReconciliationActQualifying(String s) { setField(7,s); }
+    public void setEmploymentStatusCode(String s) { setField(8,s); }
+    public void setStudentStatusCode(String s) { setField(9,s); }
+    public void setYesNoConditionOrResponseCode2(String s) { setField(10,s); }
+    public void setDateTimePeriodFormatQualifier(String s) { setField(11,s); }
+    public void setDateTimePeriod(String s) { setField(12,s); }
+    public void setConfidentialityCode(String s) { setField(13,s); }
+    public void setCityName(String s) { setField(14,s); }
+    public void setStateOrProvinceCode(String s) { setField(15,s); }
+    public void setCountryCode(String s) { setField(16,s); }
+    public void setNumber(String s) { setField(17,s); }
 }

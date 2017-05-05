@@ -53,4 +53,7 @@ public abstract class MessageLoop {
     public MessageFormat getMessageFormat() {
     	return messageFormat;
     }
+    public void setMessageFormat(MessageFormat messageFormat) {
+    	this.messageFormat = messageFormat;
+    }
 }

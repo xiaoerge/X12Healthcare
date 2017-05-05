@@ -15,19 +15,19 @@ public class QTY extends Segment {
     }
 
     @Definition(position = 1, minLength = 2, maxLength = 2)
-    public String getQuantityQualifier() { return collection[1]; }
+    public String getQuantityQualifier() { return getField(1); }
 
     @Definition(position = 2, minLength = 1, maxLength = 15)
-    public String getQuantity() { return collection[2]; }
+    public String getQuantity() { return getField(2); }
 
     @Definition(position = 3, minLength = 1, maxLength = 100)
-    public String getCOMPOSITEUNITOFMEASURE() { return collection[3]; }
+    public String getCOMPOSITEUNITOFMEASURE() { return getField(3); }
 
     @Definition(position = 4, minLength = 1, maxLength = 30)
-    public String getFreeFormInformation() { return collection[4]; }
+    public String getFreeFormInformation() { return getField(4); }
 
-    public void setQuantityQualifier(String s) { collection[1] = s; }
-    public void setQuantity(String s) { collection[2] = s; }
-    public void setCOMPOSITEUNITOFMEASURE(String s) { collection[3] = s; }
-    public void setFreeFormInformation(String s) { collection[4] = s; }
+    public void setQuantityQualifier(String s) { setField(1,s); }
+    public void setQuantity(String s) { setField(2,s); }
+    public void setCOMPOSITEUNITOFMEASURE(String s) { setField(3,s); }
+    public void setFreeFormInformation(String s) { setField(4,s); }
 }

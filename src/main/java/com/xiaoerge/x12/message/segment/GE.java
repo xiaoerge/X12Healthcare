@@ -15,11 +15,11 @@ public class GE extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 6)
-    public String getNumberOfTransactionsSetsIncluded() { return collection[1]; }
+    public String getNumberOfTransactionsSetsIncluded() { return getField(1); }
 
     @Definition(position = 2, minLength = 1, maxLength = 9)
-    public String getGroupControlNumber() { return collection[2]; }
+    public String getGroupControlNumber() { return getField(2); }
 
-    public void setNumberOfTransactionsSetsIncluded(String s) { collection[1] = s; }
-    public void setGroupControlNumber(String s) { collection[2] = s; }
+    public void setNumberOfTransactionsSetsIncluded(String s) { setField(1,s); }
+    public void setGroupControlNumber(String s) { setField(2,s); }
 }

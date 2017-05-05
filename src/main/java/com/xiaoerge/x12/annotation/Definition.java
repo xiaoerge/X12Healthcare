@@ -16,4 +16,5 @@ public @interface Definition {
     int position();
     int minLength();
     int maxLength();
+    int maxComponents() default 1;
 }

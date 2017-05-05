@@ -15,7 +15,7 @@ public class LX extends Segment {
     }
     
     @Definition(position = 1, minLength = 1, maxLength = 6)
-    public String getAssignedNumber() { return collection[1]; }
+    public String getAssignedNumber() { return getField(1); }
 
-    public void setAssignedNumber(String s) { collection[1] = s; }
+    public void setAssignedNumber(String s) { setField(1,s); }
 }

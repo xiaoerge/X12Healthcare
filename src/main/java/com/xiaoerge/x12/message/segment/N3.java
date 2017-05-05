@@ -15,11 +15,11 @@ public class N3 extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 55)
-    public String getAddressInformation1() { return collection[1]; }
+    public String getAddressInformation1() { return getField(1); }
 
     @Definition(position = 2, minLength = 1, maxLength = 55)
-    public String getAddressInformation2() { return collection[2]; }
+    public String getAddressInformation2() { return getField(2); }
 
-    public void setAddressInformation1(String s) { collection[1] = s; }
-    public void setAddressInformation2(String s) { collection[2] = s; }
+    public void setAddressInformation1(String s) { setField(1,s); }
+    public void setAddressInformation2(String s) { setField(2,s); }
 }

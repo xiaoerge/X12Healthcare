@@ -4,7 +4,8 @@
 [![Build Status](https://travis-ci.org/xiaoerge/X12Healthcare.svg?branch=master)](https://travis-ci.org/xiaoerge/X12Healthcare)
 [![codecov](https://codecov.io/gh/xiaoerge/x12healthcare/branch/master/graph/badge.svg)](https://codecov.io/gh/xiaoerge/x12healthcare)
 
-## Development is on hold. Working out an IP issue. 
+## Update. Will probably resume working at some point. No longer at a healthcare IT company.
+## ~~Development is on hold. Working out an IP issue. 
 
 ### Will support parsing and creating of messages such as 837, 835, 277, 270, 271, 999, 997, TA1.
 

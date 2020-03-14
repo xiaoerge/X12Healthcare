@@ -17,15 +17,15 @@ public class MSG extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 264)
-    public String getFreeFormMessageText() { return collection[1]; }
+    public String getFreeFormMessageText() { return getField(1); }
 
     @Definition(position = 2, minLength = 2, maxLength = 2)
-    public String getPrinterCarriageControlCode() { return collection[2]; }
+    public String getPrinterCarriageControlCode() { return getField(2); }
 
     @Definition(position = 3, minLength = 1, maxLength = 9)
-    public String getNumber() { return collection[3]; }
+    public String getNumber() { return getField(3); }
 
-    public void setFreeFormMessageText(String s) { collection[1] = s; }
-    public void setPrinterCarriageControlCode(String s) { collection[2] = s; }
-    public void setNumber(String s) { collection[3] = s; }
+    public void setFreeFormMessageText(String s) { setField(1,s); }
+    public void setPrinterCarriageControlCode(String s) { setField(2,s); }
+    public void setNumber(String s) { setField(3,s); }
 }

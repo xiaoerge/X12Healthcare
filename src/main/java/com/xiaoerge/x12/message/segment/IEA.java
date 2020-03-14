@@ -15,11 +15,11 @@ public class IEA extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 5)
-    public String getNumberOfIncludedFunctionalGroups() { return collection[1]; }
+    public String getNumberOfIncludedFunctionalGroups() { return getField(1); }
 
     @Definition(position = 2, minLength = 9, maxLength = 9)
-    public String getInterchangeControlNumber() { return collection[2]; }
+    public String getInterchangeControlNumber() { return getField(2); }
 
-    public void setNumberOfIncludedFunctionalGroups(String s) { collection[1] = s; }
-    public void setInterchangeControlNumber(String s) { collection[2] = s; }
+    public void setNumberOfIncludedFunctionalGroups(String s) { setField(1,s); }
+    public void setInterchangeControlNumber(String s) { setField(2,s); }
 }

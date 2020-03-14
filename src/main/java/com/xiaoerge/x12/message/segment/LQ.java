@@ -15,11 +15,11 @@ public class LQ extends Segment {
     }
 
     @Definition(position = 1, minLength = 1, maxLength = 3)
-    public String getCodeListQualifierCode() { return collection[1]; }
+    public String getCodeListQualifierCode() { return getField(1); }
 
     @Definition(position = 2, minLength = 1, maxLength = 30)
-    public String getIndustryCode() { return collection[2]; }
+    public String getIndustryCode() { return getField(2); }
 
-    public void setCodeListQualifierCode(String s) { collection[1] = s; }
-    public void setIndustryCode(String s) { collection[2] = s; }
+    public void setCodeListQualifierCode(String s) { setField(1,s); }
+    public void setIndustryCode(String s) { setField(2,s); }
 }

@@ -774,6 +774,22 @@ public class SegmentTest {
         Assert.assertEquals("23", eb.getTimePeriodQualifier());
         Assert.assertEquals("600", eb.getMonetaryAmount());
     }
+    
+    @Test
+    public void testParseEBRepetitionGood() {
+    	String x12 = "EB*C*IND*33^47^48^51^52***23*0*****Y~";
+        EB eb = new EB(x12, new MessageFormat());
+    	
+        Assert.assertTrue(eb.validate());
+        Assert.assertEquals("33^47^48^51^52", eb.getServiceTypeCode());
+    }
+    @Test
+    public void testParseEBRepetitionBad() {
+    	String x12 = "EB*C*IND*33^479^48^51^52***23*0*****Y~";
+        EB eb = new EB(x12, new MessageFormat());
+    	
+        Assert.assertFalse(eb.validate());
+    }
 
     @Test
     public void testCreateEB() {
@@ -882,4 +898,42 @@ public class SegmentTest {
         Assert.assertEquals(true, ls.validate());
         Assert.assertEquals(x12, ls.toString());
     }
+    
+    @Test
+    public void testParseSTC() {
+        String x12 = "STC*P3:317:1P*20050913*9000.00*8513.88~";
+        MessageFormat mf = new MessageFormat();
+        mf.setComponentElementSeparator(":");
+        STC stc = new STC(x12, mf);
+
+        Assert.assertEquals(true, stc.validate());
+        Assert.assertEquals(x12, stc.toString());
+        Assert.assertEquals("P3:317:1P", stc.getClaimStatus());
+        Assert.assertEquals("P3", stc.getClaimStatusCategoryCode());
+        Assert.assertEquals("317", stc.getClaimStatusCode());
+        Assert.assertEquals("1P", stc.getEntityIdentifierCode());
+        Assert.assertEquals("20050913", stc.getStatusInformationEffectiveDate());
+        Assert.assertEquals("9000.00", stc.getTotalClaimChargeAmount());
+        Assert.assertEquals("8513.88", stc.getClaimPaymentAmount());
+    }
+
+    @Test
+    public void testCreateSTC() {
+        String x12 = "STC*P3:317:1P*20050913*9000.00*8513.88~";
+        STC stc = new STC();
+        MessageFormat mf = new MessageFormat();
+        mf.setComponentElementSeparator(":");
+        stc.setMessageFormat(mf);
+
+        stc.setClaimStatusCategoryCode("P3");
+        stc.setClaimStatusCode("317");
+        stc.setEntityIdentifierCode("1P");
+        stc.setStatusInformationEffectiveDate("20050913");
+        stc.setTotalClaimChargeAmount("9000.00");
+        stc.setClaimPaymentAmount("8513.88");
+
+        Assert.assertEquals(true, stc.validate());
+        Assert.assertEquals(x12, stc.toString());
+    }
+
 }

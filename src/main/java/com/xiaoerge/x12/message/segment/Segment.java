@@ -21,7 +21,42 @@ public class Segment extends MessageLoop
     private boolean parseError;
     protected int fieldSize;
     protected String name, content;
-    protected String[] collection;
+    
+    protected class DataElement {
+    	String[] components;
+    	
+    	public DataElement(int length) {
+    		components = new String[length];
+    		for (int i=0;i<components.length;i++) {
+    			components[i] = "";
+    		}
+    	}
+    	public DataElement(String[] components)
+    	{
+    		if (this.components==null) this.components = new String[components.length];
+    		set(components);
+    	}
+    	public String get(int idx) {
+    		if (idx<0 || idx>=components.length) return "";
+    		return components[idx];
+    	}
+    	public void set(int idx, String s) {
+    		if (idx<0 || idx>=components.length) return;
+    		components[idx] = s;
+    	}
+    	public void set(String[] components) {
+    		for (int i=0;i<components.length;i++) {
+    			this.components[i] = components[i];
+    		}
+    	}
+    	public int size() { return components.length; }
+    	// save awkward collection[i].toString().length() call
+    	public int length() { return toString().length(); }
+    	public String toString() {
+    		return StringUtils.join(components, messageFormat.getComponentElementSeparator());
+    	}
+    }
+    protected DataElement[] collection;
 
     public Segment() {
         this("", new MessageFormat());
@@ -45,10 +80,28 @@ public class Segment extends MessageLoop
         else parse();
     }
 
+    private Definition findDefinition(int position) {
+        Class obj = this.getClass();
+        for (Method method : obj.getDeclaredMethods()) {
+            if (method.isAnnotationPresent(Definition.class)) {
+                Definition definition = method.getAnnotation(Definition.class);
+                if (definition.position()==position) return definition;
+            }
+        }
+        return null;
+    }
     private void parse() {
-        collection = new String[fieldSize+1];
-        collection[0] = name;
-        for (int i = 1; i < collection.length; i++) collection[i] = "";
+        collection = new DataElement[fieldSize+1];
+     	collection[0] = new DataElement(1);
+        setField(0,name);
+        
+        // FIX ME - slow
+        for (int i = 1; i < collection.length; i++) {
+        	Definition definition = findDefinition(i);
+        	if (definition!=null) {
+        		collection[i] = new DataElement(definition.maxComponents());
+        	} 
+        }
 
         if (content.length() > 0){
         	String c = content.trim();
@@ -63,10 +116,10 @@ public class Segment extends MessageLoop
                 int min = Math.min(collection.length, pCollection.length);
                 for (int i = 0; i < min; i++) {
                     try {
-                        collection[i] = pCollection[i];
+                        setField(i,pCollection[i]);
                     }
                     catch (Exception ex) {
-                        collection[i] = "";
+                        setField(i,"");
                         logger.error(ex.getMessage(), content);
                     }
                 }
@@ -100,7 +153,7 @@ public class Segment extends MessageLoop
     }
 
     private boolean validateName() {
-        boolean v = name.length() > 0 && collection[0].equals(name);
+        boolean v = name.length() > 0 && collection[0].toString().equals(name);
         if (!v) {
             logger.info(name+" validateName()");
             logger.warn(name+" Segment field does not match");
@@ -116,6 +169,18 @@ public class Segment extends MessageLoop
         }
         return v;
     }
+    private boolean validateDataLength(String code, Definition definition)
+    {
+        boolean v =  code.length() >= definition.minLength() && code.length() <= definition.maxLength();
+    	if (!v) {
+    		logger.warn(name+" validateDataLength()");
+    		String message = (definition.minLength() == definition.maxLength()) ?
+    		definition.minLength()+"" : "between "+definition.minLength()+", "+definition.maxLength();
+            logger.warn(name+""+String.format("%02d", definition.position())+" length should be "+message+" ("+code+")");
+            return false;
+    	}
+    	return true;
+    }
 
     private boolean validateDataLength() {
         boolean ret = true;
@@ -127,17 +192,18 @@ public class Segment extends MessageLoop
                 try {
                     String code = (String) method.invoke(this);
                     if (code.length() == 0) continue;
-
-                    boolean v =  code.length() >= definition.minLength() && code.length() <= definition.maxLength();
-
-                    if (!v) {
-                        logger.warn(name+" validateDataLength()");
-                        String message = (definition.minLength() == definition.maxLength()) ?
-                                definition.minLength()+"" : "between "+definition.minLength()+", "+definition.maxLength();
-                        logger.warn(name+""+String.format("%02d", definition.position())+" length should be "+message+" ("+code+")");
-                        ret = false;
+                    
+                    if (code.indexOf(messageFormat.getRepetitionSeparator()) >= 0) 
+                    {
+                    	String[] codes = code.split(Pattern.quote(messageFormat.getRepetitionSeparator()));
+                    	ret = true;
+                    	for (String code2 : codes) {
+                    		if (!validateDataLength(code2, definition)) ret = false;
+                    	}
+                    } else {
+                   		if (!validateDataLength(code, definition)) ret = false;
                     }
-
+                    
                 } catch (IllegalAccessException e) {
                     return false;
                 } catch (InvocationTargetException e) {
@@ -154,7 +220,7 @@ public class Segment extends MessageLoop
         if (isEmpty()) return "";
         if (!validate()) return name.concat(StringUtils.repeat("*", fieldSize)).concat(messageFormat.getSegmentTerminator());
 
-        collection[0] = name;
+        setField(0,name);
         StringBuilder builder = new StringBuilder();
         builder.append(name).append("*");
 
@@ -183,5 +249,26 @@ public class Segment extends MessageLoop
             if (collection[i].length() > 0) return false;
         }
         return true;
+    }
+    
+    protected String getField(int idx, int subidx) {
+        return collection[idx].get(subidx);
+    }
+    protected String getField(int idx) {
+        return collection[idx].toString();
+    }
+    protected void setField(int idx, int subidx, String value) {
+        collection[idx].set(subidx, value);
+    }
+    protected void setField(int idx, String value) {
+        if (collection[idx].size() > 1 && value.indexOf(messageFormat.getComponentElementSeparator()) >= 0) 
+        {
+        	// important to pass -1 on split as delimiter only string 
+        	// (like ISA16) will result in zero length array otherwise
+        	String[] components = value.split(Pattern.quote(messageFormat.getComponentElementSeparator()), -1);
+        	collection[idx].set(components);
+        } else {
+        	collection[idx].set(0, value);
+        }
     }
 }

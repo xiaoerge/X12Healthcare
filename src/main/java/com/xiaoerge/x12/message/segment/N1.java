@@ -15,27 +15,27 @@ public class N1 extends Segment {
     }
     
     @Definition(position = 1, minLength = 2, maxLength = 3)
-    public String getEntityIdentifierCode() { return collection[1]; }
+    public String getEntityIdentifierCode() { return getField(1); }
 
     @Definition(position = 2, minLength = 1, maxLength = 60)
-    public String getName() { return collection[2]; }
+    public String getName() { return getField(2); }
 
     @Definition(position = 3, minLength = 1, maxLength = 2)
-    public String getIdentificationCodeQualifier() { return collection[3]; }
+    public String getIdentificationCodeQualifier() { return getField(3); }
 
     @Definition(position = 4, minLength = 2, maxLength = 80)
-    public String getIdentificationCode() { return collection[4]; }
+    public String getIdentificationCode() { return getField(4); }
 
     @Definition(position = 5, minLength = 2, maxLength = 2)
-    public String getEntityRelationshipCode() { return collection[5]; }
+    public String getEntityRelationshipCode() { return getField(5); }
 
     @Definition(position = 6, minLength = 2, maxLength = 3)
-    public String getEntityIdentifierCode2() { return collection[6]; }
+    public String getEntityIdentifierCode2() { return getField(6); }
 
-    public void setEntityIdentifierCode(String s) { collection[1] = s; }
-    public void setName(String s) { collection[2] = s; }
-    public void setIdentificationCodeQualifier(String s) { collection[3] = s; }
-    public void setIdentificationCode(String s) { collection[4] = s; }
-    public void setEntityRelationshipCode(String s) { collection[5] = s; }
-    public void setEntityIdentifierCode2(String s) { collection[6] = s; }
+    public void setEntityIdentifierCode(String s) { setField(1,s); }
+    public void setName(String s) { setField(2,s); }
+    public void setIdentificationCodeQualifier(String s) { setField(3,s); }
+    public void setIdentificationCode(String s) { setField(4,s); }
+    public void setEntityRelationshipCode(String s) { setField(5,s); }
+    public void setEntityIdentifierCode2(String s) { setField(6,s); }
 }
